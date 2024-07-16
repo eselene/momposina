@@ -3,6 +3,8 @@
 /.env.local
 /.env.local.php
 /.env.*.local
+/.compare.php
+/.todo.txt
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
