@@ -55,10 +55,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     private ?string $etat = null;
 
-    #[ORM\OneToOne(mappedBy: "user", cascade: ["persist", "remove"], nullable: true)]
+    #[ORM\OneToOne(mappedBy: "user", cascade: ["persist", "remove"])]
     private ?Evenement $evenement = null;
 
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'], nullable: true)]
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Reservation $reservation = null;
 
     public function getId(): ?int
