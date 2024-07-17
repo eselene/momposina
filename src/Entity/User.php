@@ -55,6 +55,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     private ?string $etat = null;
 
+    #[ORM\OneToOne(mappedBy: "user", cascade: ["persist", "remove"], nullable: true)]
+    private ?Evenement $evenement = null;
+
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'], nullable: true)]
+    private ?Reservation $reservation = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -222,6 +228,45 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEtat(string $etat): static
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getEvenement(): ?Evenement
+    {
+        return $this->evenement;
+    }
+
+    public function setEvenement(Evenement $evenement): static
+    {
+        // set the owning side of the relation if necessary
+        if ($evenement->getUser() !== $this) {
+            $evenement->setUser($this);
+        }
+
+        $this->evenement = $evenement;
+
+        return $this;
+    }
+
+    public function getReservation(): ?Reservation
+    {
+        return $this->reservation;
+    }
+
+    public function setReservation(?Reservation $reservation): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($reservation === null && $this->reservation !== null) {
+            $this->reservation->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($reservation !== null && $reservation->getUser() !== $this) {
+            $reservation->setUser($this);
+        }
+
+        $this->reservation = $reservation;
 
         return $this;
     }
