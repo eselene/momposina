@@ -58,7 +58,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $pays = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $etat = null;
+    private ?string $etat = "actif";
 
     #[ORM\OneToOne(mappedBy: "user", cascade: ["persist", "remove"])]
     private ?Evenement $evenement = null;
