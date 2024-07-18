@@ -9,62 +9,86 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Validator\Constraints\IsTrue;
-use Symfony\Component\Validator\Constraints\Length;
+// use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('email', EmailType::class, [
-            'attr' => ['placeholder' => 'Votre email']
-        ])
-        ->add('nom', null, [
-            'attr' => ['placeholder' => 'Votre nom']
-        ])
-        ->add('prenom', null, [
-            'attr' => ['placeholder' => 'Votre prénom']
-        ])
-        ->add('telephone', null, [
-            'attr' => ['placeholder' => 'Votre téléphone']
-        ])
-        ->add('adresse', null, [
-            'attr' => ['placeholder' => 'Votre adresse']
-        ])
-        ->add('code_postal', null, [
-            'attr' => ['placeholder' => 'Votre code postal']
-        ])
-        ->add('ville', null, [
-            'attr' => ['placeholder' => 'Votre ville']
-        ])
-        ->add('pays', null, [
-            'attr' => ['placeholder' => 'Votre pays']
-        ])
-        ->add('plainPassword', RepeatedType::class, [
-            'type' => PasswordType::class,
-            'first_options' => [
-                'attr' => ['placeholder' => 'Mot de passe']
-            ],
-            'second_options' => [
-                'attr' => ['placeholder' => 'Repeter Mot de passe']
-            ],
-            'invalid_message' => 'Les mots de passe doivent être identiques.',
-            'mapped' => false,
-            'attr' => ['autocomplete' => 'new-password'],
-            'constraints' => [
-                new NotBlank([
-                    'message' => 'Entrez votre mot de passe.',
-                ]),
-                new Length([
-                    'min' => 6,
-                    'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères.',
-                    'max' => 15,
-                ]),
-            ],
-        ])
+            ->add('email', EmailType::class, [
+                'attr' => [
+                    'placeholder' => 'Email',
+                    'autocomplete' => 'off'
+                ],
+            ])
+            ->add('nom', null, [
+                'attr' => ['placeholder' => 'Nom *']
+            ])
+            ->add('prenom', null, [
+                'attr' => ['placeholder' => 'Prénom *']
+            ])
+            ->add('telephone', null, [
+                'attr' => ['placeholder' => 'Téléphone']
+            ])
+            ->add('adresse', null, [
+                'attr' => ['placeholder' => 'Adresse']
+            ])
+            ->add('code_postal', null, [
+                'attr' => ['placeholder' => 'Code postal']
+            ])
+            ->add('ville', null, [
+                'attr' => ['placeholder' => 'Ville']
+            ])
+            ->add('pays', null, [
+                'attr' => ['placeholder' => 'Pays']
+            ])
+
+            ->add('genre', ChoiceType::class, [
+                'choices' => [
+                    'Madame' => 'Madame',
+                    'Monsieur' => 'Monsieur',
+                ],
+                'expanded' => true,
+                'multiple' => false,
+                'label' => false,
+                'placeholder' => false,
+                'constraints' => [
+                    new NotBlank(['message' => 'Choisissez votre civilité.']),
+                ],
+            ])
+
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'first_options' => [
+                    'attr' => [
+                        'placeholder' => 'Mot de passe',
+                        'autocomplete' => 'new-password'
+                    ],
+                    'label' => false,
+                ],
+                'second_options' => [
+                    'attr' => [
+                        'placeholder' => 'Répétez le mot de passe',
+                        'autocomplete' => 'new-password'
+                    ],
+                    'label' => false,
+                ],
+                'invalid_message' => 'Les mots de passe doivent être identiques.',
+                'mapped' => false,
+                'constraints' => [
+                    new NotBlank(['message' => 'Entrez votre mot de passe.']),
+                    new Length([
+                        'min' => 6,
+                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères.',
+                        'max' => 15,
+                    ]),
+                ],
+            ]);
+
             // TO ACTIVATE*****************
             // ->add('agreeTerms', CheckboxType::class, [
             //     'mapped' => false,
@@ -74,7 +98,7 @@ class RegistrationFormType extends AbstractType
             //         ]),
             //     ],
             // ])
-            ;
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

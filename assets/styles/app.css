@@ -1,3 +1,62 @@
 body {
-    background-color: skyblue;
+    background-color: rgb(61, 52, 52);
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: #333;
+    color: white;
+}
+
+.navbar-nav .nav-item .nav-link i.fas.fa-user {
+    font-size: 1.2em;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.row .col-md-6 {
+    width: 45%;
+}
+
+
+card {
+    height: 100px;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+
+/* .image {
+    height: 40vh;
+} */
+
+.details-span {
+    width: 80%;
+}
+/* // Custom styles */
+
+
+button.btn-primary {
+    width: 100%;
+} 
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+button.btn-primary {
+    width: 100%;
 }
