@@ -19,33 +19,52 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class)
-            ->add('nom')
-            ->add('prenom')
-            ->add('telephone')
-            ->add('adresse')
-            ->add('code_postal')
-            ->add('ville')
-            ->add('pays')
-            ->add('plainPassword', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'first_options' => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Repeter Mot de passe'],
-                'invalid_message' => 'Les mots de passe doivent être idéntiques.',
-                'mapped' => false,
-                'attr' => ['autocomplete' => 'Nouveau mot de passe'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Entrez votre mot de passe.',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères.',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 15,
-                    ]),
-                ],
-            ])
+        ->add('email', EmailType::class, [
+            'attr' => ['placeholder' => 'Votre email']
+        ])
+        ->add('nom', null, [
+            'attr' => ['placeholder' => 'Votre nom']
+        ])
+        ->add('prenom', null, [
+            'attr' => ['placeholder' => 'Votre prénom']
+        ])
+        ->add('telephone', null, [
+            'attr' => ['placeholder' => 'Votre téléphone']
+        ])
+        ->add('adresse', null, [
+            'attr' => ['placeholder' => 'Votre adresse']
+        ])
+        ->add('code_postal', null, [
+            'attr' => ['placeholder' => 'Votre code postal']
+        ])
+        ->add('ville', null, [
+            'attr' => ['placeholder' => 'Votre ville']
+        ])
+        ->add('pays', null, [
+            'attr' => ['placeholder' => 'Votre pays']
+        ])
+        ->add('plainPassword', RepeatedType::class, [
+            'type' => PasswordType::class,
+            'first_options' => [
+                'attr' => ['placeholder' => 'Mot de passe']
+            ],
+            'second_options' => [
+                'attr' => ['placeholder' => 'Repeter Mot de passe']
+            ],
+            'invalid_message' => 'Les mots de passe doivent être identiques.',
+            'mapped' => false,
+            'attr' => ['autocomplete' => 'new-password'],
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Entrez votre mot de passe.',
+                ]),
+                new Length([
+                    'min' => 6,
+                    'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères.',
+                    'max' => 15,
+                ]),
+            ],
+        ])
             // TO ACTIVATE*****************
             // ->add('agreeTerms', CheckboxType::class, [
             //     'mapped' => false,

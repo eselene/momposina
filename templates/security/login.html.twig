@@ -3,10 +3,11 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-    <h1>Login</h1>
+    <h1>DÉJÀ CLIENT? IDENTIFIEZ-VOUS</h1>
 
     {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {# <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div> #}
     {% endif %}
 
     <form method="post">
@@ -16,15 +17,18 @@
 
         {% if app.user %}
             <div class="mb-3">
-                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                Bonjour {{ app.user.prenom }}, <a href="{{ path('app_logout') }}">Se deconnecter</a>
             </div>
         {% endif %}
 
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="username">Email</label>
-        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
-        <label for="password">Password</label>
-        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+        <div class="form-group">
+            <label for="username">Email</label>
+            <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus placeholder="Votre email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required placeholder="Votre mot de passe">
+        </div>
 
         <input type="hidden" name="_csrf_token"
                value="{{ csrf_token('authenticate') }}"
@@ -32,13 +36,12 @@
             {# Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
             See https://symfony.com/doc/current/security/remember_me.html #}
 
-            <div class="checkbox mb-3">
-                <input type="checkbox" name="_remember_me" id="_remember_me">
-                <label for="_remember_me">Remember me</label>
-            </div>
+        <div class="form-group form-check">
+            <input type="checkbox" name="_remember_me" id="_remember_me" class="form-check-input">
+            <label for="_remember_me" class="form-check-label">Remember me</label>
+        </div>
 
-        <button class="btn btn-lg btn-primary" type="submit">
-            Sign in
-        </button>
+        <button class="btn btn-primary" type="submit">Me connecter</button>
+
     </form>
 {% endblock %}

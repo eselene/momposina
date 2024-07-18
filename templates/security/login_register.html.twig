@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion et inscription{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>DÉJÀ CLIENT? IDENTIFIEZ-VOUS</h1>
+
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="mb-3">
+                            Bonjour {{ app.user.prenom }}, <a href="{{ path('app_logout') }}">Se deconnecter</a>
+                        </div>
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label for="username">Email</label>
+                        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus placeholder="Votre email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required placeholder="Votre mot de passe">
+                    </div>
+                    
+                    <input type="hidden" name="_csrf_token"
+                           value="{{ csrf_token('authenticate') }}"
+                    >
+
+                    <div class="form-group form-check">
+                        <input type="checkbox" name="_remember_me" id="_remember_me" class="form-check-input">
+                        <label for="_remember_me" class="form-check-label">Remember me</label>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">Me connecter</button>
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                <h1>CREEZ VOTRE COMPTE</h1>
+
+                {% for flash_error in app.flashes('verify_email_error') %}
+                    <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                {% endfor %}
+
+                {% for flash_success in app.flashes('success') %}
+                    <div class="alert alert-success" role="alert">{{ flash_success }}</div>
+                {% endfor %}
+
+                {{ form_start(registrationForm) }}
+                <div class="form-group">
+                    {{ form_row(registrationForm.email, { 'attr': {'placeholder': 'Votre email'} }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.nom, { 'attr': {'placeholder': 'Votre nom'} }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.prenom, { 'attr': {'placeholder': 'Votre prénom'} }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.telephone, { 'attr': {'placeholder': 'Votre téléphone'} }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.adresse, { 'attr': {'placeholder': 'Votre adresse'} }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.code_postal, { 'attr': {'placeholder': 'Votre code postal'} }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.ville, { 'attr': {'placeholder': 'Votre ville'} }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.pays, { 'attr': {'placeholder': 'Votre pays'} }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.plainPassword.first, { 'attr': {'placeholder': 'Mot de passe'} }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.plainPassword.second, { 'attr': {'placeholder': 'Repeter Mot de passe'} }) }}
+                </div>
+                <button class="btn btn-primary">Créer mon compte</button>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
