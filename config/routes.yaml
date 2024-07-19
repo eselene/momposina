@@ -1,5 +1,22 @@
+# Consolidated controller configuration
 controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
-    type: attribute
+    resource: ../src/Controller/ # Path to your controller directory
+    # namespace: App\Controller  # Namespace for your controllers
+    type: attribute             # Default controller type (can be adjusted if needed)
+# index:
+#     path: /# Route definitions for reservations
+# index:
+    # path: /
+    # controller: App\Controller\ProduitController::index
+    # controller: App\Controller\MainController::home
+    # controller: App\Controller\SousCategorieController::index
+    # controller: App\Controller\login_registerController::index
+
+# reservation_new:
+#   path: /reservation/new
+#   controller: App\Controller\ReservationController::new
+
+# reservation_confirmation:
+#   path: /reservation/confirmation/{id}
+#   controller: App\Controller\ReservationController::confirmation
+    # controller: App\Controller\ProduitController::index
