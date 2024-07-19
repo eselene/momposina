@@ -16,12 +16,21 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class RegistrationFormType extends AbstractType
 {
+    private const PASSWORD_FIELD_OPTIONS = [
+        'attr' => [
+            'placeholder' => 'Mot de passe',
+            'autocomplete' => 'new-password',
+            'class' => 'password-field'
+        ],
+        'label' => false,
+    ];
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('email', EmailType::class, [
                 'attr' => [
-                    'placeholder' => 'Email',
+                    'placeholder' => 'Email *',
                     'autocomplete' => 'off'
                 ],
             ])
@@ -66,14 +75,16 @@ class RegistrationFormType extends AbstractType
                 'first_options' => [
                     'attr' => [
                         'placeholder' => 'Mot de passe',
-                        'autocomplete' => 'new-password'
+                        'autocomplete' => 'new-password',
+                        'class' => 'password-field'
                     ],
                     'label' => false,
                 ],
                 'second_options' => [
                     'attr' => [
                         'placeholder' => 'Répétez le mot de passe',
-                        'autocomplete' => 'new-password'
+                        'autocomplete' => 'new-password',
+                        'class' => 'password-field'  
                     ],
                     'label' => false,
                 ],

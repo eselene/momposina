@@ -1,18 +1,40 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-        {% block stylesheets %}
-        {% endblock %}
-
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		{# Icône pour l'onglet du navigateur #}
+		{# Lien vers la bibliothèque d'icônes Font Awesome #}
+		<link
+		rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> 
+		{# Lien vers la bibliothèque CSS Bootstrap #}
+		<link
+		rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		{# Bloc pour les feuilles de style supplémentaires #}
+		{% block stylesheets %}
+		{% endblock %}
+		{# Lien vers la bibliothèque JavaScript Bootstrap #}
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+				{# Importation des scripts JavaScript #}
+			{% endblock %}
+		{% endblock %}
+	</head>
+	<body>
+		{% block body %}
+			{# Bloc pour le contenu principal de la page #}
+			<div class="container">
+				<div class="alert alert-success">
+					Bienvenue sur ma page !
+					{# Message de bienvenue #}
+				</div>
+			</div>
+		{% endblock %}
+	</body>
 </html>
