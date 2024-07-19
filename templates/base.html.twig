@@ -6,19 +6,17 @@
 			{% block title %}Welcome!
 			{% endblock %}
 		</title>
-		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		{# <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>"> #}
 		{# Icône pour l'onglet du navigateur #}
 		{# Lien vers la bibliothèque d'icônes Font Awesome #}
 		<link
-		rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> 
-		{# Lien vers la bibliothèque CSS Bootstrap #}
+		{# rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">  #}
 		<link
 		rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 		{# Bloc pour les feuilles de style supplémentaires #}
-		{% block stylesheets %}
-		{% endblock %}
+		{# {% block stylesheets %}
+		{% endblock %} #}
 		{# Lien vers la bibliothèque JavaScript Bootstrap #}
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 		{% block javascripts %}
 			{% block importmap %}
 				{{ importmap('app') }}
@@ -27,14 +25,84 @@
 		{% endblock %}
 	</head>
 	<body>
-		{% block body %}
-			{# Bloc pour le contenu principal de la page #}
-			<div class="container">
-				<div class="alert alert-success">
-					Bienvenue sur ma page !
-					{# Message de bienvenue #}
+		{# <nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="{{ path('app_main') }}">My Shop</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ml-auto">
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						<li class="nav-item">
+
+							<a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+						</li>
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_login') }}">Login</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_register') }}">Register</a>
+						</li>
+					{% endif %}
+				</ul>
+			</div>
+		</nav> #}
+		<div class="container-fluid py-3 mt-0 text-center ">
+			<div class="row">
+				<div class="col">
+					{% if app.user %}
+						<div class="mb-3">
+							Welcome
+							{{ app.user.email }}
+							! You can
+							<a href="{{ path('app_logout') }}">Logout</a>.
+						</div>
+					{% else %}
+						<div class="mb-3">
+							User not connected ! You can
+							<a href="{{ path('app_login') }}">Login</a>.
+						</div>
+					{% endif %}
+
 				</div>
 			</div>
-		{% endblock %}
+		</div>
+		<div class="container">
+			{% block body %}
+				{# <img src="{{asset('images/Aain-s-Creed-Origins-PS4.jpg')}}" alt="article.description"> #}
+			{% endblock %}
+		</div>
+
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
+	 	<script>
+			(function () {
+				'use strict';
+				window.addEventListener('load', function () {
+				var forms = document.getElementsByClassName('needs-validation');
+				Array.prototype.filter.call(forms, function (form) {
+				form.addEventListener('submit', function (event) {
+				if (form.checkValidity() === false) {
+				event.preventDefault();
+				event.stopPropagation();
+				}
+				form.classList.add('was-validated');
+				}, false);
+				});
+				}, false);
+				})();
+		</script>
+		{% block javascript %}{% endblock %}
+		{# {% block body %}
+			{# Bloc pour le contenu principal de la page #}
+			{# <div class="container">
+				<div class="alert alert-success">
+					Bienvenue sur ma page !
+				</div>
+			</div>
+		{% endblock %} #} 
 	</body>
 </html>
