@@ -9,10 +9,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-// use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -55,7 +56,6 @@ class RegistrationFormType extends AbstractType
             ->add('pays', null, [
                 'attr' => ['placeholder' => 'Pays']
             ])
-
             ->add('genre', ChoiceType::class, [
                 'choices' => [
                     'Madame' => 'Madame',
@@ -69,7 +69,6 @@ class RegistrationFormType extends AbstractType
                     new NotBlank(['message' => 'Choisissez votre civilité.']),
                 ],
             ])
-
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => [
@@ -98,18 +97,16 @@ class RegistrationFormType extends AbstractType
                         'max' => 15,
                     ]),
                 ],
+            ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Vous devez accepter nos conditions générales.',
+                    ]),
+                ],
+                'label' => 'J\'accepte les conditions générales'
             ]);
-
-            // TO ACTIVATE*****************
-            // ->add('agreeTerms', CheckboxType::class, [
-            //     'mapped' => false,
-            //     'constraints' => [
-            //         new IsTrue([
-            //             'message' => 'You should agree to our terms.',
-            //         ]),
-            //     ],
-            // ])
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

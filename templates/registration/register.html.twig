@@ -10,11 +10,7 @@
 
 	<h1>Register</h1>
 
-	{# {{ form_errors(registrationForm) }} #}
-
-	{{ form_start(registrationForm) }}
 	{{ form_start(registrationForm, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
-	{{ form_row(registrationForm.email) }}
 	{{ form_row(registrationForm.plainPassword.first) }}
 	{{ form_row(registrationForm.plainPassword.second) }}
 	{{ form_row(registrationForm.nom) }}
@@ -24,13 +20,10 @@
 	{{ form_row(registrationForm.code_postal) }}
 	{{ form_row(registrationForm.ville) }}
 	{{ form_row(registrationForm.pays) }}
-	<button class="btn">Créer mon compte</button>
-	{# {{ form_row(registrationForm.email) }}
-	        {{ form_row(registrationForm.plainPassword, {
-	            label: 'Password'
-	        }) }}
-	        {{ form_row(registrationForm.agreeTerms) }}
-	
-	        <button type="submit" class="btn">Register</button> #}
+	{{ form_row(registrationForm.email) }}
+	{{ form_row(registrationForm.agreeTerms) }}
+
+	<button type="submit" class="btn">Register</button>
 	{{ form_end(registrationForm) }}
+
 {% endblock %}
