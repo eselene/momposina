@@ -27,8 +27,8 @@
                     <td>{{ produit.nomEs }}</td>
                     <td>{{ produit.pays }}</td>
                     <td>{{ produit.marque }}</td>
-                    <td class="W-75">{{ produit.description}}</td>
-                    <td>{{ produit.photo1 }}</td>
+                    {# <td class="W-75">{{ produit.description}}</td> #}
+                    <td >{{ produit.photo1 }}</td>
                     <td><img src="{{ asset('images/' ~ produit.photo1) }}" alt="{{ produit.nom }}" width="100"></td>
                     <td>{{ produit.visibleWeb ? 'Oui' : 'No' }}</td>
                     <td>

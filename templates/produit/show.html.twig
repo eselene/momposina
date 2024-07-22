@@ -32,26 +32,6 @@
 				<th>Marque</th>
 				<td>{{ produit.marque }}</td>
 			</tr>
-			{# <tr>
-			                <th>Poids</th>
-			                <td>{{ produit.poids }}</td>
-			            </tr>
-			            <tr>
-			                <th>UnitePoids</th>
-			                <td>{{ produit.unitePoids }}</td>
-			            </tr>
-			            <tr>
-			                <th>Ingredients</th>
-			                <td>{{ produit.ingredients }}</td>
-			            </tr>
-			            <tr>
-			                <th>Allergenes</th>
-			                <td>{{ produit.allergenes }}</td>
-			            </tr>
-			            <tr>
-			                <th>Certification</th>
-			                <td>{{ produit.certification }}</td>
-			            </tr> #}
 			<tr>
 				<th>Chemin photo</th>
 				<td>{{ produit.photo1 }}</td>
@@ -72,7 +52,7 @@
 		</tbody>
 	</table>
 
-	<a href="{{ path('app_produit_index') }}">back to list</a>
+	{# <a href="{{ path('app_produit_index') }}">back to list</a> #}
 
 	<a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
 

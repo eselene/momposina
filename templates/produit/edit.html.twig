@@ -5,12 +5,12 @@
 
 {% block body %}
 	<h1>Edit Produit</h1>
-	<img src="{{ asset('/images/' ~ produit.photo1) }}" alt="Photo" style="height: 30px;">
-	{{ form_row(produit.photo1) }}
-	{{ form_row(form.photo1) }}
-	{{ include('produit/_form.html.twig', {'button_label': 'Update'}) }}
+	{# <img src="{{ asset('/images/' ~ produit.photo1) }}" alt="Photo" style="height: 30px;"> #}
+	{# {{ form_row(produit.photo1) }}
+	{{ form_row(form.photo1) }} #}
+	{{ include('produit/_form.html.twig', {'button_label': 'Sauvegarde'}) }}
 
-	<a href="{{ path('app_produit_index') }}">back to list</a>
+	{# <a href="{{ path('app_produit_index') }}">back to list</a> #}
 
 	{{ include('produit/_delete_form.html.twig') }}
 {% endblock %}

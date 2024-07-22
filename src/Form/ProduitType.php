@@ -22,25 +22,29 @@ class ProduitType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [ // Use TextType for product names
-                'label' => 'Nom du produit' // Clearer label for user
+                'label' => 'Nom *' // Clearer label for user
             ])
             ->add('nomEs', TextType::class, [ // Use TextType for Spanish name
-                'label' => 'Nom du produit (espagnol)' // Clearer label for user
+                'required' => false,
+                'label' => 'Nom (espagnol)' // Clearer label for user
             ])
             ->add('description', TextType::class, [ // Use TextType for product description
-                'label' => 'Description du produit' // Clearer label for user
+                'label' => 'Description *' // Clearer label for user
             ])
             ->add('pays', TextType::class, [ // Use TextType for country
+                'required' => false,
                 'label' => 'Pays d\'origine' // Clearer label for user
             ])
             ->add('marque', TextType::class, [ // Use TextType for brand
+                'required' => false,
                 'label' => 'Marque' // Clearer label for user
             ])
             // ->add('prix', TextType::class, [ // Use TextType for price (likely a number)
             //     'label' => 'Prix (€)' // Clearer label for user, assuming euros
             // ])
             ->add('visibleWeb', CheckboxType::class, [ // Use CheckboxType for boolean visibility
-                'label' => 'Visible sur le site web' 
+                'label' => 'Visible sur le site web' ,
+                'data' => true,
             ])
             ->add('user', EntityType::class, [ // Use EntityType for user association
                 'class' => User::class,
@@ -56,6 +60,7 @@ class ProduitType extends AbstractType
                 'label' => 'Sous-catégorie' 
             ])            
             ->add('photo1', FileType::class, [ // il faut traiter ce fichier là dans le controller
+                'required' => false,
                 'label' => 'Ajouter une image (jpeg, jpg, png)',
                 'data_class' => null,
                 // unmapped means that this field is not associated to any entity property
