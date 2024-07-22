@@ -1,59 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produit index{% endblock %}
+{% block title %}Liste des Produits
+{% endblock %}
 
 {% block body %}
     <h1>Produit index</h1>
-
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
                 <th>NomEs</th>
-                <th>Description</th>
                 <th>Pays</th>
                 <th>Marque</th>
-                <th>Poids</th>
-                <th>UnitePoids</th>
-                <th>Ingredients</th>
-                <th>Allergenes</th>
-                <th>Certification</th>
+                <th>Lien Photo</th>
                 <th>Photo1</th>
-                <th>Photo2</th>
-                <th>Prix</th>
                 <th>VisibleWeb</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for produit in produits %}
-            <tr>
-                <td>{{ produit.id }}</td>
-                <td>{{ produit.nom }}</td>
-                <td>{{ produit.nomEs }}</td>
-                <td>{{ produit.description }}</td>
-                <td>{{ produit.pays }}</td>
-                <td>{{ produit.marque }}</td>
-                <td>{{ produit.poids }}</td>
-                <td>{{ produit.unitePoids }}</td>
-                <td>{{ produit.ingredients }}</td>
-                <td>{{ produit.allergenes }}</td>
-                <td>{{ produit.certification }}</td>
-                <td>{{ produit.photo1 }}</td>
-                <td>{{ produit.photo2 }}</td>
-                <td>{{ produit.prix }}</td>
-                <td>{{ produit.visibleWeb ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
-                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="16">no records found</td>
-            </tr>
-        {% endfor %}
+            {% for produit in produits %}
+                <tr>
+                    <td>{{ produit.id }}</td>
+                    <td>{{ produit.nom }}</td>
+                    <td>{{ produit.nomEs }}</td>
+                    <td>{{ produit.pays }}</td>
+                    <td>{{ produit.marque }}</td>
+                    <td class="W-75">{{ produit.description}}</td>
+                    <td>{{ produit.photo1 }}</td>
+                    <td><img src="{{ asset('images/' ~ produit.photo1) }}" alt="{{ produit.nom }}" width="100"></td>
+                    <td>{{ produit.visibleWeb ? 'Oui' : 'No' }}</td>
+                    <td>
+                        <a href="{{ path('app_produit_show', {'id': produit.id}) }}">Afficher</a>
+                        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">Editer</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">no records found</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 

@@ -1,4 +1,10 @@
+{# generates the opening <form> tag for your form.
+ It sets the necessary attributes like the HTTP method (usually "POST") and the action URL for form submission. #}
 {{ form_start(form) }}
+{# Renders all the form fields associated with the form object. It iterates 
+through each form field and generates the appropriate HTML input elements 
+(text fields, dropdowns, checkboxes, etc.) based on the field type. #}
     {{ form_widget(form) }}
+    {# he |default('Save') filter ensures that a default label "Save" is displayed if the button_label variable is not defined. #}
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

@@ -9,6 +9,10 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+# firewalls: This is the main section where different firewall configurations are defined.
+# dev: This is the name of the specific firewall configuration, likely for the development environment.
+# pattern: This defines a regular expression pattern that matches certain URLs. In this case, it matches URLs that start with /_(profiler|wdt) or /css, /images, or /js.
+# security: This is set to false, meaning that security measures (like authentication) are not applied to the URLs that match the pattern.                
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

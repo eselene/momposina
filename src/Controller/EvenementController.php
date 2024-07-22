@@ -32,7 +32,8 @@ class EvenementController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($evenement);
             $entityManager->flush();
-
+            // Ajout des messages flash
+            // $this->addFlash('success', 'Evenement créé avec succès!');
             return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -61,7 +62,8 @@ class EvenementController extends AbstractController
 
             return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
         }
-
+            // Ajout des messages flash
+            // $this->addFlash('success', 'Evenement modifié avec succès!');
         return $this->render('evenement/edit.html.twig', [
             'evenement' => $evenement,
             'form' => $form,
@@ -75,7 +77,8 @@ class EvenementController extends AbstractController
             $entityManager->remove($evenement);
             $entityManager->flush();
         }
-
+            // Ajout des messages flash
+            // $this->addFlash('success', 'Evenement suprimé avec succès!');
         return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
     }
 }

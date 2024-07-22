@@ -5,9 +5,9 @@ controllers:
     type: attribute             # Default controller type (can be adjusted if needed)
 # index:
 #     path: /# Route definitions for reservations
-# index:
-    # path: /
-    # controller: App\Controller\ProduitController::index
+index:
+    path: /
+    controller: App\Controller\ProduitController::index
     # controller: App\Controller\MainController::home
     # controller: App\Controller\SousCategorieController::index
     # controller: App\Controller\login_registerController::index

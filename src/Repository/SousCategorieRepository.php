@@ -15,6 +15,11 @@ class SousCategorieRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, SousCategorie::class);
     }
+    public function findAlphabeticallyOrdered()
+    {
+        return $this->createQueryBuilder('sc')
+            ->orderBy('sc.description', 'ASC');
+    }
 
     //    /**
     //     * @return SousCategorie[] Returns an array of SousCategorie objects

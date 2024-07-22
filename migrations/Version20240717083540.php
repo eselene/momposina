@@ -20,7 +20,8 @@ final class Version20240717083540 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // $this->addSql('ALTER TABLE user ADD is_verified TINYINT(1) DEFAULT 0');
-        $this->addSql('ALTER TABLE user ADD genre VARCHAR(10) NOT NULL');
+        // $this->addSql('ALTER TABLE user ADD genre VARCHAR(10) NOT NULL');
+        $this->addSql('ALTER TABLE produit DROP INDEX UNIQ_29A5EC27A76ED395');
     }
 
     public function down(Schema $schema): void
