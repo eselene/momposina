@@ -4,45 +4,48 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Produit index</h1>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>NomEs</th>
-                <th>Pays</th>
-                <th>Marque</th>
-                <th>Lien Photo</th>
-                <th>Photo1</th>
-                <th>VisibleWeb</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for produit in produits %}
-                <tr>
-                    <td>{{ produit.id }}</td>
-                    <td>{{ produit.nom }}</td>
-                    <td>{{ produit.nomEs }}</td>
-                    <td>{{ produit.pays }}</td>
-                    <td>{{ produit.marque }}</td>
-                    {# <td class="W-75">{{ produit.description}}</td> #}
-                    <td >{{ produit.photo1 }}</td>
-                    <td><img src="{{ asset('images/' ~ produit.photo1) }}" alt="{{ produit.nom }}" width="100"></td>
-                    <td>{{ produit.visibleWeb ? 'Oui' : 'No' }}</td>
-                    <td>
-                        <a href="{{ path('app_produit_show', {'id': produit.id}) }}">Afficher</a>
-                        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">Editer</a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="9">no records found</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+	<h1>Liste des Produits</h1>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nom</th>
+				<th>NomEs</th>
+				<th>Pays</th>
+				<th>Marque</th>
+				<th>Lien Photo</th>
+                <th>Sous-Catégorie</th>
+				<th>Photo1</th>
+				<th>VisibleWeb</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for produit in produits %}
+				<tr>
+					<td>{{ produit.id }}</td>
+					<td>{{ produit.nom }}</td>
+					<td>{{ produit.nomEs }}</td>
+					<td>{{ produit.pays }}</td>
+					<td>{{ produit.marque }}</td>
+					<td>{{ produit.photo1 }}</td>
+                    <td>{{ produit.sousCategorie.description }}</td>
+					<td><img src="{{ asset('images/' ~ produit.photo1) }}" alt="{{ produit.nom }}" style="width: 100px;"></td>
+					<td>
+						<a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-info">Voir</a>
+						<a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-primary">Éditer</a>
+						{{ form_start(delete_forms[produit.id], {'attr': {'style': 'display:inline-block;'}}) }}
+						<button class="btn btn-danger">Supprimer</button>
+						{{ form_end(delete_forms[produit.id]) }}
+					</td>
+				</tr>
+				{# {% else %}
+				                <tr>
+				                    <td colspan="9">no records found</td>
+				                </tr> #}
+			{% endfor %}
+		</tbody>
+	</table>
 
-    <a href="{{ path('app_produit_new') }}">Create new</a>
+	<a href="{{ path('app_produit_new') }}">Create new</a>
 {% endblock %}

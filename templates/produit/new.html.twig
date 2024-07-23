@@ -1,62 +1,78 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Produit{% endblock %}
-
 {% block body %}
-    <h1>Créer un nouveau produit</h1>
+    <div class="container form-container">
+        <h1>Create New Product</h1>
+        {{ form_start(form) }}
 
-    {{ include('produit/_form.html.twig') }}
+        <div class="row">
+            <div class="col-md-6">
+				{{ form_row(form.nom) }}
+				{{ form_row(form.nomEs) }}
+				{{ form_row(form.description, {'attr': {'rows': '3'}}) }}
+				{{ form_row(form.pays) }}
+				{{ form_row(form.marque) }}
+				{{ form_row(form.visibleWeb) }}
+				{{ form_row(form.user) }}
+				{{ form_row(form.sousCategorie) }}                
+            </div>
 
-    <a href="{{ path('app_produit_index') }}">Retour à la liste</a>
+            <div class="col-md-6">
+                <div class="image-container" id="image-preview">
+                    <img src="" alt="Photo" style="height: 30vh; display: none; margin: 0 auto;">
+                    {{ form_row(form.photo1) }}
+                </div>
+            </div>
+        </div>
 
-	{# JavaScript pour la prévisualisation de l'image #}
-	{# Le script écoute l'événement change sur l'input de fichier. #}
-	{# Lorsqu'un fichier est sélectionné, il utilise FileReader pour lire le fichier et mettre à jour l'élément img à l'intérieur de #image-preview. #}
-		<script>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        {{ form_end(form) }}
+        <a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Retour à la liste</a>
+    </div>
+
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
             const imageInput = document.querySelector('#{{ form.photo1.vars.id }}');
             const imagePreview = document.querySelector('#image-preview img');
-
-            imageInput.addEventListener('change', function (event) {
-            console.log('Image input changed');                
-        if (event.target.files && event.target.files[0]) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {                c
-                    onsole.log('FileReader loaded');
-                        imagePreview.src = e.target.result;
-                    };
-                    reader.readAsDataURL(event.target.files[0]);
-                } else {
-
-            console.log('No file selected, using default image');
-            imagePreview.src = '{{ asset('/images/' ~ produit.photo1) }}';
-                }
-            });
-
             const saveButton = document.querySelector('.btn-primary');
             const backToListButton = document.querySelector('.btn-secondary');
             const formElements = document.querySelectorAll('input[type="text"], textarea');
 
-            saveButton.disabled = true;
-
-            function checkFormChanges() {
-                let formChanged = false;
-                formElements.forEach(element => {
-                    if (element.value !== element.defaultValue) {
-                        formChanged = true;
+            if (imageInput) {
+                imageInput.addEventListener('change', function (event) {
+                    if (event.target.files && event.target.files[0]) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            imagePreview.src = e.target.result;
+                            imagePreview.style.display = 'block';
+                        };
+                        reader.readAsDataURL(event.target.files[0]);
+                    } else {
+                        imagePreview.style.display = 'none';
                     }
                 });
-                saveButton.disabled = !formChanged;
-                console.log('Form changed:', formChanged);
             }
 
+            let formChanged = false;
+
             formElements.forEach(element => {
-                element.addEventListener('input', checkFormChanges);
+                element.addEventListener('input', () => {
+                    formChanged = true;
+                    saveButton.disabled = false;
+                    backToListButton.disabled = false;
+                });
             });
 
-            backToListButton.addEventListener('click', function (event) {
-                if (!saveButton.disabled && !confirm('Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir quitter cette page ?')) {
+            saveButton.addEventListener('click', (event) => {
+                formChanged = false;
+            });
+
+            backToListButton.addEventListener('click', (event) => {
+                if (formChanged) {
                     event.preventDefault();
+                    if (confirm('You have unsaved changes. Are you sure you want to leave?')) {
+                        window.location.href = backToListButton.href;
+                    }
                 }
             });
         });
