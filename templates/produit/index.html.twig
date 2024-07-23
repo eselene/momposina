@@ -11,12 +11,12 @@
 				<th>Id</th>
 				<th>Nom</th>
 				<th>NomEs</th>
-				<th>Pays</th>
-				<th>Marque</th>
-				<th>Lien Photo</th>
+				{# <th>Pays</th>
+				<th>Marque</th> #}
+				{# <th>Lien Photo</th> #}
                 <th>Sous-Catégorie</th>
 				<th>Photo1</th>
-				<th>VisibleWeb</th>
+				<th>V</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -26,11 +26,12 @@
 					<td>{{ produit.id }}</td>
 					<td>{{ produit.nom }}</td>
 					<td>{{ produit.nomEs }}</td>
-					<td>{{ produit.pays }}</td>
-					<td>{{ produit.marque }}</td>
-					<td>{{ produit.photo1 }}</td>
+					{# <td>{{ produit.pays }}</td>
+					<td>{{ produit.marque }}</td> #}
+					{# <td>{{ produit.photo1 }}</td> #}
                     <td>{{ produit.sousCategorie.description }}</td>
 					<td><img src="{{ asset('images/' ~ produit.photo1) }}" alt="{{ produit.nom }}" style="width: 100px;"></td>
+                    <td>{{ produit.visibleWeb ? 'Oui' : 'Non' }}</td>
 					<td>
 						<a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-info">Voir</a>
 						<a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-primary">Éditer</a>

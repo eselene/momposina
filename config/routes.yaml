@@ -3,8 +3,7 @@ controllers:
     resource: ../src/Controller/ # Path to your controller directory
     # namespace: App\Controller  # Namespace for your controllers
     type: attribute             # Default controller type (can be adjusted if needed)
-# index:
-#     path: /# Route definitions for reservations
+
 index:
     path: /
     controller: App\Controller\ProduitController::index
@@ -20,3 +19,10 @@ index:
 #   path: /reservation/confirmation/{id}
 #   controller: App\Controller\ReservationController::confirmation
     # controller: App\Controller\ProduitController::index
+
+favicon:
+    path: /favicon.ico
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirect
+    defaults:
+        path: /public/favicon.ico
+        permanent: true
