@@ -131,6 +131,14 @@ button.btn-primary {
     margin-top: 5px;
   }
   
+  .custom-btn {
+    width: 100px; /* Fixez la largeur */
+    height: 32px; /* Fixez la hauteur */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
 
 @media (max-width: 768px) {
     .border-right.border-danger {

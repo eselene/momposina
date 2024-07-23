@@ -4,41 +4,46 @@
 {% endblock %}
 
 {% block body %}
-  <h1>Liste des Produits</h1>
+	<h1>Liste des Produits</h1>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Nom produit</th>
-        <th>Nom Espagnol</th>
-        <th>Sous-Catégorie</th>
-        <th>Photo</th>
-        <th>Visible</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for produit in produits %}
-      <tr class="align-items-center">  <td>{{ produit.id }}</td>
-        <td>{{ produit.nom }}</td>
-        <td>{{ produit.nomEs }}</td>
-        <td>{{ produit.sousCategorie.description }}</td>
-        <td>
-          <img src="{{ asset('images/' ~ produit.photo1) }}" alt="{{ produit.nom }}" style="width: 100px;">
-        </td>
-        <td>{{ produit.visibleWeb ? 'Oui' : 'Non' }}</td>
-        <td>
-          <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-info">Voir</a>
-          <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-primary">Éditer</a>
-          {{ form_start(delete_forms[produit.id], {'attr': {'style': 'display:inline-block;'}}) }}
-            <button class="btn btn-danger">Supprimer</button>
-          {{ form_end(delete_forms[produit.id]) }}
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nom produit</th>
+				<th>Nom Espagnol</th>
+				<th>Sous-Catégorie</th>
+				<th>Photo</th>
+				<th>Visible</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for produit in produits %}
+				<tr
+					class="align-middle">
+					<!-- Utilisez 'align-middle' pour centrer verticalement -->
+					<td>{{ produit.id }}</td>
+					<td>{{ produit.nom }}</td>
+					<td>{{ produit.nomEs }}</td>
+					<td>{{ produit.sousCategorie.description }}</td>
+					<td>
+						<img src="{{ asset('images/' ~ produit.photo1) }}" alt="{{ produit.nom }}" class="img-fluid object-fit-cover object-position-center" style="width: 100px; height: 100px;">
+						{# <img src="{{ asset('images/' ~ produit.photo1) }}" alt="{{ produit.nom }}" style="width: 100px; height: 100px;"> <!-- Fixez la largeur et la hauteur --> #}
+						{# <img src="{{ produit and produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}" alt={{produit.nom }} class="img-fluid object-fit-cover object-position-center" style="display: {{ produit and produit.photo1 ? 'block' : 'none' }};"> #}
+					</td>
+					<td>{{ produit.visibleWeb ? 'Oui' : 'Non' }}</td>
+					<td>
+						<a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-info btn-sm custom-btn">Voir</a>
+						<a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-primary btn-sm custom-btn">Modifier</a>
+						{{ form_start(delete_forms[produit.id], {'attr': {'style': 'display:inline-block;'}}) }}
+						<button class="btn btn-danger btn-sm custom-btn">Supprimer</button>
+						{{ form_end(delete_forms[produit.id]) }}
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
-	<a href="{{ path('app_produit_new') }}">Nouveau produit</a>
+	<a href="{{ path('app_produit_new') }}" class="btn btn-success">Nouveau produit</a>
 {% endblock %}

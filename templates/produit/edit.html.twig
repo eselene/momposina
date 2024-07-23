@@ -1,121 +1,128 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container form-container">
-        <h1>Edit Product</h1>
-        {{ form_start(form) }}
+	<div class="container form-container">
+		<h1>Modification du Produit</h1>
+		{{ form_start(form) }}
 
-        <div class="row">
-            <div class="col-md-8"> <!-- Augmenter la largeur de la colonne gauche -->
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label text-left">{{ form_label(form.nom) }}</label>
-                    <div class="col-sm-8">
-                        {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label text-left">{{ form_label(form.nomEs) }}</label>
-                    <div class="col-sm-8">
-                        {{ form_widget(form.nomEs, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label text-left">{{ form_label(form.description) }}</label>
-                    <div class="col-sm-8">
-                        {{ form_widget(form.description, {'attr': {'rows': '3', 'class': 'form-control', 'style': 'width: 100%;'}}) }}
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label text-left">{{ form_label(form.pays) }}</label>
-                    <div class="col-sm-8">
-                        {{ form_widget(form.pays, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label text-left">{{ form_label(form.marque) }}</label>
-                    <div class="col-sm-8">
-                        {{ form_widget(form.marque, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label text-left">{{ form_label(form.visibleWeb) }}</label>
-                    <div class="col-sm-8">
-                        {{ form_widget(form.visibleWeb, {'attr': {'class': 'form-check-input'}}) }}
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label text-left">{{ form_label(form.user) }}</label>
-                    <div class="col-sm-8">
-                        {{ form_widget(form.user, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label text-left">{{ form_label(form.sousCategorie) }}</label>
-                    <div class="col-sm-8">
-                        {{ form_widget(form.sousCategorie, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                </div>
-            </div>
+		<div class="row">
+			<div
+				class="col-md-8">
+				<!-- Augmenter la largeur de la colonne gauche -->
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label text-left">{{ form_label(form.nom) }}</label>
+					<div class="col-sm-8">
+						{{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label text-left">{{ form_label(form.nomEs) }}</label>
+					<div class="col-sm-8">
+						{{ form_widget(form.nomEs, {'attr': {'class': 'form-control'}}) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label text-left">{{ form_label(form.description) }}</label>
+					<div class="col-sm-8">
+						{{ form_widget(form.description, {'attr': {'rows': '3', 'class': 'form-control', 'style': 'width: 100%;'}}) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label text-left">{{ form_label(form.pays) }}</label>
+					<div class="col-sm-8">
+						{{ form_widget(form.pays, {'attr': {'class': 'form-control'}}) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label text-left">{{ form_label(form.marque) }}</label>
+					<div class="col-sm-8">
+						{{ form_widget(form.marque, {'attr': {'class': 'form-control'}}) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label text-left">{{ form_label(form.visibleWeb) }}</label>
+					<div class="col-sm-8">
+						{{ form_widget(form.visibleWeb, {'attr': {'class': 'form-check-input'}}) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label text-left">{{ form_label(form.user) }}</label>
+					<div class="col-sm-8">
+						{{ form_widget(form.user, {'attr': {'class': 'form-control'}}) }}
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label text-left">{{ form_label(form.sousCategorie) }}</label>
+					<div class="col-sm-8">
+						{{ form_widget(form.sousCategorie, {'attr': {'class': 'form-control'}}) }}
+					</div>
+				</div>
+			</div>
 
-            <div class="col-md-4"> <!-- Réduire la largeur de la colonne droite -->
-                <div class="image-container" id="image-preview">
-                    <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}" alt="Photo" class="img-fluid" style="height: 30vh; display: {{ produit.photo1 ? 'block' : 'none' }}; margin: 0 auto;">
-                    {{ form_row(form.photo1) }}
-                </div>
-            </div>
-        </div>
+			<div class="col-md-4">
+				<div class="image-container" id="image-preview">
+					<img src="{{ produit and produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}" alt={{produit.nom }} class="img-fluid object-fit-cover object-position-center" style="display: {{ produit and produit.photo1 ? 'block' : 'none' }};">
+					{{ form_row(form.photo1) }}
 
-        <button type="submit" class="btn btn-primary">Enregistrer</button>
-        {{ form_end(form) }}
-        <a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Retour à la liste</a>
-    </div>
+				</div>
+			</div>
+		</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const imageInput = document.querySelector('#{{ form.photo1.vars.id }}');
-            const imagePreview = document.querySelector('#image-preview img');
-            const saveButton = document.querySelector('.btn-primary');
-            const backToListButton = document.querySelector('.btn-secondary');
-            const formElements = document.querySelectorAll('input[type="text"], textarea');
+		<button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
 
-            if (imageInput) {
-                imageInput.addEventListener('change', function (event) {
-                    if (event.target.files && event.target.files[0]) {
-                        const reader = new FileReader();
-                        reader.onload = function (e) {
-                            imagePreview.src = e.target.result;
-                            imagePreview.style.display = 'block';
-                        };
-                        reader.readAsDataURL(event.target.files[0]);
-                    } else {
-                        imagePreview.src = '{{ produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}';
-                        imagePreview.style.display = '{{ produit.photo1 ? 'block' : 'none' }}';
-                    }
-                });
-            }
+		{{ form_end(form) }}
 
-            let formChanged = false;
+		<a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Retour à la liste</a>
 
-            formElements.forEach(element => {
-                element.addEventListener('input', () => {
-                    formChanged = true;
-                    saveButton.disabled = false;
-                    backToListButton.disabled = false;
-                });
-            });
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+const imageInput = document.querySelector('# {{ form.photo1.vars.id }}');
+const imagePreview = document.querySelector('#image-preview img');
+const saveButton = document.querySelector('.btn-primary');
+const backToListButton = document.querySelector('.btn-secondary');
+const formElements = document.querySelectorAll('input[type="text"], textarea');
 
-            saveButton.addEventListener('click', (event) => {
-                formChanged = false;
-            });
+if (imageInput) {
+imageInput.addEventListener('change', function (event) {
+if (event.target.files && event.target.files[0]) {
+const reader = new FileReader();
+reader.onload = function (e) {
+imagePreview.src = e.target.result;
+imagePreview.style.display = 'block';
+};
+reader.readAsDataURL(event.target.files[0]);
+} else {
+imagePreview.src = '{{ produit and produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}';
+imagePreview.style.display = '{{ produit and produit.photo1 ? 'block' : 'none' }}';
+}
+});
+}
+// imagePreview.src = '{{ produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}';
+//                         imagePreview.style.display = '{{ produit.photo1 ? 'block' : 'none' }}';
+// and produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}';
+//               imagePreview.style.display = '
+let formChanged = false;
 
-            backToListButton.addEventListener('click', (event) => {
-                if (formChanged) {
-                    event.preventDefault();
-                    if (confirm('You have unsaved changes. Are you sure you want to leave?')) {
-                        window.location.href = backToListButton.href;
-                    }
-                }
-            });
-        });
-    </script>
-{% endblock %}
+formElements.forEach(element => {
+element.addEventListener('input', () => {
+formChanged = true;
+saveButton.disabled = false;
+backToListButton.disabled = false;
+});
+});
+
+saveButton.addEventListener('click', (event) => {
+formChanged = false;
+});
+
+backToListButton.addEventListener('click', (event) => {
+if (formChanged) {
+event.preventDefault();
+if (confirm('Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir quitter ?')) {
+window.location.href = backToListButton.href;
+}
+}
+});
+});
+		</script>
+	{% endblock %}
