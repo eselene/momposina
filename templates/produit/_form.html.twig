@@ -1,90 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{# {% block title %}Edit Produit{% endblock %} #}
-
 {% block body %}
-	<div class="container form-container">
-		{{ form_start(form) }}
+    <div class="container form-container">
+        {{ form_start(form) }}
 
-		<div class="row">
-			<div class="col-md-6">
-				{{ form_row(form.nom) }}
-				{{ form_row(form.nomEs) }}
-				{{ form_row(form.description, {'attr': {'rows': '3'}}) }}
-				{{ form_row(form.pays) }}
-				{{ form_row(form.marque) }}
-				{{ form_row(form.visibleWeb) }}
-				{{ form_row(form.user) }}
-				{{ form_row(form.sousCategorie) }}
-			</div>
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_row(form.nom) }}
+                {{ form_row(form.nomEs) }}
+                {{ form_row(form.description, {'attr': {'rows': '3'}}) }}
+                {{ form_row(form.pays) }}
+                {{ form_row(form.marque) }}
+                {{ form_row(form.visibleWeb) }}
+                {{ form_row(form.user) }}
+                {{ form_row(form.sousCategorie) }}
+            </div>
 
-			<div class="col-md-6">
-				<div class="image-container" id="image-preview">
-					<img src="{{ asset('/images/' ~ produit.photo1) }}" alt="Photo" style="height: 30vh; display: block; margin: 0 auto;">
-					{{ form_row(form.photo1) }}
-				</div>
-			</div>
-		</div>
+            <div class="col-md-6">
+                <div class="image-container" id="image-preview">
+                    <img src="{{ asset('/images/' ~ produit.photo1) }}" alt="Photo" style="height: 30vh; display: block; margin: 0 auto;">
+                    {{ form_row(form.photo1) }}
+                </div>
+            </div>
+        </div>
 
-		<button type="submit" class="btn btn-primary">Enregistrer</button>
-
-		{{ form_end(form) }}
-
-		<a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Retour à la liste</a>
-	</div>
-
-
-	{# JavaScript pour la prévisualisation de l'image #}
-	{# Le script écoute l'événement change sur l'input de fichier. #}
-	{# Lorsqu'un fichier est sélectionné, il utilise FileReader pour lire le fichier et mettre à jour l'élément img à l'intérieur de #image-preview. #}
-		<script>
-document.addEventListener('DOMContentLoaded', function () { // Script pour la prévisualisation de l'image*************
-const imageInput = document.querySelector('# {{ form.photo1.vars.id }}');
-// Sélectionne l'élément img à l'intérieur de l'élément avec l'ID image-preview
-const imagePreview = document.querySelector('#image-preview img');
-
-imageInput.addEventListener('change', function (event) {
-if (event.target.files && event.target.files[0]) {
-const reader = new FileReader();
-reader.onload = function (e) {
-imagePreview.src = e.target.result;
-};
-reader.readAsDataURL(event.target.files[0]);
-} else {
-imagePreview.src = '{{ asset('/images/' ~ produit.photo1) }}';
-}
-});
-// Script pour gérer l'état du bouton "Enregistrer"
-const saveButton = document.querySelector('.btn-primary');
-const backToListButton = document.querySelector('.btn-secondary');
-const formElements = document.querySelectorAll('input[type="text"], textarea');
-
-// Désactiver le bouton "Enregistrer" initialement
-saveButton.disabled = true;
-
-// Fonction pour vérifier les modifications dans le formulaire
-function checkFormChanges() {
-let formChanged = false;
-formElements.forEach(element => {
-if (element.value !== element.defaultValue) {
-formChanged = true;
-}
-});
-
-// Activer le bouton "Enregistrer" si des modifications sont détectées
-saveButton.disabled = ! formChanged;
-}
-
-// Ajouter des écouteurs d'événements aux éléments de formulaire pour détecter les modifications
-formElements.forEach(element => {
-element.addEventListener('input', checkFormChanges);
-});
-
-// Si nécessaire, ajouter une confirmation de navigation pour le bouton "Retour à la liste"
-backToListButton.addEventListener('click', function (event) {
-if (! saveButton.disabled && !confirm('Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir quitter cette page ?')) {
-event.preventDefault();
-}
-});
-});
-</script>{% endblock %}
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        {{ form_end(form) }}
+        <a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Retour à la liste</a>
+    </div>
+{% endblock %}

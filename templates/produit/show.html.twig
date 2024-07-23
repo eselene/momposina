@@ -1,60 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produit
-{% endblock %}
+{% block title %}Produit{% endblock %}
 
 {% block body %}
-	<h1>Produit</h1>
+    <h1>Produit</h1>
 
-	<table class="table">
-		<tbody>
-			<tr>
-				<th>Id</th>
-				<td>{{ produit.id }}</td>
-			</tr>
-			<tr>
-				<th>Nom</th>
-				<td>{{ produit.nom }}</td>
-			</tr>
-			<tr>
-				<th>NomEs</th>
-				<td>{{ produit.nomEs }}</td>
-			</tr>
-			<tr>
-				<th>Description</th>
-				<td>{{ produit.description }}</td>
-			</tr>
-			<tr>
-				<th>Pays</th>
-				<td>{{ produit.pays }}</td>
-			</tr>
-			<tr>
-				<th>Marque</th>
-				<td>{{ produit.marque }}</td>
-			</tr>
-			<tr>
-				<th>Chemin photo</th>
-				<td>{{ produit.photo1 }}</td>
-			</tr>
-			<tr>
-				<th>Photo1</th>
-				<td>
-					<img src="{{ asset('images/' ~ produit.photo1) }}" alt="Photo" width="200">
-					{{ produit.photo1 }}
-				</td>
-			</tr>
-            
-			<tr>
-				<th>VisibleWeb</th>
-				<td>{{ produit.visibleWeb ? 'Oui' : 'Non' }}</td>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ produit.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ produit.nom }}</td>
+            </tr>
+            <tr>
+                <th>NomEs</th>
+                <td>{{ produit.nomEs }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ produit.description }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ produit.pays }}</td>
+            </tr>
+            <tr>
+                <th>Marque</th>
+                <td>{{ produit.marque }}</td>
+            </tr>
+            <tr>
+                <th>Chemin photo</th>
+                <td>{{ produit.photo1 }}</td>
+            </tr>
+            <tr>
+                <th>Photo1</th>
+                <td>
+                    <img src="{{ asset('images/' ~ produit.photo1) }}" alt="Photo" width="200">
+                </td>
+            </tr>
+            <tr>
+                <th>VisibleWeb</th>
+                <td>{{ produit.visibleWeb ? 'Oui' : 'Non' }}</td>
+            </tr>
+        </tbody>
+    </table>
 
-			</tr>
-		</tbody>
-	</table>
+    <div>
+        <a href="{{ path('app_produit_index') }}">Retour à la liste</a>
+        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">Modifier</a>
+    </div>
 
-	{# <a href="{{ path('app_produit_index') }}">back to list</a> #}
-
-	<a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
-
-	{{ include('produit/_delete_form.html.twig') }}
+    {{ include('produit/_delete_form.html.twig') }}
 {% endblock %}
