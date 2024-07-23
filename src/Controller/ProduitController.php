@@ -112,6 +112,7 @@ class ProduitController extends AbstractController
                 } catch (FileException $e) {
                     $this->addFlash('error', 'Une erreur est apparue pendant le téléchargement du fichier.');
                 }
+
                 $produit->setPhoto1($newFilename);
             }
 
@@ -125,8 +126,7 @@ class ProduitController extends AbstractController
             'form' => $form,
         ]);
     }
-    // #[Route('/produit/delete/{id}', name: 'produit_delete', methods: ['POST'])]
- 
+
     #[Route('/{id}/delete', name: 'app_produit_delete', methods: ['POST'])]
     // public function delete(int $id, LoggerInterface $logger): Response   
     public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager, LoggerInterface $logger): Response
