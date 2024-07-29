@@ -1,5 +1,5 @@
 <?php
-
+//nouvelle version généré à partir des entities et repository
 declare(strict_types=1);
 
 namespace DoctrineMigrations;
