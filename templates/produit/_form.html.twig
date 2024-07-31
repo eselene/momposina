@@ -1,81 +1,83 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<div class="container form-container">
-		<h1>Edit Product</h1>
-		{{ form_start(form) }}
+  <div class="container form-container">
+    <h1>Edit Product</h1>
 
-		<div class="row">
-			<div class="col-md-6">
-				{{ form_row(form.nom) }}
-				{{ form_row(form.nomEs) }}
-				{{ form_row(form.description, {'attr': {'rows': '3'}}) }}
-				{{ form_row(form.pays) }}
-				{{ form_row(form.marque) }}
-				{{ form_row(form.visibleWeb) }}
-				{{ form_row(form.user) }}
-				{{ form_row(form.sousCategorie) }}
-			</div>
+    {{ form_start(form) }}
 
-			<div class="col-md-6">
-				<div class="image-container" id="image-preview">
-					<img src="{{ produit and produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}" alt="Photo" style="height: 30vh; display: {{ produit and produit.photo1 ? 'block' : 'none' }}; margin: 0 auto;">
-					{{ form_row(form.photo1) }}
-				</div>
-			</div>
-		</div>
-		<button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+    <div class="row">
+      <div class="col-md-6">
+        {{ form_row(form.nom) }}
+        {{ form_row(form.nomEs) }}
+        {{ form_row(form.description, {'attr': {'rows': '3'}}) }}
+        {{ form_row(form.pays) }}
+        {{ form_row(form.marque) }}
+        {{ form_row(form.visibleWeb) }}
+        {{ form_row(form.user) }}
+        {{ form_row(form.sousCategorie) }}
+      </div>
 
-		{{ form_end(form) }}
+      <div class="col-md-6">
+        <div class="image-container" id="image-preview">
+          <img src="{{ produit and produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}" alt="Photo" style="height: 30vh; display: {{ produit and produit.photo1 ? 'block' : 'none' }}; margin: 0 auto;">
+          {{ form_row(form.photo1) }}
+        </div>
+      </div>
+    </div>
 
-		<a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Retour à la liste</a>
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
 
-		<script>
-			document.addEventListener('DOMContentLoaded', function () {
-const imageInput = document.querySelector('#   {{ form.photo1.vars.id }}');
-const imagePreview = document.querySelector('#image-preview img');
-const saveButton = document.querySelector('.btn-primary');
-const backToListButton = document.querySelector('.btn-secondary');
-const formElements = document.querySelectorAll('input[type="text"], textarea');
+    {{ form_end(form) }}
 
-if (imageInput) {
-imageInput.addEventListener('change', function (event) {
-if (event.target.files && event.target.files[0]) {
-const reader = new FileReader();
-reader.onload = function (e) {
-imagePreview.src = e.target.result;
-imagePreview.style.display = 'block';
-};
-reader.readAsDataURL(event.target.files[0]);
-} else {
-imagePreview.src = '{{ produit and produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}';
-imagePreview.style.display = '{{ produit and produit.photo1 ? 'block' : 'none' }}';
-}
-});
-}
+    <a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Retour à la liste</a>
 
-let formChanged = false;
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const imageInput = document.querySelector('#{{ form.photo1.vars.id }}');
+        const imagePreview = document.querySelector('#image-preview img');
+        const saveButton = document.querySelector('.btn-primary');
+        const backToListButton = document.querySelector('.btn-secondary');
+        const formElements = document.querySelectorAll('input[type="text"], textarea');
 
-formElements.forEach(element => {
-element.addEventListener('input', () => {
-formChanged = true;
-saveButton.disabled = false;
-backToListButton.disabled = false;
-});
-});
+        if (imageInput) {
+          imageInput.addEventListener('change', function (event) {
+            if (event.target.files && event.target.files[0]) {
+              const reader = new FileReader();
+              reader.onload = function (e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block';
+              };
+              reader.readAsDataURL(event.target.files[0]);
+            } else {
+              imagePreview.src = '{{ produit and produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}';
+              imagePreview.style.display = '{{ produit and produit.photo1 ? 'block' : 'none' }}';
+            }
+          });
+        }
 
-saveButton.addEventListener('click', (event) => {
-formChanged = false;
-});
+        let formChanged = false;
 
-backToListButton.addEventListener('click', (event) => {
-if (formChanged) {
-event.preventDefault();
-if (confirm('Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir quitter ?')) {
-window.location.href = backToListButton.href;
-}
-}
-});
-});
-		</script>
-	{% endblock %}
+        formElements.forEach(element => {
+          element.addEventListener('input', () => {
+            formChanged = true;
+            saveButton.disabled = false;
+            backToListButton.disabled = false;
+          });
+        });
+
+        saveButton.addEventListener('click', (event) => {
+          formChanged = false;
+        });
+
+        backToListButton.addEventListener('click', (event) => {
+          if (formChanged) {
+            event.preventDefault();
+            if (confirm('Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir quitter ?')) {
+              window.location.href = backToListButton.href;
+            }
+          }
+        });
+      });
+    </script>
+{% endblock %}

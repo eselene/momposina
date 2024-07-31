@@ -1,11 +1,34 @@
 <header class="d-flex justify-content-between align-items-center">
     <div class="logo" style="height: 20vh;">
-        <img src="path_to_logo" alt="Logo" style="height: 100%;">
+        <img src="{{ asset('images/logo/momposina.webp') }}" alt="Logo" style="height: 50%;">
     </div>
     <div class="middle-section" style="width: 70vh;">
         <div class="message">
             <marquee behavior="scroll" direction="left">LA MOMPOSINA - Tienda Latina - Epicerie Latino Grenoble</marquee>
         </div>
+        {# <nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="{{ path('app_main') }}">My Shop</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ml-auto">
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						<li class="nav-item">
+
+							<a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+						</li>
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_login') }}">Login</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_register') }}">Register</a>
+						</li>
+					{% endif %}
+				</ul>
+			</div>
+		</nav> #}
         <nav class="menu">
             <ul class="nav">
                 <li class="nav-item"><a class="nav-link" href="{{ path('app_evenements') }}">Événements</a></li>

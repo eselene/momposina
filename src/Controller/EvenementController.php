@@ -6,31 +6,70 @@ use App\Entity\Evenement;
 use App\Form\EvenementType;
 use App\Repository\EvenementRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
-#[Route('/evenement')]
+#[Route('/')]
 class EvenementController extends AbstractController
 {
+    private CsrfTokenManagerInterface $csrfTokenManager;
+
+    public function __construct(CsrfTokenManagerInterface $csrfTokenManager)
+    {
+        $this->csrfTokenManager = $csrfTokenManager;
+    }
+
     #[Route('/', name: 'app_evenement_index', methods: ['GET'])]
     public function index(EvenementRepository $evenementRepository): Response
     {
+        $evenements = $evenementRepository->findAll();
+        $deleteForms = [];
+        
+        foreach ($evenements as $evenement ) {
+            $deleteForms[$evenement ->getId()] = $this->createDeleteForm($evenement ->getId())->createView();
+        }
+
         return $this->render('evenement/index.html.twig', [
-            'evenements' => $evenementRepository->findAll(),
+            'evenements' => $evenements,
+            'delete_forms' => $deleteForms,
         ]);
     }
 
     #[Route('/new', name: 'app_evenement_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $evenement = new Evenement();
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($evenement);
+            $imageFile = $form->get('photo1')->getData();
+
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Une erreur est apparue pendant le téléchargement du fichier.');
+                }
+                // Enregistre seulement le nom du fichier dans la base de données
+                $evenement ->setPhoto1($newFilename);
+            }
+
+            $entityManager->persist($evenement );
             $entityManager->flush();
             // Ajout des messages flash
             // $this->addFlash('success', 'Evenement créé avec succès!');
@@ -43,42 +82,87 @@ class EvenementController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_evenement_show', methods: ['GET'])]
-    public function show(Evenement $evenement): Response
+    // #[Route('/{id}/show', name: 'app_evenement_show', methods: ['GET'], requirements: ['id' => '\d+'])]
+    #[Route('/{id}', name: 'app_evenement_show', methods: ['GET'], requirements: ['id' => '\d+'])]
+    public function show(Evenement $evenement ): Response
     {
         return $this->render('evenement/show.html.twig', [
             'evenement' => $evenement,
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_evenement_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Evenement $evenement, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/edit', name: 'app_evenement_edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
+    public function edit(Request $request, Evenement $evenement , EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('photo1')->getData();
+
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Une erreur est apparue pendant le téléchargement du fichier.');
+                }
+
+                $evenement ->setPhoto1($newFilename);
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
         }
             // Ajout des messages flash
             // $this->addFlash('success', 'Evenement modifié avec succès!');
+  
         return $this->render('evenement/edit.html.twig', [
-            'evenement' => $evenement,
+            'evenement' => $evenement ,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_evenement_delete', methods: ['POST'])]
-    public function delete(Request $request, Evenement $evenement, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/delete', name: 'app_evenement_delete', methods: ['POST'])]
+    // public function delete(int $id, LoggerInterface $logger): Response   
+    public function delete(Request $request, Evenement $evenement , EntityManagerInterface $entityManager, LoggerInterface $logger): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$evenement->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($evenement);
+        $logger->info('evenement deletion requested for ID: {id}', ['id' => $evenement ->getId()]);
+
+        if ($this->isCsrfTokenValid('delete'.$evenement ->getId(), $request->request->get('_token'))) {
+            $logger->info('CSRF token valid for product deletion.');
+
+            $entityManager->remove($evenement );
             $entityManager->flush();
-        }
             // Ajout des messages flash
             // $this->addFlash('success', 'Evenement suprimé avec succès!');
+            $logger->info('Product with ID {id} deleted successfully.', ['id' => $evenement ->getId()]);
+            $this->addFlash('success', 'Product deleted successfully.');
+        } else {
+            $logger->error('Invalid CSRF token for product deletion. Product ID: {id}', ['id' => $evenement ->getId()]);
+            $this->addFlash('error', 'Invalid CSRF token.');
+        }
+
         return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
     }
+    
+
+    private function createDeleteForm($id)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('app_evenement_delete', ['id' => $id]))
+            ->setMethod('POST') // Ensure the method is POST
+            ->add('_token', HiddenType::class, [
+                'data' => $this->csrfTokenManager->getToken('delete'.$id)->getValue(),
+            ])
+            ->getForm();
+    }
+    
 }

@@ -16,8 +16,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-#[Route('/')]
-// #[Route('/produit')]
+// #[Route('/')]
+#[Route('/produit')]
 class ProduitController extends AbstractController
 {
     private CsrfTokenManagerInterface $csrfTokenManager;
@@ -72,7 +72,8 @@ class ProduitController extends AbstractController
 
             $entityManager->persist($produit);
             $entityManager->flush();
-
+           // Ajout des messages flash
+            // $this->addFlash('success', 'Evenement créé avec succès!');
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -82,7 +83,8 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/show', name: 'app_produit_show', methods: ['GET'], requirements: ['id' => '\d+'])]
+    // #[Route('/{id}/show', name: 'app_produit_show', methods: ['GET'], requirements: ['id' => '\d+'])]
+    #[Route('/{id}', name: 'app_produit_show', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function show(Produit $produit): Response
     {
         return $this->render('produit/show.html.twig', [
@@ -120,7 +122,9 @@ class ProduitController extends AbstractController
 
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }
-
+           // Ajout des messages flash
+            // $this->addFlash('success', 'Evenement modifié avec succès!');
+  
         return $this->render('produit/edit.html.twig', [
             'produit' => $produit,
             'form' => $form,
@@ -138,7 +142,8 @@ class ProduitController extends AbstractController
 
             $entityManager->remove($produit);
             $entityManager->flush();
-
+            // Ajout des messages flash
+            // $this->addFlash('success', 'Evenement suprimé avec succès!');
             $logger->info('Product with ID {id} deleted successfully.', ['id' => $produit->getId()]);
             $this->addFlash('success', 'Product deleted successfully.');
         } else {

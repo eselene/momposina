@@ -7,8 +7,8 @@ body {
     background-color: #212121;
     padding: 5px;
     color: #fff;
-}
-
+  }
+  
 .form-group {
     margin-bottom: 10px;
 }
@@ -116,78 +116,33 @@ button.btn-primary {
 .image-container {
     text-align: center;
     margin-bottom: 10px;
-}
-
-.image {
+  }
+  
+  .image {
     max-width: 100%;
     height: auto;
     margin: 0 auto;
     border: 1px solid #ccc;
     padding: 10px;
-}
-
-.image-name {
+  }
+  
+  .image-name {
     font-weight: bold;
     margin-top: 5px;
-}
-
-.custom-btn {
-    width: 100px;
-    /* Fixez la largeur */
-    height: 32px;
-    /* Fixez la hauteur */
+  }
+  
+  .custom-btn {
+    width: 100px; /* Fixez la largeur */
+    height: 32px; /* Fixez la hauteur */
     display: flex;
     align-items: center;
     justify-content: center;
-}
+  }
 
-/* Style de base pour le footer */
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-    line-height: 1.2; /* Réduit l'espacement entre les lignes */
-}
 
-/* Media query pour les petits écrans */
-@media (max-width: 480px) {
-    footer {
-        padding: 10px;
-        font-size: 12px;
-        line-height: 1.2;
-    }
-}
-
-/* Pour les écrans de taille extra-petite (téléphones) */
-@media (max-width: 575px) {
-    .footer {
-        text-align: center;
-        padding: 15px;
-        font-size: 8px;
-        line-height: 1;
-    }
-}
-/* Media query pour les écrans de taille moyenne */
 @media (max-width: 768px) {
-    footer {
-      padding: 15px;
-      font-size: 14px;
-      line-height: 1; /* Ajuste l'espacement pour les écrans moyens */
-    }
-    .col-md-3 {
-        flex: 0 0 100%;
-        /* Faire en sorte que chaque colonne occupe 100% de la largeur */
-    }
-}
-/* Pour les écrans de taille petite (tablettes) */
-@media (min-width: 576px) and (max-width: 767px) {
-    /* Vos styles spécifiques pour les tablettes ici */
-    /* Par exemple, vous pouvez ajuster la taille des colonnes ou modifier la disposition */
-}
-
-
-/* @media (max-width: 768px) {
     .border-right.border-danger {
         display: none;
         /* Hide the line on small screens */
+    }
+}

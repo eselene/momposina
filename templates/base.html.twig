@@ -1,27 +1,39 @@
 {# templates/base.html.twig #}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <script src="{{ asset('js/app.js') }}" defer></script>
-        {% block stylesheets %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </head>
-    <body>
-        {% if app.request.get('_route') != 'app_login' %}
-            {% block header %}
-                {% include 'components/header.html.twig' %}
-            {% endblock %}
-        {% endif %}
-        <main>
-            {% block body %}{% endblock %}
-        </main>
-        {% if app.request.get('_route') != 'app_login' %}
-            {% block footer %}
-                {% include 'components/footer.html.twig' %}
-            {% endblock %}
-        {% endif %}
-    </body>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> {% block stylesheets %}{% endblock %}
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+		<link rel="stylesheet" href="{{ asset('css/styles.css') }}">		
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+		{% endblock %}
+	</head>
+	<body>
+		{% if app.request.get('_route') != 'app_login' %}
+			{% block header %}
+				{% include 'components/header.html.twig' %}
+			{% endblock %}
+		{% endif %}
+		<main>
+			{% block body %}{% endblock %}
+		</main>
+		{% if app.request.get('_route') != 'app_login' %}
+			{% block footer %}
+				{% include 'components/footer.html.twig' %}
+			{% endblock %}
+
+			
+		{% endif %}
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		{% block javascript %}{% endblock %}	</body>
 </html>

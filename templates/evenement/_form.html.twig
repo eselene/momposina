@@ -1,4 +1,81 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container form-container">
+		<h1>Edit eEvenement</h1>
+		{{ form_start(form) }}
+
+		<div class="row">
+			<div class="col-md-6">
+				{{ form_row(form.nom) }}
+				{{ form_row(form.nomEs) }}
+				{{ form_row(form.description, {'attr': {'rows': '3'}}) }}
+				{{ form_row(form.pays) }}
+				{{ form_row(form.marque) }}
+				{{ form_row(form.visibleWeb) }}
+				{{ form_row(form.user) }}
+				{{ form_row(form.sousCategorie) }}
+			</div>
+
+			<div class="col-md-6">
+				<div class="image-container" id="image-preview">
+					<img src="{{ evenement and evenement.photo1 ? asset('images/' ~ evenement.photo1) : '' }}" alt="Photo" style="height: 30vh; display: {{ evenement and evenement.photo1 ? 'block' : 'none' }}; margin: 0 auto;">
+					{{ form_row(form.photo1) }}
+				</div>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+
 {{ form_end(form) }}
+
+		<a href="{{ path('app_evenement_index') }}" class="btn btn-secondary">Retour à la liste</a>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+const imageInput = document.querySelector('#   {{ form.photo1.vars.id }}');
+const imagePreview = document.querySelector('#image-preview img');
+const saveButton = document.querySelector('.btn-primary');
+const backToListButton = document.querySelector('.btn-secondary');
+const formElements = document.querySelectorAll('input[type="text"], textarea');
+
+if (imageInput) {
+imageInput.addEventListener('change', function (event) {
+if (event.target.files && event.target.files[0]) {
+const reader = new FileReader();
+reader.onload = function (e) {
+imagePreview.src = e.target.result;
+imagePreview.style.display = 'block';
+};
+reader.readAsDataURL(event.target.files[0]);
+} else {
+imagePreview.src = '{{ evenement and evenement.photo1 ? asset('images/' ~ evenement.photo1) : '' }}';
+imagePreview.style.display = '{{ evenement and evenement.photo1 ? 'block' : 'none' }}';
+}
+});
+}
+
+let formChanged = false;
+
+formElements.forEach(element => {
+element.addEventListener('input', () => {
+formChanged = true;
+saveButton.disabled = false;
+backToListButton.disabled = false;
+});
+});
+
+saveButton.addEventListener('click', (event) => {
+formChanged = false;
+});
+
+backToListButton.addEventListener('click', (event) => {
+if (formChanged) {
+event.preventDefault();
+if (confirm('Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir quitter ?')) {
+window.location.href = backToListButton.href;
+}
+}
+});
+});
+		</script>
+	{% endblock %}
