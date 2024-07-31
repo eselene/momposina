@@ -6,8 +6,8 @@ controllers:
 
 index:
     path: /
-    controller: App\Controller\ProduitController::index
-    # controller: App\Controller\MainController::home
+    controller: App\Controller\MainController::home
+    # controller: App\Controller\ProduitController::index
     # controller: App\Controller\SousCategorieController::index
     # controller: App\Controller\login_registerController::index
 

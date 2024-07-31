@@ -4,6 +4,7 @@
 /.env.local.php
 /.env.*.local
 /.compare.php
+/.compare.html.twig
 /.todo.txt
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/

@@ -8,10 +8,10 @@
         </div>
         <nav class="menu">
             <ul class="nav">
-                <li class="nav-item"><a class="nav-link" href="#">Événements</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Présentation</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="alimentationMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <li class="nav-item"><a class="nav-link" href="{{ path('app_evenements') }}">Événements</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('app_presentation') }}">Présentation</a></li>
+                {# <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="{{ path('app_alimentation', {id: sousCategorie.id}) }}" id="alimentationMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ sousCategorie.nom }}
                         Alimentation
                     </a>
                     <div class="dropdown-menu" aria-labelledby="alimentationMenu">
@@ -21,7 +21,7 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="boissonMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="{{ path('app_boisson', {id: sousCategorie.id}) }}" id="boissonMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ sousCategorie.nom }}
                         Boisson
                     </a>
                     <div class="dropdown-menu" aria-labelledby="boissonMenu">
@@ -29,10 +29,10 @@
                             <a class="dropdown-item" href="#">{{ sous_categorie.nom }}</a>
                         {% endfor %}
                     </div>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="#">Plats</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Galerie</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </li> #}
+                <li class="nav-item"><a class="nav-link" href="{{ path('app_plats', {id: 3}) }}">Plats</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('app_galerie') }}">Galerie</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('app_contact') }}">Contact</a></li>
             </ul>
         </nav>
     </div>
