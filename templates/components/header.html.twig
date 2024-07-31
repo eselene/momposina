@@ -1,0 +1,42 @@
+<header class="d-flex justify-content-between align-items-center">
+    <div class="logo" style="height: 20vh;">
+        <img src="path_to_logo" alt="Logo" style="height: 100%;">
+    </div>
+    <div class="middle-section" style="width: 70vh;">
+        <div class="message">
+            <marquee behavior="scroll" direction="left">LA MOMPOSINA - Tienda Latina - Epicerie Latino Grenoble</marquee>
+        </div>
+        <nav class="menu">
+            <ul class="nav">
+                <li class="nav-item"><a class="nav-link" href="#">Événements</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Présentation</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="alimentationMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Alimentation
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="alimentationMenu">
+                        {% for sous_categorie in sous_categories_alimentation %}
+                            <a class="dropdown-item" href="#">{{ sous_categorie.nom }}</a>
+                        {% endfor %}
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="boissonMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Boisson
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="boissonMenu">
+                        {% for sous_categorie in sous_categories_boisson %}
+                            <a class="dropdown-item" href="#">{{ sous_categorie.nom }}</a>
+                        {% endfor %}
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#">Plats</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Galerie</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="user-icon">
+        <i class="fas fa-user-circle"></i>
+    </div>
+</header>
