@@ -10,7 +10,7 @@
       <div class="col-md-6">
         {{ form_row(form.nom) }}
         {{ form_row(form.nomEs) }}
-        {{ form_row(form.description, {'attr': {'rows': '3'}}) }}
+        {{ form_row(form.description {'attr': {'rows': '3'}}) }}
         {{ form_row(form.pays) }}
         {{ form_row(form.marque) }}
         {{ form_row(form.visibleWeb) }}
@@ -20,7 +20,7 @@
 
       <div class="col-md-6">
         <div class="image-container" id="image-preview">
-          <img src="{{ produit and produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}" alt="Photo" style="height: 30vh; display: {{ produit and produit.photo1 ? 'block' : 'none' }}; margin: 0 auto;">
+          <img src="{{ produit and produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}" alt="Photo" style="height: 30vh; display: '{{ produit and produit.photo1 ? 'block' : 'none' }}'; margin: 0 auto;">
           {{ form_row(form.photo1) }}
         </div>
       </div>
@@ -50,8 +50,8 @@
               };
               reader.readAsDataURL(event.target.files[0]);
             } else {
-              imagePreview.src = '{{ produit and produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}';
-              imagePreview.style.display = '{{ produit and produit.photo1 ? 'block' : 'none' }}';
+              imagePreview.src = "{{ produit and produit.photo1 ? asset('images/' ~ {{produit.photo1}}) : '' }}";
+              imagePreview.style.display = "{{ produit and produit.photo1 ? 'block' : 'none' }}";
             }
           });
         }
