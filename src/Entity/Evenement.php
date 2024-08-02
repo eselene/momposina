@@ -25,8 +25,6 @@ class Evenement
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
-    // #[ORM\Column(type="datetime")];
-    // private ?DateInterface $date = null;
 
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $plageHeure = null;
@@ -47,7 +45,7 @@ class Evenement
     private ?bool $visibleWeb = null;
 
     #[ORM\OneToOne(inversedBy: 'evenement', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $user = null;
 
     /**

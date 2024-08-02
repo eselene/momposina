@@ -44,8 +44,8 @@
                         };
                         reader.readAsDataURL(event.target.files[0]);
                     } else {
-                        imagePreview.src = "{{ produit and produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}";
-                        imagePreview.style.display = "{{ produit and produit.photo1 ? 'block' : 'none' }}";
+                        imagePreview.src = "{{ evenement and evenement.photo1 ? asset('images/' ~ evenement.photo1) : '' }}";
+                        imagePreview.style.display = "{{ evenement and evenement.photo1 ? 'block' : 'none' }}";
                     }
                 });
             }

@@ -14,17 +14,17 @@ final class Version20240717083540 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Create a non-unique index on the user_id column of the evenement table.';
+        return 'Create a non-unique index on the user_id column of the produit table.';
     }
 
     public function up(Schema $schema): void
     {
-        $this->addSql('CREATE INDEX IDX_B26681EA76ED395 ON evenement(user_id)');
+        $this->addSql('CREATE INDEX IDX_29A5EC27A76ED395 ON produit(user_id)');
     }
 
     public function down(Schema $schema): void
     {
-        $this->addSql('DROP INDEX UNIQ_B26681EA76ED395');
+        $this->addSql('DROP INDEX IDX_29A5EC27A76ED395');
     }
     // public function getDescription(): string
     // {

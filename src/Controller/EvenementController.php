@@ -32,8 +32,8 @@ class EvenementController extends AbstractController
         $evenements = $evenementRepository->findAll();
         $deleteForms = [];
         
-        foreach ($evenements as $evenement ) {
-            $deleteForms[$evenement ->getId()] = $this->createDeleteForm($evenement ->getId())->createView();
+        foreach ($evenements as $evenement) {
+            $deleteForms[$evenement->getId()] = $this->createDeleteForm($evenement->getId())->createView();
         }
 
         return $this->render('evenement/index.html.twig', [
@@ -66,10 +66,10 @@ class EvenementController extends AbstractController
                     $this->addFlash('error', 'Une erreur est apparue pendant le téléchargement du fichier.');
                 }
                 // Enregistre seulement le nom du fichier dans la base de données
-                $evenement ->setPhoto1($newFilename);
+                $evenement->setPhoto1($newFilename);
             }
 
-            $entityManager->persist($evenement );
+            $entityManager->persist($evenement);
             $entityManager->flush();
             // Ajout des messages flash
             // $this->addFlash('success', 'Evenement créé avec succès!');
@@ -82,9 +82,8 @@ class EvenementController extends AbstractController
         ]);
     }
 
-    // #[Route('/{id}/show', name: 'app_evenement_show', methods: ['GET'], requirements: ['id' => '\d+'])]
     #[Route('/{id}', name: 'app_evenement_show', methods: ['GET'], requirements: ['id' => '\d+'])]
-    public function show(Evenement $evenement ): Response
+    public function show(Evenement $evenement): Response
     {
         return $this->render('evenement/show.html.twig', [
             'evenement' => $evenement,
@@ -92,7 +91,7 @@ class EvenementController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_evenement_edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
-    public function edit(Request $request, Evenement $evenement , EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    public function edit(Request $request, Evenement $evenement, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
@@ -114,7 +113,7 @@ class EvenementController extends AbstractController
                     $this->addFlash('error', 'Une erreur est apparue pendant le téléchargement du fichier.');
                 }
 
-                $evenement ->setPhoto1($newFilename);
+                $evenement->setPhoto1($newFilename);
             }
 
             $entityManager->flush();
@@ -125,28 +124,27 @@ class EvenementController extends AbstractController
             // $this->addFlash('success', 'Evenement modifié avec succès!');
   
         return $this->render('evenement/edit.html.twig', [
-            'evenement' => $evenement ,
+            'evenement' => $evenement,
             'form' => $form,
         ]);
     }
 
     #[Route('/{id}/delete', name: 'app_evenement_delete', methods: ['POST'])]
-    // public function delete(int $id, LoggerInterface $logger): Response   
-    public function delete(Request $request, Evenement $evenement , EntityManagerInterface $entityManager, LoggerInterface $logger): Response
+    public function delete(Request $request, Evenement $evenement, EntityManagerInterface $entityManager, LoggerInterface $logger): Response
     {
-        $logger->info('evenement deletion requested for ID: {id}', ['id' => $evenement ->getId()]);
+        $logger->info('Evenement deletion requested for ID: {id}', ['id' => $evenement->getId()]);
 
-        if ($this->isCsrfTokenValid('delete'.$evenement ->getId(), $request->request->get('_token'))) {
-            $logger->info('CSRF token valid for product deletion.');
+        if ($this->isCsrfTokenValid('delete' . $evenement->getId(), $request->request->get('_token'))) {
+            $logger->info('CSRF token valid for evenement deletion.');
 
-            $entityManager->remove($evenement );
+            $entityManager->remove($evenement);
             $entityManager->flush();
             // Ajout des messages flash
-            // $this->addFlash('success', 'Evenement suprimé avec succès!');
-            $logger->info('Product with ID {id} deleted successfully.', ['id' => $evenement ->getId()]);
-            $this->addFlash('success', 'Product deleted successfully.');
+            // $this->addFlash('success', 'Evenement supprimé avec succès!');
+            $logger->info('Evenement with ID {id} deleted successfully.', ['id' => $evenement->getId()]);
+            $this->addFlash('success', 'Evenement supprimé avec succès.');
         } else {
-            $logger->error('Invalid CSRF token for product deletion. Product ID: {id}', ['id' => $evenement ->getId()]);
+            $logger->error('Invalid CSRF token for evenement deletion. Evenement ID: {id}', ['id' => $evenement->getId()]);
             $this->addFlash('error', 'Invalid CSRF token.');
         }
 
