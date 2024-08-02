@@ -40,6 +40,10 @@
 						{{ form_end(delete_forms[produit.id]) }}
 					</td>
 				</tr>
+				{% else %}
+				<tr>
+					<td colspan="11">Il n'y a pas de registrement</td>
+				</tr>				
 			{% endfor %}
 		</tbody>
 	</table>

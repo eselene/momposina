@@ -1,62 +1,64 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Événement{% endblock %}
+
 {% block body %}
-    <div class="container">
-        <h1>Événement : {{ evenement.titre }}</h1>
+<div class="container">
+    <h1>Événement : {{ evenement.titre }}</h1>
 
-        <table class="table table-striped">
-            <tbody>
-                <tr>
-                    <th>ID</th>
-                    <td>{{ evenement.id }}</td>
-                </tr>
-                <tr>
-                    <th>Titre</th>
-                    <td>{{ evenement.titre }}</td>
-                </tr>
-                <tr>
-                    <th>Description</th>
-                    <td>{{ evenement.description }}</td>
-                </tr>
-                <tr>
-                    <th>Date</th>
-                    <td>{{ evenement.date ? evenement.date|date('d-m-Y') : '' }}</td>
-                </tr>
-                <tr>
-                    <th>Plage Horaire</th>
-                    <td>{{ evenement.plageHeure }}</td>
-                </tr>
-                <tr>
-                    <th>Lieu</th>
-                    <td>{{ evenement.lieu }}</td>
-                </tr>
-                <tr>
-                    <th>Prix</th>
-                    <td>{{ evenement.prix }}</td>
-                </tr>
-                <tr>
-                    <th>Visible sur le Web</th>
-                    <td>{{ evenement.visibleWeb ? 'Oui' : 'Non' }}</td>
-                </tr>
-                <tr>
-                    <th>Photo 1</th>
-                    <td>
-                        {% if evenement.photo1 %}
-                            <img src="{{ asset('images/' ~ evenement.photo1) }}" alt="{{ evenement.titre }}" style="max-width: 200px;">
-                        {% else %}
-                            <p>Pas de photo</p>
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <th>Utilisateur</th>
-                    <td>{{ evenement.user.email }}</td>
-                </tr>
-            </tbody>
-        </table>
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ evenement.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ evenement.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ evenement.description }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ evenement.date ? evenement.date|date('d-m-Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Plage Horaire</th>
+                <td>{{ evenement.plageHeure }}</td>
+            </tr>
+            <tr>
+                <th>Lieu</th>
+                <td>{{ evenement.lieu }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ evenement.prix }}</td>
+            </tr>
+            <tr>
+                <th>Visible sur le Web</th>
+                <td>{{ evenement.visibleWeb ? 'Oui' : 'Non' }}</td>
+            </tr>
+            <tr>
+                <th>Photo 1</th>
+                <td>
+                    {% if evenement.photo1 %}
+                        <img src="{{ asset('images/' ~ evenement.photo1) }}" alt="{{ evenement.titre }}" style="max-width: 200px;">
+                    {% else %}
+                        <p>Pas de photo</p>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Utilisateur</th>
+                <td>{{ evenement.user.email }}</td>
+            </tr>
+        </tbody>
+    </table>
 
-        <a href="{{ path('app_evenement_index') }}" class="btn btn-secondary">Retour à la liste</a>
-        <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}" class="btn btn-primary">Modifier</a>
-        {{ include('evenement/_delete_form.html.twig') }}
-    </div>
+    <a href="{{ path('app_evenement_index') }}" class="btn btn-secondary">Retour à la liste</a>
+    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}" class="btn btn-primary">Modifier</a>
+    {{ include('evenement/_delete_form.html.twig') }}
+</div>
 {% endblock %}

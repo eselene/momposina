@@ -1,8 +1,9 @@
-{# <form method="post" action="{{ path('app_evenement_delete', {'id': evenement.id}) }}" onsubmit="return confirm('Vous êtes sur de vouloir supprimer ce registre?');">
+<form method="post" action="{{ path('app_evenement_delete', {'id': evenement.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.id) }}">
-    <button class="btn">Delete</button>
-</form> #}
-{% extends 'base.html.twig' %}
+    <button class="btn btn-danger">Supprimer</button>
+</form>
+
+{# {% extends 'base.html.twig' %}
 
 {% block body %}
     <div class="container">
@@ -16,4 +17,4 @@
             <a href="{{ path('app_evenement_index') }}" class="btn btn-secondary">Annuler</a>
         </form>
     </div>
-{% endblock %}
+{% endblock %} #}

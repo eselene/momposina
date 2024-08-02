@@ -2,11 +2,11 @@
 
 {% block body %}
     <div class="container form-container">
-        <h1>Create New Product</h1>
+        <h1>Créer un nouveau Produit</h1>
         {{ form_start(form) }}
 
         <div class="row">
-            <div class="col-md-8"> <!-- Augmenter la largeur de la colonne gauche -->
+            <div class="col-md-8"> 
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label text-left">{{ form_label(form.nom) }}</label>
                     <div class="col-sm-8">
@@ -57,9 +57,9 @@
                 </div>
             </div>
 
-            <div class="col-md-4"> <!-- Réduire la largeur de la colonne droite -->
+            <div class="col-md-4"> 
                 <div class="image-container" id="image-preview">
-                    <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}" alt="Photo" class="img-fluid" style="height: 30vh; display: {{ produit.photo1 ? 'block' : 'none' }}; margin: 0 auto;">
+                    <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}" alt="Photo" class="img-fluid" style="height: 30vh; display: '{{ produit.photo1 ? 'block' : 'none' }}'; margin: 0 auto;">
                     {{ form_row(form.photo1) }}
                 </div>
             </div>

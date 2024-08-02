@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use DateTime\DateInterface;
 
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
 class Evenement
@@ -24,6 +25,8 @@ class Evenement
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
+    // #[ORM\Column(type="datetime")];
+    // private ?DateInterface $date = null;
 
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $plageHeure = null;
@@ -37,7 +40,7 @@ class Evenement
     #[ORM\Column(length: 255)]
     private ?string $photo1 = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $photo2 = null;
 
     #[ORM\Column]
