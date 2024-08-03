@@ -36,16 +36,6 @@ class EvenementType extends AbstractType
                     ]),
                 ],
             ])
-
-            // ->add('date', TextType::class, [
-            //     'label' => 'Date',
-            //     'constraints' => [
-            //         new Assert\Regex([
-            //             'pattern' => '/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/',
-            //             'message' => 'Veuillez entrer une date et une heure au format YYYY-MM-DD HH:MM',
-            //         ]),
-            //     ],
-            // ])
             ->add('date', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
@@ -60,7 +50,7 @@ class EvenementType extends AbstractType
                 'label' => 'Prix',
             ])
             ->add('visibleWeb', CheckboxType::class, [
-                'label' => 'Visible sur le site web',
+                'label' => 'Visible',
                 'data' => true,
             ])
             ->add('user', EntityType::class, [

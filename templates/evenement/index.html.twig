@@ -3,8 +3,10 @@
 {% block title %}Liste des Événements{% endblock %}
 
 {% block body %}
-<h1>Liste des Événements</h1>
+<div class="container mt-5">
+    <h1 class="text-center">Liste des Événements</h1>
 
+    <div class="table-responsive">
 <table class="table table-striped">
     <thead>
         <tr>
@@ -32,7 +34,7 @@
             <td>{{ evenement.prix }}</td>
             <td>
                 {% if evenement.photo1 %}
-                <img src="{{ asset('images/' ~ evenement.photo1) }}" alt="{{ evenement.titre }}" style="max-width: 200px;">
+                <img src="{{ asset('images/' ~ evenement.photo1) }}" alt="{{ evenement.titre }}" class="img-fluid object-fit-cover object-position-center" style="width: 100px; height: 100px;">
                 {% else %}
                 Pas de photo
                 {% endif %}
@@ -53,6 +55,8 @@
         {% endfor %}
     </tbody>
 </table>
+    </div>
 
-<a href="{{ path('app_evenement_new') }}" class="btn btn-success">Créer un nouvel événement</a>
+    <a href="{{ path('app_evenement_new') }}" class="btn btn-success mt-3">Créer un nouvel événement</a>
+</div>
 {% endblock %}
