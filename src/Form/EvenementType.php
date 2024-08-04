@@ -41,7 +41,7 @@ class EvenementType extends AbstractType
                 'format' => 'yyyy-MM-dd',
             ])
             ->add('plageHeure', TextType::class, [
-                'label' => 'Plage Horaire',
+                'label' => 'Horaire',
             ])
             ->add('lieu', TextType::class, [
                 'label' => 'Lieu',

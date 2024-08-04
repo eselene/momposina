@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-#[Route('/')]
+#[Route('/evenement')]
 class EvenementController extends AbstractController
 {
     private CsrfTokenManagerInterface $csrfTokenManager;
@@ -29,6 +29,7 @@ class EvenementController extends AbstractController
     #[Route('/', name: 'app_evenement_index', methods: ['GET'])]
     public function index(EvenementRepository $evenementRepository): Response
     {
+        // index(PaginatorInterface $paginator, Request $request): Response
         $evenements = $evenementRepository->findAll();
         $deleteForms = [];
         

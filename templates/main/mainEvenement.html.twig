@@ -1,53 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Evenement index
-{% endblock %}
+{% block title %}Liste des Événements{% endblock %}
 
 {% block body %}
-	<h1>Evenement index</h1>
+<div class="container mt-5">
+    <h1 class="text-center">Liste des Événements</h1>
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Titre</th>
-				<th>Description</th>
-				<th>Date</th>
-				<th>PlageHeure</th>
-				<th>Lieu</th>
-				<th>Prix</th>
-				<th>Photo1</th>
-				{# <th>Photo2</th> #}
-				<th>VisibleWeb</th>
-				<th>actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for evenement in evenements %}
-				<tr>
-					<td>{{ evenement.id }}</td>
-					<td>{{ evenement.titre }}</td>
-					<td>{{ evenement.description }}</td>
-					<td>{{ evenement.date ? evenement.date|date('d-m-y') : '' }}</td>
-					<td>{{ evenement.plageHeure }}</td>
-					<td>{{ evenement.lieu }}</td>
-					<td>{{ evenement.prix }}</td>
-					<td>{{ evenement.photo1 }}</td>
-					<td class="col-2"><img src="{{ asset('images/' ~ evenement.photo1)}}" alt="{{ evenement.description }}"></td>
-					{# <td>{{ evenement.photo2 }}</td> #}
-					<td>{{ evenement.visibleWeb ? 'Yes' : 'No' }}</td>
-					<td>
-						<a href="{{ path('app_evenement_show', {'id': evenement.id}) }}">show</a>
-						<a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">edit</a>
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="11">no records found</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+    <div class="section yellow-paragraph">
+        <p class="text-yellow">
+            Découvrez tous les événements que La Momposina Tienda Latina vous propose tout le long de l'année :
+            - Repas, concerts, rencontres.
+            - Fiesta Latina tout autour de l’environnement « Latino Grenoble » !
+        </p>
+    </div>
 
-	<a href="{{ path('app_evenement_new') }}">Create new</a>
+    <div class="event-list">
+        {# {% for evenement in pagination  %} #}
+        {% for evenement in evenements %}
+            <div class="event-card mb-4">
+                <div class="card-header bg-gradient-gray">
+                    <span>{{ evenement.date ? evenement.date|date('l j F Y') : '' }}</span>
+                </div>
+                <div class="card-body">
+                    <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : 'default.jpg' }}" alt="{{ evenement.titre }}" class="event-photo">
+                    <h3 class="event-title text-primary">{{ evenement.titre }}</h3>
+                    <button class="btn btn-danger float-end">Réserver</button>
+                    <div class="event-details">
+                        <div class="detail-row">
+                            <span class="detail-description">{{ evenement.description }}</span>
+                            <span class="detail-time">{{ evenement.plageHeure }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-location">{{ evenement.lieu }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {# <div class="pagination d-flex justify-content-center">
+        {{ knp_pagination_render(pagination) }}
+    </div> #}
+
+    <div class="section find-us">
+        <h2 class="text-center">RETROUVEZ-NOUS</h2>
+        <div class="google-map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2761.913425847509!2d5.727772815963063!3d45.188529379098105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478af4bfb3033f89%3A0xe0679c30bcbfa96b!2s107%20Cours%20Jean%20Jaur%C3%A8s%2C%2038000%20Grenoble%2C%20France!5e0!3m2!1sen!2sfr!4v1652803708657!5m2!1sen!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <p class="text-center">
+            Adresse: 107 Cours Jean Jaurès Grenoble 38000 France<br>
+            <span>★★★★☆ (123 avis)</span>
+        </p>
+    </div>
+</div>
 {% endblock %}

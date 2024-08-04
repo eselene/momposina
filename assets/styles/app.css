@@ -191,3 +191,51 @@ footer {
     .border-right.border-danger {
         display: none;
         /* Hide the line on small screens */
+        .text-yellow {
+            color: yellow;
+            background-color: black;
+            padding: 10px;
+        }
+        
+        .event-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .card-header.bg-gradient-gray {
+            background: linear-gradient(45deg, #ccc, #eee);
+            padding: 10px;
+            font-weight: bold;
+        }
+        
+        .event-photo {
+            width: 100%;
+            height: 60%;
+            object-fit: cover;
+        }
+        
+        .event-title {
+            margin: 10px 0;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .pagination .pagination {
+            justify-content: center;
+        }
+        
+        .section.find-us {
+            margin-top: 50px;
+            text-align: center;
+        }
+        
+        .section.find-us .google-map {
+            margin-bottom: 20px;
+        }
+
+        
