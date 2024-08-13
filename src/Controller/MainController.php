@@ -5,6 +5,8 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Http\HttpResponse;
+
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Evenement;
@@ -14,28 +16,26 @@ use App\Repository\EvenementRepository;
 class MainController extends AbstractController
 {
     #[Route('/', name: 'app_evenements')]
-    // public function index(PaginatorInterface $paginator, Request $request): Response
+    // public function index(EvenementRepository $evenementRepository, PaginatorInterface $paginator, Request $request): Response
     // {
-    //     $repository = $this->getDoctrine()->getRepository(Evenement::class);
-    //     $query = $repository->createQueryBuilder('e')
-    //         ->getQuery();
+    //     $query = $evenementRepository->createQueryBuilder('e')->getQuery();
 
     //     $pagination = $paginator->paginate(
     //         $query,
-    //         $request->query->getInt('page', 1), // numéro de la page
-    //         10 // limite par page
+    //         $request->query->getInt('page', 1), // page number
+    //         4 // limit per page
     //     );
 
     //     return $this->render('main/mainEvenement.html.twig', [
     //         'pagination' => $pagination,
-    //             ]);
-    //     }
-
+    //     ]);
+    // }
     public function home(EvenementRepository $evenementRepository): Response
     {
+        setlocale(LC_TIME, 'fr_FR.UTF-8');
         $evenements = $evenementRepository->findAll();
         return $this->render('main/mainEvenement.html.twig', [
-            'evenements' => $evenements
+            'evenements' => $evenements,
     ]);
 
     }
@@ -108,4 +108,3 @@ class MainController extends AbstractController
         return $this->render('main/contact.html.twig');
     }
 }
-

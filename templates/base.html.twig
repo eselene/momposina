@@ -1,15 +1,16 @@
 {# templates/base.html.twig #}
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark">
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Welcome!
-			{% endblock %}
+			{% block title %}Page de base</b>!	{% endblock %}
 		</title>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> {% block stylesheets %}{% endblock %}
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-		<link rel="stylesheet" href="{{ asset('css/styles.css') }}">		
+		<link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+				
+        {% block stylesheets %}{% endblock %}		
 		{% block javascripts %}
 			{% block importmap %}
 				{{ importmap('app') }}
@@ -29,11 +30,11 @@
 			{% block footer %}
 				{% include 'components/footer.html.twig' %}
 			{% endblock %}
-
-			
+	
 		{% endif %}
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-		{% block javascript %}{% endblock %}	</body>
+		{% block javascript %}{% endblock %}
+	</body>
 </html>

@@ -1,10 +1,13 @@
+/* Global Styles */
 body {
-    background-color: rgb(244, 216, 216);
+    background-color: black;
+    color: white !important;
     font-family: Arial, sans-serif;
+    line-height: 1.5;
 }
 
+/* Form Styles */
 .form-container {
-    background-color: #212121;
     padding: 5px;
     color: #fff;
 }
@@ -26,51 +29,6 @@ body {
     box-sizing: border-box;
 }
 
-/* .navbar {
-    background-color: #333;
-    color: white;
-}
-
-.navbar-nav .nav-item .nav-link i.fas.fa-user {
-    font-size: 1.2em;
-}
-*/
-/* .row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.row .col-md-6 {
-    width: 45%;
-} */
-
-/*
-.card {
-    height: 100px;
-}
-
-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-} */
-
-
-
-/* .image {
-    height: 40vh;
-} */
-
-/* .details-span {
-    width: 80%;
-}
-
-
-button.btn-primary {
-    width: 100%;
-} 
-
 .password-toggle {
     position: absolute;
     right: 10px;
@@ -79,12 +37,17 @@ button.btn-primary {
     cursor: pointer;
 }
 
-button.btn-primary {
-    width: 100%;
-} */
+/* Navbar Styles */
+.navbar {
+    background-color: #853131;
+    color: white;
+}
 
-/* Commun aux mains */
-/* 
+.navbar-nav .nav-item .nav-link i.fas.fa-user {
+    font-size: 1.2em;
+}
+
+/* Layout Styles */
 .container {
     flex-grow: 1;
     width: 96%;
@@ -97,12 +60,17 @@ button.btn-primary {
     flex-direction: row;
     justify-content: space-evenly;
     flex-wrap: wrap;
-} */
+}
 
-/* .col-lg-6,
+.row .col-md-6 {
+    width: 45%;
+}
+
+.col-lg-6,
 .col-md-12 {
-    padding: 5vh 2vw;
-} */
+    /* padding: 5px; */
+    padding: 5vh 4vw;
+}
 
 .border-right.border-danger {
     height: 100%;
@@ -110,9 +78,19 @@ button.btn-primary {
     top: 0;
     right: 0;
     width: 1px;
-    /* Adjust the width if needed */
 }
 
+c .text-black {
+    color: black;
+}
+
+p {
+    margin-bottom: 8px;
+
+    /* Reduced margin for better spacing */
+}
+
+/* Additional Styles */
 .image-container {
     text-align: center;
     margin-bottom: 10px;
@@ -131,35 +109,114 @@ button.btn-primary {
     margin-top: 5px;
 }
 
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.details-span {
+    width: 80%;
+}
+
+button.btn-primary {
+    width: 100%;
+}
+
 .custom-btn {
     width: 100px;
-    /* Fixez la largeur */
     height: 32px;
-    /* Fixez la hauteur */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Style de base pour le footer */
 footer {
     background-color: #333;
     color: #fff;
     text-align: center;
     padding: 20px;
-    line-height: 1.2; /* Réduit l'espacement entre les lignes */
+    line-height: 1.2;
 }
 
-/* Media query pour les petits écrans */
+.text-yellow {
+    color: yellow;
+    padding: 10px;
+}
+
+.text-white {
+    color: white !important;
+}
+
+.text-black {
+    font-size: 0.9em;
+    /* Smaller font size for text on small screens */
+}
+
+.text-primary {
+    color: #007bff;
+}
+.card-title {
+    margin-bottom: 0;
+}
+
+.btn-danger {
+    background-color: red;
+    border: none;
+}
+
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+presentationagination {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.section.find-us {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.section.find-us .google-map {
+    margin-bottom: 20px;
+}
+
 @media (max-width: 480px) {
     footer {
         padding: 10px;
         font-size: 12px;
         line-height: 1.2;
     }
+
+    .event-card {
+        height: auto;
+        /* Make the card height auto for smaller screens */
+        margin-bottom: 20px;
+        /* Add margin bottom for spacing */
+    }
+
+    .event-photo {
+        height: 200px;
+        /* Smaller height for images on small screens */
+        object-fit: cover;
+        /* Ensure the image covers the area */
+    }
+
+    .event-title {
+        font-size: 1.2em;
+        /* Smaller font size for titles on small screens */
+    }
+
+
+    .btn-danger {
+        font-size: 0.8em;
+        /* Smaller font size for button text on small screens */
+    }
 }
 
-/* Pour les écrans de taille extra-petite (téléphones) */
 @media (max-width: 575px) {
     .footer {
         text-align: center;
@@ -167,75 +224,50 @@ footer {
         font-size: 8px;
         line-height: 1;
     }
-}
-/* Media query pour les écrans de taille moyenne */
-@media (max-width: 768px) {
-    footer {
-      padding: 15px;
-      font-size: 14px;
-      line-height: 1; /* Ajuste l'espacement pour les écrans moyens */
-    }
-    .col-md-3 {
-        flex: 0 0 100%;
-        /* Faire en sorte que chaque colonne occupe 100% de la largeur */
-    }
-}
-/* Pour les écrans de taille petite (tablettes) */
-@media (min-width: 576px) and (max-width: 767px) {
-    /* Vos styles spécifiques pour les tablettes ici */
-    /* Par exemple, vous pouvez ajuster la taille des colonnes ou modifier la disposition */
-}
 
+    .row .col-md-6 {
+        width: 100%;
+        /* Make column full width on small screens */
+    }
 
-/* @media (max-width: 768px) {
-    .border-right.border-danger {
-        display: none;
-        /* Hide the line on small screens */
-        .text-yellow {
-            color: yellow;
-            background-color: black;
-            padding: 10px;
+    .event-card {
+        margin-bottom: 15px;
+        /* Adjust margin for smaller screens */
+    }
+
+    .event-photo {
+        height: 150px;
+        /* Adjust image height for smaller screens */
+    }
+
+    .event-title {
+        font-size: 1em;
+        /* Adjust font size for smaller screens */
+    }
+
+    @media (max-width: 768px) {
+        footer {
+            padding: 15px;
+            font-size: 14px;
+            line-height: 1;
         }
-        
-        .event-card {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            overflow: hidden;
+
+        .col-md-3 {
+            flex: 0 0 100%;
         }
-        
-        .card-header.bg-gradient-gray {
-            background: linear-gradient(45deg, #ccc, #eee);
-            padding: 10px;
-            font-weight: bold;
-        }
-        
+
         .event-photo {
-            width: 100%;
-            height: 60%;
-            object-fit: cover;
-        }
-        
-        .event-title {
-            margin: 10px 0;
-        }
-        
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        
-        .pagination .pagination {
-            justify-content: center;
-        }
-        
-        .section.find-us {
-            margin-top: 50px;
-            text-align: center;
-        }
-        
-        .section.find-us .google-map {
-            margin-bottom: 20px;
+            height: 250px;
+            /* Adjust image height for medium screens */
         }
 
-        
+        .event-title {
+            font-size: 1.5em;
+            /* Adjust font size for titles on medium screens */
+        }
+
+        .text-black {
+            font-size: 1em;
+        }
+    }
+}

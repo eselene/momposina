@@ -7,51 +7,65 @@
     <h1 class="text-center">Liste des Événements</h1>
 
     <div class="section yellow-paragraph">
-        <p class="text-yellow">
+        <ul class="text-yellow">
             Découvrez tous les événements que La Momposina Tienda Latina vous propose tout le long de l'année :
-            - Repas, concerts, rencontres.
-            - Fiesta Latina tout autour de l’environnement « Latino Grenoble » !
-        </p>
+            <li> Repas, concerts, rencontres.</li>
+            <li> Fiesta Latina tout autour de l’environnement « Latino Grenoble » !</li>
+        </ul>
     </div>
 
-    <div class="event-list">
-        {# {% for evenement in pagination  %} #}
+    <div class="event-list row">
+        {# {% for evenement in pagination.items %} #}
         {% for evenement in evenements %}
-            <div class="event-card mb-4">
-                <div class="card-header bg-gradient-gray">
-                    <span>{{ evenement.date ? evenement.date|date('l j F Y') : '' }}</span>
+        <div class="col-md-6 col-sm-12 mb-4">
+            <div class="event-card card bg-dark text-white">
+                <div class="card-header bg-gradient-gray text-white event-date">
+                    <span>{{ evenement.date ? evenement.date|date('l j F Y', 'Europe/Paris') : 'Pas de date' }}</span>
                 </div>
-                <div class="card-body">
-                    <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : 'default.jpg' }}" alt="{{ evenement.titre }}" class="event-photo">
-                    <h3 class="event-title text-primary">{{ evenement.titre }}</h3>
-                    <button class="btn btn-danger float-end">Réserver</button>
-                    <div class="event-details">
-                        <div class="detail-row">
-                            <span class="detail-description">{{ evenement.description }}</span>
-                            <span class="detail-time">{{ evenement.plageHeure }}</span>
+                <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : 'default.jpg' }}"
+                    class="card-img-top event-photo" alt="{{ evenement.titre }}" data-bs-toggle="modal"
+                    data-bs-target="#imageModal{{ loop.index }}">
+
+                <div class="card-body bg-white">
+                    <div class="row mb-1">
+                        <div class="col-12 mb-0 mt-0">
+                            <h5 class="card-title text-primary event-title">{{ evenement.titre }}</h5>
                         </div>
-                        <div class="detail-row">
-                            <span class="detail-location">{{ evenement.lieu }}</span>
+                        <div class="col-12 text-end mt-2 mb-2">
+                            <button class="btn btn-danger w-100">Réserver</button>
+                        </div>
+                    </div>
+                    <div class="row bg-secondary py-2 event-details">
+                        <div class="col-12">
+                            <p><i class="fas fa-align-left"></i> {{ evenement.description }}</p>
+                            <p><i class="fas fa-clock"></i> {{ evenement.plageHeure }}</p>
+                            <p><i class="fas fa-map-marker-alt"></i> {{ evenement.lieu }}</p>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1"
+            aria-labelledby="imageModalLabel{{ loop.index }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel{{ loop.index }}">{{ evenement.titre }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : 'default.jpg' }}"
+                            class="img-fluid" alt="{{ evenement.titre }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {% endfor %}
     </div>
 
-    {# <div class="pagination d-flex justify-content-center">
-        {{ knp_pagination_render(pagination) }}
-    </div> #}
-
-    <div class="section find-us">
-        <h2 class="text-center">RETROUVEZ-NOUS</h2>
-        <div class="google-map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2761.913425847509!2d5.727772815963063!3d45.188529379098105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478af4bfb3033f89%3A0xe0679c30bcbfa96b!2s107%20Cours%20Jean%20Jaur%C3%A8s%2C%2038000%20Grenoble%2C%20France!5e0!3m2!1sen!2sfr!4v1652803708657!5m2!1sen!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-        </div>
-        <p class="text-center">
-            Adresse: 107 Cours Jean Jaurès Grenoble 38000 France<br>
-            <span>★★★★☆ (123 avis)</span>
-        </p>
-    </div>
+    {% include 'components/findUs.html.twig' %}
 </div>
 {% endblock %}

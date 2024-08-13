@@ -1,53 +1,112 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Evenement index
-{% endblock %}
+{% block title %}Présentation{% endblock %}
 
 {% block body %}
-	<h1>Evenement index</h1>
+<!-- Section presentation -->
+<section class="container">
+    <div class="my-5">
+        <h1 class="text-yellow">L'Amérique Latine à Grenoble</h1>
+        <p>
+            Venez découvrir la Momposina Tienda Latina et vivez une expérience latino unique. Voyagez à travers
+            l'Amérique Latine et dégustez multiples plats traditionnels. Vous trouverez tous les ingrédients
+            nécessaires
+            à sa réalisation sur place pour manger des délicieuses empanadas maison mais d'abord vous irez faire un
+            tour
+            aux plages du Brésil pour boire un cocktail de Cachaça.
+        </p>
+        <button id="btn-en-savoir-plus" class="btn btn-danger custom-btn">En savoir plus</button>
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Titre</th>
-				<th>Description</th>
-				<th>Date</th>
-				<th>PlageHeure</th>
-				<th>Lieu</th>
-				<th>Prix</th>
-				<th>Photo1</th>
-				{# <th>Photo2</th> #}
-				<th>VisibleWeb</th>
-				<th>actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for evenement in evenements %}
-				<tr>
-					<td>{{ evenement.id }}</td>
-					<td>{{ evenement.titre }}</td>
-					<td>{{ evenement.description }}</td>
-					<td>{{ evenement.date ? evenement.date|date('d-m-y') : '' }}</td>
-					<td>{{ evenement.plageHeure }}</td>
-					<td>{{ evenement.lieu }}</td>
-					<td>{{ evenement.prix }}</td>
-					<td>{{ evenement.photo1 }}</td>
-					<td class="col-2"><img src="{{ asset('images/' ~ evenement.photo1)}}" alt="{{ evenement.description }}"></td>
-					{# <td>{{ evenement.photo2 }}</td> #}
-					<td>{{ evenement.visibleWeb ? 'Yes' : 'No' }}</td>
-					<td>
-						<a href="{{ path('app_evenement_show', {'id': evenement.id}) }}">show</a>
-						<a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">edit</a>
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="11">no records found</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+        <div id="moreText" class="d-none mt-3">
+            <p>
+                Au menu, nous vous proposons un arrêt en Colombie. En option non alcoolisé, nous vous proposons
+                de
+                faire
+                un saut en Argentine pour boire un bon Maté! En remontant la côte, vous vous arrêterez au Pérou
+                pour
+                visiter le Machu Picchu et la verdure vous fera penser à toutes les épices que vous avez envie
+                de
+                goûter. Un marchand vous parlera alors du vin chilien et votre curiosité vous poussera à boire
+                un
+                verre
+                de rouge tout en regardant le plus grand festival de musique!
+            </p>
+            <p>
+                Au lever du soleil, vous déjeunerez avec toute sorte de jus exotiques et du fromage frais. La
+                Salsa
+                et
+                les musiques tropicales vous feront rêver de Cuba et ses incontournables rhums. Mais pour le
+                moment,
+                c'est l'heure du goûter et vous vous arrêterez au Venezuela pour manger une arepa sans gluten.
+                Pour
+                être
+                sûr de tenir la Fiesta du soir, vous commanderez une tasse de café guatémaltèque. Et à ce
+                moment-là,
+                détendu et calme, vous vous poserez une seule question: Si je mange une tortilla mexicaine et la
+                sauce
+                est trop piquante... Est-ce qu'une bonne Tequila fera l'affaire?
+            </p>
+        </div>
+        <div class="image-container">
+            <img src="{{ asset('images/presentation/ameriqueGre.jpg') }}" alt="Proposition momposina" class="img-fluid">
+        </div>
+        <hr class="my-4">
+    </div>
+    <hr class="my-4">
+</section>
 
-	<a href="{{ path('app_evenement_new') }}">Create new</a>
+<!-- Section Histoire -->
+<section class="container my-5">
+    <h2 class="text-primary">Histoire</h2>
+    <p>
+        Avant l'épicerie, une association. La Momposina, association franco-colombienne a été créée en 2006 par Andrea
+        Puentes. Elle a pour propos de faciliter les échanges entre les deux pays à travers des événements
+        socio-culturels. Le projet Momposina Tienda Latina est né de la nécessité de la communauté d'un endroit physique
+        pour concrétiser des échanges gastronomiques.
+    </p>
+    <div class="image-container">
+        <img src="{{ asset('images/presentation/histoire.jpg') }}" alt="Histoire momposina" class="img-fluid">
+    </div>
+</section>
+<hr class="my-4">
+<!-- Section Qui sommes-nous -->
+<section class="container my-5">
+    <h2 class="text-primary">Qui sommes-nous ?</h2>
+    <p>
+        L'épicerie est gérée par Xiomara et Andrea Puentes, deux sœurs colombiennes passionnées de leur culture qui se
+        sont investies pour créer des liens entre la communauté latino-américaine et qui ont pour objectif de faire
+        découvrir à la France les délices d'Amérique Latine.
+    </p>
+    <hr>
+    <div class="image-container">
+        <img src="{{ asset('images/presentation/sommes.jpg') }}" alt="Qui est momposina" class="img-fluid">
+    </div>
+</section>
+
+<!-- Section Qu'avons-nous à proposer -->
+<section class="container my-5">
+    <h2 class="text-primary">Qu'avons-nous à proposer ?</h2>
+    <p>
+        L'épicerie est gérée par Xiomara et Andrea Puentes, deux sœurs colombiennes passionnées de leur culture qui se
+        sont investies pour créer des liens entre la communauté latino-américaine et qui ont pour objectif de faire
+        découvrir à la France les délices d'Amérique Latine.
+    </p>
+    <div class="image-container">
+        <img src="{{ asset('images/presentation/proposition.jpg') }}" alt="Proposition momposina" class="img-fluid">
+    </div>
+    <hr class="my-4">
+</section>
+
+<!-- Section Retrouvez-nous -->
+<section class="container find-us my-5">
+    {% include 'components/findUs.html.twig' %}
+</section>
+
+<script>
+    // En savoir plus button click event
+    document.getElementById('btn-en-savoir-plus').addEventListener('click', function () {
+        document.getElementById('moreText').classList.remove('d-none');
+        this.style.display = 'none';
+    });
+</script>
 {% endblock %}

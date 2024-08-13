@@ -1,10 +1,13 @@
 knp_paginator:
-    page_range: 5                      # Page range used in pagination control
+    page_range: 5                        # number of links shown in the pagination menu
     default_options:
-        page_name: page                # Page query parameter name
-        sort_field_name: sort          # Sort field query parameter name
-        sort_direction_name: direction # Sort direction query parameter name
-        distinct: true                 # Ensure distinct results, useful when ORM queries are using GROUP BY statements
+        page_name: page                  # page query parameter name
+        sort_field_name: sort            # sort field query parameter name
+        sort_direction_name: direction   # sort direction query parameter name
+        filter_field_name: filterField   # filter field query parameter name
+        filter_value_name: filterValue   # filter value query parameter name
+        distinct: true                   # ensure distinct results, useful when ORM queries are using GROUP BY statements
     template:
-        pagination: '@KnpPaginator/Pagination/sliding.html.twig'  # Sliding pagination template
-        sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' # Sortable link template
+        pagination: '@KnpPaginator/Pagination/sliding.html.twig'     # sliding pagination template
+        sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' # sortable link template
+        filtration: '@KnpPaginator/Pagination/filtration.html.twig'  # filtration template

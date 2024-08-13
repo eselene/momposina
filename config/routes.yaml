@@ -10,6 +10,10 @@ index:
     # controller: App\Controller\ProduitController::index
     # controller: App\Controller\SousCategorieController::index
     # controller: App\Controller\login_registerController::index
+    
+app_evenements:
+    path: /
+    controller: App\Controller\MainController::index
 
 # reservation_new:
 #   path: /reservation/new
