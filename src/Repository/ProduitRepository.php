@@ -16,6 +16,55 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
+  /*** @return Produit[] Returns an array of Produit objects   */
+   public function findByCategorie($idCategorie): array
+   {
+       return $this->createQueryBuilder('p')
+           ->andWhere('p.getSousCategorie().getCategorie() = :val')
+           ->setParameter('val', $idCategorie)
+           ->orderBy('p.nom', 'ASC')
+           ->setMaxResults(10)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
+
+  /*** @return Produit[] Returns an array of Produit objects   */
+  public function findById($id): array
+  {
+      return $this->createQueryBuilder('p')
+          ->andWhere('p.id = :val')
+          ->setParameter('val', $id)
+          ->orderBy('p.nom', 'ASC')
+          ->setMaxResults(10)
+          ->getQuery()
+          ->getResult()
+      ;
+  }
+  /*** @return Produit[] Returns an array of Produit objects   */
+  public function findByNom($id): array
+  {
+      return $this->createQueryBuilder('p')
+          ->andWhere('p.id = :val')
+          ->setParameter('val', $id)
+          ->orderBy('p.nom', 'ASC')
+          ->setMaxResults(10)
+          ->getQuery()
+          ->getResult()
+      ;
+  }
+   public function findSomesByNomNomEs($value): ?Produit
+   {
+       return $this->createQueryBuilder('p')
+           ->andWhere('p.nom = :val')
+           ->setParameter('val', $value[0])
+           ->andWhere('p.nomEs = :val2')
+           ->setParameter('val2', $value[1])           
+           ->getQuery()
+           ->getOneOrNullResult()
+       ;
+   }
+
 //    /**
 //     * @return Produit[] Returns an array of Produit objects
 //     */

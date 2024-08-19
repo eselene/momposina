@@ -1,15 +1,17 @@
 <?php
+
 namespace App\Controller;
 
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Http\HttpResponse;
+// use Symfony\Component\Http\HttpResponse;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Evenement;
+use App\Entity\Produit;
 use App\Entity\SousCategorie;
 use App\Repository\EvenementRepository;
 
@@ -36,8 +38,7 @@ class MainController extends AbstractController
         $evenements = $evenementRepository->findAll();
         return $this->render('main/mainEvenement.html.twig', [
             'evenements' => $evenements,
-    ]);
-
+        ]);
     }
 
     #[Route('/presentation', name: 'app_presentation')]
@@ -50,14 +51,14 @@ class MainController extends AbstractController
     public function alimentation(int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
         $query = $request->query->get('query');
-        $evenements = [];
+        $alimentations = [];
 
         if ($query) {
-            $evenements = $entityManager->getRepository(Evenement::class)->findBy(['sousCategorie' => $id]);
+            $alimentations = $entityManager->getRepository(Produit::class)->findById(['sousCategorie' => $id]);
         }
 
         return $this->render('main/alimentation.html.twig', [
-            'evenements' => $evenements,
+            'alimentations' => $alimentations,
             'query' => $query,
         ]);
     }
@@ -66,14 +67,14 @@ class MainController extends AbstractController
     public function boisson(int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
         $query = $request->query->get('query');
-        $evenements = [];
+        $boissons = [];
 
         if ($query) {
-            $evenements = $entityManager->getRepository(Evenement::class)->findBy(['sousCategorie' => $id]);
+            $boissons = $entityManager->getRepository(Produit::class)->findById(['sousCategorie' => $id]);
         }
 
         return $this->render('main/boisson.html.twig', [
-            'evenements' => $evenements,
+            'boissons' => $boissons,
             'query' => $query,
         ]);
     }
@@ -91,17 +92,57 @@ class MainController extends AbstractController
     }
 
     #[Route('/plats', name: 'app_plats')]
-    public function plats(): Response
+    public function plats(EntityManagerInterface $entityManager): Response
     {
-        return $this->render('main/plats.html.twig');
+        $sousCategoriePlats = $entityManager->getRepository(SousCategorie::class)->findByCategorie(['categorie' => 3]);
+        return $this->render('main/plats.html.twig', [
+            'sousCategoriesPlat' => $sousCategoriePlats,
+        ]);
     }
 
     #[Route('/galerie', name: 'app_galerie')]
     public function galerie(): Response
     {
-        return $this->render('main/galerie.html.twig');
+        $images = [
+            [
+                'src' => 'images/galerie/barril.jpg',
+                'alt' => 'photo de fûts de chêne et poupée'
+            ],
+            [
+                'src' => 'images/galerie/alcoholFort.jpg',
+                'alt' => 'photo d\'alcohol Fort'
+            ],
+            [
+                'src' => 'images/galerie/cafe.jpg',
+                'alt' => 'photo de fûts de café'
+            ],
+            [
+                'src' => 'images/galerie/poupeeFaitMain.jpg',
+                'alt' => 'photo de poupée fait main'
+            ],
+            [
+                'src' => 'images/galerie/sacAmain.jpg',
+                'alt' => 'photo de sacs à main'
+            ],
+            [
+                'src' => 'images/galerie/doudou.jpg',
+                'alt' => 'photo de doudous'
+            ],
+            [
+                'src' => 'images/galerie/trio.jpg',
+                'alt' => 'photo d\'équipe momposina'
+            ],
+            [
+                'src' => 'images/galerie/produits.jpg',
+                'alt' => 'photo de produits'
+            ],
+        ];
+    
+        return $this->render('main/galerie.html.twig', [
+            'images' => $images,
+        ]);
     }
-
+    
     #[Route('/contact', name: 'app_contact')]
     public function contact(): Response
     {

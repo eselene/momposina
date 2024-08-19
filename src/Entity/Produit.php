@@ -47,9 +47,6 @@ class Produit
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photo1 = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $photo2 = null;
-
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
     private ?string $prix = null;
 
@@ -197,18 +194,6 @@ class Produit
     public function setPhoto1(?string $photo1): static
     {
         $this->photo1 = $photo1;
-
-        return $this;
-    }
-
-    public function getPhoto2(): ?string
-    {
-        return $this->photo2;
-    }
-
-    public function setPhoto2(?string $photo2): static
-    {
-        $this->photo2 = $photo2;
 
         return $this;
     }

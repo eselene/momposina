@@ -131,6 +131,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
+    // TODO*******************
     #[Route('/{id}/delete', name: 'app_produit_delete', methods: ['POST'])]
     // public function delete(int $id, LoggerInterface $logger): Response   
     public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager, LoggerInterface $logger): Response

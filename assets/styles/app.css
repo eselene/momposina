@@ -150,6 +150,9 @@ hr {
     margin: 20px 0;
     /* 20px top et bottom */
     text-align: center;
+    width: 600px;  /* Largeur fixe */
+    height: 300px; /* Hauteur fixe */
+    /* overflow: hidden;     */
 }
 
 .image {
@@ -171,7 +174,16 @@ img {
     object-fit: cover;
     border-radius: var(--img-border-radius);
 }
-
+.fixed-size-image {
+    width: 100%;   /* Prend toute la largeur du conteneur */
+    height: 300px;  /* Hauteur fixe */
+    object-fit: cover;
+}
+/* .fixed-size-image {
+    width: 300px;   
+    height: 300px;  
+    object-fit: cover;
+} */
 /* Button Styles */
 button.btn-primary {
     width: 100%;
@@ -244,6 +256,11 @@ footer {
     padding: var(--footer-padding);
     line-height: var(--footer-line-height);
 }
+.fixed-size-image {
+    width: 100%;   /* Prend toute la largeur du conteneur */
+    height: 300px;  /* Hauteur fixe */
+    object-fit: cover;
+}
 
 /* Responsive Media Queries */
 @media (max-width: 480px) {
@@ -281,6 +298,11 @@ footer {
 }
 
 @media (max-width: 575px) {
+    .col-lg-4,
+    .col-md-6 {
+        flex: 0 0 100%;
+    }
+
     .row .col-md-6 {
         width: 100%;
         /* Make column full width on small screens */
@@ -293,7 +315,9 @@ footer {
     .event-title {
         font-size: 1em;
     }
-
+    .fixed-size-image {
+        height: 200px;  /* Ajustez la hauteur pour les petits écrans */
+    }
     .footer {
         text-align: center;
         padding: 15px;
@@ -303,6 +327,10 @@ footer {
 }
 
 @media (max-width: 768px) {
+    .col-lg-4 {
+        flex: 0 0 50%;
+    }
+
     .col-md-3 {
         flex: 0 0 100%;
     }
