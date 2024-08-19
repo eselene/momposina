@@ -24,7 +24,7 @@
                 </div>
                 <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : 'default.jpg' }}"
                     class="card-img-top event-photo" alt="{{ evenement.titre }}" data-bs-toggle="modal"
-                    data-bs-target="#imageModal{{ loop.index }}">
+                    data-bs-target="#imageModal{{ loop.index }}"/>
 
                 <div class="card-body bg-white">
                     <div class="row mb-1">
@@ -57,7 +57,7 @@
                     </div>
                     <div class="modal-body">
                         <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : 'default.jpg' }}"
-                            class="img-fluid" alt="{{ evenement.titre }}">
+                            class="img-fluid" alt="{{ evenement.titre }}"/>
                     </div>
                 </div>
             </div>
