@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Événements{% endblock %}
+{% block title %}Alimentation{% endblock %}
 
 {% block body %}
 <div class="container mt-5">
@@ -25,7 +25,7 @@
             <div class="event-card card bg-dark text-white">
                 <img src="{{ alimentation.photo1 ? asset('images/' ~ alimentation.photo1) : 'default.jpg' }}"
                     class="card-img-top event-photo" alt="{{ alimentation.nom }}" data-bs-toggle="modal"
-                    data-bs-target="#imageModal{{ loop.index }}">
+                    data-bs-target="#imageModal{{ loop.index }}"/>
 
                 <div class="card-body bg-white">
                     <div class="row mb-1">

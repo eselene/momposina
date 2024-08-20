@@ -46,59 +46,86 @@ class MainController extends AbstractController
     {
         return $this->render('main/presentation.html.twig');
     }
-
-    #[Route('/alimentation/{id}', name: 'app_alimentation')]
-    public function alimentation(int $id, Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/alimentation', name: 'app_alimentation')]
+    public function alimentation(EntityManagerInterface $entityManager): Response
     {
-        $query = $request->query->get('query');
-        $alimentations = [];
-
-        if ($query) {
-            $alimentations = $entityManager->getRepository(Produit::class)->findById(['sousCategorie' => $id]);
-        }
-
+        $sousCategories = $entityManager->getRepository(SousCategorie::class)
+            ->findBy(['categorie' => 1], ['id' => 'ASC']); // Trier par ID croissant
+    
         return $this->render('main/alimentation.html.twig', [
-            'alimentations' => $alimentations,
-            'query' => $query,
+            'sousCategories' => $sousCategories,
         ]);
     }
-
-    #[Route('/boisson/{id}', name: 'app_boisson')]
-    public function boisson(int $id, Request $request, EntityManagerInterface $entityManager): Response
+    
+    #[Route('/boisson', name: 'app_boisson')]
+    public function boisson(EntityManagerInterface $entityManager): Response
     {
-        $query = $request->query->get('query');
-        $boissons = [];
-
-        if ($query) {
-            $boissons = $entityManager->getRepository(Produit::class)->findById(['sousCategorie' => $id]);
-        }
-
+        $sousCategories = $entityManager->getRepository(SousCategorie::class)
+            ->findBy(['categorie' => 2], ['id' => 'ASC']); // Trier par ID croissant
+    
         return $this->render('main/boisson.html.twig', [
-            'boissons' => $boissons,
-            'query' => $query,
+            'sousCategories' => $sousCategories,
         ]);
     }
-
-    #[Route('/sous-categories', name: 'app_sous_categories')]
-    public function sousCategories(EntityManagerInterface $entityManager): Response
-    {
-        $sousCategoriesAlimentation = $entityManager->getRepository(SousCategorie::class)->findBy(['categorie' => 1]);
-        $sousCategoriesBoisson = $entityManager->getRepository(SousCategorie::class)->findBy(['categorie' => 2]);
-
-        return $this->render('main/sous_categories.html.twig', [
-            'sousCategoriesAlimentation' => $sousCategoriesAlimentation,
-            'sousCategoriesBoisson' => $sousCategoriesBoisson,
-        ]);
-    }
-
+    
     #[Route('/plats', name: 'app_plats')]
-    public function plats(EntityManagerInterface $entityManager): Response
+    public function plats(): Response
     {
-        $sousCategoriePlats = $entityManager->getRepository(SousCategorie::class)->findByCategorie(['categorie' => 3]);
-        return $this->render('main/plats.html.twig', [
-            'sousCategoriesPlat' => $sousCategoriePlats,
-        ]);
+        return $this->render('main/plats.html.twig');
     }
+    
+    // #[Route('/alimentation/{id}', name: 'app_alimentation')]
+    // public function alimentation(int $id, Request $request, EntityManagerInterface $entityManager): Response
+    // {
+    //     $query = $request->query->get('query');
+    //     $alimentations = [];
+
+    //     if ($query) {
+    //         $alimentations = $entityManager->getRepository(Produit::class)->findById(['sousCategorie' => $id]);
+    //     }
+
+    //     return $this->render('main/alimentation.html.twig', [
+    //         'alimentations' => $alimentations,
+    //         'query' => $query,
+    //     ]);
+    // }
+
+    // #[Route('/boisson/{id}', name: 'app_boisson')]
+    // public function boisson(int $id, Request $request, EntityManagerInterface $entityManager): Response
+    // {
+    //     $query = $request->query->get('query');
+    //     $boissons = [];
+
+    //     if ($query) {
+    //         $boissons = $entityManager->getRepository(Produit::class)->findById(['sousCategorie' => $id]);
+    //     }
+
+    //     return $this->render('main/boisson.html.twig', [
+    //         'boissons' => $boissons,
+    //         'query' => $query,
+    //     ]);
+    // }
+
+    // #[Route('/sous-categories', name: 'app_sous_categories')]
+    // public function sousCategories(EntityManagerInterface $entityManager): Response
+    // {
+    //     $sousCategoriesAlimentation = $entityManager->getRepository(SousCategorie::class)->findBy(['categorie' => 1]);
+    //     $sousCategoriesBoisson = $entityManager->getRepository(SousCategorie::class)->findBy(['categorie' => 2]);
+
+    //     return $this->render('main/sous_categories.html.twig', [
+    //         'sousCategoriesAlimentation' => $sousCategoriesAlimentation,
+    //         'sousCategoriesBoisson' => $sousCategoriesBoisson,
+    //     ]);
+    // }
+
+    // #[Route('/plats', name: 'app_plats')]
+    // public function plats(EntityManagerInterface $entityManager): Response
+    // {
+    //     $sousCategoriePlats = $entityManager->getRepository(SousCategorie::class)->findByCategorie(['categorie' => 3]);
+    //     return $this->render('main/plats.html.twig', [
+    //         'sousCategoriesPlat' => $sousCategoriePlats,
+    //     ]);
+    // }
 
     #[Route('/galerie', name: 'app_galerie')]
     public function galerie(): Response

@@ -28,7 +28,7 @@
 					<td>{{ produit.nomEs }}</td>
 					<td>{{ produit.sousCategorie.description }}</td>
 					<td>
-						<img src="{{ asset('images/' ~ produit.photo1) }}" alt="{{ produit.nom }}" class="img-fluid object-fit-cover object-position-center" style="width: 100px; height: 100px;">
+						<img src="{{ asset('images/' ~ produit.photo1) }}" alt="{{ produit.nom }}" class="img-fluid object-fit-cover object-position-center" style="width: 100px; height: 100px;"/>
 						{# <img src="{{ asset('images/' ~ produit.photo1) }}" alt="{{ produit.nom }}" style="width: 100px; height: 100px;"> <!-- Fixez la largeur et la hauteur --> #}
 						{# <img src="{{ produit and produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}" alt="{{ produit.nom }}" class="img-fluid object-fit-cover object-position-center" style="display: '{{ produit and produit.photo1 ? 'block' : 'none' }}';"> #}
 					</td>

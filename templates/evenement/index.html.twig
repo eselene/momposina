@@ -34,7 +34,7 @@
             <td>{{ evenement.prix }}</td>
             <td>
                 {% if evenement.photo1 %}
-                <img src="{{ asset('images/' ~ evenement.photo1) }}" alt="{{ evenement.titre }}" class="img-fluid object-fit-cover object-position-center" style="width: 100px; height: 100px;">
+                <img src="{{ asset('images/' ~ evenement.photo1) }}" alt="{{ evenement.titre }}" class="img-fluid object-fit-cover object-position-center" style="width: 100px; height: 100px;"/>
                 {% else %}
                 Pas de photo
                 {% endif %}

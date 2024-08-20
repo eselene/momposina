@@ -18,7 +18,7 @@
 	</div>
 	<div class="col-md-6">
 		<div class="image-container" id="image-preview">
-			<img src="{{ evenement and evenement.photo1 ? asset('images/' ~ evenement.photo1) : '' }}" alt="Photo" style="height: 30vh; display: '{{ evenement and evenement.photo1 ? 'block' : 'none' }}'; margin: 0 auto;">
+			<img src="{{ evenement and evenement.photo1 ? asset('images/' ~ evenement.photo1) : '' }}" alt="Photo" style="height: 30vh; display: '{{ evenement and evenement.photo1 ? 'block' : 'none' }}'; margin: 0 auto;"/>
 			{{ form_row(form.photo1) }}
 		</div>
 	</div>
