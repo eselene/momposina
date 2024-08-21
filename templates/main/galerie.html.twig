@@ -12,15 +12,13 @@
             N’HÉSITEZ PAS À NOUS DEMANDER QUEL EST LE PLAT DE LA SEMAINE!
         </p>
     </div>
-    {# event-list #}
+    {#  #}
     <div class="row">
         {% for image in images %}
         <div class="row">
-            {% for image in images %}
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                 <img src="{{ asset(image.src) }}" class="img-fluid rounded fixed-size-image" alt="{{ image.alt }}"/>
             </div>
-            {% endfor %}
         </div>
         {% endfor %}
     </div>

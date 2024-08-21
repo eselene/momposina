@@ -18,22 +18,25 @@
     <div class="event-list row">
         {# {% for evenement in pagination.items %} #}
         {% for evenement in evenements %}
-        <div class="col-md-6 col-sm-12 mb-4">
-            <div class="event-card card bg-dark text-white">
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="event-card card bg-dark text-white h-100">
                 <div class="card-header bg-gradient-gray text-white event-date">
                     <span>{{ evenement.date ? evenement.date|date('l j F Y', 'Europe/Paris') : 'Pas de date' }}</span>
                 </div>
-                <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : 'default.jpg' }}"
-                    class="card-img-top event-photo" alt="{{ evenement.titre }}" data-bs-toggle="modal"
-                    data-bs-target="#imageModal{{ loop.index }}"/>
-
-                <div class="card-body bg-white">
+                <div class="card-img-top event-photo"> 
+                    <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : 'default.jpg' }}"
+                    alt="{{ evenement.titre }}"
+                    class="img-fluid"
+                    data-bs-toggle="modal"
+                    data-bs-target="#imageModal{{ loop.index }}" />
+                </div>
+                <div class="card-body p-3 bg-white">
                     <div class="row mb-1">
                         <div class="col-12 mb-0 mt-0">
                             <h5 class="card-title text-primary event-title">{{ evenement.titre }}</h5>
                         </div>
                         <div class="col-12 text-end mt-2 mb-2">
-                            <button class="btn btn-danger w-100">Réserver</button>
+                            <button class="btn btn-primary w-100">Réserver</button>
                         </div>
                     </div>
                     <div class="row bg-secondary py-2 event-details">
@@ -58,7 +61,7 @@
                     </div>
                     <div class="modal-body">
                         <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : 'default.jpg' }}"
-                            class="img-fluid" alt="{{ evenement.titre }}"/>
+                            class="img-fluid" alt="{{ evenement.titre }}" />
                     </div>
                 </div>
             </div>
