@@ -6,69 +6,49 @@
 <div class="container">
     <!-- Section presentation -->
     <section class="row">
-        <div class="d-md-flex justify-content-between align-items-center">
-            <div class="col-md-8 mb-3 mb-md-0">
-                <h1 class="text-yellow">L'Amérique Latine à Grenoble</h1>
-                <div class="text-justify">
-                    <p>
-                        Venez découvrir la Momposina Tienda Latina et vivez une expérience latino unique. Voyagez à
-                        travers
-                        l'Amérique Latine et dégustez multiples plats traditionnels. Vous trouverez tous les ingrédients
-                        nécessaires
-                        à sa réalisation sur place pour manger des délicieuses empanadas maison mais d'abord vous irez
-                        faire
-                        un
-                        tour
-                        aux plages du Brésil pour boire un cocktail de Cachaça.
-                    </p>
-                    <div class="text-end mt-3">
-                        <button id="btn-en-savoir-plus" class="btn btn-danger custom-btn ml-3 ">En savoir plus</button>
-                    </div>
-                </div>
-                <div id="moreText" class="d-none mt-3">
-                    <p class="text-justify">
-                        Au menu, nous vous proposons un arrêt en Colombie. En option non alcoolisé, nous vous proposons
-                        de
-                        faire
-                        un saut en Argentine pour boire un bon Maté! En remontant la côte, vous vous arrêterez au Pérou
-                        pour
-                        visiter le Machu Picchu et la verdure vous fera penser à toutes les épices que vous avez envie
-                        de
-                        goûter. Un marchand vous parlera alors du vin chilien et votre curiosité vous poussera à boire
-                        un
-                        verre
-                        de rouge tout en regardant le plus grand festival de musique!
-
-                        Au lever du soleil, vous déjeunerez avec toute sorte de jus exotiques et du fromage frais. La
-                        Salsa
-                        et
-                        les musiques tropicales vous feront rêver de Cuba et ses incontournables rhums. Mais pour le
-                        moment,
-                        c'est l'heure du goûter et vous vous arrêterez au Venezuela pour manger une arepa sans gluten.
-                        Pour
-                        être
-                        sûr de tenir la Fiesta du soir, vous commanderez une tasse de café guatémaltèque. Et à ce
-                        moment-là,
-                        détendu et calme, vous vous poserez une seule question: Si je mange une tortilla mexicaine et la
-                        sauce
-                        est trop piquante... Est-ce qu'une bonne Tequila fera l'affaire?
-                    </p>
+        <div class="col-md-8 mb-3 mb-md-0">
+            <h1 class="text-warning">L'Amérique Latine à Grenoble</h1>
+            <div class="text-justify">
+                <p>
+                    Venez découvrir la Momposina Tienda Latina et vivez une expérience latino unique. Voyagez à travers
+                    l'Amérique Latine et dégustez multiples plats traditionnels. Vous trouverez tous les ingrédients
+                    nécessaires à sa réalisation sur place pour manger des délicieuses empanadas maison mais d'abord vous irez
+                    faire un tour aux plages du Brésil pour boire un cocktail de Cachaça.
+                </p>
+                <div class="col-md-4 d-flex flex-column align-items-end mt-0">
+                    <button id="btn-en-savoir-plus" class="btn btn-danger">En savoir plus</button>
                 </div>
             </div>
-            <div class="col-md-4">
-                <img src="{{ asset('images/presentation/ameriqueGre.jpg') }}" alt="Proposition momposina"
-                    class="img-fluid rounded presentation-photo"/>
+            <div id="moreText" class="d-none mt-1">
+                <p class="text-justify">
+                    Au menu, nous vous proposons un arrêt en Colombie. En option non alcoolisé, nous vous proposons de faire
+                    un saut en Argentine pour boire un bon Maté! En remontant la côte, vous vous arrêterez au Pérou pour
+                    visiter le Machu Picchu et la verdure vous fera penser à toutes les épices que vous avez envie de goûter.
+                    Un marchand vous parlera alors du vin chilien et votre curiosité vous poussera à boire un verre de rouge
+                    tout en regardant le plus grand festival de musique!
+
+                    Au lever du soleil, vous déjeunerez avec toute sorte de jus exotiques et du fromage frais. La Salsa et
+                    les musiques tropicales vous feront rêver de Cuba et ses incontournables rhums. Mais pour le moment,
+                    c'est l'heure du goûter et vous vous arrêterez au Venezuela pour manger une arepa sans gluten. Pour être
+                    sûr de tenir la Fiesta du soir, vous commanderez une tasse de café guatémaltèque. Et à ce moment-là,
+                    détendu et calme, vous vous poserez une seule question: Si je mange une tortilla mexicaine et la sauce
+                    est trop piquante... Est-ce qu'une bonne Tequila fera l'affaire?
+                </p>
             </div>
         </div>
-        <hr class="my-1"/>
+        <div class="col-md-4">
+            <img src="{{ asset('images/presentation/ameriqueGre.jpg') }}" alt="Proposition momposina"
+                class="img-fluid rounded presentation-photo"/>
+        </div>
     </section>
+    <hr class="my-2"/>
 
     <!-- Section Histoire -->
     <section class="row">
         <div class="d-md-flex justify-content-between align-items-center">
-            <div class="col-md-8 mb-3 mb-md-0">
-                <h2 class="text-primary">Histoire</h2>
-                <p class="text-justify">
+        <div class="col-md-8 mb-3 mb-md-0">
+            <h2 class="text-primary">Histoire</h2>
+            <p class="text-justify">
                     Avant l'épicerie, une association. La Momposina, association franco-colombienne a été créée en 2006
                     par
                     Andrea
@@ -77,8 +57,8 @@
                     endroit
                     physique
                     pour concrétiser des échanges gastronomiques.
-                </p>
-            </div>
+            </p>
+        </div>
             <div class="col-md-4">
                 <img src="{{ asset('images/presentation/histoire.jpg') }}" alt="Histoire"
                     class="img-fluid rounded presentation-photo"/>
@@ -86,6 +66,7 @@
         </div>
         <hr class="my-1"/>
     </section>
+    <hr class="my-2"/>
 
     <!-- Section Qui sommes-nous -->
     <section class="row">
@@ -105,11 +86,11 @@
             <div class="col-md-4">
                 <img src="{{ asset('images/presentation/sommes.jpg') }}" alt="Qui est momposina"
                     class="img-fluid rounded presentation-photo"/>
-
             </div>
         </div>
         <hr class="my-1"/>
     </section>
+    <hr class="my-2"/>
 
     <!-- Section Qu'avons-nous à proposer -->
     <section class="row">
@@ -133,6 +114,7 @@
         </div>
         <hr class="my-1"/>
     </section>
+    <hr class="my-2"/>
 
     <!-- Section Retrouvez-nous -->
     <section class="row find-us mt-4">

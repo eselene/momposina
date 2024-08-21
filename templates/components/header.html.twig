@@ -1,114 +1,43 @@
-<header class="d-flex justify-content-between align-items-center">
-    <div class="logo" style="height: 20vh;">
-        <img src="{{ asset('images/logo/momposina.webp') }}" alt="Logo" style="height: 50%;">
-    </div>
-    <div class="middle-section" style="width: 70vh;">
-        <div class="message">
-            <marquee behavior="scroll" direction="left">LA MOMPOSINA - Tienda Latina - Epicerie Latino Grenoble</marquee>
-        </div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{ path('app_home') }}">Site</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_evenements') }}">Événements</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_presentation') }}">Présentation</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="alimentationDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">Alimentation</a>
-                            <ul class="dropdown-menu" aria-labelledby="alimentationDropdown">
-                                {% for sousCategorie in sousCategoriesAlimentation %}
-                                    <li><a class="dropdown-item"
-                                           href="{{ path('app_alimentation', {id: sousCategorie.id}) }}">{{ sousCategorie.nom }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="boissonDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">Boisson</a>
-                            <ul class="dropdown-menu" aria-labelledby="boissonDropdown">
-                                {% for sousCategorie in sousCategoriesBoisson %}
-                                    <li><a class="dropdown-item"
-                                           href="{{ path('app_boisson', {id: sousCategorie.id}) }}">{{ sousCategorie.nom }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_plats') }}">Plats</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_galerie') }}">Galerie</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
-                        </li>
-                    </ul>
+{# templates/components/header.html.twig #}
+<header>
+    <div class="container-fluid container d-flex flex-wrap justify-content-between align-items-center">
+            <div class="col-md-2 my-1">
+                <div class="logo" style="height: 20vh;">
+                    <img src="{{ asset('images/logo/momposina.webp') }}" alt="Logo momposina" style="height: 80%;">
                 </div>
             </div>
-        </nav>
-        
-        {# <nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand" href="{{ path('app_main') }}">My Shop</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav ml-auto">
-					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-						<li class="nav-item">
-
-							<a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
-						</li>
-					{% else %}
-						<li class="nav-item">
-							<a class="nav-link" href="{{ path('app_login') }}">Login</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="{{ path('app_register') }}">Register</a>
-						</li>
-					{% endif %}
-				</ul>
-			</div>
-		</nav> 
-        <nav class="menu">
-            <ul class="nav">
-                <li class="nav-item"><a class="nav-link" href="{{ path('app_evenements') }}">Événements</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path('app_presentation') }}">Présentation</a></li>
-                {# <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{{ path('app_alimentation', {id: sousCategorie.id}) }}" id="alimentationMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ sousCategorie.nom }}
-                        Alimentation
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="alimentationMenu">
-                        {% for sous_categorie in sous_categories_alimentation %}
-                            <a class="dropdown-item" href="#">{{ sous_categorie.nom }}</a>
-                        {% endfor %}
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{{ path('app_boisson', {id: sousCategorie.id}) }}" id="boissonMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ sousCategorie.nom }}
-                        Boisson
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="boissonMenu">
-                        {% for sous_categorie in sous_categories_boisson %}
-                            <a class="dropdown-item" href="#">{{ sous_categorie.nom }}</a>
-                        {% endfor %}
-                    </div>
-                </li> #}
-                {# <li class="nav-item"><a class="nav-link" href="{{ path('app_plats', {id: 3}) }}">Plats</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path('app_galerie') }}">Galerie</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path('app_contact') }}">Contact</a></li>
-            </ul> 
-        </nav>#}
-    </div>
-    <div class="user-icon">
-        <i class="fas fa-user-circle"></i>
-    </div>
+            <div class="col-md-9 middle-section">
+                <div class="message">
+                    <marquee behavior="scroll" direction="left">LA MOMPOSINA - Tienda Latina - Epicerie Latino Grenoble</marquee>
+                </div>
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                        <a class="navbar-brand" href="{{ path('app_evenements') }}"></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_evenements') }}">Événements</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_presentation') }}">Présentation</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_plats') }}">Plats</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_galerie') }}">Galerie</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                </nav>
+            </div>
+            <div class="col-md-1 user-icon mt-auto mb-auto">
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </div>
 </header>
