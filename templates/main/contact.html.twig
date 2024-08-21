@@ -6,61 +6,65 @@
 
 {% block body %}
 <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            {{ form_start(form) }}
-                <div class="form-group">
-                    {{ form_label(form.name) }}
-                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-                    {{ form_errors(form.name) }}
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.email) }}
-                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-                    {{ form_errors(form.email) }}
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.telephone) }}
-                    {{ form_widget(form.telephone, {'attr': {'class': 'form-control'}}) }}
-                    {{ form_errors(form.telephone) }}
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.subject) }}
-                    {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
-                    {{ form_errors(form.subject) }}
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.message) }}
-                    {{ form_widget(form.message, {'attr': {'class': 'form-control'}}) }}
-                    {{ form_errors(form.message) }}
-                </div>
-                <div class="form-group">
-                    {{ form_widget(form.privacyPolicyAccepted) }}
-                    {{ form_label(form.privacyPolicyAccepted) }}
-                    {{ form_errors(form.privacyPolicyAccepted) }}
-                </div>
-                <div class="form-group">
-                    {{ form_widget(form.send) }}
-                </div>
-            {{ form_end(form) }}
+	<!-- Section Retrouvez-nous -->
+	<section class="find-us mt-4">
+		{% include 'components/findUs.html.twig' %}
+	</section>
+	<div class="row">
+		<div class="col-md-8">
+			{{ form_start(form) }}
+			<div class="form-group">
+				{{ form_label(form.name) }}
+				{{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(form.name) }}
+			</div>
+			<div class="form-group">
+				{{ form_label(form.email) }}
+				{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(form.email) }}
+			</div>
+			<div class="form-group">
+				{{ form_label(form.telephone) }}
+				{{ form_widget(form.telephone, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(form.telephone) }}
+			</div>
+			<div class="form-group">
+				{{ form_label(form.subject) }}
+				{{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(form.subject) }}
+			</div>
+			<div class="form-group">
+				{{ form_label(form.message) }}
+				{{ form_widget(form.message, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(form.message) }}
+			</div>
+			<div class="form-group">
+				{{ form_widget(form.privacyPolicyAccepted) }}
+				{{ form_label(form.privacyPolicyAccepted) }}
+				{{ form_errors(form.privacyPolicyAccepted) }}
+			</div>
+			<div class="form-group">
+				{{ form_widget(form.send) }}
+			</div>
+			{{ form_end(form) }}
 
-            <p class="text-sm mt-3">
-                Les informations saisies sur ce formulaire seront communiquées au propriétaire de ce site via email. 
-                Vous pouvez exercer vos droits relatifs à vos données personnelles (accès, effacement, rectification, 
-                portabilité…) directement depuis ce formulaire contact. Le propriétaire du site est informé qu’il 
-                dispose d’un mois pour vous répondre. Pour en savoir plus sur la protection de vos données personnelles.
-            </p>
-        </div>
-        <div class="col-md-6">
-            <div class="image-container">
-                <img src="{{ asset('images/contact/MomposinaFondatrices.jpg') }}" alt="Contact Image" class="img-fluid">
-                <p>123 Rue de l'Adresse, Ville, Pays</p>
+			<p class="text-sm mt-3">
+				Les informations saisies sur ce formulaire seront communiquées au propriétaire de ce site via email.
+				Vous pouvez exercer vos droits relatifs à vos données personnelles (accès, effacement, rectification,
+				portabilité…) directement depuis ce formulaire contact. Le propriétaire du site est informé qu’il
+				dispose d’un mois pour vous répondre. Pour en savoir plus sur la protection de vos données personnelles.
+			</p>
+		</div>
+		<div class="col-md-4">
+			<div class="image-container mt-2">
+				<img src="{{ asset('images/contact/MomposinaFondatrices.jpg') }}" alt="Contact Image" class="img-fluid">
 				<p>LA TIENDA MOMPOSINA SARL</p>
 				<p>107 Cours Jean Jaurès - GRENOBLE</p>
 				<p>Téléphone : 04 57 93 31 47</p>
 				<p>WA: +33 612 023 435</p>
-            </div>
-        </div>
-    </div>
+			</div>
+		</div>
+	</div>
 </div>
+
 {% endblock %}
