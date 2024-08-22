@@ -1,5 +1,6 @@
 <?php
 // src/Controller/ContactController.php
+// src/Controller/ContactController.php
 namespace App\Controller;
 
 use App\Entity\Contact;
@@ -8,12 +9,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+// use Symfony\Component\Mailer\MailerInterface;
 
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'contact')]
     public function index(Request $request): Response
-    // public function contact(Request $request, MailerInterface $mailer): Response
+    // public function index(Request $request, MailerInterface $mailer): Response
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
@@ -21,7 +23,13 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Envoyez l'email 
+            if ($form->get('hidden_field')->getData() !== '') {
+                return $this->redirectToRoute('contact'); // Rediriger ou ignorer la soumission
+            }
+
+            // Send the email
+            // $mailer->send(...);
+
             $this->addFlash('success', 'Votre message a été envoyé avec succès !');
 
             return $this->redirectToRoute('contact');
@@ -29,9 +37,6 @@ class ContactController extends AbstractController
 
         return $this->render('main/contact.html.twig', [
             'form' => $form->createView(),
-        ]);       
+        ]);
     }
 }
-
-
-

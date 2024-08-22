@@ -36,6 +36,12 @@ class ContactType extends AbstractType
             ->add('privacyPolicyAccepted', CheckboxType::class, [
                 'label' => 'J\'ai pris connaissance de la politique de confidentialité de la tienda Monposina et l\'accepte.',
             ])
+            ->add('hidden_field', TextType::class, [
+                'label' => false,
+                'attr' => ['class' => 'd-none'],
+                'mapped' => false,
+                'required' => false,
+                ])
             ->add('send', SubmitType::class, [
                 'label' => 'Envoyer',
                 'attr' => ['class' => 'btn btn-primary mt-3'],

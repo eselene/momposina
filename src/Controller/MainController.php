@@ -14,24 +14,11 @@ use App\Entity\Evenement;
 use App\Entity\Produit;
 use App\Entity\SousCategorie;
 use App\Repository\EvenementRepository;
+use App\Repository\ProduitRepository;
 
 class MainController extends AbstractController
 {
     #[Route('/', name: 'app_evenements')]
-    // public function index(EvenementRepository $evenementRepository, PaginatorInterface $paginator, Request $request): Response
-    // {
-    //     $query = $evenementRepository->createQueryBuilder('e')->getQuery();
-
-    //     $pagination = $paginator->paginate(
-    //         $query,
-    //         $request->query->getInt('page', 1), // page number
-    //         4 // limit per page
-    //     );
-
-    //     return $this->render('main/mainEvenement.html.twig', [
-    //         'pagination' => $pagination,
-    //     ]);
-    // }
     public function home(EvenementRepository $evenementRepository): Response
     {
         setlocale(LC_TIME, 'fr_FR.UTF-8');
@@ -47,7 +34,7 @@ class MainController extends AbstractController
         return $this->render('main/presentation.html.twig');
     }
     #[Route('/alimentation', name: 'app_alimentation')]
-    public function alimentation(EntityManagerInterface $entityManager): Response
+    public function alimentation(EntityManagerInterface $produitRepository): Response
     {
         $sousCategories = $entityManager->getRepository(SousCategorie::class)
             ->findBy(['categorie' => 1], ['id' => 'ASC']); // Trier par ID croissant
@@ -69,11 +56,13 @@ class MainController extends AbstractController
     }
     
     #[Route('/plats', name: 'app_plats')]
-    public function plats(): Response
+    public function plats(ProduitRepository $produitRepository): Response
     {
-        return $this->render('main/plats.html.twig');
+        $produits = $produitRepository->findByCategorie(3);
+        return $this->render('main/plats.html.twig', [
+            'sousCategoriesPlat' => $produits,
+        ]);
     }
-    
     // #[Route('/alimentation/{id}', name: 'app_alimentation')]
     // public function alimentation(int $id, Request $request, EntityManagerInterface $entityManager): Response
     // {
@@ -115,15 +104,6 @@ class MainController extends AbstractController
     //     return $this->render('main/sous_categories.html.twig', [
     //         'sousCategoriesAlimentation' => $sousCategoriesAlimentation,
     //         'sousCategoriesBoisson' => $sousCategoriesBoisson,
-    //     ]);
-    // }
-
-    // #[Route('/plats', name: 'app_plats')]
-    // public function plats(EntityManagerInterface $entityManager): Response
-    // {
-    //     $sousCategoriePlats = $entityManager->getRepository(SousCategorie::class)->findByCategorie(['categorie' => 3]);
-    //     return $this->render('main/plats.html.twig', [
-    //         'sousCategoriesPlat' => $sousCategoriePlats,
     //     ]);
     // }
 
