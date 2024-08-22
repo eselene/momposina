@@ -34,7 +34,7 @@ class MainController extends AbstractController
         return $this->render('main/presentation.html.twig');
     }
     #[Route('/alimentation', name: 'app_alimentation')]
-    public function alimentation(EntityManagerInterface $produitRepository): Response
+    public function alimentation(EntityManagerInterface $entityManager): Response
     {
         $sousCategories = $entityManager->getRepository(SousCategorie::class)
             ->findBy(['categorie' => 1], ['id' => 'ASC']); // Trier par ID croissant
