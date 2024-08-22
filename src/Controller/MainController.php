@@ -60,7 +60,7 @@ class MainController extends AbstractController
     {
         $produits = $produitRepository->findByCategorie(3);
         return $this->render('main/plats.html.twig', [
-            'sousCategoriesPlat' => $produits,
+            'plats' => $produits,
         ]);
     }
     // #[Route('/alimentation/{id}', name: 'app_alimentation')]

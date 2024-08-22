@@ -6,22 +6,32 @@
 <div class="container mt-5">
     <h1 class="text-center">Galerie</h1>
 
-    <div class="section yellow-paragraph">
+    <div class="text-yellow">
         <p>Venez visiter la boutique pour connaître la gamme complète du mois. Vous trouverez des
-            nouveautés tous les jours
-            N’HÉSITEZ PAS À NOUS DEMANDER QUEL EST LE PLAT DE LA SEMAINE!
-        </p>
+            nouveautés tous les jours</p>
+        <p> N’HÉSITEZ PAS À NOUS DEMANDER QUEL EST LE PLAT DE LA SEMAINE!</p>
     </div>
-    {#  #}
+
     <div class="row">
         {% for image in images %}
-        <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                <img src="{{ asset(image.src) }}" class="img-fluid rounded fixed-size-image" alt="{{ image.alt }}"/>
-            </div>
-        </div>
+                <img src="{{ asset(image.src) }}" class="img-fluid rounded fixed-size-image" alt="{{ image.alt }}" data-toggle="modal"
+                data-target="#imageModal{{ loop.index }}"/>
+
+            <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" role="dialog"
+                aria-labelledby="imageModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <img src="{{ asset(image.src) }}" class="modal-body img-fluid">
+                    </div>
+                </div>
+            </div>            
+        </div>            
         {% endfor %}
-    </div>
+    </div>            
 </div>
 
 {% include 'components/findUs.html.twig' %}

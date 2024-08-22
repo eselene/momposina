@@ -17,17 +17,18 @@ class ProduitRepository extends ServiceEntityRepository
     }
 
   /*** @return Produit[] Returns an array of Produit objects   */
-   public function findByCategorie($idCategorie): array
-   {
-       return $this->createQueryBuilder('p')
-           ->andWhere('p.getSousCategorie().getCategorie() = :val')
-           ->setParameter('val', $idCategorie)
-           ->orderBy('p.nom', 'ASC')
-           ->setMaxResults(10)
-           ->getQuery()
-           ->getResult()
-       ;
-   }
+  public function findByCategorie($idCategorie): array
+  {
+      return $this->createQueryBuilder('p')
+          ->join('p.sousCategorie', 's')
+          ->join('s.categorie', 'c')
+          ->andWhere('c.id = :val')
+          ->setParameter('val', $idCategorie)
+          ->orderBy('p.nom', 'ASC')
+          ->getQuery()
+          ->getResult();
+  }
+  
 
   /*** @return Produit[] Returns an array of Produit objects   */
   public function findById($id): array
