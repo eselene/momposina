@@ -5,60 +5,46 @@
 
 {% block body %}
 <div class="container mt-5">
-    <h1 class="text-center">Liste de plats</h1>
+    <h1 class="text-center">Plats Momposina</h1>
     <div class="section text-yellow">
         <p>Venez visiter la boutique pour connaître la gamme complète du mois. Vous trouverez des
             nouveautés tous les jours</p>
-        <p class="text-yellow">N’HÉSITEZ PAS À NOUS DEMANDER QUEL EST LE PLAT DE LA SEMAINE!
+        <p>N’HÉSITEZ PAS À NOUS DEMANDER QUEL EST LE PLAT DE LA SEMAINE!
         </p>
     </div>
 
     <div class="row">
         {% for plat in plats %}
         <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card">
-                <img src="{{ asset('images/' ~ plat.photo1) }}" class="card-img-top img-fluid" data-toggle="modal"
-                    data-target="#imageModal{{ loop.index }}">
-                <div class="card-body bg-bleu">
-                    <h2 class="card-title">{{ plat.nom }}</h2>
-                    {% set description = plat.description|split('.') %}
-                    <p class="card-text">{{ description[0] }}.</p>
-                    <p class="card-text">{{ description[1] }}.</p>
-                    {# <p class="card-text">{{ strtok(plat.description, "."); }}</p> #}
-                </div>
-            </div>
+            {# <div class="col-md-4 col-sm-6 mb-4"> #}
+                <div class="card h-100">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <img src="{{ asset('images/' ~ plat.photo1) }}" class="card-img-top embed-responsive-item"
+                            data-toggle="modal" data-target="#imageModal{{ loop.index }}">
+                    </div>
 
-            <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" role="dialog"
-                aria-labelledby="imageModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <img src="{{ asset('images/' ~ plat.photo1) }}" class="modal-body img-fluid">
+                    <div class="card-body bg-bleu">
+                        <h2 class="card-title">{{ plat.nom }}</h2>
+                        {% set description = plat.description|split('.') %}
+                        <p class="card-text">{{ description[0] }}.</p>
+                        <p class="card-text">{{ description[1] }}.</p>
                     </div>
                 </div>
-            </div>
-            {# <div class="card bg-dark text-white h-100">
-                <div class="card-img-top">
-                    <img src="{{ plat.photo1 ? asset('images/' ~ plat.photo1) : asset('images/default.jpg') }}"
-                        alt="{{ plat.nom }}" class="img-fluid" data-bs-toggle="modal"
-                        data-bs-target="#imageModal{{ loop.index }}" />
-                </div>
-                <div class="card-body p-1 bg-white">
-                    <div class="row bg-secondary py-1 event-details">
-                        <div class="col-12">
-                            <p>{{ plat.nom }}</p>
-                            <p>{{ plat.description }}</p>
+
+                <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" role="dialog"
+                    aria-labelledby="imageModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <img src="{{ asset('images/' ~ plat.photo1) }}" class="modal-body img-fluid">
                         </div>
                     </div>
                 </div>
-            </div> #}
+            </div>
+            {% endfor %}
         </div>
-
-
-        {% endfor %}
     </div>
-</div>
-{% include 'components/findUs.html.twig' %}
-{% endblock %}
+    {% include 'components/findUs.html.twig' %}
+    {% endblock %}

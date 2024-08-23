@@ -41,12 +41,14 @@ class EvenementType extends AbstractType
                 'format' => 'yyyy-MM-dd',
             ])
             ->add('plageHeure', TextType::class, [
+                'required' => false,                
                 'label' => 'Horaire',
             ])
             ->add('lieu', TextType::class, [
                 'label' => 'Lieu',
             ])
             ->add('prix', TextType::class, [
+                'required' => false,                   
                 'label' => 'Prix',
             ])
             ->add('visibleWeb', CheckboxType::class, [
