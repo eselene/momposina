@@ -10,12 +10,14 @@ use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[Route('/evenement')]
 class EvenementController extends AbstractController
@@ -28,29 +30,23 @@ class EvenementController extends AbstractController
     }
 
     #[Route('/', name: 'app_evenement_index', methods: ['GET'])]
-    public function index(EvenementRepository $evenementRepository, PaginatorInterface $paginator, Request $request): Response
+    public function index(EvenementRepository $evenementRepository): Response
     {
         $evenements = $evenementRepository->findAll();
-    
-        $pagination = $paginator->paginate(
-            $evenements,
-            $request->query->getInt('page', 1),
-            10 // Nombre d'éléments par page
-        );
-    
         $deleteForms = [];
-        foreach ($pagination as $evenement) {
+        
+        foreach ($evenements as $evenement) {
             $deleteForms[$evenement->getId()] = $this->createDeleteForm($evenement->getId())->createView();
         }
-    
+
         return $this->render('evenement/index.html.twig', [
-            'pagination' => $pagination,
+            'evenements' => $evenements,
             'delete_forms' => $deleteForms,
         ]);
     }
-    
+
     #[Route('/new', name: 'app_evenement_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger, ValidatorInterface $validator): Response
     {
         $evenement = new Evenement();
         $form = $this->createForm(EvenementType::class, $evenement);
@@ -60,6 +56,23 @@ class EvenementController extends AbstractController
             $imageFile = $form->get('photo1')->getData();
 
             if ($imageFile) {
+                $errors = $validator->validate(
+                    $imageFile,
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => ['image/jpeg','image/jpg', 'image/png'],
+                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, JPG ou PNG).',
+                    ])
+                );
+
+                if (count($errors) > 0) {
+                    $this->addFlash('error', (string)$errors);
+                    return $this->render('evenement/new.html.twig', [
+                        'evenement' => $evenement,
+                        'form' => $form,
+                    ]);
+                }
+
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
@@ -78,8 +91,8 @@ class EvenementController extends AbstractController
 
             $entityManager->persist($evenement);
             $entityManager->flush();
-            // Ajout des messages flash
-            // $this->addFlash('success', 'Evenement créé avec succès!');
+
+            $this->addFlash('success', 'Événement créé avec succès !');
             return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -98,15 +111,33 @@ class EvenementController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_evenement_edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
-    public function edit(Request $request, Evenement $evenement, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    public function edit(Request $request, Evenement $evenement, EntityManagerInterface $entityManager, SluggerInterface $slugger, ValidatorInterface $validator): Response
     {
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $imageFile */
             $imageFile = $form->get('photo1')->getData();
 
             if ($imageFile) {
+                $errors = $validator->validate(
+                    $imageFile,
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => ['image/jpeg', 'image/jpg', 'image/png'],
+                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, JPEG ou PNG).',
+                    ])
+                );
+
+                if (count($errors) > 0) {
+                    $this->addFlash('error', (string)$errors);
+                    return $this->render('evenement/edit.html.twig', [
+                        'evenement' => $evenement,
+                        'form' => $form,
+                    ]);
+                }
+
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
@@ -124,12 +155,11 @@ class EvenementController extends AbstractController
             }
 
             $entityManager->flush();
+            $this->addFlash('success', 'Événement modifié avec succès !');
 
             return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
         }
-            // Ajout des messages flash
-            // $this->addFlash('success', 'Evenement modifié avec succès!');
-  
+
         return $this->render('evenement/edit.html.twig', [
             'evenement' => $evenement,
             'form' => $form,
@@ -142,15 +172,15 @@ class EvenementController extends AbstractController
         $logger->info('Evenement deletion requested for ID: {id}', ['id' => $evenement->getId()]);
 
         if ($this->isCsrfTokenValid('delete' . $evenement->getId(), $request->request->get('_token'))) {
-            $logger->info('CSRF token valid for evenement deletion.');
 
             $entityManager->remove($evenement);
             $entityManager->flush();
-            // Ajout des messages flash
-            // $this->addFlash('success', 'Evenement supprimé avec succès!');
+
+            $this->addFlash('success', 'Événement supprimé avec succès !');
             $logger->info('Evenement with ID {id} deleted successfully.', ['id' => $evenement->getId()]);
             $this->addFlash('success', 'Evenement supprimé avec succès.');
         } else {
+            $this->addFlash('error', 'Token CSRF invalide.');
             $logger->error('Invalid CSRF token for evenement deletion. Evenement ID: {id}', ['id' => $evenement->getId()]);
             $this->addFlash('error', 'Invalid CSRF token.');
         }
@@ -163,9 +193,9 @@ class EvenementController extends AbstractController
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('app_evenement_delete', ['id' => $id]))
-            ->setMethod('POST') // Ensure the method is POST
+            ->setMethod('POST')
             ->add('_token', HiddenType::class, [
-                'data' => $this->csrfTokenManager->getToken('delete'.$id)->getValue(),
+                'data' => $this->csrfTokenManager->getToken('delete' . $id)->getValue(),
             ])
             ->getForm();
     }
