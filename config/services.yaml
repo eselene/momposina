@@ -30,3 +30,6 @@ services:
     App\Controller\ProduitController:
         arguments: []
             # $logger: '@logger'
+ 
+    App\Twig\AppExtension:
+        tags: ['twig.extension']

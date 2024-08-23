@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 #[Route('/evenement')]
 class EvenementController extends AbstractController
@@ -27,22 +28,27 @@ class EvenementController extends AbstractController
     }
 
     #[Route('/', name: 'app_evenement_index', methods: ['GET'])]
-    public function index(EvenementRepository $evenementRepository): Response
+    public function index(EvenementRepository $evenementRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        // index(PaginatorInterface $paginator, Request $request): Response
         $evenements = $evenementRepository->findAll();
+    
+        $pagination = $paginator->paginate(
+            $evenements,
+            $request->query->getInt('page', 1),
+            10 // Nombre d'éléments par page
+        );
+    
         $deleteForms = [];
-        
-        foreach ($evenements as $evenement) {
+        foreach ($pagination as $evenement) {
             $deleteForms[$evenement->getId()] = $this->createDeleteForm($evenement->getId())->createView();
         }
-
+    
         return $this->render('evenement/index.html.twig', [
-            'evenements' => $evenements,
+            'pagination' => $pagination,
             'delete_forms' => $deleteForms,
         ]);
     }
-
+    
     #[Route('/new', name: 'app_evenement_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {

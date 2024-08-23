@@ -7,69 +7,71 @@
 <div class="container mt-5">
     <h1 class="text-center">Liste des Événements</h1>
 
-    <div class="section yellow-paragraph">
+    <div class="section mb-4">
         <ul class="text-yellow">
-            Découvrez tous les événements que La Momposina Tienda Latina vous propose tout le long de l'année :
-            <li> Repas, concerts, rencontres.</li>
-            <li> Fiesta Latina tout autour de l’environnement « Latino Grenoble » !</li>
+            Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année :
+            <li>Repas, concerts, rencontres.</li>
+            <li>Fiesta Latina autour de l’environnement « Latino Grenoble » !</li>
         </ul>
     </div>
 
-    <div class="event-list row">
-        {# {% for evenement in pagination.items %} #}
-        {% for evenement in evenements %}
+    {# event-list #}
+    <div class="row">
+        {# {% for evenement in evenements %} #}
+        {% for evenement in pagination %}
         <div class="col-md-4 col-sm-6 mb-4">
-            <div class="event-card card bg-dark text-white h-100">
-                <div class="card-header bg-gradient-gray text-white event-date">
-                    <span>{{ evenement.date ? evenement.date|date('l j F Y', 'Europe/Paris') : 'Pas de date' }}</span>
+            {%
+            if evenement.titre starts with 'Programme' %}
+            {% set dateEnLettres = evenement.titre %}
+            {% else %}
+            {% set dateEnLettres = evenement.date|date('Y-m-d')|date_en_lettres %}
+            {% endif %}
+            <div class="card bg-dark text-white h-100 d-flex flex-column">
+                <div class="card-header text-center">
+                    {# {{ evenement.date ? evenement.date|date('l j F Y', 'Europe/Paris') : 'Pas de date' }} #}
+                    {{ dateEnLettres ? dateEnLettres : 'Pas de date' }}
                 </div>
-                <div class="card-img-top event-photo"> 
-                    <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : 'default.jpg' }}"
-                    alt="{{ evenement.titre }}"
-                    class="img-fluid"
-                    data-bs-toggle="modal"
-                    data-bs-target="#imageModal{{ loop.index }}" />
+                <div class="card-img-top" style="height: 66%;">
+                    <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpg') }}"
+                        alt="{{ evenement.titre }}" class="img-fluid h-100 w-100 object-fit-cover" data-toggle="modal"
+                        data-target="#imageModal{{ loop.index }}" />
                 </div>
-                <div class="card-body p-3 bg-white">
-                    <div class="row mb-1">
-                        <div class="col-12 mb-0 mt-0">
-                            <h5 class="card-title text-primary event-title">{{ evenement.titre }}</h5>
+                <div class="card-body bg-white text-dark d-flex flex-column flex-grow-1">
+                    <h2 class="card-title text-primary event-title">{{ evenement.titre }}</h2>
+                    <p><i class="fas fa-align-left"></i> {{ evenement.description }}</p>
+                    <p><i class="fas fa-clock"></i> {{ evenement.plageHeure }}</p>
+                    <p><i class="fas fa-map-marker-alt"></i> {{ evenement.lieu }}</p>
+                </div>
+            </div>
+
+            {# <div class="mt-auto">
+                <button class="btn btn-primary w-100">Réserver</button>
+            </div> #}
+            {# Modal #}
+            <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" role="dialog"
+                aria-labelledby="imageModalLabel{{ loop.index }}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title text-dark" id="imageModalLabel{{ loop.index }}">{{ evenement.titre }}
+                            </h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                        <div class="col-12 text-end mt-2 mb-2">
-                            <button class="btn btn-primary w-100">Réserver</button>
-                        </div>
-                    </div>
-                    <div class="row bg-secondary py-2 event-details">
-                        <div class="col-12">
-                            <p><i class="fas fa-align-left"></i> {{ evenement.description }}</p>
-                            <p><i class="fas fa-clock"></i> {{ evenement.plageHeure }}</p>
-                            <p><i class="fas fa-map-marker-alt"></i> {{ evenement.lieu }}</p>
+                        <div class="modal-body">
+                            <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpg') }}"
+                                class="img-fluid" alt="{{ evenement.titre }}">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1"
-            aria-labelledby="imageModalLabel{{ loop.index }}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="imageModalLabel{{ loop.index }}">{{ evenement.titre }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : 'default.jpg' }}"
-                            class="img-fluid" alt="{{ evenement.titre }}" />
-                    </div>
-                </div>
-            </div>
-        </div>
-
         {% endfor %}
     </div>
-
+    <div class="pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
     {% include 'components/findUs.html.twig' %}
 </div>
 {% endblock %}

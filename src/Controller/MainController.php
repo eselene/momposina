@@ -15,19 +15,28 @@ use App\Entity\Produit;
 use App\Entity\SousCategorie;
 use App\Repository\EvenementRepository;
 use App\Repository\ProduitRepository;
+use Doctrine\ORM\Query\AST\OrderByItem;
 
 class MainController extends AbstractController
 {
     #[Route('/', name: 'app_evenements')]
-    public function home(EvenementRepository $evenementRepository): Response
+    public function home(EvenementRepository $evenementRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        setlocale(LC_TIME, 'fr_FR.UTF-8');
         $evenements = $evenementRepository->findAll();
+
+        $pagination = $paginator->paginate(
+            $evenements,
+            $request->query->getInt('page', 1),
+            6 // Nombre d'éléments par page
+        );
+
+        setlocale(LC_TIME, 'fr_FR.UTF-8');
+        $evenements = $evenementRepository->findAllOrderByDate();
+
         return $this->render('main/mainEvenement.html.twig', [
-            'evenements' => $evenements,
+            'pagination' => $pagination,
         ]);
     }
-
     #[Route('/presentation', name: 'app_presentation')]
     public function presentation(): Response
     {
@@ -38,23 +47,23 @@ class MainController extends AbstractController
     {
         $sousCategories = $entityManager->getRepository(SousCategorie::class)
             ->findBy(['categorie' => 1], ['id' => 'ASC']); // Trier par ID croissant
-    
+
         return $this->render('main/alimentation.html.twig', [
             'sousCategories' => $sousCategories,
         ]);
     }
-    
+
     #[Route('/boisson', name: 'app_boisson')]
     public function boisson(EntityManagerInterface $entityManager): Response
     {
         $sousCategories = $entityManager->getRepository(SousCategorie::class)
             ->findBy(['categorie' => 2], ['id' => 'ASC']); // Trier par ID croissant
-    
+
         return $this->render('main/boisson.html.twig', [
             'sousCategories' => $sousCategories,
         ]);
     }
-    
+
     #[Route('/plats', name: 'app_plats')]
     public function plats(ProduitRepository $produitRepository): Response
     {
@@ -144,12 +153,12 @@ class MainController extends AbstractController
                 'alt' => 'photo de produits'
             ],
         ];
-    
+
         return $this->render('main/galerie.html.twig', [
             'images' => $images,
         ]);
     }
-    
+
     #[Route('/contact', name: 'app_contact')]
     public function contact(): Response
     {
