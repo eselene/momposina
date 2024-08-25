@@ -54,6 +54,7 @@ class EvenementType extends AbstractType
             ->add('visibleWeb', CheckboxType::class, [
                 'label' => 'Visible',
                 'data' => true,
+                'required' => false,
             ])
             ->add('user', EntityType::class, [
                 'class' => User::class,
@@ -61,7 +62,7 @@ class EvenementType extends AbstractType
                 'label' => 'Utilisateur associé',
             ])
             ->add('photo1', FileType::class, [
-                'required' => false,
+                'required' => true,
                 'label' => 'Ajouter une image (jpeg, jpg, png)',
                 'data_class' => null,
                 'mapped' => false,
@@ -70,6 +71,7 @@ class EvenementType extends AbstractType
                         'maxSize' => '2M',
                         'mimeTypes' => [
                             'image/jpeg',
+                            'image/jpg',
                             'image/png',
                         ],
                         'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, JPG ou PNG)',

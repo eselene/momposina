@@ -32,7 +32,7 @@ class EvenementController extends AbstractController
     #[Route('/', name: 'app_evenement_index', methods: ['GET'])]
     public function index(EvenementRepository $evenementRepository): Response
     {
-        $evenements = $evenementRepository->findAll();
+        $evenements = $evenementRepository->findAllOrderByDate();
         $deleteForms = [];
         
         foreach ($evenements as $evenement) {
@@ -59,7 +59,7 @@ class EvenementController extends AbstractController
                 $errors = $validator->validate(
                     $imageFile,
                     new File([
-                        'maxSize' => '5M',
+                        'maxSize' => '2M',
                         'mimeTypes' => ['image/jpeg','image/jpg', 'image/png'],
                         'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, JPG ou PNG).',
                     ])
@@ -124,7 +124,7 @@ class EvenementController extends AbstractController
                 $errors = $validator->validate(
                     $imageFile,
                     new File([
-                        'maxSize' => '5M',
+                        'maxSize' => '2M',
                         'mimeTypes' => ['image/jpeg', 'image/jpg', 'image/png'],
                         'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, JPEG ou PNG).',
                     ])
