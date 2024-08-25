@@ -18,15 +18,29 @@ class EvenementRepository extends ServiceEntityRepository
    /**
     * @return Evenement[] Returns an array of Evenement objects
     */
-   public function findAllOrderByDate(): array
-   {
-       return $this->createQueryBuilder('e')
-           ->orderBy('e.date', 'DESC')
-           ->setMaxResults(10)
-           ->getQuery()
-           ->getResult()
-       ;
-   }
+    public function findAllOrderByDate(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.date', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();             
+    }
+          
+
+   /**
+    * @return Evenement[] Returns an array of Evenement objects
+    */
+    public function findAllOrderByDateVisible(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.visibleWeb = :visible')
+            ->setParameter('visible', true)
+            ->orderBy('e.date', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
 //    /**
 //     * @return Evenement[] Returns an array of Evenement objects
 //     */

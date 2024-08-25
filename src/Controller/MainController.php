@@ -22,16 +22,13 @@ class MainController extends AbstractController
     #[Route('/', name: 'app_evenements')]
     public function home(EvenementRepository $evenementRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $evenements = $evenementRepository->findAll();
-
-        $pagination = $paginator->paginate(
-            $evenements,
-            $request->query->getInt('page', 1),
-            6 // Nombre d'éléments par page
-        );
-
         setlocale(LC_TIME, 'fr_FR.UTF-8');
-        $evenements = $evenementRepository->findAllOrderByDate();
+        $query = $evenementRepository->findAllOrderByDateVisible();
+        $pagination = $paginator->paginate(
+            $query ,
+            $request->query->getInt('page', 1),
+            4 // Nombre d'éléments par page
+        );
 
         return $this->render('main/mainEvenement.html.twig', [
             'pagination' => $pagination,

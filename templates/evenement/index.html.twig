@@ -1,62 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Événements{% endblock %}
+{% block title %}Liste des Événements
+{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-    <h1 class="text-center">Liste des Événements</h1>
 
-    <div class="table-responsive">
-<table class="table table-striped text-white">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Titre</th>
-            <th>Description</th>
-            <th>Date</th>
-            <th>Plage Horaire</th>
-            <th>Lieu</th>
-            <th>Prix</th>
-            <th>Photo1</th>
-            <th>Visible</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for evenement in evenements %}
-        <tr class="align-middle">
-            <td>{{ evenement.id }}</td>
-            <td>{{ evenement.titre }}</td>
-            <td>{{ evenement.description }}</td>
-            <td>{{ evenement.date ? evenement.date|date('d-m-Y') : '' }}</td>
-            <td>{{ evenement.plageHeure }}</td>
-            <td>{{ evenement.lieu }}</td>
-            <td>{{ evenement.prix }}</td>
-            <td>
-                {% if evenement.photo1 %}
-                <img src="{{ asset('images/' ~ evenement.photo1) }}" alt="{{ evenement.titre }}" class="img-fluid object-fit-cover object-position-center" style="width: 100px; height: 100px;"/>
-                {% else %}
-                Pas de photo
-                {% endif %}
-            </td>
-            <td>{{ evenement.visibleWeb ? 'Oui' : 'Non' }}</td>
-            <td>
-                <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-info btn-sm custom-btn">Voir</a>
-                <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}" class="btn btn-primary btn-sm custom-btn">Modifier</a>
-                {# {{ form_start(delete_forms[evenement.id], {'attr': {'style': 'display:inline-block;'}}) }}
-                <button class="btn btn-danger btn-sm">Supprimer</button>
-                {{ form_end(delete_forms[evenement.id]) }} #}
-            </td>
-        </tr>
-        {% else %}
-        <tr>
-            <td colspan="10">Aucun événement trouvé</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-    </div>
+	<div class="container mt-5">
+		<h1 class="text-center">Liste des Événements</h1>
 
-    <a href="{{ path('app_evenement_new') }}" class="btn btn-success mt-3">Créer un nouvel événement</a>
-</div>
+		<div class="table-responsive">
+			<table class="table table-striped text-white">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Titre</th>
+						<th>Description</th>
+						<th>Date</th>
+						<th>Plage Horaire</th>
+						<th>Lieu</th>
+						<th>Prix</th>
+						<th>Photo1</th>
+						<th>Visible</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for evenement in evenements %}
+						<tr class="align-middle">
+							<td>{{ evenement.id }}</td>
+							<td>{{ evenement.titre }}</td>
+							<td>{{ evenement.description }}</td>
+							<td>{{ evenement.date ? evenement.date|date('d-m-Y') : '' }}</td>
+							<td>{{ evenement.plageHeure }}</td>
+							<td>{{ evenement.lieu }}</td>
+							<td>{{ evenement.prix }}</td>
+							<td>
+								{% if evenement.photo1 %}
+									<img src="{{ asset('images/' ~ evenement.photo1) }}" alt="{{ evenement.titre }}" class="img-fluid object-fit-cover object-position-center" style="width: 100px; height: 100px;"/>
+								{% else %}
+									Pas de photo
+								{% endif %}
+							</td>
+							<td>{{ evenement.visibleWeb ? 'Oui' : 'Non' }}</td>
+							<td>
+								<a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-info btn-sm custom-btn">Voir</a>
+								<a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}" class="btn btn-primary btn-sm custom-btn">Modifier</a>
+								{# {{ form_start(delete_forms[evenement.id], {'attr': {'style': 'display:inline-block;'}}) }}
+																                <button class="btn btn-danger btn-sm">Supprimer</button>
+																                {{ form_end(delete_forms[evenement.id]) }} #}
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="10">Aucun événement trouvé</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+		<a href="{{ path('app_evenement_new') }}" class="btn btn-success mt-3">Créer un nouvel événement</a>
+	</div>
 {% endblock %}

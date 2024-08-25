@@ -287,6 +287,38 @@ footer {
     line-height: var(--footer-line-height);
 }
 
+.pagination .page-item .page-link {
+    background-color: red; /* Change le fond des boutons */
+    color: white; /* Change la couleur du texte */
+    border-color: red; /* Change la couleur de la bordure */
+}
+
+.pagination .page-item.active .page-link {
+    background-color: darkred; /* Change le fond des boutons actifs */
+    border-color: darkred; /* Change la couleur de la bordure des boutons actifs */
+}
+
+.pagination .page-item:hover .page-link {
+    background-color: #cc0000; /* Change la couleur au survol */
+    border-color: #cc0000;
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: #ffcccc; /* Change la couleur des boutons désactivés */
+    color: white;
+    border-color: red;
+}
+.card {
+    height: 100%;
+    min-height: 300px;
+}
+
+.card-title {
+    white-space: nowrap; /* Prevent text from wrapping */
+    /* overflow: hidden; Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis for overflow text */
+}
+
 /* Responsive Styles */
 @media (max-width: 480px) {
     footer {
@@ -296,10 +328,6 @@ footer {
 
     body {
         text-size-adjust: text-sm;
-    }
-
-    .card {
-        height: 100%;
     }
 
     .image-container,
@@ -326,9 +354,21 @@ footer {
         object-fit: cover;
     }
 
-    .card-body {
-        padding: 1.5rem;
+    .card {
+        height: auto; 
+    }
 
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 0.1rem;
+        max-height: 130px; 
+        overflow-y: auto; /
+    }
+    
+    .card-title {
+        font-size: 1em; 
     }
 
     .event-title {
