@@ -41,11 +41,11 @@
             </td>
             <td>{{ evenement.visibleWeb ? 'Oui' : 'Non' }}</td>
             <td>
-                <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-info btn-sm">Voir</a>
-                <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}" class="btn btn-primary btn-sm">Modifier</a>
-                {{ form_start(delete_forms[evenement.id], {'attr': {'style': 'display:inline-block;'}}) }}
+                <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-info btn-sm custom-btn">Voir</a>
+                <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}" class="btn btn-primary btn-sm custom-btn">Modifier</a>
+                {# {{ form_start(delete_forms[evenement.id], {'attr': {'style': 'display:inline-block;'}}) }}
                 <button class="btn btn-danger btn-sm">Supprimer</button>
-                {{ form_end(delete_forms[evenement.id]) }}
+                {{ form_end(delete_forms[evenement.id]) }} #}
             </td>
         </tr>
         {% else %}

@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use App\Form\EvenementType;
 
 // #[Route('/')]
 #[Route('/produit')]
@@ -47,7 +48,9 @@ class ProduitController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $produit = new Produit();
-        $form = $this->createForm(ProduitType::class, $produit);
+        $form = $this->createForm(EvenementType::class, $produit, [
+            'is_edit' => $produit->getId() !== null, // Si l'ID est non nul, c'est une édition
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

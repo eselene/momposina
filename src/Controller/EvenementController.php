@@ -49,7 +49,9 @@ class EvenementController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger, ValidatorInterface $validator): Response
     {
         $evenement = new Evenement();
-        $form = $this->createForm(EvenementType::class, $evenement);
+        $form = $this->createForm(EvenementType::class, $evenement, [
+            'is_edit' => false, // On indique qu'il s'agit d'une création
+        ]);        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -113,7 +115,10 @@ class EvenementController extends AbstractController
     #[Route('/{id}/edit', name: 'app_evenement_edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
     public function edit(Request $request, Evenement $evenement, EntityManagerInterface $entityManager, SluggerInterface $slugger, ValidatorInterface $validator): Response
     {
-        $form = $this->createForm(EvenementType::class, $evenement);
+        $form = $this->createForm(EvenementType::class, $evenement, [
+            'is_edit' => $evenement->getId() !== null, // Si l'ID est non nul, c'est une édition
+        ]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

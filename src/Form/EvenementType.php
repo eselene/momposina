@@ -14,11 +14,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class EvenementType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        //option personnalisée pour détecter l'édition
+        $isEdit = $options['is_edit'] ?? false;
         $builder
             ->add('titre', TextType::class, [
                 'label' => 'Titre',
@@ -41,14 +45,14 @@ class EvenementType extends AbstractType
                 'format' => 'yyyy-MM-dd',
             ])
             ->add('plageHeure', TextType::class, [
-                'required' => false,                
+                'required' => false,
                 'label' => 'Horaire',
             ])
             ->add('lieu', TextType::class, [
                 'label' => 'Lieu',
             ])
             ->add('prix', TextType::class, [
-                'required' => false,                   
+                'required' => false,
                 'label' => 'Prix',
             ])
             ->add('visibleWeb', CheckboxType::class, [
@@ -62,7 +66,7 @@ class EvenementType extends AbstractType
                 'label' => 'Utilisateur associé',
             ])
             ->add('photo1', FileType::class, [
-                'required' => true,
+                'required' => !$isEdit, // Le champ est obligatoire seulement si ce n'est pas une édition
                 'label' => 'Ajouter une image (jpeg, jpg, png)',
                 'data_class' => null,
                 'mapped' => false,
@@ -77,13 +81,40 @@ class EvenementType extends AbstractType
                         'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, JPG ou PNG)',
                     ]),
                 ],
-            ]);
-    }
+            ])
+        ;
 
+        // Ajout d'un écouteur pour gérer les formulaires en mode édition
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $evenement = $event->getData();
+            $form = $event->getForm();
+
+            if ($evenement && $evenement->getId()) {
+                // En mode édition, rendre le champ photo1 non obligatoire
+                $form->add('photo1', FileType::class, [
+                    'required' => false,
+                    'label' => 'Modifier l\'image (laissez vide pour conserver l\'image actuelle)',
+                    'mapped' => false,
+                    'constraints' => [
+                        new \Symfony\Component\Validator\Constraints\File([
+                            'maxSize' => '2M',
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/jpg',
+                                'image/png',
+                            ],
+                            'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, JPG ou PNG)',
+                        ]),
+                    ],
+                ]);
+            }
+        });
+    }
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Evenement::class,
+            'is_edit' => false, // Ajout de l'option is_edit avec une valeur par défaut            
         ]);
     }
 }

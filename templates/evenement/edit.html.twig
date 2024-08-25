@@ -6,10 +6,7 @@
 		{{ form_start(form) }}
 
 		<div class="row">
-			<pre>
-      {{ dump(form) }}
-    </pre>
-			<div class="col-md-6 text-white">
+			<div class="col-md-6">
 				{{ form_row(form.titre) }}
 				{{ form_row(form.description, {'attr': {'rows': '3'}}) }}
 				{{ form_row(form.date) }}
@@ -21,37 +18,65 @@
 			</div>
 			<div class="col-md-6">
 				<div class="image-container" id="image-preview">
-					<img src="{{ evenement and evenement.photo1 ? asset('images/' ~ evenement.photo1) : '' }}" alt="Photo" style="height: 50vh; display: '{{ evenement and evenement.photo1 ? 'block' : 'none' }}'; margin: 0 auto;">
-					{{ form_row(form.photo1) }}
+					<img src="{{ evenement and evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default_event.png') }}" alt="Photo" class="img-fluid" style="height: 50vh; display: '{{ evenement and evenement.photo1 ? 'block' : 'none' }}'; margin: 0 auto;">
+					{{ form_row(form.photo1, {'data': asset('images/' ~ evenement.photo1)}) }}
 				</div>
 			</div>
 		</div>
 
-		<button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+		<button type="submit" class="btn btn-primary" id="save-button">Enregistrer</button>
+
 		{{ form_end(form) }}
 
 		<a href="{{ path('app_evenement_index') }}" class="btn btn-secondary">Retour à la liste</a>
 
 		<script>
-			document.addEventListener('DOMContentLoaded', function () {
-const imageInput = document.querySelector('# {{ form.photo1.vars.id }}');
-const imagePreview = document.querySelector('#image-preview img');
+document.addEventListener('DOMContentLoaded', function () {
+    const imageInput = document.querySelector('#{{ form.photo1.vars.id }}');
+    const imagePreview = document.querySelector('#image-preview img');
+    
+    if (imageInput) {
+        imageInput.addEventListener('change', function (event) {
+      if (event.target.files && event.target.files[0]) {
+        // console.log('Fichier sélectionné : ', event.target.files[0]);
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            // console.log('Fichier chargé avec succès');
+            imagePreview.src = e.target.result;
+            imagePreview.style.display = 'block';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    } else {
+        // console.log('Aucun fichier sélectionné');
+        imagePreview.src = "{{ evenement and evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default_event.png') }}";
+        imagePreview.style.display = '{{ evenement and evenement.photo1 ? 'block' : 'none' }}';
+    }
+});
 
-if (imageInput) {
-imageInput.addEventListener('change', function (event) {
-if (event.target.files && event.target.files[0]) {
-const reader = new FileReader();
-reader.onload = function (e) {
-imagePreview.src = e.target.result;
-imagePreview.style.display = 'block';
-};
-reader.readAsDataURL(event.target.files[0]);
-} else {
-imagePreview.src = "{{ evenement and evenement.photo1 ? asset('images/' ~ evenement.photo1) : '' }}";
-imagePreview.style.display = "{{ evenement and evenement.photo1 ? 'block' : 'none' }}";
+}
+
+let formChanged = false;
+
+formElements.forEach(element => {
+element.addEventListener('input', () => {
+formChanged = true;
+saveButton.disabled = false;
+backToListButton.disabled = false;
+});
+});
+
+saveButton.addEventListener('click', () => {
+formChanged = false;
+});
+
+backToListButton.addEventListener('click', (event) => {
+if (formChanged) {
+event.preventDefault();
+if (confirm('Vous avez des modifications non sauvegardées. Êtes-vous sûr de vouloir quitter ?')) {
+window.location.href = backToListButton.href;
+}
 }
 });
-}
 });
 		</script>
 	</div>
