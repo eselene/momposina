@@ -67,7 +67,7 @@ class EvenementType extends AbstractType
             ])
             ->add('photo1', FileType::class, [
                 'required' => !$isEdit, // Le champ est obligatoire seulement si ce n'est pas une édition
-                'label' => 'Ajouter une image (jpeg, jpg, png)',
+                'label' => 'Ajouter une image (jpeg ou png)',
                 'data_class' => null,
                 'mapped' => false,
                 'constraints' => [
@@ -75,10 +75,9 @@ class EvenementType extends AbstractType
                         'maxSize' => '2M',
                         'mimeTypes' => [
                             'image/jpeg',
-                            'image/jpg',
                             'image/png',
                         ],
-                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, JPG ou PNG)',
+                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG ou PNG)',
                     ]),
                 ],
             ])
@@ -100,10 +99,9 @@ class EvenementType extends AbstractType
                             'maxSize' => '2M',
                             'mimeTypes' => [
                                 'image/jpeg',
-                                'image/jpg',
                                 'image/png',
                             ],
-                            'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, JPG ou PNG)',
+                            'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG ou PNG)',
                         ]),
                     ],
                 ]);

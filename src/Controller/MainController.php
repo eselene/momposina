@@ -118,35 +118,35 @@ class MainController extends AbstractController
     {
         $images = [
             [
-                'src' => 'images/galerie/barril.jpg',
+                'src' => 'images/galerie/barril.jpeg',
                 'alt' => 'photo de fûts de chêne et poupée'
             ],
             [
-                'src' => 'images/galerie/alcoholFort.jpg',
+                'src' => 'images/galerie/alcoholFort.jpeg',
                 'alt' => 'photo d\'alcohol Fort'
             ],
             [
-                'src' => 'images/galerie/cafe.jpg',
+                'src' => 'images/galerie/cafe.jpeg',
                 'alt' => 'photo de fûts de café'
             ],
             [
-                'src' => 'images/galerie/poupeeFaitMain.jpg',
+                'src' => 'images/galerie/poupeeFaitMain.jpeg',
                 'alt' => 'photo de poupée fait main'
             ],
             [
-                'src' => 'images/galerie/sacAmain.jpg',
+                'src' => 'images/galerie/sacAmain.jpeg',
                 'alt' => 'photo de sacs à main'
             ],
             [
-                'src' => 'images/galerie/doudou.jpg',
+                'src' => 'images/galerie/doudou.jpeg',
                 'alt' => 'photo de doudous'
             ],
             [
-                'src' => 'images/galerie/trio.jpg',
+                'src' => 'images/galerie/trio.jpeg',
                 'alt' => 'photo d\'équipe momposina'
             ],
             [
-                'src' => 'images/galerie/produits.jpg',
+                'src' => 'images/galerie/produits.jpeg',
                 'alt' => 'photo de produits'
             ],
         ];

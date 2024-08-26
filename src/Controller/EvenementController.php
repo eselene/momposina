@@ -62,8 +62,8 @@ class EvenementController extends AbstractController
                     $imageFile,
                     new File([
                         'maxSize' => '2M',
-                        'mimeTypes' => ['image/jpeg','image/jpg', 'image/png'],
-                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, JPG ou PNG).',
+                        'mimeTypes' => ['image/jpeg', 'image/png'],
+                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG ou PNG).',
                     ])
                 );
 
@@ -130,7 +130,7 @@ class EvenementController extends AbstractController
                     $imageFile,
                     new File([
                         'maxSize' => '2M',
-                        'mimeTypes' => ['image/jpeg', 'image/jpg', 'image/png'],
+                        'mimeTypes' => ['image/jpeg', 'image/png'],
                         'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, JPEG ou PNG).',
                     ])
                 );

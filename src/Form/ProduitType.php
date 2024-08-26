@@ -20,7 +20,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ProduitType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    {        //option personnalisée pour détecter l'édition
+        $isEdit = $options['is_edit'] ?? false;
         $builder
             ->add('nom', TextType::class, [
                 'label' => 'Nom         *',
@@ -44,6 +45,7 @@ class ProduitType extends AbstractType
             ->add('visibleWeb', CheckboxType::class, [ // Use CheckboxType for boolean visibility
                 'label' => 'Visible sur le site web' ,
                 'data' => true,
+                'required' => false,
             ])
             ->add('user', EntityType::class, [ // Use EntityType for user association
                 'class' => User::class,
@@ -60,7 +62,7 @@ class ProduitType extends AbstractType
             ])            
             ->add('photo1', FileType::class, [ // il faut traiter ce fichier là dans le controller
                 'required' => false,
-                'label' => 'Ajouter une image (jpeg, jpg, png)',
+                'label' => 'Ajouter une image (jpeg ou png)',
                 'data_class' => null,
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false, // mémo en bdd ou pas
@@ -88,6 +90,8 @@ class ProduitType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Produit::class,
+            'is_edit' => false, // Ajout de l'option is_edit avec une valeur par défaut            
+
         ]);
     }
 }

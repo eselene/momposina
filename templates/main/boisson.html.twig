@@ -22,7 +22,7 @@
                 <div class="card-header bg-gradient-gray text-white event-date">
                     <span>"{{ evenement.date ? evenement.date|date('l j F Y', 'Europe/Paris') : 'Pas de date' }}"</span>
                 </div>
-                <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : 'default.jpg' }}"
+                <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : 'default.jpeg' }}"
                     class="card-img-top event-photo" alt="{{ evenement.titre }}" data-bs-toggle="modal"
                     data-bs-target="#imageModal{{ loop.index }}">
 
@@ -56,7 +56,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : 'default.jpg' }}"
+                        <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : 'default.jpeg' }}"
                             class="img-fluid" alt="{{ evenement.titre }}">
                     </div>
                 </div>

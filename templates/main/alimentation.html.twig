@@ -23,7 +23,7 @@
         {% for produit in produits %}
         <div class="col-md-6 col-sm-12 mb-4">
             <div class="event-card card bg-dark text-white">
-                <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : 'default.jpg' }}"
+                <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : 'default.jpeg' }}"
                     class="card-img-top event-photo" alt="{{ produit.nom }}" data-bs-toggle="modal"
                     data-bs-target="#imageModal{{ loop.index }}"/>
 
@@ -52,7 +52,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : 'default.jpg' }}"
+                        <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : 'default.jpeg' }}"
                             class="img-fluid" alt="{{ produit.nom }}">
                     </div>
                 </div>

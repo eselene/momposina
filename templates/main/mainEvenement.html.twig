@@ -29,7 +29,7 @@
 							{{ dateEnLettres ? dateEnLettres : 'Pas de date' }}
 						</div>
 						<div class="card-img-top" style="height: 56%;">
-							<img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpg') }}" alt="{{ evenement.titre }}" class="img-fluid h-100 w-100 object-fit-cover" data-toggle="modal" data-target="#imageModal{{ loop.index }}"/>
+							<img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="{{ evenement.titre }}" class="img-fluid h-100 w-100 object-fit-cover" data-toggle="modal" data-target="#imageModal{{ loop.index }}"/>
 						</div>
 						<div class="card-body bg-white text-dark d-flex flex-column flex-grow-1">
 							<h2 class="card-title text-primary event-title"style="font-size: 1.2rem;"> {{ evenement.titre }}</h2>
@@ -59,7 +59,7 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									<img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpg') }}" class="img-fluid" alt="{{ evenement.titre }}">
+									<img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" class="img-fluid" alt="{{ evenement.titre }}">
 								</div>
 							</div>
 						</div>
