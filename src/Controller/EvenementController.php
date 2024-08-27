@@ -131,7 +131,7 @@ class EvenementController extends AbstractController
                     new File([
                         'maxSize' => '2M',
                         'mimeTypes' => ['image/jpeg', 'image/png'],
-                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, JPEG ou PNG).',
+                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG ou PNG).',
                     ])
                 );
 
@@ -149,7 +149,7 @@ class EvenementController extends AbstractController
 
                 try {
                     $imageFile->move(
-                        $this->getParameter('images_directory'),
+                        $this->getParameter('images_directory') , 
                         $newFilename
                     );
                 } catch (FileException $e) {

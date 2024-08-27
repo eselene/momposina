@@ -31,7 +31,26 @@ body {
     color: var(--text-color) !important;
     font-family: var(--font-family);
     line-height: var(--line-height);
-  font-size: var(--base-font-size);
+    font-size: var(--base-font-size);
+}
+
+.navbar-nav .nav-item .nav-link i.fas.fa-user {
+    font-size: 1em;
+}
+
+/* .dropdown-item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+} */
+/* .dropdown-menu-horizontal { */
+    .dropdown-item{
+    /* Override Bootstrap's default display: flex; */
+    display: flex;
+    justify-content: space-between;
+    /* Alignement des contenus sur toute la largeur */
+    width: 100%;
+    background-color: white;
 }
 
 p {
@@ -57,7 +76,7 @@ hr {
 }
 
 .text-black {
-  font-size: calc(var(--base-font-size) * var(--font-scale) * 0.9);
+    font-size: calc(var(--base-font-size) * var(--font-scale) * 0.9);
 }
 
 .text-primary {
@@ -73,11 +92,11 @@ hr {
 }
 
 .text-sm {
-  font-size: calc(var(--base-font-size) * var(--font-scale) * 0.875);
+    font-size: calc(var(--base-font-size) * var(--font-scale) * 0.875);
 }
 
 .text-md {
-  font-size: calc(var(--base-font-size) * var(--font-scale));
+    font-size: calc(var(--base-font-size) * var(--font-scale));
 }
 
 /* Layout Styles */
@@ -142,23 +161,24 @@ hr {
     align-items: center;
     background-color: #853131;
     color: var(--text-color);
-    padding: 0 15px;
+    padding: 0 8px;
     width: 100%;
+    height: auto;
     box-sizing: border-box;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .navbar-nav .nav-item .nav-link i.fas.fa-user {
     display: flex;
     justify-content: flex-end;
     flex-wrap: nowrap;
-  font-size: calc(var(--base-font-size) * var(--font-scale) * 1.2);
+    font-size: calc(var(--base-font-size) * var(--font-scale) * 1.2);
     margin-bottom: 5px;
 }
 
 .navbar-nav .nav-item .nav-link {
-    padding: 10px 15px;
-  font-size: calc(var(--base-font-size) * var(--font-scale));
+    padding: 8px;
+    font-size: calc(var(--base-font-size) * var(--font-scale));
 }
 
 .navbar-toggler {
@@ -190,7 +210,7 @@ header {
 }
 
 .user-icon {
-  font-size: calc(var(--base-font-size) * var(--font-scale) * 2);
+    font-size: calc(var(--base-font-size) * var(--font-scale) * 2);
     margin: 10px 0;
 }
 
@@ -230,7 +250,7 @@ button.btn-primary {
     align-items: center;
     justify-content: center;
     padding: 0.375rem 0.75rem;
-  font-size: calc(var(--base-font-size) * var(--font-scale));
+    font-size: calc(var(--base-font-size) * var(--font-scale));
     line-height: 1.5;
     border-radius: 0.25rem;
 }
@@ -288,35 +308,45 @@ footer {
 }
 
 .pagination .page-item .page-link {
-    background-color: red; /* Change le fond des boutons */
-    color: white; /* Change la couleur du texte */
-    border-color: red; /* Change la couleur de la bordure */
+    background-color: red;
+    /* Change le fond des boutons */
+    color: white;
+    /* Change la couleur du texte */
+    border-color: red;
+    /* Change la couleur de la bordure */
 }
 
 .pagination .page-item.active .page-link {
-    background-color: darkred; /* Change le fond des boutons actifs */
-    border-color: darkred; /* Change la couleur de la bordure des boutons actifs */
+    background-color: darkred;
+    /* Change le fond des boutons actifs */
+    border-color: darkred;
+    /* Change la couleur de la bordure des boutons actifs */
 }
 
 .pagination .page-item:hover .page-link {
-    background-color: #cc0000; /* Change la couleur au survol */
+    background-color: #cc0000;
+    /* Change la couleur au survol */
     border-color: #cc0000;
 }
 
 .pagination .page-item.disabled .page-link {
-    background-color: #ffcccc; /* Change la couleur des boutons désactivés */
+    background-color: #ffcccc;
+    /* Change la couleur des boutons désactivés */
     color: white;
     border-color: red;
 }
+
 .card {
     height: 100%;
     min-height: 300px;
 }
 
 .card-title {
-    white-space: nowrap; /* Prevent text from wrapping */
+    white-space: nowrap;
+    /* Prevent text from wrapping */
     /* overflow: hidden; Hide overflow text */
-    text-overflow: ellipsis; /* Add ellipsis for overflow text */
+    text-overflow: ellipsis;
+    /* Add ellipsis for overflow text */
 }
 
 /* Responsive Styles */
@@ -355,7 +385,7 @@ footer {
     }
 
     .card {
-        height: auto; 
+        height: auto;
     }
 
     .card-body {
@@ -363,12 +393,12 @@ footer {
         flex-direction: column;
         justify-content: space-between;
         padding: 0.1rem;
-        max-height: 130px; 
-        overflow-y: auto; /
+        max-height: 130px;
+        overflow-y: auto;/
     }
-    
+
     .card-title {
-        font-size: 1em; 
+        font-size: 1em;
     }
 
     .event-title {
@@ -448,12 +478,13 @@ footer {
         display: flex;
         justify-content: space-between;
         flex-wrap: nowrap;
-        /* Assurez-vous que les éléments ne passent pas à la ligne */
     }
 
     .navbar-nav .nav-item {
         margin-left: 10px;
+        flex-direction: row;
     }
+
 }
 
 /* Global Styles */
