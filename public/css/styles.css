@@ -38,20 +38,11 @@ body {
     font-size: 1em;
 }
 
-/* .dropdown-item {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-} */
-/* .dropdown-menu-horizontal { */
-    .dropdown-item{
-    /* Override Bootstrap's default display: flex; */
-    display: flex;
-    justify-content: space-between;
-    /* Alignement des contenus sur toute la largeur */
-    width: 100%;
-    background-color: white;
+.dropdown-item-container {
+    display: block;
 }
+
+
 
 p {
     margin-bottom: var(--margin-bottom-p);
@@ -159,12 +150,11 @@ hr {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #853131;
     color: var(--text-color);
-    padding: 0 8px;
+    padding: 0 5px;
     width: 100%;
     height: auto;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     /* overflow: hidden; */
 }
 
@@ -177,12 +167,29 @@ hr {
 }
 
 .navbar-nav .nav-item .nav-link {
-    padding: 8px;
+    padding: 6px;
     font-size: calc(var(--base-font-size) * var(--font-scale));
 }
 
 .navbar-toggler {
     margin: 0 auto;
+}
+/* Changer la couleur au survol */
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    /* Remplacez par la couleur de votre choix */
+    color: #ff0000;
+    /* Remplacez par la couleur de votre choix */
+}
+.dropdown-item {
+    padding-left: 5px;
+    padding-right: 7px;
+}
+
+/* Soulignement en rouge au clic */
+.dropdown-item.clicked {
+    text-decoration: underline;
+    text-decoration-color: red;
 }
 
 /* Header Styles */
@@ -343,10 +350,7 @@ footer {
 
 .card-title {
     white-space: nowrap;
-    /* Prevent text from wrapping */
-    /* overflow: hidden; Hide overflow text */
     text-overflow: ellipsis;
-    /* Add ellipsis for overflow text */
 }
 
 /* Responsive Styles */
@@ -366,9 +370,6 @@ footer {
         max-height: 200px;
         object-fit: cover;
         border-radius: 0;
-        /* height: 100%; */
-        /* height: auto;
-        margin-bottom: 15px; */
     }
 
     .card-img-top {
@@ -483,8 +484,15 @@ footer {
     .navbar-nav .nav-item {
         margin-left: 10px;
         flex-direction: row;
+        width: 100%;
+        justify-content: center; 
     }
 
+    .dropdown-item-container {
+        display: flex;
+        justify-content: center; 
+        width: 100%;
+    }
 }
 
 /* Global Styles */

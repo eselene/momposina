@@ -39,16 +39,7 @@ class MainController extends AbstractController
     {
         return $this->render('main/presentation.html.twig');
     }
-    // #[Route('/alimentation', name: 'app_alimentation')]
-    // public function alimentation(EntityManagerInterface $entityManager): Response
-    // {
-    //     $sousCategories = $entityManager->getRepository(SousCategorie::class)
-    //         ->findBy(['categorie' => 1], ['id' => 'ASC']); // Trier par ID croissant
 
-    //     return $this->render('main/alimentation.html.twig', [
-    //         'sousCategories' => $sousCategories,
-    //     ]);
-    // }
     #[Route('/alimentation/{id}', name: 'app_alimentation_detail', requirements: ['id' => '\d+'])]
     public function alimentationDetail(int $id, ProduitRepository $produitRepository): Response
     {
@@ -58,18 +49,6 @@ class MainController extends AbstractController
             'produits' => $produits,
         ]);
     }
-
-    
-    // #[Route('/boisson', name: 'app_boisson')]
-    // public function boisson(EntityManagerInterface $entityManager): Response
-    // {
-    //     $sousCategories = $entityManager->getRepository(SousCategorie::class)
-    //         ->findBy(['categorie' => 2], ['id' => 'ASC']); // Trier par ID croissant
-
-    //     return $this->render('main/boisson.html.twig', [
-    //         'sousCategories' => $sousCategories,
-    //     ]);
-    // }
 
     #[Route('/boisson/{id}', name: 'app_boisson_detail', requirements: ['id' => '\d+'])]
     public function boissonDetail(int $id, ProduitRepository $produitRepository): Response
@@ -90,19 +69,7 @@ class MainController extends AbstractController
         ]);
     }
 
-    // #[Route('/sous-categories', name: 'app_sous_categories')]
-    // public function sousCategories(EntityManagerInterface $entityManager): Response
-    // {
-    //     $sousCategoriesAlimentation = $entityManager->getRepository(SousCategorie::class)->findBy(['categorie' => 1]);
-    //     $sousCategoriesBoisson = $entityManager->getRepository(SousCategorie::class)->findBy(['categorie' => 2]);
-
-    //     return $this->render('main/sous_categories.html.twig', [
-    //         'sousCategoriesAlimentation' => $sousCategoriesAlimentation,
-    //         'sousCategoriesBoisson' => $sousCategoriesBoisson,
-    //     ]);
-    // }
-
-    #[Route('/galerie', name: 'app_galerie')]
+     #[Route('/galerie', name: 'app_galerie')]
     public function galerie(): Response
     {
         $images = [

@@ -25,6 +25,7 @@
     {% endif %}
     <main>
       {% block body %}
+
       {% endblock %}
     </main>
     {% if app.request.get('_route') != 'app_login' %}
@@ -38,6 +39,42 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     {% block javascripts %}
+      // <script>
+      //   document.addEventListener('DOMContentLoaded', function () {
+      //     const dropdownItems = document.querySelectorAll('.dropdown-item')
+      //     const dropdownToggles = document.querySelectorAll('.dropdown-toggle')
+        
+      //     dropdownItems.forEach(function (item) {
+      //       item.addEventListener('click', function (event) {
+      //         console.log('Dropdown item clicked')
+      //         dropdownItems.forEach(function (i) {
+      //           i.classList.remove('clicked')
+      //         })
+      //         this.classList.add('clicked')
+      //         event.stopPropagation()
+      //       })
+      //     })
+        
+      //     dropdownToggles.forEach(function (toggle) {
+      //       toggle.addEventListener('click', function (event) {
+      //         console.log('Dropdown toggle clicked')
+      //         const parentDropdown = this.closest('.dropdown')
+      //         const dropdownMenu = parentDropdown.querySelector('.dropdown-menu')
+      //         dropdownMenu.classList.toggle('show')
+      //         event.preventDefault()
+      //         event.stopPropagation()
+      //       })
+      //     })
+        
+      //     document.addEventListener('click', function (event) {
+      //       if (!event.target.closest('.dropdown')) {
+      //         document.querySelectorAll('.dropdown-menu.show').forEach(function (menu) {
+      //           menu.classList.remove('show')
+      //         })
+      //       }
+      //     })
+      //   })
+      // </script>
     {% endblock %}
   </body>
 </html>
