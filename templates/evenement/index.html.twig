@@ -33,8 +33,7 @@
 							<td>{{ evenement.date ? evenement.date|date('d-m-Y') : '' }}</td>
 							<td>{{ evenement.plageHeure }}</td>
 							<td>{{ evenement.lieu }}</td>
-							<td>{{ evenement.prix }}</td>
-							<td>
+							<td>{{ evenement.prix }}</td>+
 								{% if evenement.photo1 %}
 									<img src="{{ asset('images/' ~ evenement.photo1) }}" alt="{{ evenement.titre }}" class="img-fluid object-fit-cover object-position-center" style="width: 100px; height: 100px;"/>
 								{% else %}

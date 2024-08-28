@@ -77,7 +77,7 @@ class ProduitType extends AbstractType
                             'image/jpeg',
                             'image/png',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid image file (JPEG or PNG)',
+                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG ou PNG)',
                     ])
                 ],
             ]);

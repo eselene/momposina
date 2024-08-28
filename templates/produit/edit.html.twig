@@ -61,7 +61,7 @@
         <div class="col-md-4">
             <div class="image-container" id="image-preview">
                 <img src="{{ produit and produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}"
-                    alt="{{ produit.nom }}" class="img-fluid object-fit-cover object-position-center">
+                    alt="{{ produit.nom }}" class="img-fluid"style="height: 50vh; display: '{{ produit and produit.photo1 ? 'block' : 'none' }}'; margin: 0 auto;">
                 {{ form_row(form.photo1) }}
             </div>
         </div>
@@ -74,60 +74,60 @@
 
     <a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Retour à la liste</a>
 </div>
+{% endblock %}
 
 {% block javascripts %}
-<script>
+  <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const form = document.querySelector('form'); // Assuming form is the main form element
-        const imageInput = form.querySelector('#{{ form.photo1.vars.id }}'); // Use form.querySelector for better separation
-        const imagePreview = document.querySelector('#image-preview img');
-        const saveButton = document.querySelector('.btn-primary');
-        const backToListButton = document.querySelector('.btn-secondary');
-        const formElements = document.querySelectorAll('input[type="text"], textarea');
-
-        if (imageInput) {
-            imageInput.addEventListener('change', function (event) {
-                if (event.target.files && event.target.files[0]) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        imagePreview.src = e.target.result;
-                        imagePreview.style.display = 'block';
-                    };
-                    reader.readAsDataURL(event.target.files[0]);
-                } else {
-                    imagePreview.src = '{{ produit and produit.photo1 ? asset("images/" ~ produit.photo1) : "" }}';
-                    imagePreview.style.display = '{{ produit and produit.photo1 ? "block" : "none" }}';
-                }
-            });
-        }
-
-        // if (imageInput1) {
-        //     updateImagePreview(imageInput1, imagePreview1);
-        // }                
-
-        let formChanged = false;
-
-        formElements.forEach(element => {
-            element.addEventListener('input', () => {
-                formChanged = true;
-                saveButton.disabled = false;
-                backToListButton.disabled = false;
-            });
-        });
-
-        saveButton.addEventListener('click', (event) => {
-            formChanged = false;
-        });
-
-        backToListButton.addEventListener('click', (event) => {
-            if (formChanged) {
-                event.preventDefault();
-                if (confirm('Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir quitter ?')) {
-                    window.location.href = backToListButton.href;
-                }
+      const form = document.querySelector('form') // Assuming form is the main form element
+      const imageInput = form.querySelector('#{{ form.photo1.vars.id }}') // Use form.querySelector for better separation
+      const imagePreview = document.querySelector('#image-preview img')
+      const saveButton = document.querySelector('.btn-primary')
+      const backToListButton = document.querySelector('.btn-secondary')
+      const formElements = document.querySelectorAll('input[type="text"], textarea')
+    
+      if (imageInput) {
+        imageInput.addEventListener('change', function (event) {
+          if (event.target.files && event.target.files[0]) {
+            const reader = new FileReader()
+            reader.onload = function (e) {
+              imagePreview.src = e.target.result
+              imagePreview.style.display = 'block'
             }
-        });
-    });
-</script>
-{% endblock %}
+            reader.readAsDataURL(event.target.files[0])
+          } else {
+            imagePreview.src = '{{ produit and produit.photo1 ? asset("images/" ~ produit.photo1) : "" }}'
+            imagePreview.style.display = '{{ produit and produit.photo1 ? "block" : "none" }}'
+          }
+        })
+      }
+    
+      // if (imageInput1) {
+      //     updateImagePreview(imageInput1, imagePreview1);
+      // }
+    
+      let formChanged = false
+    
+      formElements.forEach((element) => {
+        element.addEventListener('input', () => {
+          formChanged = true
+          saveButton.disabled = false
+          backToListButton.disabled = false
+        })
+      })
+    
+      saveButton.addEventListener('click', (event) => {
+        formChanged = false
+      })
+    
+      backToListButton.addEventListener('click', (event) => {
+        if (formChanged) {
+          event.preventDefault()
+          if (confirm('Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir quitter ?')) {
+            window.location.href = backToListButton.href
+          }
+        }
+      })
+    })
+  </script>
 {% endblock %}
