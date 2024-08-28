@@ -32,7 +32,7 @@
 							<img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="{{ evenement.titre }}" class="img-fluid h-100 w-100 object-fit-cover" data-toggle="modal" data-target="#imageModal{{ loop.index }}"/>
 						</div>
 						<div class="card-body bg-white text-dark d-flex flex-column flex-grow-1">
-							<h2 class="card-title text-primary event-title"style="font-size: 1.2rem;"> {{ evenement.titre }}</h2>
+							<h2 class="card-title text-primary"style="font-size: 1.2rem;"> {{ evenement.titre }}</h2>
 							<p>
 								<i class="fas fa-align-left"></i>
 								{{ evenement.description }}</p>

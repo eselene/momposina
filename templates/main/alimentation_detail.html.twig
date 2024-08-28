@@ -8,27 +8,25 @@
 {% block body %}
   <div class="container mt-5">
     {# Le nom de la sous Categorie, sino Alimentation (caché) #}
-    <h1 class="text-center">{{ sousCategorie}}</h1>
+    <h1 class="text-center">{{ sousCategorie }}</h1>
 
-    <div class="section yellow-paragraph">
-      <p class="text-yellow">Venez visiter la boutique pour connaître la gamme complète du mois. Vous trouverez des nouveautés tous les jours N’HÉSITEZ PAS À NOUS DEMANDER QUEL EST LE PLAT DE LA SEMAINE!</p>
+    <div class="section text-yellow">
+      <p>Venez visiter la boutique pour connaître la gamme complète du mois. Vous trouverez des nouveautés tous les jours</p>
+      <p>N’HÉSITEZ PAS À NOUS DEMANDER QUEL EST LE PLAT DE LA SEMAINE!</p>
     </div>
 
     {# Barre de recherche de produit: "Cherche un produit" query: nom, nomES using function findSomesByNomNomEs #}
     <div class="row">
       {% for produit in pagination %}
         <div class="col-md-4 col-sm-6 mb-4">
-          <div class="card bg-light text-black h-100 d-flex flex-column">
+          <div class="card bg-light text-black d-flex flex-column">
             <div class="card-img-top" style="height: 56%;">
               <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : asset('images/default.jpeg') }}" class="img-fluid h-100 w-100 object-fit-cover" alt="{{ produit.nom }}" data-toggle="modal" data-target="#imageModal{{ loop.index }}" />
             </div>
 
-            <div class="card-body  bg-black d-flex flex-column flex-grow-1">
-              <h2 class="card-title event-title" style="font-size: 1.2rem;">{{ produit.nom }}</h2>
-              <p>
-                <i class="fas fa-align-left"></i>
-                {{ produit.description }}
-              </p>
+            <div class="card-body bg-black d-flex flex-column">
+              <h2 class="card-title" style="font-size: 1.2rem;">{{ produit.nom }}</h2>
+              <p>{{ produit.description }}</p>
             </div>
           </div>
 

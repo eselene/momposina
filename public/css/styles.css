@@ -359,6 +359,10 @@ footer {
     background-color: black;
 }
 
+.card-body {
+    padding: 0.6rem !important;
+}
+
 /* Responsive Styles */
 @media (max-width: 480px) {
     footer {
@@ -370,8 +374,7 @@ footer {
         text-size-adjust: text-sm;
     }
 
-    .image-container,
-    .event-card .event-photo img {
+    .image-container {
         width: 100%;
         max-height: 200px;
         object-fit: cover;
@@ -384,15 +387,11 @@ footer {
         object-fit: cover;
     }
 
-    .event-photo,
+    /* .event-photo, */
     .presentation-photo {
         height: 200px;
         max-height: 350px;
         object-fit: cover;
-    }
-
-    .card {
-        height: auto;
     }
 
     .card-body {
@@ -406,10 +405,6 @@ footer {
 
     .card-title {
         font-size: 1em;
-    }
-
-    .event-title {
-        font-size: 1.2em;
     }
 
     .btn-danger {
@@ -438,13 +433,9 @@ footer {
         white-space: nowrap;
         margin-bottom: 5px;
     }
-
-    .event-card {
-        margin-bottom: 15px;
-    }
-
-    .event-title {
-        font-size: 1em;
+    
+    .card {
+        height: auto;
     }
 
     .fixed-size-image {

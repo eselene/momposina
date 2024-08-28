@@ -22,11 +22,10 @@
         <div class="col-md-6 col-sm-12 mb-4">
           <div class="event-card card bg-dark text-white">
             <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : 'default.jpeg' }}" class="card-img-top event-photo" alt="{{ produit.nom }}" data-bs-toggle="modal" data-bs-target="#imageModal{{ loop.index }}" />
-
             <div class="card-body bg-white">
               <div class="row mb-1">
                 <div class="col-12 mb-0 mt-0">
-                  <h2 class="card-title text-primary event-title">{{ produit.nom }}</h2>
+                  <h2 class="card-title text-primary">{{ produit.nom }}</h2>
                 </div>
               </div>
               <div class="row bg-secondary py-2 event-details">
