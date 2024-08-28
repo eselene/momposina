@@ -11,6 +11,10 @@ index:
     # controller: App\Controller\SousCategorieController::index
     # controller: App\Controller\login_registerController::index
     
+# images:
+#     path: /images/
+#     controller: App\Controller\ImageController::index
+
 app_evenements:
     path: /
     controller: App\Controller\MainController::index

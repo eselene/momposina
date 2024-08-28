@@ -15,7 +15,9 @@ use App\Entity\Produit;
 use App\Entity\SousCategorie;
 use App\Repository\EvenementRepository;
 use App\Repository\ProduitRepository;
+use App\Repository\SousCategorieRepository;
 use Doctrine\ORM\Query\AST\OrderByItem;
+use phpDocumentor\Reflection\DocBlock\Description;
 
 class MainController extends AbstractController
 {
@@ -25,7 +27,7 @@ class MainController extends AbstractController
         setlocale(LC_TIME, 'fr_FR.UTF-8');
         $query = $evenementRepository->findAllOrderByDateVisible();
         $pagination = $paginator->paginate(
-            $query ,
+            $query,
             $request->query->getInt('page', 1),
             4 // Nombre d'éléments par page
         );
@@ -39,14 +41,22 @@ class MainController extends AbstractController
     {
         return $this->render('main/presentation.html.twig');
     }
-
     #[Route('/alimentation/{id}', name: 'app_alimentation_detail', requirements: ['id' => '\d+'])]
-    public function alimentationDetail(int $id, ProduitRepository $produitRepository): Response
+    public function alimentationDetail(int $id, ProduitRepository $produitRepository, SousCategorieRepository $sousCategorieRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $produits = $produitRepository->findBySousCategorieId(['sousCategorie' => $id]);
+        $produits = $produitRepository->findBy(['sousCategorie' => $id]);
+        $sousCategorie = $sousCategorieRepository->find($id);
+        $sousCategorieNom = $sousCategorie ? $sousCategorie->getDescription() : '';
+
+        $pagination = $paginator->paginate(
+            $produits,
+            $request->query->getInt('page', 1),
+            4 // Nombre d'éléments par page
+        );
 
         return $this->render('main/alimentation_detail.html.twig', [
-            'produits' => $produits,
+            'pagination' => $pagination,
+            'sousCategorie' => $sousCategorieNom,
         ]);
     }
 
@@ -59,7 +69,7 @@ class MainController extends AbstractController
             'produits' => $produits,
         ]);
     }
-    
+
     #[Route('/plats', name: 'app_plats')]
     public function plats(ProduitRepository $produitRepository): Response
     {
@@ -69,7 +79,7 @@ class MainController extends AbstractController
         ]);
     }
 
-     #[Route('/galerie', name: 'app_galerie')]
+    #[Route('/galerie', name: 'app_galerie')]
     public function galerie(): Response
     {
         $images = [

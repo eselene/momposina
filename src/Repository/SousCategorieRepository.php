@@ -20,7 +20,18 @@ class SousCategorieRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('sc')
             ->orderBy('sc.description', 'ASC');
     }
-
+       /**
+        * @return SousCategorie[] Returns an array of SousCategorie objects
+        */
+       public function findOneById(int $value): ?SousCategorie
+       {
+           return $this->createQueryBuilder('s')
+               ->andWhere('s.id = :val')
+               ->setParameter('val', $value)
+               ->getQuery()
+               ->getOneOrNullResult();
+       }
+       
     //    /**
     //     * @return SousCategorie[] Returns an array of SousCategorie objects
     //     */
