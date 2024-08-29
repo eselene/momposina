@@ -209,6 +209,10 @@ class Produit
 
         return $this;
     }
+    public function getVisibleWeb(): ?bool
+    {
+        return $this->visibleWeb;
+    }
 
     public function isVisibleWeb(): ?bool
     {

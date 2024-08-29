@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Evenement;
 use App\Entity\Produit;
 use App\Entity\SousCategorie;
+use App\Form\ProduitSearchType;
 use App\Repository\EvenementRepository;
 use App\Repository\ProduitRepository;
 use App\Repository\SousCategorieRepository;
@@ -42,21 +43,35 @@ class MainController extends AbstractController
         return $this->render('main/presentation.html.twig');
     }
     #[Route('/alimentation/{id}', name: 'app_alimentation_detail', requirements: ['id' => '\d+'])]
-    public function alimentationDetail(int $id, ProduitRepository $produitRepository, SousCategorieRepository $sousCategorieRepository, PaginatorInterface $paginator, Request $request): Response
+    public function alimentationDetail(ProduitRepository $produitRepository, SousCategorieRepository $sousCategorieRepository, PaginatorInterface $paginator, Request $request, int $id): Response
     {
-        $produits = $produitRepository->findBy(['sousCategorie' => $id]);
+        $formResearch = $this->createForm(ProduitSearchType::class);
+        $formResearch->handleRequest($request);
+
+        // $produits = $produitRepository->findBy(['sousCategorie' => $id]);
+        $produits = $produitRepository->findBy(['sousCategorie' => $id, 'visibleWeb' => true]);
         $sousCategorie = $sousCategorieRepository->find($id);
         $sousCategorieNom = $sousCategorie ? $sousCategorie->getDescription() : '';
+
+        if ($formResearch->isSubmitted() && $formResearch->isValid()) {
+            $data = $formResearch->getData();
+            $query = $data['query'];
+            // Effectuer la recherche dans la base de données si nécessaire
+            $produits = $produitRepository->findByNomNomEs($query, $id);
+            // dd($produits);  
+        }
 
         $pagination = $paginator->paginate(
             $produits,
             $request->query->getInt('page', 1),
-            4 // Nombre d'éléments par page
+            2 // Number of items per page
         );
 
         return $this->render('main/alimentation_detail.html.twig', [
+            'formResearch' => $formResearch->createView(),
             'pagination' => $pagination,
-            'sousCategorie' => $sousCategorieNom,
+            'sousCategorieNom' => $sousCategorieNom,
+            'products' => $produits,
         ]);
     }
 

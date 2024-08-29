@@ -1,0 +1,18 @@
+{# templates/produit/search.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Recherche de produit</h1>
+    <div class="row">
+        <div class="col-md-8 offset-md-2"> 
+            {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
+                <div class="input-group mb-3">
+                    {{ form_row(form.query, {'attr': {'class': 'form-control', 'placeholder': 'Saisissez votre recherche'}}) }}
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary">Chercher</button>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

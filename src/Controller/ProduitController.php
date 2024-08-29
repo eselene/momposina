@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Form\ProduitSearchType;
 use App\Entity\Produit;
 use App\Form\ProduitType;
+
 use App\Repository\ProduitRepository;
+// use App\Repository\Repository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +35,7 @@ class ProduitController extends AbstractController
     {
         $produits = $produitRepository->findAll();
         $deleteForms = [];
-        
+
         foreach ($produits as $produit) {
             $deleteForms[$produit->getId()] = $this->createDeleteForm($produit->getId())->createView();
         }
@@ -74,7 +77,7 @@ class ProduitController extends AbstractController
 
             $entityManager->persist($produit);
             $entityManager->flush();
-           // Ajout des messages flash
+            // Ajout des messages flash
             // $this->addFlash('success', 'Produit créé avec succès!');
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -121,19 +124,42 @@ class ProduitController extends AbstractController
 
                 $produit->setPhoto1($newFilename);
             }
-
+            // $this->getDoctrine()->getManager()->flush();
             $entityManager->flush();
 
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }
-           // Ajout des messages flash
-            // $this->addFlash('success', 'Produit modifié avec succès!');
-  
+        // Ajout des messages flash
+        // $this->addFlash('success', 'Produit modifié avec succès!');
+
         return $this->render('produit/edit.html.twig', [
             'produit' => $produit,
             'form' => $form,
         ]);
     }
+
+    // #[Route('/{id}/search', name: 'app_produit_search', methods: ['GET', 'POST'])]
+    // public function search(Request $request, ProduitRepository $produitRepository ): Response
+    // {
+    //     $form = $this->createForm(ProduitSearchType::class);
+    //     $form->handleRequest($request);
+
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $data = $form->getData();
+    //         $query = $data['query'];
+
+    //         // Effectuer la recherche dans la base de données
+    //         $products = $produitRepository->findByNomNomEs($id);
+
+    //         return $this->render('product/search_results.html.twig', [
+    //             'products' => $products,
+    //         ]);
+    //     }
+
+    //     return $this->render('product/search.html.twig', [
+    //         'form' => $form->createView(),
+    //     ]);
+    // }
 
     // TODO*******************
     #[Route('/{id}/delete', name: 'app_produit_delete', methods: ['POST'])]
@@ -142,7 +168,7 @@ class ProduitController extends AbstractController
     {
         $logger->info('Product deletion requested for ID: {id}', ['id' => $produit->getId()]);
 
-        if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $produit->getId(), $request->request->get('_token'))) {
             $logger->info('CSRF token valid for product deletion.');
 
             $entityManager->remove($produit);
@@ -158,7 +184,7 @@ class ProduitController extends AbstractController
 
         return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
     }
-    
+
 
     private function createDeleteForm($id)
     {
@@ -166,9 +192,8 @@ class ProduitController extends AbstractController
             ->setAction($this->generateUrl('app_produit_delete', ['id' => $id]))
             ->setMethod('POST') // Ensure the method is POST
             ->add('_token', HiddenType::class, [
-                'data' => $this->csrfTokenManager->getToken('delete'.$id)->getValue(),
+                'data' => $this->csrfTokenManager->getToken('delete' . $id)->getValue(),
             ])
             ->getForm();
     }
-    
 }

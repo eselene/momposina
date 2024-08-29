@@ -23,6 +23,7 @@ class ProduitRepository extends ServiceEntityRepository
             ->join('p.sousCategorie', 's')
             ->join('s.categorie', 'c')
             ->andWhere('c.id = :val')
+            ->andWhere('p.visibleWeb = true')
             ->setParameter('val', $idCategorie)
             ->orderBy('p.nom', 'ASC')
             ->getQuery()
@@ -36,6 +37,7 @@ class ProduitRepository extends ServiceEntityRepository
             // ->join('p.sousCategorie', 's')
             // ->join('s.categorie', 'c')
             ->andWhere('p.sousCategorie = :val')
+            ->andWhere('p.visibleWeb = true')
             ->setParameter('val', $sousCategorieId)
             ->orderBy('p.nom', 'ASC')
             ->getQuery()
@@ -59,6 +61,7 @@ class ProduitRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.id = :val')
+            // ->andWhere('p.visibleWeb = true')
             ->setParameter('val', $id)
             ->orderBy('p.nom', 'ASC')
             ->setMaxResults(10)
@@ -72,6 +75,7 @@ class ProduitRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.nom = :val')
+            ->andWhere('p.visibleWeb = true')
             ->setParameter('val', $value)
             ->orderBy('p.nom', 'ASC')
             ->setMaxResults(10)
@@ -79,15 +83,17 @@ class ProduitRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    public function findByNomNomEs($value): ?Produit
+
+    public function findByNomNomEs($value, $valSousCategorieId): array
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.nom = :val')
-            ->orWhere('p.nomEs = :val')
-            ->setParameter('val', $value)
+            ->andWhere('p.nom LIKE :val OR p.nomEs LIKE :val')
+            ->andWhere('p.sousCategorie = :valSousCategorieId')
+            ->andWhere('p.visibleWeb = true')
+            ->setParameter('val', '%'. $value .'%')
+            ->setParameter('valSousCategorieId', $valSousCategorieId)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
 
     //    /**

@@ -44,7 +44,7 @@ class ProduitType extends AbstractType
             ])
             ->add('visibleWeb', CheckboxType::class, [ // Use CheckboxType for boolean visibility
                 'label' => 'Visible sur le site web' ,
-                'data' => true,
+                // 'data' => true,
                 'required' => false,
             ])
             ->add('user', EntityType::class, [ // Use EntityType for user association
