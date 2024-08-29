@@ -15,19 +15,22 @@
     </div>
 
     {# Ajouter la zone de recherche de produit #}
-    <div class="search-bar">
-      {{ form_start(formResearch) }}
-        {{ form_row(formResearch.query) }}
-        <button type="submit" class="btn btn-primary">Chercher</button>
+    <div class="search-bar d-flex justify-content-center mt-4 mb-4">
+      {{ form_start(formResearch, {'attr': {'class': 'form-inline'}}) }}
+        <div class="form-group mb-0">
+          {{ form_label(formResearch.query) }}
+          {{ form_widget(formResearch.query) }}
+        </div>
+        <button type="submit" class="btn btn-primary d-none ml-2">Chercher</button>
       {{ form_end(formResearch) }}
     </div>
+
 
     {# Afficher les résultats de recherche #}
     {% if pagination is not empty %}
       <div class="row mt-4">
         {# {% for produit in products %} #}
-      {% for produit in pagination %}
-
+        {% for produit in pagination %}
           <div class="col-md-3 col-sm-6 mb-4">
             <div class="card bg-light text-black d-flex flex-column">
               <div class="card-img-top" style="height: 56%;">

@@ -362,7 +362,23 @@ footer {
 .card-body {
     padding: 0.6rem !important;
 }
-
+/* .form-inline {
+    display: flex;
+    flex-flow: row nowrap !important;
+  }
+  
+  .search-bar {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .search-label {
+    margin-right: 8px;
+  }
+   */
 /* Responsive Styles */
 @media (max-width: 480px) {
     footer {
