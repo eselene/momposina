@@ -1,20 +1,21 @@
-{# templates/components/header.html.twig #}
-<header>
-  <div class="container-fluid d-flex flex-wrap justify-content-between align-items-center">
-    <div class="col-md-1 my-1">
-      <div class="logo">
+<header class="mt-0 bg-dark ">
+  <div class="container-fluid d-flex justify-content-between align-items-center bg-dark mt-0">
+    <div class="col-md-2 col-4">
+      <div class="logo mt-2 mb-2">
         <img src="{{ asset('images/logo/momposina.webp') }}" alt="Logo momposina" class="img-fluid" />
       </div>
     </div>
-    <div class="col-md-10 middle-section">
-      <div class="message">
-        <marquee behavior="scroll" direction="left">LA MOMPOSINA - Tienda Latina - Epicerie Latino Grenoble</marquee>
+    <div class="col-md-9 col-4 text-center">
+      <div class="message mb-2">
+        <marquee behavior="scroll" direction="left" class="text-white">
+        LA MOMPOSINA - Tienda Latina - Epicerie Latino Grenoble</marquee>
       </div>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ path('app_evenements') }}"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
+          <ul class="navbar-nav mx-auto">
             <li class="nav-item">
               <a class="nav-link" href="{{ path('app_evenements') }}">Événements</a>
             </li>
@@ -24,28 +25,23 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="alimentationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Alimentation</a>
               <div class="dropdown-menu" aria-labelledby="alimentationDropdown">
-                <div class="dropdown-item-container">
-                  <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 4 }) }}">Confiserie</a>
-                  <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 5 }) }}">Farines</a>
-                  <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 6 }) }}">Fromages</a>
-                  <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 7 }) }}">Sauces & Épices</a>
-                  <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 8 }) }}">Saucisses</a>
-                </div>
+                <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 4 }) }}">Confiserie</a>
+                <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 5 }) }}">Farines</a>
+                <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 6 }) }}">Fromages</a>
+                <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 7 }) }}">Sauces & Épices</a>
+                <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 8 }) }}">Saucisses</a>
               </div>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="boissonDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Boisson</a>
               <div class="dropdown-menu" aria-labelledby="boissonDropdown">
-                <div class="dropdown-item-container">
-                  <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 9 }) }}">Bières</a>
-                  <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 10 }) }}">Cafés</a>
-                  <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 11 }) }}">Mate</a>
-                  <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 12 }) }}">Spiritueux</a>
-                  <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 13 }) }}">Vins</a>
-                </div>
+                <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 9 }) }}">Bières</a>
+                <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 10 }) }}">Cafés</a>
+                <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 11 }) }}">Mate</a>
+                <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 12 }) }}">Spiritueux</a>
+                <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 13 }) }}">Vins</a>
               </div>
             </li>
-
             <li class="nav-item">
               <a class="nav-link" href="{{ path('app_plats') }}">Plats</a>
             </li>
@@ -59,8 +55,10 @@
         </div>
       </nav>
     </div>
-    <div class="col-md-1 user-icon mt-auto mb-auto text-center">
-      <i class="fas fa-user-circle"></i>
+    <div class="col-md-1 col-4 text-right">
+      <div class="user-icon">
+        <i class="fas fa-user"></i>
+      </div>
     </div>
   </div>
 </header>
