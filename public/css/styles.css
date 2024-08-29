@@ -201,7 +201,8 @@ header {
     align-items: center;
     flex-wrap: nowrap;
     width: 100%;
-    padding: 0 10px;
+    padding: 10px 0;
+    background-color: var(--bg-light);
 }
 
 .logo,
@@ -215,11 +216,12 @@ header {
 
 .logo img {
     margin: 0 auto;
-    max-width: 100%;
+    max-width: 100px;
 }
 
 .user-icon {
     font-size: calc(var(--base-font-size) * var(--font-scale) * 2);
+    /* font-size: 2rem; */
     margin: 10px 0;
 }
 
@@ -448,6 +450,8 @@ footer {
         margin-left: 15px;
         white-space: nowrap;
         margin-bottom: 5px;
+        justify-content: center;
+        width: 100%;
     }
     
     .card {
@@ -479,13 +483,15 @@ footer {
     }
 
     .navbar-nav .nav-item {
-        margin-bottom: 5px;
+        /* margin-bottom: 5px; */
+        margin: 5px 0;
     }
 }
 
 @media (min-width: 768px) {
     .middle-section {
-        width: 80vw;
+        /* width: 80vw; */
+        max-width: 80vw;        
     }
 
     .navbar {
