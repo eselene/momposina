@@ -18,21 +18,17 @@
   </head>
 
   <body>
-    {% if app.request.get('_route') != 'app_login' %}
       {% block header %}
         {% include 'components/header.html.twig' %}
       {% endblock %}
-    {% endif %}
     <main>
       {% block body %}
 
       {% endblock %}
     </main>
-    {% if app.request.get('_route') != 'app_login' %}
       {% block footer %}
         {% include 'components/footer.html.twig' %}
       {% endblock %}
-    {% endif %}
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

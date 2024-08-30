@@ -49,11 +49,13 @@
               <a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
-              <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                <a class="dropdown-item" href="{{ path('app_evenement_index', { id: 9 }) }}">Evenement</a>
-                <a class="dropdown-item" href="{{ path('app_produit_index', { id: 10 }) }}">Produits</a>
-              </div>
+              {% if is_granted('ROLE_ADMIN') %}
+                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                <div class="dropdown-menu" aria-labelledby="adminDropdown">
+                  <a class="dropdown-item" href="{{ path('app_evenement_index', { id: 9 }) }}">Evenement</a>
+                  <a class="dropdown-item" href="{{ path('app_produit_index', { id: 10 }) }}">Produits</a>
+                </div>
+              {% endif %}
             </li>
           </ul>
         </div>
@@ -62,6 +64,8 @@
     <div class="col-md-1 col-4 text-right">
       <div class="user-icon">
         <i class="fas fa-user"></i>
+              <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+
       </div>
     </div>
   </div>
