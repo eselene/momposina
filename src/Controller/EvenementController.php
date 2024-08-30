@@ -18,8 +18,8 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-
-#[Route('/evenement')]
+// /evenement
+#[Route('/admin')]
 class EvenementController extends AbstractController
 {
     private CsrfTokenManagerInterface $csrfTokenManager;

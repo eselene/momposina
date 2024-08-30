@@ -20,7 +20,8 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 // #[Route('/')]
-#[Route('/produit')]
+// #[Route('/produit')]
+#[Route('/admin')]
 class ProduitController extends AbstractController
 {
     private CsrfTokenManagerInterface $csrfTokenManager;
