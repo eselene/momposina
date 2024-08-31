@@ -18,8 +18,8 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-// /evenement
-#[Route('/admin')]
+// /
+#[Route('/evenement')]
 class EvenementController extends AbstractController
 {
     private CsrfTokenManagerInterface $csrfTokenManager;
@@ -29,7 +29,7 @@ class EvenementController extends AbstractController
         $this->csrfTokenManager = $csrfTokenManager;
     }
 
-    #[Route('/', name: 'app_evenement_index', methods: ['GET'])]
+    #[Route('admin/evenement', name: 'app_evenement_index', methods: ['GET'])]
     public function index(EvenementRepository $evenementRepository): Response
     {
         $evenements = $evenementRepository->findAllOrderByDate();
@@ -45,7 +45,7 @@ class EvenementController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_evenement_new', methods: ['GET', 'POST'])]
+    #[Route('admin/evenement/new', name: 'app_evenement_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger, ValidatorInterface $validator): Response
     {
         $evenement = new Evenement();
@@ -104,7 +104,7 @@ class EvenementController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_evenement_show', methods: ['GET'], requirements: ['id' => '\d+'])]
+    #[Route('admin/evenement/{id}', name: 'app_evenement_show', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function show(Evenement $evenement): Response
     {
         return $this->render('evenement/show.html.twig', [
@@ -112,7 +112,7 @@ class EvenementController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_evenement_edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
+    #[Route('admin/evenement/{id}/edit', name: 'app_evenement_edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
     public function edit(Request $request, Evenement $evenement, EntityManagerInterface $entityManager, SluggerInterface $slugger, ValidatorInterface $validator): Response
     {
         $form = $this->createForm(EvenementType::class, $evenement, [
@@ -171,7 +171,7 @@ class EvenementController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'app_evenement_delete', methods: ['POST'])]
+    #[Route('admin/evenement/{id}/delete', name: 'app_evenement_delete', methods: ['POST'])]
     public function delete(Request $request, Evenement $evenement, EntityManagerInterface $entityManager, LoggerInterface $logger): Response
     {
         $logger->info('Evenement deletion requested for ID: {id}', ['id' => $evenement->getId()]);

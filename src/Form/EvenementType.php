@@ -57,7 +57,7 @@ class EvenementType extends AbstractType
             ])
             ->add('visibleWeb', CheckboxType::class, [
                 'label' => 'Visible',
-                'data' => true,
+                // 'data' => true,
                 'required' => false,
             ])
             ->add('user', EntityType::class, [

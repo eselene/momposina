@@ -1,14 +1,20 @@
-{% extends 'base.html.twig' %}
 {# templates/security/login_register.html.twig #}
+{% extends 'base.html.twig' %}
+
 {% block title %}
   Connexion et inscription
 {% endblock %}
 
 {% block body %}
+  <h1 class="text-hidden">Login ou Register</h1>
   <div class="container mt-5">
+    <div class="row text-center">
+      <h2>DÉJÀ CLIENT? IDENTIFIEZ-VOUS</h2>
+      <h2>-- ou --</h2>
+      <h2>CRÉEZ VOTRE COMPTE</h2>
+    </div>
     <div class="row justify-content-center">
       <div class="col-lg-5 col-md-12">
-        <h2 class="text-center">DÉJÀ CLIENT? IDENTIFIEZ-VOUS</h2>
         <form method="post" class="mt-3">
           {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -16,19 +22,18 @@
 
           {% if app.user %}
             <div class="mb-3">
-              Bonjour
-              {{ app.user.prenom }}, Role:
-              {{ app.user.role }},
+              Bonjour {{ app.user.prenom }},
               <a href="{{ path('app_logout') }}">Se déconnecter</a>
             </div>
           {% endif %}
 
           <div class="form-group">
-            <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus placeholder="Email" />
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" value="{{ last_username }}" required class="form-control" autocomplete="email" autofocus placeholder="Votre email" />
           </div>
-          <div class="form-group position-relative">
-            <input type="password" name="_password" id="password" class="form-control" autocomplete="off" required placeholder="Votre mot de passe" />
-            <span class="password-toggle" onclick="togglePasswordVisibility(this)" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"><i class="fa fa-eye"></i></span>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required class="form-control" autocomplete="current-password" placeholder="Votre mot de passe" />
           </div>
 
           <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
@@ -37,64 +42,80 @@
             <input type="checkbox" name="_remember_me" id="_remember_me" class="form-check-input" />
             <label for="_remember_me" class="form-check-label">Remember me</label>
           </div>
-          <button class="btn btn-lg btn-primary w-75" style="background-color: red; border-color: red;" type="submit">Me connecter</button>
+
+          <button class="btn btn-primary" type="submit">Me connecter</button>
         </form>
       </div>
       <div class="col-md-1 d-flex justify-content-center align-items-center">
         <div class="border-left border-secondary" style="height: 100%;"></div>
       </div>
       <div class="col-lg-6 col-md-12">
-        <h2 class="text-center">CREEZ COMPTE</h2>
+        <h2 class="text-center">CRÉEZ VOTRE COMPTE</h2>
         <div>
           <p>Veuillez remplir les champs:</p>
         </div>
         {% for flash_error in app.flashes('error') %}
           <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
         {% endfor %}
-        {{ form_errors(registrationForm) }}
         {{ form_start(registrationForm) }}
         {% for flash_success in app.flashes('success') %}
           <div class="alert alert-success" role="alert">{{ flash_success }}</div>
         {% endfor %}
 
-        <div class="form-group">{{ form_widget(registrationForm.genre) }}
-          {{ form_errors(registrationForm.genre) }}</div>
+        <div class="form-group">
+          {{ form_widget(registrationForm.genre) }}
+          <div class="invalid-feedback">{{ form_errors(registrationForm.genre) }}</div>
+        </div>
         <div class="form-group">
           {{ form_widget(registrationForm.nom) }}
           <div class="invalid-feedback">{{ form_errors(registrationForm.nom) }}</div>
         </div>
-        <div class="form-group">{{ form_widget(registrationForm.prenom) }}
-          {{ form_errors(registrationForm.prenom) }}</div>
-        <div class="form-group">{{ form_widget(registrationForm.email) }}
-          {{ form_errors(registrationForm.email) }}</div>
-
+        <div class="form-group">
+          {{ form_widget(registrationForm.prenom) }}
+          <div class="invalid-feedback">{{ form_errors(registrationForm.prenom) }}</div>
+        </div>
+        <div class="form-group">
+          {{ form_widget(registrationForm.email) }}
+          <div class="invalid-feedback">{{ form_errors(registrationForm.email) }}</div>
+        </div>
         <div class="form-group position-relative">
           {{ form_widget(registrationForm.plainPassword.first) }}
-          {{ form_errors(registrationForm.plainPassword.first) }}
+          <div class="invalid-feedback">{{ form_errors(registrationForm.plainPassword.first) }}</div>
           <span class="password-toggle" onclick="togglePasswordVisibility(this)" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"><i class="fa fa-eye"></i></span>
         </div>
         <div class="form-group position-relative">
           {{ form_widget(registrationForm.plainPassword.second) }}
-          {{ form_errors(registrationForm.plainPassword.second) }}
+          <div class="invalid-feedback">{{ form_errors(registrationForm.plainPassword.second) }}</div>
           <span class="password-toggle" onclick="togglePasswordVisibility(this)" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"><i class="fa fa-eye"></i></span>
-          {{ form_errors(registrationForm.plainPassword) }}
         </div>
-
-        <div class="form-group">{{ form_widget(registrationForm.telephone) }}
-          {{ form_errors(registrationForm.telephone) }}</div>
-        <div class="form-group">{{ form_widget(registrationForm.adresse) }}
-          {{ form_errors(registrationForm.adresse) }}</div>
-        <div class="form-group">{{ form_widget(registrationForm.code_postal) }}
-          {{ form_errors(registrationForm.code_postal) }}</div>
-        <div class="form-group">{{ form_widget(registrationForm.ville) }}
-          {{ form_errors(registrationForm.ville) }}</div>
-        <div class="form-group">{{ form_widget(registrationForm.pays) }}
-          {{ form_errors(registrationForm.pays) }}</div>
+        <div class="form-group">
+          {{ form_widget(registrationForm.telephone) }}
+          <div class="invalid-feedback">{{ form_errors(registrationForm.telephone) }}</div>
+        </div>
+        <div class="form-group">
+          {{ form_widget(registrationForm.adresse) }}
+          <div class="invalid-feedback">{{ form_errors(registrationForm.adresse) }}</div>
+        </div>
+        <div class="form-group">
+          {{ form_widget(registrationForm.code_postal) }}
+          <div class="invalid-feedback">{{ form_errors(registrationForm.code_postal) }}</div>
+        </div>
+        <div class="form-group">
+          {{ form_widget(registrationForm.ville) }}
+          <div class="invalid-feedback">{{ form_errors(registrationForm.ville) }}</div>
+        </div>
+        <div class="form-group">
+          {{ form_widget(registrationForm.pays) }}
+          <div class="invalid-feedback">{{ form_errors(registrationForm.pays) }}</div>
+        </div>
         <button class="btn btn-lg btn-primary w-75" style="background-color: red; border-color: red;">Créer mon compte</button>
         {{ form_end(registrationForm) }}
       </div>
     </div>
   </div>
+{% endblock %}
+
+{% block javascripts %}
   <script>
     function togglePasswordVisibility(element) {
       const passwordField = element.previousElementSibling

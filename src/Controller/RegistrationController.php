@@ -15,6 +15,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+use App\Security\AppAuthenticator;
 
 class RegistrationController extends AbstractController
 {
@@ -23,8 +25,13 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
-    {
+    public function register(
+        Request $request,
+        UserPasswordHasherInterface $passwordHasher,
+        UserAuthenticatorInterface $userAuthenticator,
+        AppAuthenticator $authenticator,
+        EntityManagerInterface $entityManager
+    ): Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -33,7 +40,7 @@ class RegistrationController extends AbstractController
             try {
                 // encode the plain password
                 $user->setPassword(
-                    $userPasswordHasher->hashPassword(
+                    $passwordHasher->hashPassword(
                         $user,
                         $form->get('plainPassword')->getData()
                     )
@@ -42,22 +49,16 @@ class RegistrationController extends AbstractController
                 $entityManager->persist($user);
                 $entityManager->flush();
 
-                // generate a signed url and email it to the user
-                $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                    (new TemplatedEmail())
-                        ->from(new Address('no-reply@example.com', 'Acme Mail Bot'))
-                        ->to($user->getEmail())
-                        ->subject('Please Confirm your Email')
-                        ->htmlTemplate('registration/confirmation_email.html.twig')
-                );
-
-                // do anything else you need here, like send an email
-
                 $this->addFlash('success', 'Your account has been created. Please check your email to verify your account.');
 
-                return $this->redirectToRoute('app_login');
+                // Authentification automatique de l'utilisateur après inscription
+                return $userAuthenticator->authenticateUser(
+                    $user,
+                    $authenticator,
+                    $request
+                );
             } catch (\Exception $e) {
-                $this->addFlash('error', 'Une erreur est survenue lors de la création de votre compte.');
+                $this->addFlash('error', 'There was a problem creating your account.');
             }
         }
 

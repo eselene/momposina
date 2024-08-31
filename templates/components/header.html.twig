@@ -52,8 +52,8 @@
               {% if is_granted('ROLE_ADMIN') %}
                 <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
                 <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                  <a class="dropdown-item" href="{{ path('app_evenement_index', { id: 9 }) }}">Evenement</a>
-                  <a class="dropdown-item" href="{{ path('app_produit_index', { id: 10 }) }}">Produits</a>
+                  <a class="dropdown-item" href="{{ path('app_evenement_index', ) }}">Evenement</a>
+                  <a class="dropdown-item" href="{{ path('app_produit_index', ) }}">Produits</a>
                 </div>
               {% endif %}
             </li>

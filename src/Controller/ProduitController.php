@@ -19,9 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-// #[Route('/')]
-// #[Route('/produit')]
-#[Route('/admin')]
+#[Route('/produit')]
 class ProduitController extends AbstractController
 {
     private CsrfTokenManagerInterface $csrfTokenManager;
@@ -31,7 +29,7 @@ class ProduitController extends AbstractController
         $this->csrfTokenManager = $csrfTokenManager;
     }
 
-    #[Route('/', name: 'app_produit_index', methods: ['GET'])]
+    #[Route('admin/produit', name: 'app_produit_index', methods: ['GET'])]
     public function index(ProduitRepository $produitRepository): Response
     {
         $produits = $produitRepository->findAll();
@@ -47,7 +45,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
+    #[Route('admin/produit/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $produit = new Produit();
@@ -90,7 +88,7 @@ class ProduitController extends AbstractController
     }
 
     // #[Route('/{id}/show', name: 'app_produit_show', methods: ['GET'], requirements: ['id' => '\d+'])]
-    #[Route('/{id}', name: 'app_produit_show', methods: ['GET'], requirements: ['id' => '\d+'])]
+    #[Route('admin/produit/{id}', name: 'app_produit_show', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function show(Produit $produit): Response
     {
         return $this->render('produit/show.html.twig', [
@@ -98,7 +96,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
+    #[Route('admin/produit/{id}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
     public function edit(Request $request, Produit $produit, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(ProduitType::class, $produit, [
