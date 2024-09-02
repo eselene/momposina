@@ -95,8 +95,8 @@ class MainController extends AbstractController
             'pagination' => $pagination,
             'formResearch' => $formResearch->createView(),
             'sousCategorieNom' => $sousCategorieNom,
-            'pageTitle' => $typePage, 
-            'isBoisson' => $isBoisson,            
+            'pageTitle' => $typePage,
+            'isBoisson' => $isBoisson,
         ]);
     }
 

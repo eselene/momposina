@@ -2,6 +2,7 @@
 {# templates/produit/boisson_detail.html.twig #}
 {% block title %}
   {{ pageTitle }}
+
 {% endblock %}
 
 {% block body %}
@@ -9,7 +10,7 @@
     <h1 class="text-center">{{ sousCategorieNom }}</h1>
 
     <div class="section text-yellow">
-      <p>Venez visiter la boutique pour connaître la gamme complète du mois. Vous trouverez des nouveautés tous les jours</p>
+      <p>Venez visiter la boutique pour connaître la gamme complète du mois. Vous trouverez des nouveautés tous les jours</p>
     </div>
 
     {# Zone de recherche #}
@@ -30,6 +31,7 @@
           <div class="col-md-3 col-sm-6 mb-4">
             <div class="card bg-light text-black d-flex flex-column">
               <div class="{{ isBoisson ? 'card-img-left' : 'card-img-top' }}" style="height: 56%;">
+              
               {# <div class="{{ isBoisson ? 'card-img-left' : 'card-img-top' }}" style="height: 56%;"> #}
                 <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : asset('images/default.jpeg') }}" class="img-fluid h-100 w-100 object-fit-cover" alt="{{ produit.nom }}" data-toggle="modal" data-target="#imageModal{{ loop.index }}" />
               </div>
