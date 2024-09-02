@@ -66,7 +66,7 @@
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+    <button type="submit" class="btn btn-primary" id="btn_submit"> {{ button_label|default('Enregistrer') }}</button>
     {# <button type="submit" class="btn btn-primary" {{ has_unsaved_changes ? '' : 'disabled' }}>{{
         button_label|default('Enregistrer') }}</button> #}
 
@@ -78,6 +78,19 @@
 
 {% block javascripts %}
   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var returnButton = document.getElementById('returnToList');
+
+        if (returnButton) {
+            returnButton.addEventListener('click', function(event) {
+                var confirmation = confirm("Êtes-vous sûr de vouloir retourner à la liste ?");
+                if (!confirmation) {
+                    event.preventDefault(); // Annule la navigation si l'utilisateur clique sur "Annuler"
+                }
+            });
+        }
+    });
+
     document.addEventListener('DOMContentLoaded', function () {
       const form = document.querySelector('form') // Assuming form is the main form element
       const imageInput = form.querySelector('#{{ form.photo1.vars.id }}') // Use form.querySelector for better separation

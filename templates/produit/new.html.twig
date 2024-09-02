@@ -69,8 +69,10 @@
         {{ form_end(form) }}
         <a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Retour à la liste</a>
     </div>
+  
 
     <script>
+
         document.addEventListener('DOMContentLoaded', function () {
             const imageInput = document.querySelector('#{{ form.photo1.vars.id }}');
             const imagePreview = document.querySelector('#image-preview img');

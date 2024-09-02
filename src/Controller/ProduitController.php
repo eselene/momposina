@@ -77,7 +77,7 @@ class ProduitController extends AbstractController
             $entityManager->persist($produit);
             $entityManager->flush();
             // Ajout des messages flash
-            // $this->addFlash('success', 'Produit créé avec succès!');
+            $this->addFlash('success', 'Produit créé avec succès!');
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }
 

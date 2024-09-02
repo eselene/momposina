@@ -35,7 +35,7 @@
 						<a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-primary btn-sm custom-btn">Modifier</a>
 						{# {{ form_start(delete_forms[produit.id], {'attr': {'style': 'display:inline-block;'}}) }}
 						<button class="btn btn-danger btn-sm custom-btn">Supprimer</button>
-						{{ form_end(delete_forms[produit.id]) }} #}
+						{{ form_end(delete_forms[produit.id]) }} #}						
 					</td>
 				</tr>
 				{% else %}
@@ -47,7 +47,11 @@
 		</tbody>
 	</table>
     </div>
-
-    <a href="{{ path('app_produit_new') }}" class="btn btn-success mt-3">Créer un nouveau produit</a>
 </div>
+    <a href="{{ path('app_produit_new') }}" class="btn btn-success mt-3">Créer un nouveau produit</a>
+      {% for message in app.flashes('success') %}
+        <script type="text/javascript">
+            alert("{{ message }}");
+        </script>
+    {% endfor %}
 {% endblock %}

@@ -24,17 +24,30 @@
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary" id="save-button">Enregistrer</button>
+    <button type="submit"  class="btn btn-primary" id="save-button">Enregistrer</button>
 
     {{ form_end(form) }}
 
-    <a href="{{ path('app_evenement_index') }}" class="btn btn-secondary">Retour à la liste</a>
+    <a href="{{ path('app_evenement_index') }}" id="returnToList" class="btn btn-secondary">Retour à la liste</a>
   </div>
 {% endblock %}
 
 
 {% block javascripts %}
   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var returnButton = document.getElementById('returnToList');
+
+        if (returnButton) {
+            returnButton.addEventListener('click', function(event) {
+                var confirmation = confirm("Êtes-vous sûr de vouloir retourner à la liste ?");
+                if (!confirmation) {
+                    event.preventDefault(); // Annule la navigation si l'utilisateur clique sur "Annuler"
+                }
+            });
+        }
+    });
+
     document.addEventListener('DOMContentLoaded', function () {
       const imageInput = document.querySelector('#{{ form.photo1.vars.id }}');
       const imagePreview = document.querySelector('#image-preview img');
