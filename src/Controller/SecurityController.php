@@ -49,7 +49,7 @@ class SecurityController extends AbstractController
         // Create the registration form
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-
+        dump($request->request->all());
         // Check if form is submitted and valid
         if ($form->isSubmitted() && $form->isValid()) {
             // Hash the password
@@ -59,7 +59,7 @@ class SecurityController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
+       
             // Save the user
             $entityManager->persist($user);
             $entityManager->flush();

@@ -21,10 +21,11 @@ app_login:
 
 app_logout:
     path: /logout
+    controller: App\Controller\SecurityController::logout
 
 app_register:
     path: /register
-    controller: App\Controller\RegistrationController::register
+    controller: App\Controller\SecurityController::register
 
 app_evenements:
     path: /

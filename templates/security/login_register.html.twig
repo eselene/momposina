@@ -47,7 +47,7 @@
         </form>
       </div>
     
-    {# PARTIE REGISTRATION FOMR #}
+    {# PARTIE REGISTRATION FORM #}
       <div class="col-md-1 d-flex justify-content-center align-items-center">
         <div class="border-left border-secondary" style="height: 100%;"></div>
       </div>
@@ -59,7 +59,8 @@
         {% for flash_error in app.flashes('error') %}
           <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
         {% endfor %}
-        {{ form_start(registrationForm) }}
+        {# {{ form_start(registrationForm) }} #}
+        {{ form_start(registrationForm, {'action': path('app_register')}) }}
         {% for flash_success in app.flashes('success') %}
           <div class="alert alert-success" role="alert">{{ flash_success }}</div>
         {% endfor %}

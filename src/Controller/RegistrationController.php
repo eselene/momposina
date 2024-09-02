@@ -26,7 +26,7 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-
+        dd($request->request->all());
         if ($form->isSubmitted() && $form->isValid()) {
             try {
                 $user->setPassword(
@@ -40,7 +40,7 @@ class RegistrationController extends AbstractController
                 $entityManager->flush();
 
                 $this->addFlash('success', 'Your account has been created. Please check your email to verify your account.');
-
+                
                 return $userAuthenticator->authenticateUser(
                     $user,
                     $authenticator,
@@ -51,7 +51,7 @@ class RegistrationController extends AbstractController
             }
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('security/login_register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
