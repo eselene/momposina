@@ -2,7 +2,9 @@ when@dev:
     web_profiler:
         toolbar: true
         intercept_redirects: false
-
+        # excluded_ajax_paths: ^/((app(_[\\w]+)?\\.php/)?_wdt|css|images|js)/
+        excluded_ajax_paths: ^/((app(_[\\w]+)?\\.php/)?_wdt|_profiler)/
+        
     framework:
         profiler:
             only_exceptions: false

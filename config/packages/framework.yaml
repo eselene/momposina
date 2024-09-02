@@ -9,6 +9,18 @@ framework:
     #esi: true
     #fragments: true
 
+    # default_locale: fr
+    # translator:
+    #     default_path: '%kernel.project_dir%/translations'
+    #     fallbacks:
+    #         - fr   
+
+    translator:
+        enabled: false
+    #     fallbacks: ['fr']
+    # profiler:
+    #     enabled: true
+    #     collect: false
 when@test:
     framework:
         test: true
