@@ -452,6 +452,11 @@ footer {
     padding: 0.6rem !important;
 }
 
+.card-img-left {
+    float: left !important;
+    margin-right: 15px;
+  }
+
 /* Responsive Styles */
 @media (max-width: 480px) {
     footer {

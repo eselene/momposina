@@ -9,14 +9,17 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ProduitSearchType extends AbstractType
 {
+    private const LABEL = 'Rechercher un produit';
+    private const PLACEHOLDER = 'Rechercher';
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('query', TextType::class, [
-                'label' => 'Rechercher un produit',
+                'label' => self::LABEL,
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'Rechercher',
+                    'placeholder' =>  self::PLACEHOLDER,
                     'class' => 'form-control', // Classe Bootstrap pour le champ de recherche
                     'onkeydown' => 'if (event.key === "Enter") this.form.submit();' // Soumission sur Enter
                 ],

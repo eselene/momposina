@@ -1,61 +1,9 @@
-{% extends 'base.html.twig' %}
-{# templates/main/boisson_detail.html.twig #}
+{% extends 'produit/produit_detail.html.twig' %}
 
-{% block title %}
+{% block pageTitle %}
+  Boisson
 {% endblock %}
 
-{% block body %}
-  <div class="container mt-5">
-    <h1 class="text-center">Boisson</h1>
-
-    <div class="section yellow-paragraph">
-      <p class="text-yellow">Venez visiter la boutique pour connaître la gamme complète du mois. Vous trouverez des nouveautés tous les jours N’HÉSITEZ PAS À NOUS DEMANDER QUEL EST LE PLAT DE LA SEMAINE!</p>
-    </div>
-
-    {# Barre de recherche de produit: "Cherche un produit" query: nom, nomES using function findSomesByNomNomEs #}
-    <div class="event-list row">
-    <pre>
-      {{ dump(produits) }}
-    </pre>
-      {# {% for produit in pagination.items %} #}
-      {% for produit in produits %}
-        <div class="col-md-6 col-sm-12 mb-4">
-          <div class="event-card card bg-dark text-white">
-            <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : 'default.jpeg' }}" class="card-img-top event-photo" alt="{{ produit.nom }}" data-bs-toggle="modal" data-bs-target="#imageModal{{ loop.index }}" />
-            <div class="card-body bg-white">
-              <div class="row mb-1">
-                <div class="col-12 mb-0 mt-0">
-                  <h2 class="card-title text-primary">{{ produit.nom }}</h2>
-                </div>
-              </div>
-              <div class="row bg-secondary py-2 event-details">
-                <div class="col-12">
-                  <p>
-                    <i class="fas fa-align-left"></i> {{ produit.description }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" aria-labelledby="imageModalLabel{{ loop.index }}" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="imageModalLabel{{ loop.index }}">{{ produit.titre }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : 'default.jpeg' }}" class="img-fluid" alt="{{ produit.nom }}" />
-              </div>
-            </div>
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-
-    {% include 'components/findUs.html.twig' %}
-  </div>
+{% block introText %}
+  Découvrez notre sélection de boissons latino-américaines. Du café aux bières artisanales, trouvez votre boisson préférée chez nous !
 {% endblock %}

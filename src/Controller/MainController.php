@@ -22,6 +22,9 @@ use phpDocumentor\Reflection\DocBlock\Description;
 
 class MainController extends AbstractController
 {
+    private const ALIM = 'Alimentation';
+    private const BOISSON = 'Boisson'; 
+
     #[Route('/', name: 'app_evenements')]
     public function home(EvenementRepository $evenementRepository, PaginatorInterface $paginator, Request $request): Response
     {
@@ -43,45 +46,57 @@ class MainController extends AbstractController
         return $this->render('main/presentation.html.twig');
     }
     #[Route('/alimentation/{id}', name: 'app_alimentation_detail', requirements: ['id' => '\d+'])]
-    public function alimentationDetail(ProduitRepository $produitRepository, SousCategorieRepository $sousCategorieRepository, PaginatorInterface $paginator, Request $request, int $id): Response
-    {
+    public function alimentationDetail(
+        ProduitRepository $produitRepository,
+        SousCategorieRepository $sousCategorieRepository,
+        PaginatorInterface $paginator,
+        Request $request,
+        int $id
+    ): Response {
+        return $this->produitDetail($produitRepository, $sousCategorieRepository, $paginator, $request, $id, self::ALIM);
+    }
+
+    #[Route('/boisson/{id}', name: 'app_boisson_detail', requirements: ['id' => '\d+'])]
+    public function boissonDetail(
+        ProduitRepository $produitRepository,
+        SousCategorieRepository $sousCategorieRepository,
+        PaginatorInterface $paginator,
+        Request $request,
+        int $id
+    ): Response {
+        return $this->produitDetail($produitRepository, $sousCategorieRepository, $paginator, $request, $id, self::BOISSON);
+    }
+
+    private function produitDetail(
+        ProduitRepository $produitRepository,
+        SousCategorieRepository $sousCategorieRepository,
+        PaginatorInterface $paginator,
+        Request $request,
+        int $id,
+        string $typePage
+    ): Response {
         $formResearch = $this->createForm(ProduitSearchType::class);
         $formResearch->handleRequest($request);
 
-        // $produits = $produitRepository->findBy(['sousCategorie' => $id]);
         $produits = $produitRepository->findBy(['sousCategorie' => $id, 'visibleWeb' => true]);
         $sousCategorie = $sousCategorieRepository->find($id);
         $sousCategorieNom = $sousCategorie ? $sousCategorie->getDescription() : '';
 
-        if ($formResearch->isSubmitted() && $formResearch->isValid()) {
-            $data = $formResearch->getData();
-            $query = $data['query'];
-            // Effectuer la recherche dans la base de données si nécessaire
-            $produits = $produitRepository->findByNomNomEs($query, $id);
-            // dd($produits);  
-        }
-
         $pagination = $paginator->paginate(
             $produits,
             $request->query->getInt('page', 1),
-            2 // Number of items per page
+            2
         );
+         // Détermine si la page est pour "Boisson"
+        $isBoisson = $typePage === 'Boisson';
+        $template = $isBoisson ? 'main/boisson_detail.html.twig': 'main/alimentation_detail.html.twig';
 
-        return $this->render('main/alimentation_detail.html.twig', [
-            'formResearch' => $formResearch->createView(),
+        return $this->render($template, [
             'pagination' => $pagination,
+            'formResearch' => $formResearch->createView(),
             'sousCategorieNom' => $sousCategorieNom,
-            'products' => $produits,
-        ]);
-    }
-
-    #[Route('/boisson/{id}', name: 'app_boisson_detail', requirements: ['id' => '\d+'])]
-    public function boissonDetail(int $id, ProduitRepository $produitRepository): Response
-    {
-        $produits = $produitRepository->findBySousCategorieId(['sousCategorie' => $id]);
-
-        return $this->render('main/boisson_detail.html.twig', [
-            'produits' => $produits,
+            'pageTitle' => $typePage, 
+            'isBoisson' => $isBoisson,            
         ]);
     }
 

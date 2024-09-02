@@ -15,7 +15,7 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-lg-5 col-md-12">
-        <form method="post" class="mt-3">
+        <form method="post" class="mt-1">
           {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
           {% endif %}
@@ -46,6 +46,8 @@
           <button class="btn btn-primary" type="submit">Me connecter</button>
         </form>
       </div>
+    
+    {# PARTIE REGISTRATION FOMR #}
       <div class="col-md-1 d-flex justify-content-center align-items-center">
         <div class="border-left border-secondary" style="height: 100%;"></div>
       </div>

@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+{# templates/produit/boisson_detail.html.twig #}
+{% block title %}
+  {{ pageTitle }}
+{% endblock %}
+
+{% block body %}
+  <div class="container mt-5">
+    <h1 class="text-center">{{ sousCategorieNom }}</h1>
+
+    <div class="section text-yellow">
+      <p>Venez visiter la boutique pour connaître la gamme complète du mois. Vous trouverez des nouveautés tous les jours</p>
+    </div>
+
+    {# Zone de recherche #}
+    <div class="search-bar d-flex justify-content-center mt-4 mb-4">
+      {{ form_start(formResearch, {'attr': {'class': 'form-inline'}}) }}
+        <div class="form-group mb-0">
+          {{ form_label(formResearch.query) }}
+          {{ form_widget(formResearch.query) }}
+        </div>
+        <button type="submit" class="btn btn-primary d-none ml-2">Chercher</button>
+      {{ form_end(formResearch) }}
+    </div>
+
+    {# Résultats de la recherche #}
+    {% if pagination is not empty %}
+      <div class="row mt-4">
+        {% for produit in pagination %}
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="card bg-light text-black d-flex flex-column">
+              <div class="{{ isBoisson ? 'card-img-left' : 'card-img-top' }}" style="height: 56%;">
+              {# <div class="{{ isBoisson ? 'card-img-left' : 'card-img-top' }}" style="height: 56%;"> #}
+                <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : asset('images/default.jpeg') }}" class="img-fluid h-100 w-100 object-fit-cover" alt="{{ produit.nom }}" data-toggle="modal" data-target="#imageModal{{ loop.index }}" />
+              </div>
+
+              <div class="card-body bg-black d-flex flex-column">
+                <h2 class="card-title" style="font-size: 1.2rem;">{{ produit.nom }}</h2>
+                <p>{{ produit.description }}</p>
+              </div>
+            </div>
+
+            {# Modal pour afficher l'image en grand #}
+            <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel{{ loop.index }}" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h2 class="modal-title text-light" id="imageModalLabel{{ loop.index }}">{{ produit.nom }}</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : asset('images/default.jpeg') }}" class="img-fluid" alt="{{ produit.nom }}" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="mt-4">Aucun produit trouvé.</p>
+    {% endif %}
+
+    <div class="pagination">{{ knp_pagination_render(pagination) }}</div>
+    {% include 'components/findUs.html.twig' %}
+  </div>
+{% endblock %}

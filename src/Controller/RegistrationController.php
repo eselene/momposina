@@ -20,25 +20,15 @@ use App\Security\AppAuthenticator;
 
 class RegistrationController extends AbstractController
 {
-    public function __construct(private EmailVerifier $emailVerifier)
-    {
-    }
-
     #[Route('/register', name: 'app_register')]
-    public function register(
-        Request $request,
-        UserPasswordHasherInterface $passwordHasher,
-        UserAuthenticatorInterface $userAuthenticator,
-        AppAuthenticator $authenticator,
-        EntityManagerInterface $entityManager
-    ): Response {
+    public function register(Request $request, UserPasswordHasherInterface $passwordHasher, UserAuthenticatorInterface $userAuthenticator, AppAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             try {
-                // encode the plain password
                 $user->setPassword(
                     $passwordHasher->hashPassword(
                         $user,
@@ -51,7 +41,6 @@ class RegistrationController extends AbstractController
 
                 $this->addFlash('success', 'Your account has been created. Please check your email to verify your account.');
 
-                // Authentification automatique de l'utilisateur après inscription
                 return $userAuthenticator->authenticateUser(
                     $user,
                     $authenticator,
@@ -67,3 +56,4 @@ class RegistrationController extends AbstractController
         ]);
     }
 }
+
