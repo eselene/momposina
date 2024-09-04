@@ -1,5 +1,4 @@
 {# templates/main/contact.html.twig #}
-{# templates/contact/index.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Contactez-nous{% endblock %}
@@ -10,8 +9,8 @@
 	<section class="find-us mt-4">
 		{% include 'components/findUs.html.twig' %}
 	</section>
-	<div class="row">
-		<div class="col-md-8">
+	<div class="row  no-gutters">
+		<div class="col-md-7 ">
 			{{ form_start(form) }}
 			<div class="form-group">
 				{{ form_label(form.name) }}
@@ -55,7 +54,7 @@
 				dispose d’un mois pour vous répondre. Pour en savoir plus sur la protection de vos données personnelles.
 			</p>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<div class="image-container mt-2">
 				<img src="{{ asset('images/contact/MomposinaFondatrices.jpeg') }}" alt="Contact Image" class="img-fluid">
 				<p>LA TIENDA MOMPOSINA SARL</p>

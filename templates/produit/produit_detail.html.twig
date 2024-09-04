@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block body %}
-  <div class="container mt-5">
+  <div class="container mt-3">
     <h1 class="text-center">{{ sousCategorieNom }}</h1>
 
     <div class="section text-yellow">
@@ -14,7 +14,7 @@
     </div>
 
     {# Zone de recherche #}
-    <div class="search-bar d-flex justify-content-center mt-4 mb-4">
+    <div class="search-bar d-flex justify-content-center mt-4 mb-3">
       {{ form_start(formResearch, {'attr': {'class': 'form-inline'}}) }}
         <div class="form-group mb-0">
           {{ form_label(formResearch.query) }}
@@ -28,7 +28,7 @@
     {% if pagination is not empty %}
       <div class="row mt-4">
         {% for produit in pagination %}
-          <div class="col-md-3 col-sm-6 mb-4">
+          <div class="col-md-3 col-sm-6 mb-3">
             <div class="card bg-light text-black d-flex flex-column">
               <div class="{{ isBoisson ? 'card-img-left' : 'card-img-top' }}" style="height: 56%;">
               
