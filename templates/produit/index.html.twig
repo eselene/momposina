@@ -33,9 +33,11 @@
 					<td>
 						<a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-info btn-sm custom-btn">Voir</a>
 						<a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-primary btn-sm custom-btn">Modifier</a>
-						{# {{ form_start(delete_forms[produit.id], {'attr': {'style': 'display:inline-block;'}}) }}
+					</td>
+					<td>
+						{{ form_start(delete_forms[produit.id], {'attr': {'style': 'display:inline-block;'}}) }}
 						<button class="btn btn-danger btn-sm custom-btn">Supprimer</button>
-						{{ form_end(delete_forms[produit.id]) }} #}						
+						{{ form_end(delete_forms[produit.id]) }}
 					</td>
 				</tr>
 				{% else %}

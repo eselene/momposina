@@ -136,9 +136,6 @@ hr {
     cursor: pointer;
 }
 
- .logo img {
-    max-height: 70px;
-}
 
 .user-icon {
     display: flex;
@@ -178,6 +175,12 @@ img {
     height: auto;
     object-fit: cover;
     border-radius: var(--img-border-radius);
+}
+
+.logo img {
+    /* min-height: 70px; */
+    width: 100%;
+    max-width: 150px;
 }
 
 button.btn-primary {
@@ -250,17 +253,23 @@ footer {
 }
 
 .pagination .page-item.active .page-link {
-    background-color: #ff0000; /* Rouge */
+    background-color: #ff0000;
+    /* Rouge */
     border-color: #ff0000;
-    color: #ffffff; /* Blanc */
+    color: #ffffff;
+    /* Blanc */
 }
 
 .pagination .page-item .page-link {
-    color: #000000; /* Noir */
-    border: 1px solid #007bff; /* Bleu clair */
+    color: #000000;
+    /* Noir */
+    border: 1px solid #007bff;
+    /* Bleu clair */
 }
+
 .pagination .page-item:hover .page-link {
-    background-color: #e6e6e6; /* Gris clair */
+    background-color: #e6e6e6;
+    /* Gris clair */
 }
 
 .card {
@@ -286,6 +295,11 @@ footer {
     margin-right: 15px;
 }
 
+.dropdown-menu {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
 /* Style de survol pour les éléments du menu déroulant */
 .dropdown-item:hover {
     background-color: #786161;
@@ -299,34 +313,54 @@ footer {
     /* Couleur du texte au clic */
 }
 
-.dropdown-menu
-{
+.dropdown-menu {
     padding-top: 6px;
     padding-bottom: 6px;
 }
 
-.nav-link .dropdown-item{
+.nav-link .dropdown-item {
     padding-top: 4px;
     padding-bottom: 4px;
 }
 
-.scrolling-text {
+/* .scrolling-text {
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
     box-sizing: border-box;
     animation: scroll-left 10s linear infinite;
-  }
-  
-  @keyframes scroll-left {
+    max-width: 100%;
+    position: relative;
+
+}
+
+@keyframes scroll-left {
     0% {
-      transform: translateX(100%);
+        transform: translateX(100%);
     }
+
     100% {
-      transform: translateX(-100%);
+        transform: translateX(-100%);
     }
-  }
-  
+} */
+
+.message {
+    overflow: hidden;
+    /* Cache le texte qui dépasse de la div */
+    position: relative;
+    /* Assure que le texte reste dans sa div */
+}
+/* 
+.sticky-top {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+} */
+.card-img-top img{
+    cursor:pointer
+    }
+
 
 /* Responsive Styles */
 @media (max-width: 480px) {
@@ -382,6 +416,7 @@ footer {
 }
 
 @media (max-width: 575px) {
+
     .col-lg-4,
     .col-md-6 {
         flex: 0 0 100%;
@@ -403,6 +438,35 @@ footer {
         padding: 15px;
         font-size: 8px;
         line-height: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .logo img {
+        max-width: 100px;
+    }
+
+    /* Optionnel : centrer le logo si nécessaire */
+    .navbar-brand {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    /* .navbar-brand {
+        margin-left: auto;
+        margin-right: auto;
+    }
+     */
+    .col-3 {
+        flex-basis: auto;
+        /* Pour s'assurer que le logo ne soit pas trop petit */
+    }
+
+    .image-container {
+        width: auto;
+        /* Pour s'adapter aux petits écrans */
+        height: auto;
+        /* Même chose pour la hauteur */
     }
 }
 
