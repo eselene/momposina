@@ -188,7 +188,7 @@ button.btn-primary {
 }
 
 .custom-btn {
-    width: 80px;
+    width: 95px;
     height: 40px;
     text-align: center;
     display: flex;
@@ -323,7 +323,7 @@ footer {
     padding-bottom: 4px;
 }
 
-/* .scrolling-text {
+.scrolling-text {
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
@@ -342,7 +342,7 @@ footer {
     100% {
         transform: translateX(-100%);
     }
-} */
+}
 
 .message {
     overflow: hidden;
@@ -350,13 +350,13 @@ footer {
     position: relative;
     /* Assure que le texte reste dans sa div */
 }
-/* 
+
 .sticky-top {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 1020;
-} */
+}
 .card-img-top img{
     cursor:pointer
     }

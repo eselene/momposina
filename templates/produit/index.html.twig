@@ -1,59 +1,59 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produits Admin{% endblock %}
+{% block title %}
+  Produits Admin
+{% endblock %}
 
 {% block body %}
-<div class="container mt-3">
+  <div class="container mt-3">
     <h1 class="text-center">Liste des Produits</h1>
 
     <div class="table-responsive">
-	<table class="table table-striped text-white">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Nom produit</th>
-				<th>Nom Espagnol</th>
-				<th>Sous-Catégorie</th>
-				<th>Photo</th>
-				<th>Visible</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for produit in produits %}
-				<tr class="align-middle">
-					<td>{{ produit.id }}</td>
-					<td>{{ produit.nom }}</td>
-					<td>{{ produit.nomEs }}</td>
-					<td>{{ produit.sousCategorie.description }}</td>
-					<td>
-						<img src="{{ asset('images/' ~ produit.photo1) }}" alt="{{ produit.nom }}" class="img-fluid object-fit-cover object-position-center" style="width: 100px; height:100px;"/>
-					</td>
-					<td>{{ produit.visibleWeb ? 'Oui' : 'Non' }}</td>
-					<td>
-						<a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-info btn-sm custom-btn">Voir</a>
-						<a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-primary btn-sm custom-btn">Modifier</a>
-					</td>
-					<td>
-						{{ form_start(delete_forms[produit.id], {'attr': {'style': 'display:inline-block;'}}) }}
-						<button class="btn btn-danger btn-sm custom-btn">Supprimer</button>
-						{{ form_end(delete_forms[produit.id]) }}
-					</td>
-				</tr>
-				{% else %}
-				<tr>
-                    <td colspan="7">Aucun produit trouvé</td>
-
-				</tr>				
-			{% endfor %}
-		</tbody>
-	</table>
+      <table class="table table-striped text-white">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nom produit</th>
+            <th>Nom Espagnol</th>
+            <th>Sous-Catégorie</th>
+            <th>Photo</th>
+            <th>Visible</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for produit in produits %}
+            <tr class="align-middle">
+              <td>{{ produit.id }}</td>
+              <td>{{ produit.nom }}</td>
+              <td>{{ produit.nomEs }}</td>
+              <td>{{ produit.sousCategorie.description }}</td>
+              <td>
+                <img src="{{ asset('images/' ~ produit.photo1) }}" alt="{{ produit.nom }}" class="img-fluid object-fit-cover object-position-center" style="width: 100px; height:100px;" />
+              </td>
+              <td>{{ produit.visibleWeb ? 'Oui' : 'Non' }}</td>
+              <td>
+                <a href="{{ path('app_produit_show', { id: produit.id }) }}" class="btn btn-info btn-sm custom-btn">Voir</a>
+                <a href="{{ path('app_produit_edit', { id: produit.id }) }}" class="btn btn-primary btn-sm custom-btn">Modifier</a>
+                <form method="post" action="{{ path('app_produit_delete', { id: produit.id }) }}" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                  <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ produit.id) }}" />
+                  <button class="btn btn-danger btn-sm custom-btn">Supprimer</button>
+                </form>
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="7">Aucun produit trouvé</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
-</div>
-    <a href="{{ path('app_produit_new') }}" class="btn btn-success mt-3">Créer un nouveau produit</a>
-      {% for message in app.flashes('success') %}
-        <script type="text/javascript">
-            alert("{{ message }}");
-        </script>
-    {% endfor %}
+  </div>
+  <a href="{{ path('app_produit_new') }}" class="btn btn-success mt-3">Créer un nouveau produit</a>
+  {% for message in app.flashes('success') %}
+    <script type="text/javascript">
+      alert('{{ message }}')
+    </script>
+  {% endfor %}
 {% endblock %}

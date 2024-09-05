@@ -161,25 +161,18 @@ class ProduitController extends AbstractController
     // }
 
     // TODO*******************
-    #[Route('/{id}/delete', name: 'app_produit_delete', methods: ['POST'])]
-    // public function delete(int $id, LoggerInterface $logger): Response   
-    public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager, LoggerInterface $logger): Response
+    // #[Route('admin/produit/{id}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
+    #[Route('admin/produit/{id}/delete', name: 'app_produit_delete', methods: ['POST'], requirements: ['id' => '\d+'])]
+    public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {
-        $logger->info('Product deletion requested for ID: {id}', ['id' => $produit->getId()]);
-
         if ($this->isCsrfTokenValid('delete' . $produit->getId(), $request->request->get('_token'))) {
-            $logger->info('CSRF token valid for product deletion.');
-
             $entityManager->remove($produit);
             $entityManager->flush();
-            // Ajout des messages flash
-            // $this->addFlash('success', 'Produit suprimé avec succès!');
-            $logger->info('Product with ID {id} deleted successfully.', ['id' => $produit->getId()]);
-            $this->addFlash('success', 'Product deleted successfully.');
+            $this->addFlash('success', 'Produit supprimé avec succès!');
         } else {
-            $logger->error('Invalid CSRF token for product deletion. Product ID: {id}', ['id' => $produit->getId()]);
             $this->addFlash('error', 'Invalid CSRF token.');
         }
+    
 
         return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
     }

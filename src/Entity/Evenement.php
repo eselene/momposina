@@ -44,7 +44,8 @@ class Evenement
     #[ORM\Column]
     private ?bool $visibleWeb = null;
 
-    #[ORM\OneToOne(inversedBy: 'evenement', cascade: ['persist', 'remove'])]
+    // #[ORM\OneToOne(inversedBy: 'evenement', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: true)]
     private ?User $user = null;
 

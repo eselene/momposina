@@ -53,7 +53,8 @@ class Produit
     #[ORM\Column]
     private ?bool $visibleWeb = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    // #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
