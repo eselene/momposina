@@ -247,8 +247,7 @@ button.btn-primary {
 /* Footer Styles */
 footer {
     background-color: var(--footer-bg);
-    color: var(--footer-color);
-    text-align: center;
+    /* color: var(--footer-color); */
     padding: var(--footer-padding);
     line-height: var(--footer-line-height);
 }
