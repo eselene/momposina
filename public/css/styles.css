@@ -1,4 +1,4 @@
-/* app.css */
+/* public/css/styles.css */
 /* Variables */
 :root {
     --background-color: black;
@@ -11,6 +11,7 @@
     --text-yellow: yellow;
     --text-primary: #007bff;
     --container-max-width: 1200px;
+    --navbar-max-width: 1200px;
     --container-padding: 15px;
     --row-margin-bottom: 2rem;
     --img-border-radius: 5px;
@@ -290,10 +291,10 @@ footer {
     padding: 0.6rem !important;
 }
 
-.card-img-left {
+/* .card-img-left {
     float: left !important;
     margin-right: 15px;
-}
+} */
 
 .dropdown-menu {
     padding-top: 6px;
@@ -309,7 +310,7 @@ footer {
 .dropdown-item:active {
     background-color: #f5c6cb;
     /* Couleur de fond au clic */
-    color: #721c24;
+    color: var(--text-primary);
     /* Couleur du texte au clic */
 }
 
@@ -318,9 +319,27 @@ footer {
     padding-bottom: 6px;
 }
 
+.navbar {
+    max-width: var(--navbar-max-width);
+    margin: 0 auto;
+}
+
+/* Style pour l'élément de navigation actif */
+.nav-item.active .nav-link {
+    color: var(--text-primary);
+    font-weight: bold;
+    border-bottom: 2px solid var(--text-primary);
+}
+
+
 .nav-link .dropdown-item {
     padding-top: 4px;
     padding-bottom: 4px;
+}
+
+/* centrer le logo */
+.navbar-brand {
+    margin: 0 auto;
 }
 
 .scrolling-text {
@@ -357,9 +376,10 @@ footer {
     top: 0;
     z-index: 1020;
 }
-.card-img-top img{
-    cursor:pointer
-    }
+
+.card-img-top img {
+    cursor: pointer
+}
 
 
 /* Responsive Styles */
@@ -446,11 +466,6 @@ footer {
         max-width: 100px;
     }
 
-    /* Optionnel : centrer le logo si nécessaire */
-    .navbar-brand {
-        margin: 0 auto;
-        text-align: center;
-    }
 
     /* .navbar-brand {
         margin-left: auto;

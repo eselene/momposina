@@ -6,10 +6,23 @@
 
 {% block introText %}
   Découvrez notre sélection de boissons latino-américaines. Du café aux bières artisanales, trouvez votre boisson préférée chez nous !
-  {# {% if isBoisson %}
-    'Trueherhye'
-  {% else %}
-    'Falseyetye'
-  {% endif %} #}
 
 {% endblock %}
+
+{# {% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .boisson-detail .card-img-top {
+            float: left;
+            max-width: 50%;
+            height: auto;
+        }
+    </style>
+{% endblock %}
+
+{% block body %} 
+    <div class="boisson-detail"> <div class="card">
+            <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : asset('images/default.jpeg') }}" class="card-img-top img-fluid" alt="{{ produit.nom }}" />
+            </div>
+    </div>
+{% endblock %} #}

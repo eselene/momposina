@@ -45,27 +45,6 @@ class MainController extends AbstractController
     {
         return $this->render('main/presentation.html.twig');
     }
-    #[Route('/alimentation/{id}', name: 'app_alimentation_detail', requirements: ['id' => '\d+'])]
-    public function alimentationDetail(
-        ProduitRepository $produitRepository,
-        SousCategorieRepository $sousCategorieRepository,
-        PaginatorInterface $paginator,
-        Request $request,
-        int $id
-    ): Response {
-        return $this->produitDetail($produitRepository, $sousCategorieRepository, $paginator, $request, $id, self::ALIM);
-    }
-
-    #[Route('/boisson/{id}', name: 'app_boisson_detail', requirements: ['id' => '\d+'])]
-    public function boissonDetail(
-        ProduitRepository $produitRepository,
-        SousCategorieRepository $sousCategorieRepository,
-        PaginatorInterface $paginator,
-        Request $request,
-        int $id
-    ): Response {
-        return $this->produitDetail($produitRepository, $sousCategorieRepository, $paginator, $request, $id, self::BOISSON);
-    }
 
     private function produitDetail(
         ProduitRepository $produitRepository,
@@ -98,6 +77,28 @@ class MainController extends AbstractController
             'pageTitle' => $typePage,
             'isBoisson' => $isBoisson,
         ]);
+    }
+
+    #[Route('/alimentation/{id}', name: 'app_alimentation_detail', requirements: ['id' => '\d+'])]
+    public function alimentationDetail(
+        ProduitRepository $produitRepository,
+        SousCategorieRepository $sousCategorieRepository,
+        PaginatorInterface $paginator,
+        Request $request,
+        int $id
+    ): Response {
+        return $this->produitDetail($produitRepository, $sousCategorieRepository, $paginator, $request, $id, self::ALIM);
+    }
+
+    #[Route('/boisson/{id}', name: 'app_boisson_detail', requirements: ['id' => '\d+'])]
+    public function boissonDetail(
+        ProduitRepository $produitRepository,
+        SousCategorieRepository $sousCategorieRepository,
+        PaginatorInterface $paginator,
+        Request $request,
+        int $id
+    ): Response {
+        return $this->produitDetail($produitRepository, $sousCategorieRepository, $paginator, $request, $id, self::BOISSON);
     }
 
     #[Route('/plats', name: 'app_plats')]
