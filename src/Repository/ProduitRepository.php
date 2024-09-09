@@ -44,18 +44,7 @@ class ProduitRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    // /*** @return Produit[] Returns an array of Produit objects   */
-    // public function findSousCategorieDesc($id): array
-    // {
-    //     return $this->createQueryBuilder('s.description')
-    //         ->join('p.sousCategorie', 's')
-    //         ->andWhere('p.sous_categorie_id = :val')
-    //         ->setParameter('val', $id)
-    //         ->orderBy('p.nom', 'ASC')
-    //         ->getQuery()
-    //         ->getResult()
-    //     ;
-    // }    
+
     /*** @return Produit[] Returns an array of Produit objects   */
     public function findById($id): array
     {
@@ -90,7 +79,7 @@ class ProduitRepository extends ServiceEntityRepository
             ->andWhere('p.nom LIKE :val OR p.nomEs LIKE :val')
             ->andWhere('p.sousCategorie = :valSousCategorieId')
             ->andWhere('p.visibleWeb = true')
-            ->setParameter('val', '%'. $value .'%')
+            ->setParameter('val', '%' . $value . '%')
             ->setParameter('valSousCategorieId', $valSousCategorieId)
             ->getQuery()
             ->getResult();

@@ -2,21 +2,21 @@
 
 namespace App\Controller;
 
+use App\Repository\EvenementRepository;
+use App\Repository\ProduitRepository;
+use App\Repository\SousCategorieRepository;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 // use Symfony\Component\Http\HttpResponse;
 
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Evenement;
 use App\Entity\Produit;
 use App\Entity\SousCategorie;
 use App\Form\ProduitSearchType;
-use App\Repository\EvenementRepository;
-use App\Repository\ProduitRepository;
-use App\Repository\SousCategorieRepository;
 use Doctrine\ORM\Query\AST\OrderByItem;
 use phpDocumentor\Reflection\DocBlock\Description;
 
@@ -33,13 +33,14 @@ class MainController extends AbstractController
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            4 // Nombre d'éléments par page
+            2 // Nombre d'éléments par page
         );
 
         return $this->render('main/mainEvenement.html.twig', [
             'pagination' => $pagination,
         ]);
     }
+    
     #[Route('/presentation', name: 'app_presentation')]
     public function presentation(): Response
     {
@@ -57,7 +58,13 @@ class MainController extends AbstractController
         $formResearch = $this->createForm(ProduitSearchType::class);
         $formResearch->handleRequest($request);
 
+        if ($formResearch->isSubmitted() && $formResearch->isValid()) {
+            $query = $formResearch->get('query')->getData();
+            $produits = $produitRepository->findByNomNomEs($query, $id);
+        } else {
         $produits = $produitRepository->findBy(['sousCategorie' => $id, 'visibleWeb' => true]);
+        }
+
         $sousCategorie = $sousCategorieRepository->find($id);
         $sousCategorieNom = $sousCategorie ? $sousCategorie->getDescription() : '';
 
@@ -66,9 +73,10 @@ class MainController extends AbstractController
             $request->query->getInt('page', 1),
             2
         );
+
          // Détermine si la page est pour "Boisson"
         $isBoisson = $typePage === 'Boisson';
-        $template = $isBoisson ? 'main/boisson_detail.html.twig': 'main/alimentation_detail.html.twig';
+        $template = $isBoisson ? 'main/boisson_detail.html.twig' : 'main/alimentation_detail.html.twig';
 
         return $this->render($template, [
             'pagination' => $pagination,

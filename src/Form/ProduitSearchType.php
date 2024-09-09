@@ -19,17 +19,17 @@ class ProduitSearchType extends AbstractType
                 'label' => self::LABEL,
                 'required' => false,
                 'attr' => [
-                    'placeholder' =>  self::PLACEHOLDER,
-                    'class' => 'form-control', // Classe Bootstrap pour le champ de recherche
-                    'onkeydown' => 'if (event.key === "Enter") this.form.submit();' // Soumission sur Enter
+                    'placeholder' => self::PLACEHOLDER,
+                    'class' => 'form-control',
+                    'onkeydown' => 'if (event.key === "Enter") this.form.submit();'
                 ],
                 'label_attr' => [
-                    'class' => 'search-label mr-2' // Espacement avec la classe Bootstrap mr-2 (margin-right)
+                    'class' => 'search-label mr-2'
                 ],
             ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([]);
     }

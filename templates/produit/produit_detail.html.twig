@@ -15,8 +15,7 @@
     {# Zone de recherche #}
     <div class="search-bar d-flex justify-content-center mt-4 mb-3">
       {{ form_start(formResearch, {'attr': {'class': 'form-inline'}}) }}
-        <div class="form-group mb-0">
-          {{ form_label(formResearch.query) }}
+        <div class="form-group mb-2">
           {{ form_widget(formResearch.query) }}
         </div>
         <button type="submit" class="btn btn-primary d-none ml-2">Chercher</button>
@@ -24,19 +23,34 @@
     </div>
 
     {# Résultats de la recherche #}
-    {% if pagination is not empty %}
+    {% if pagination.items is not empty %}
       <div class="row mt-4">
-        {% for produit in pagination %}
-          <div class="col-md-3 col-sm-6 mb-3">
-            <div class="card bg-light text-black d-flex flex-column">
-              <div  style="height: 56%;">
+        {% for produit in pagination.items %}
+          {# <div class="col-md-3 col-sm-6 mb-3"> #}
+          <div class="col-lg-6 col-md-12 col-sm-12 mb-3">
+            <div class="card h-100 bg-light text-black ">
+              <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : asset('images/default.jpeg') }}" class="card-img-top" alt="{{ produit.nom }}">
+              <div class="card-body bg-black d-flex flex-column">
+                <h2 class="card-title" style="font-size: 1.2rem;">{{ produit.nom }}</h2>
+                <p class="card-text">{{ produit.description }}</p>
+                {% if produit.sousCategorie == 'Alimentation' %}
+                  <a href="{{ path('app_alimentation_detail', { 'id': produit.id }) }}" class="btn btn-primary mt-auto">Voir les détails AL</a>
+                {% elseif produit.sousCategorie == 'Boisson' %}
+                  <a href="{{ path('app_boisson_detail', { 'id': produit.id }) }}" class="btn btn-primary mt-auto">Voir les détails B</a>
+                {% elseif produit.sousCategorie == 'Plats' %}
+                  <a href="{{ path('app_plats_detail', { 'id': produit.id }) }}" class="btn btn-primary mt-auto">Voir les détails PL</a>
+                {% endif %}
+            </div>          
+          </div>          
+            {# <div class="card bg-light text-black d-flex flex-column">
+              <div  style="card height: 56%;">
                 <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : asset('images/default.jpeg') }}" class="img-fluid h-100 w-100 object-fit-cover" alt="{{ produit.nom }}" data-toggle="modal" data-target="#imageModal{{ loop.index }}" />
               </div>
               <div class="card-body bg-black d-flex flex-column">
                 <h2 class="card-title" style="font-size: 1.2rem;">{{ produit.nom }}</h2>
                 <p>{{ produit.description }}</p>
               </div>
-            </div>
+            </div> #}
             {# Modal pour afficher l'image en grand #}
             <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel{{ loop.index }}" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
@@ -56,11 +70,12 @@
           </div>
         {% endfor %}
       </div>
-    {% else %}
-      <p class="mt-4">Aucun produit trouvé.</p>
-    {% endif %}
 
-    <div class="pagination">{{ knp_pagination_render(pagination) }}</div>
-    {% include 'components/findUs.html.twig' %}
+      <div class="pagination justify-content-center mt-4">
+        {{ knp_pagination_render(pagination) }}
+      </div>
+    {% else %}
+      <p class="text-center mt-3">Aucun produit trouvé pour "{{ formResearch.query.vars.value }}".</p>
+    {% endif %}
   </div>
 {% endblock %}
