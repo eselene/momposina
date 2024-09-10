@@ -145,7 +145,11 @@ hr {
     text-align: center;
     justify-content: center;
     font-size: 2rem;
-    color: #fff;
+    color: #fff !important;
+}
+
+.user-icon-white {
+    color: #fff !important;
 }
 
 header .message {
@@ -465,12 +469,6 @@ footer {
         max-width: 100px;
     }
 
-
-    /* .navbar-brand {
-        margin-left: auto;
-        margin-right: auto;
-    }
-     */
     .col-3 {
         flex-basis: auto;
         /* Pour s'assurer que le logo ne soit pas trop petit */
@@ -485,6 +483,21 @@ footer {
 }
 
 @media (min-width: 992px) {
+    .navbar .col-2 {
+        flex: 0 0 15%;
+        /* Réduisez la taille de l'icône */
+    }
+
+    .navbar .col-7 {
+        flex: 0 0 70%;
+        /* Laissez plus d'espace au centre pour les liens */
+    }
+
+    .navbar .col-1 {
+        flex: 0 0 15%;
+        /* Ajustez la largeur du bouton mobile */
+    }
+
     .middle-section {
         max-width: 80vw;
     }

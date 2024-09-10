@@ -1,75 +1,73 @@
 {# templates/mainEvenement.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Événements
+{% block title %}
+  Événements
 {% endblock %}
 
 {% block body %}
-	<div class="container mt-3">
-		<h1 class="text-center">Liste des Événements</h1>
+  <div class="container mt-2">
+    <h1 class="text-center">Liste des Événements</h1>
 
-		<div class="section mb-3">
-			<ul class="text-yellow">
-				Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année :
-				<li>Repas, concerts, rencontres.</li>
-				<li>Fiesta Latina autour de l’environnement « Latino Grenoble » !</li>
-			</ul>
-		</div>
+    <div class="container section mb-2 pl-md-5">
+      <ul class="list-unstyled text-yellow">
+        <li>Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année :</li>
+        <ul>
+          <li>Repas, concerts, rencontres.</li>
+          <li>Fiesta Latina autour de l’environnement « Latino Grenoble » !</li>
+        </ul>
+      </ul>
+    </div>
 
-		<div class="row">
-			{% for evenement in pagination %}
-				<div class="col-md-4 col-sm-6 mb-3">
-					{%if evenement.titre starts with 'Programme' %}
-						{% set dateEnLettres = evenement.titre %}
-					{% else %}
-						{% set dateEnLettres = evenement.date|date('Y-m-d')|date_en_lettres %}
-					{% endif %}
-					<div class="card bg-dark text-white h-100 d-flex flex-column">
-						<div class="card-header text-center">
-							{{ dateEnLettres ? dateEnLettres : 'Pas de date' }}
-						</div>
-						<div class="card-img-top" style="height: 56%;">
-							<img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="{{ evenement.titre }}" class="img-fluid h-100 w-100 object-fit-cover pointer" data-toggle="modal" data-target="#imageModal{{ loop.index }}"/>
-						</div>
-						<div class="card-body bg-white text-dark d-flex flex-column flex-grow-1">
-							<h2 class="card-title text-primary"style="font-size: 1.2rem;"> {{ evenement.titre }}</h2>
-							<p>
-								<i class="fas fa-align-left"></i>
-								{{ evenement.description }}</p>
-							<p>
-								{% if evenement.plageHeure %}
-									<i class="fas fa-clock"></i>
-									{{ evenement.plageHeure }}
-								{% endif %}
-							</p>
-							<p>
-								<i class="fas fa-map-marker-alt"></i>
-								{{ evenement.lieu }}</p>
-						</div>
-					</div>
+    <div class="row">
+      {% for evenement in pagination %}
+        <div class="col-md-4 col-sm-6 mb-3">
+          {% if evenement.titre starts with 'Programme' %}
+            {% set dateEnLettres = evenement.titre %}
+          {% else %}
+            {% set dateEnLettres = evenement.date|date('Y-m-d')|date_en_lettres %}
+          {% endif %}
+          <div class="card bg-dark text-white h-100 d-flex flex-column">
+            <div class="card-header text-center">{{ dateEnLettres ? dateEnLettres : 'Pas de date' }}</div>
+            <div class="card-img-top" style="height: 56%;">
+              <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="{{ evenement.titre }}" class="img-fluid h-100 w-100 object-fit-cover pointer" data-toggle="modal" data-target="#imageModal{{ loop.index }}" />
+            </div>
+            <div class="card-body bg-white text-dark d-flex flex-column flex-grow-1">
+              <h2 class="card-title text-primary" style="font-size: 1.2rem;">{{ evenement.titre }}</h2>
+              <p>
+                <i class="fas fa-align-left"></i>
+                {{ evenement.description }}
+              </p>
+              <p>
+                {% if evenement.plageHeure %}
+                  <i class="fas fa-clock"></i>
+                  {{ evenement.plageHeure }}
+                {% endif %}
+              </p>
+              <p>
+                <i class="fas fa-map-marker-alt"></i>
+                {{ evenement.lieu }}
+              </p>
+            </div>
+          </div>
 
-					<div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel{{ loop.index }}" aria-hidden="true">
-						<div class="modal-dialog modal-dialog-centered" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h2 class="modal-title text-dark" id="imageModalLabel{{ loop.index }}">{{ evenement.titre }}
-									</h2>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									<img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" class="img-fluid" alt="{{ evenement.titre }}">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			{% endfor %}
-		</div>
-		<div class="pagination">
-			{{ knp_pagination_render(pagination) }}
-		</div>
-		{% include 'components/findUs.html.twig' %}
-	</div>
+          <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel{{ loop.index }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h2 class="modal-title text-dark" id="imageModalLabel{{ loop.index }}">{{ evenement.titre }}</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                  <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" class="img-fluid" alt="{{ evenement.titre }}" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="pagination">{{ knp_pagination_render(pagination) }}</div>
+    {% include 'components/findUs.html.twig' %}
+  </div>
 {% endblock %}
