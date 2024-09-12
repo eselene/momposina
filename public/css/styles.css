@@ -40,6 +40,11 @@ p {
     margin-bottom: var(--margin-bottom-p);
 }
 
+.h2,
+h2 {
+    font-size: 1.5rem;
+}
+
 hr {
     border: 1px solid var(--border-color-hr);
     margin: var(--margin-hr) 0;
@@ -116,6 +121,10 @@ hr {
     margin-bottom: 10px;
 }
 
+.form-group.position-relative {
+    position: relative;
+}
+
 .form-label {
     display: block;
     margin-bottom: 5px;
@@ -132,10 +141,13 @@ hr {
 .password-toggle {
     position: absolute;
     right: 10px;
-    top: 50%;
+    top: 70%;
     transform: translateY(-50%);
     cursor: pointer;
+    z-index: 2;
+    /* S'assurer que l'icon est dans le champ input */
 }
+
 
 
 .user-icon {

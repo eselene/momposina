@@ -42,8 +42,8 @@
 				{{ form_label(form.privacyPolicyAccepted) }}
 				{{ form_errors(form.privacyPolicyAccepted) }}
 			</div>
-			<div class="form-group">
-				{{ form_widget(form.send) }}
+			<div class="form-group">  
+				{{ form_widget(form.send, {'attr': {'class': ' btn-lg btn-danger w-75'}}) }}
 			</div>
 			{{ form_end(form) }}
 
