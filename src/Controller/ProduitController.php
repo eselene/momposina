@@ -7,7 +7,7 @@ use App\Entity\Produit;
 use App\Form\ProduitType;
 
 use App\Repository\ProduitRepository;
-// use App\Repository\Repository;
+use Knp\Component\Pager\PaginatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,18 +30,19 @@ class ProduitController extends AbstractController
     }
 
     #[Route('admin/produit', name: 'app_produit_index', methods: ['GET'])]
-    public function index(ProduitRepository $produitRepository): Response
+    public function index(ProduitRepository $produitRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $produits = $produitRepository->findAll();
-        $deleteForms = [];
-
-        foreach ($produits as $produit) {
-            $deleteForms[$produit->getId()] = $this->createDeleteForm($produit->getId())->createView();
-        }
-
+        // Crée une requête pour récupérer les produits
+        $query = $produitRepository->findAllOrderByName();    
+        // Paginer la requête
+        $pagination = $paginator->paginate(
+            $query, 
+            $request->query->getInt('page', 1), //page actuelle
+            5 
+        );
+    
         return $this->render('produit/index.html.twig', [
-            'produits' => $produits,
-            'delete_forms' => $deleteForms,
+            'pagination' => $pagination,
         ]);
     }
 
@@ -137,31 +138,6 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    // #[Route('/{id}/search', name: 'app_produit_search', methods: ['GET', 'POST'])]
-    // public function search(Request $request, ProduitRepository $produitRepository ): Response
-    // {
-    //     $form = $this->createForm(ProduitSearchType::class);
-    //     $form->handleRequest($request);
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $data = $form->getData();
-    //         $query = $data['query'];
-
-    //         // Effectuer la recherche dans la base de données
-    //         $products = $produitRepository->findByNomNomEs($id);
-
-    //         return $this->render('product/search_results.html.twig', [
-    //             'products' => $products,
-    //         ]);
-    //     }
-
-    //     return $this->render('product/search.html.twig', [
-    //         'form' => $form->createView(),
-    //     ]);
-    // }
-
-    // TODO*******************
-    // #[Route('admin/produit/{id}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
     #[Route('admin/produit/{id}/delete', name: 'app_produit_delete', methods: ['POST'], requirements: ['id' => '\d+'])]
     public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {

@@ -5,8 +5,9 @@ namespace App\Controller;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
 use App\Repository\EvenementRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
+// use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -18,7 +19,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-// /
+
 #[Route('/evenement')]
 class EvenementController extends AbstractController
 {
@@ -30,18 +31,18 @@ class EvenementController extends AbstractController
     }
 
     #[Route('admin/evenement', name: 'app_evenement_index', methods: ['GET'])]
-    public function index(EvenementRepository $evenementRepository): Response
+    public function index(EvenementRepository $evenementRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $evenements = $evenementRepository->findAllOrderByDate();
-        $deleteForms = [];
-        
-        foreach ($evenements as $evenement) {
-            $deleteForms[$evenement->getId()] = $this->createDeleteForm($evenement->getId())->createView();
-        }
-
+        // Crée une requête pour récupérer les evenements
+        $query = $evenementRepository->findAllOrderByDate();    
+        // Paginer la requête
+        $pagination = $paginator->paginate(
+            $query, 
+            $request->query->getInt('page', 1), //page actuelle
+            5 
+        );
         return $this->render('evenement/index.html.twig', [
-            'evenements' => $evenements,
-            'delete_forms' => $deleteForms,
+            'pagination' => $pagination,
         ]);
     }
 
@@ -172,21 +173,21 @@ class EvenementController extends AbstractController
     }
 
     #[Route('admin/evenement/{id}/delete', name: 'app_evenement_delete', methods: ['POST'])]
-    public function delete(Request $request, Evenement $evenement, EntityManagerInterface $entityManager, LoggerInterface $logger): Response
+    public function delete(Request $request, Evenement $evenement, EntityManagerInterface $entityManager): Response
+    // public function delete(Request $request, Evenement $evenement, EntityManagerInterface $entityManager, LoggerInterface $logger): Response
     {
-        $logger->info('Evenement deletion requested for ID: {id}', ['id' => $evenement->getId()]);
-
+        // $logger->info('Evenement deletion requested for ID: {id}', ['id' => $evenement->getId()]);
         if ($this->isCsrfTokenValid('delete' . $evenement->getId(), $request->request->get('_token'))) {
 
             $entityManager->remove($evenement);
             $entityManager->flush();
 
             $this->addFlash('success', 'Événement supprimé avec succès !');
-            $logger->info('Evenement with ID {id} deleted successfully.', ['id' => $evenement->getId()]);
+            // $logger->info('Evenement with ID {id} deleted successfully.', ['id' => $evenement->getId()]);
             $this->addFlash('success', 'Evenement supprimé avec succès.');
         } else {
             $this->addFlash('error', 'Token CSRF invalide.');
-            $logger->error('Invalid CSRF token for evenement deletion. Evenement ID: {id}', ['id' => $evenement->getId()]);
+            // $logger->error('Invalid CSRF token for evenement deletion. Evenement ID: {id}', ['id' => $evenement->getId()]);
             $this->addFlash('error', 'Invalid CSRF token.');
         }
 

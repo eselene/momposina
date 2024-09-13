@@ -59,7 +59,7 @@
         </div>
 
         <div class="col-md-4">
-            <div class="image-container" id="image-preview">
+            <div class="image-container_prod" id="image-preview">
                 <img src="{{ produit and produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}"
                     alt="{{ produit.nom }}" class="img-fluid"style="height: 50vh; display: '{{ produit and produit.photo1 ? 'block' : 'none' }}'; margin: 0 auto;">
                 {{ form_row(form.photo1) }}

@@ -85,6 +85,14 @@ class ProduitRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findAllOrderByName(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.nom', 'ASC') // 'ASC' pour un tri croissant, 'DESC' pour un tri décroissant
+            ->getQuery()
+            ->getResult();
+    }
+    
     //    /**
     //     * @return Produit[] Returns an array of Produit objects
     //     */
