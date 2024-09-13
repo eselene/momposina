@@ -11,7 +11,7 @@
 
     <div class="container section mb-2 pl-md-5">
       <ul class="list-unstyled text-yellow">
-        <li class="ml-3">     Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année :</li>
+        <li class="ml-3">Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année :</li>
         <ul>
           <li>Repas, concerts, rencontres.</li>
           <li>Fiesta Latina autour de l’environnement « Latino Grenoble » !</li>
@@ -55,11 +55,11 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h2 class="modal-title text-dark" id="imageModalLabel{{ loop.index }}">{{ evenement.titre }}</h2>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h2 class="modal-title text-center text-dark w-100" id="imageModalLabel{{ loop.index }}">{{ evenement.titre }}</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
-                <div class="modal-body">
-                  <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" class="img-fluid" alt="{{ evenement.titre }}" />
+                <div class="modal-body text-center">
+                  <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="{{ evenement.titre }}" class="img-fluid" />
                 </div>
               </div>
             </div>

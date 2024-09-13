@@ -71,7 +71,7 @@ class MainController extends AbstractController
         $pagination = $paginator->paginate(
             $produits,
             $request->query->getInt('page', 1),
-            2
+            4
         );
 
          // Détermine si la page est pour "Boisson"

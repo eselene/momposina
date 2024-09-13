@@ -1,49 +1,46 @@
 {# templates/main/plats.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Plats{% endblock %}
+{% block title %}
+  Plats
+{% endblock %}
 
 {% block body %}
-<div class="container mt-3">
+  <div class="container mt-3">
     <h1 class="text-center">Plats Momposina</h1>
     <div class="section text-yellow">
-        <p>Venez visiter la boutique pour connaître la gamme complète du mois. Vous trouverez des
-            nouveautés tous les jours</p>
-        <p>N’HÉSITEZ PAS À NOUS DEMANDER QUEL EST LE PLAT DE LA SEMAINE!
-        </p>
+      <p>Venez visiter la boutique pour connaître la gamme complète du mois. Vous trouverez des nouveautés tous les jours</p>
+      <p>N’HÉSITEZ PAS À NOUS DEMANDER QUEL EST LE PLAT DE LA SEMAINE!</p>
     </div>
 
     <div class="row">
-        {% for plat in plats %}
+      {% for plat in plats %}
         <div class="col-md-4 col-sm-6 mb-3">
-                <div class="card h-100">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <img src="{{ asset('images/' ~ plat.photo1) }}" class="card-img-top embed-responsive-item"
-                            data-toggle="modal" data-target="#imageModal{{ loop.index }}">
-                    </div>
-
-                    <div class="card-body bg-bleu">
-                        <h2 class="card-title">{{ plat.nom }}</h2>
-                        {% set description = plat.description|split('.') %}
-                        <p class="card-text">{{ description[0] }}.</p>
-                        <p class="card-text">{{ description[1] }}.</p>
-                    </div>
-                </div>
-
-                <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" role="dialog"
-                    aria-labelledby="imageModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <img src="{{ asset('images/' ~ plat.photo1) }}" class="modal-body img-fluid">
-                        </div>
-                    </div>
-                </div>
+          <div class="card h-100">
+            <div class="embed-responsive embed-responsive-16by9">
+              <img src="{{ asset('images/' ~ plat.photo1) }}" class="card-img-top embed-responsive-item" data-toggle="modal" data-target="#imageModal{{ loop.index }}" />
             </div>
-            {% endfor %}
+
+            <div class="card-body bg-bleu">
+              <h2 class="card-title">{{ plat.nom }}</h2>
+              {% set description = plat.description|split('.') %}
+              <p class="card-text">{{ description[0] }}.</p>
+              {% if (description|length) > 1 %}
+                <p class="card-text">{{ description[1] }}.</p>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <img src="{{ asset('images/' ~ plat.photo1) }}" class="modal-body img-fluid" />
+              </div>
+            </div>
+          </div>
         </div>
+      {% endfor %}
     </div>
-    {% include 'components/findUs.html.twig' %}
-    {% endblock %}
+  </div>
+{% endblock %}
