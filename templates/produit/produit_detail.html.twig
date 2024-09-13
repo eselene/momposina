@@ -28,8 +28,8 @@
         {% for produit in pagination.items %}
           {# <div class="col-md-3 col-sm-6 mb-3"> #}
           <div class="col-lg-6 col-md-12 col-sm-12 mb-3">
-            <div class="card h-100 bg-light text-black ">
-              <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : asset('images/default.jpeg') }}" class="card-img-top" alt="{{ produit.nom }}">
+  <div class="card h-100 bg-light text-black">
+    <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : asset('images/default.jpeg') }}" class="card-img-top img-fluid fixed-size-image" alt="{{ produit.nom }}">
               <div class="card-body bg-black d-flex flex-column">
                 <h2 class="card-title" style="font-size: 1.2rem;">{{ produit.nom }}</h2>
                 <p class="card-text">{{ produit.description }}</p>
@@ -42,15 +42,7 @@
                 {% endif %}
             </div>          
           </div>          
-            {# <div class="card bg-light text-black d-flex flex-column">
-              <div  style="card height: 56%;">
-                <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : asset('images/default.jpeg') }}" class="img-fluid h-100 w-100 object-fit-cover" alt="{{ produit.nom }}" data-toggle="modal" data-target="#imageModal{{ loop.index }}" />
-              </div>
-              <div class="card-body bg-black d-flex flex-column">
-                <h2 class="card-title" style="font-size: 1.2rem;">{{ produit.nom }}</h2>
-                <p>{{ produit.description }}</p>
-              </div>
-            </div> #}
+
             {# Modal pour afficher l'image en grand #}
             <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel{{ loop.index }}" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
