@@ -194,16 +194,4 @@ class EvenementController extends AbstractController
         return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
     }
     
-
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('app_evenement_delete', ['id' => $id]))
-            ->setMethod('POST')
-            ->add('_token', HiddenType::class, [
-                'data' => $this->csrfTokenManager->getToken('delete' . $id)->getValue(),
-            ])
-            ->getForm();
-    }
-    
 }

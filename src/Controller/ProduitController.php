@@ -88,8 +88,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    // #[Route('/{id}/show', name: 'app_produit_show', methods: ['GET'], requirements: ['id' => '\d+'])]
-    #[Route('admin/produit/{id}', name: 'app_produit_show', methods: ['GET'], requirements: ['id' => '\d+'])]
+    #[Route('admin/produit/{id}/show', name: 'app_produit_show', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function show(Produit $produit): Response
     {
         return $this->render('produit/show.html.twig', [
@@ -101,7 +100,7 @@ class ProduitController extends AbstractController
     public function edit(Request $request, Produit $produit, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(ProduitType::class, $produit, [
-            'is_edit' => $produit->getId() !== null, // Si l'ID est non nul, c'est une édition
+            'is_edit' => $produit->getId() !== null,
         ]);
         $form->handleRequest($request);
 
@@ -124,13 +123,11 @@ class ProduitController extends AbstractController
 
                 $produit->setPhoto1($newFilename);
             }
-            // $this->getDoctrine()->getManager()->flush();
-            $entityManager->flush();
 
+            $entityManager->flush();
+            $this->addFlash('success', 'Produit modifié avec succès!');
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }
-        // Ajout des messages flash
-        // $this->addFlash('success', 'Produit modifié avec succès!');
 
         return $this->render('produit/edit.html.twig', [
             'produit' => $produit,
@@ -148,20 +145,7 @@ class ProduitController extends AbstractController
         } else {
             $this->addFlash('error', 'Invalid CSRF token.');
         }
-    
 
         return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
-    }
-
-
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('app_produit_delete', ['id' => $id]))
-            ->setMethod('POST') // Ensure the method is POST
-            ->add('_token', HiddenType::class, [
-                'data' => $this->csrfTokenManager->getToken('delete' . $id)->getValue(),
-            ])
-            ->getForm();
     }
 }

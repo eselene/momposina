@@ -18,6 +18,8 @@
     --btn-danger-bg: red;
     --btn-danger-border: #dc3545;
     --bg-light: #f8f9fa;
+    --bg-bleu: #3696db;
+    --bg-grey: #aaa7a7;
     --footer-bg: #333;
     --footer-color: #fff;
     --footer-padding: 20px;
@@ -55,9 +57,7 @@ hr {
     padding: 10px;
 }
 
-.bg-bleu {
-    background-color: #3696db;
-}
+
 
 .text-white {
     color: var(--text-color) !important;
@@ -117,25 +117,35 @@ hr {
     color: var(--text-color);
 }
 
+/* Styles pour les groupes de formulaires */
 .form-group {
-    margin-bottom: 10px;
+    margin-bottom: var(--form-group-margin-bottom);
+}
+
+/* Styles pour les étiquettes de formulaire */
+.form-label {
+    display: block;
+    margin-bottom: 5px;    
+    padding: var(--form-label-padding);
+}
+
+/* Styles pour les champs de saisie */
+.form-control {
+    padding: var(--form-control-padding);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;    
+    line-height: var(--line-height);
+}
+
+/* Style pour les champs de saisie en ligne*/
+.form-check-label {
+    margin-bottom: 0;
 }
 
 .form-group.position-relative {
     position: relative;
-}
-
-.form-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.form-control {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-    box-sizing: border-box;
 }
 
 .password-toggle {
@@ -172,15 +182,22 @@ header .message {
 
 
 /* Image Styles */
-.image-container .image-container_prod {
+.image-container {
     margin: 20px 0;
     text-align: center;
+    height: 300px;
     width: 600px;
 }
 
-.image-container{
-    height: 300px;
+.image-container_prod img {
+    max-width: 100%;
+    max-height: 30vh;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
 }
+
 .image {
     max-width: 100%;
     height: auto;
@@ -205,10 +222,11 @@ img {
 .fixed-size-image {
     max-width: 100%;
     max-height: 350px;
-    height: auto; 
-    object-fit: contain; 
+    height: auto;
+    object-fit: contain;
     border-radius: var(--img-border-radius);
 }
+
 button.btn-primary {
     width: 100%;
 }
@@ -233,6 +251,14 @@ button.btn-primary {
 
 .bg-light {
     background-color: var(--bg-light) !important;
+}
+
+.bg-bleu {
+    background-color: var(--bg-bleu) !important;
+}
+
+.bg-grey {
+    background-color: var(--bg-grey) !important;
 }
 
 .details-span {

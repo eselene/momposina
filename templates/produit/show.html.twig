@@ -1,56 +1,66 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produit{% endblock %}
+{% block title %}
+  Produit
+{% endblock %}
 
 {% block body %}
-    <h1>Produit</h1>
+  <div class="container">
+    <h1>Produit: {{ produit.nom }}</h1>
 
-    <table class="table text-white">
-        <tbody >
-            <tr>
-                <th>Id</th>
-                <td>{{ produit.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ produit.nom }}</td>
-            </tr>
-            <tr>
-                <th>NomEs</th>
-                <td>{{ produit.nomEs }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ produit.description }}</td>
-            </tr>
-            <tr>
-                <th>Pays</th>
-                <td>{{ produit.pays }}</td>
-            </tr>
-            <tr>
-                <th>Marque</th>
-                <td>{{ produit.marque }}</td>
-            </tr>
-            <tr>
-                <th>Chemin photo</th>
-                <td>{{ produit.photo1 }}</td>
-            </tr>
-            <tr>
-                <th>Photo1</th>
-                <td>
-                    <img src="{{ asset('images/' ~ produit.photo1) }}" alt="{{ produit.nom}}" width="255"/>
-                </td>
-            </tr>
-            <tr>
-                <th>VisibleWeb</th>
-                <td>{{ produit.visibleWeb ? 'Oui' : 'Non' }}</td>
-            </tr>
-        </tbody>
+    <table class="table table-striped text-white">
+      <tbody>
+        <tr>
+          <th>Id</th>
+          <td>{{ produit.id }}</td>
+        </tr>
+        <tr>
+          <th>Nom</th>
+          <td>{{ produit.nom }}</td>
+        </tr>
+        <tr>
+          <th>NomEs</th>
+          <td>{{ produit.nomEs }}</td>
+        </tr>
+        <tr>
+          <th>Description</th>
+          <td>{{ produit.description|nl2br }}</td>
+        </tr>
+        <tr>
+          <th>Pays</th>
+          <td>{{ produit.pays }}</td>
+        </tr>
+        <tr>
+          <th>Marque</th>
+          <td>{{ produit.marque }}</td>
+        </tr>
+        <tr>
+          <th>Chemin photo</th>
+          <td>{{ produit.photo1 }}</td>
+        </tr>
+        <tr>
+          <th>Photo</th>
+          <td>
+            {% if produit.photo1 %}
+              <img src="{{ asset('images/' ~ produit.photo1) }}" alt="{{ produit.nom }}" style="max-width: 200px;" />
+            {% else %}
+              <p>Pas de photo</p>
+            {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <th>VisibleWeb</th>
+          <td>{{ produit.visibleWeb ? 'Oui' : 'Non' }}</td>
+        </tr>
+        <tr>
+          <th>Utilisateur</th>
+          <td>{{ produit.user.email }}</td>
+        </tr>
+      </tbody>
     </table>
-
-    <div>
-        <a href="{{ path('app_produit_index') }}">Retour à la liste</a>
-        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">Modifier</a>
+    <div class="pb-3">
+      <a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Retour à la liste</a>
+      <a href="{{ path('app_produit_edit', { id: produit.id }) }}" class="btn btn-primary">Modifier</a>
     </div>
-
+  </div>
 {% endblock %}

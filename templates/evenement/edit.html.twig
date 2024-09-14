@@ -17,10 +17,10 @@
         {{ form_row(form.user) }}
       </div>
       <div class="col-md-6">
-        <div class="image-container" id="image-preview">
-          {% set displayStyle = evenement and evenement.photo1 ? 'block' : 'none' %}
-          <img src="{{ evenement and evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default_event.png') }}" alt="Photo" class="img-fluid" style="height: 50vh; display: {{ displayStyle }}; margin: 0 auto;" />
-          {{ form_row(form.photo1, {'data': asset('images/' ~ evenement.photo1)}) }}
+        <div class="image-container_prod" id="image-preview">
+          <img src="{{ evenement and evenement.photo1 ? asset('images/' ~ evenement.photo1) : '' }}"
+              alt="{{ evenement.titre }}" class="img-fluid"style="height: 50vh; display: '{{ evenement and evenement.photo1 ? 'block' : 'none' }}'; margin: 0 auto;">
+          {{ form_row(form.photo1) }}
         </div>
       </div>
     </div>
