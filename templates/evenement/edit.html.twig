@@ -17,14 +17,14 @@
         {{ form_row(form.user) }}
       </div>
       <div class="col-md-6">
-        <div class="image-container_prod" id="image-preview">
+        <div class="image-container_prod text-center" id="image-preview">
           <img src="{{ evenement and evenement.photo1 ? asset('images/' ~ evenement.photo1) : '' }}"
               alt="{{ evenement.titre }}" class="img-fluid"style="height: 50vh; display: '{{ evenement and evenement.photo1 ? 'block' : 'none' }}'; margin: 0 auto;">
           {{ form_row(form.photo1) }}
         </div>
       </div>
     </div>
-    <button type="submit"  class="btn btn-primary" id="save-button">Enregistrer</button>
+    <button type="submit"  class="btn btn-primary mt-3 mb-3" id="save-button">Enregistrer</button>
 
     {{ form_end(form) }}
 

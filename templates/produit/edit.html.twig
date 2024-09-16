@@ -59,14 +59,14 @@
         </div>
 
         <div class="col-md-4">
-            <div class="image-container_prod" id="image-preview">
+            <div class="image-container_prod text-center" id="image-preview">
                 <img src="{{ produit and produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}"
                     alt="{{ produit.nom }}" class="img-fluid"style="height: 50vh; display: '{{ produit and produit.photo1 ? 'block' : 'none' }}'; margin: 0 auto;">
                 {{ form_row(form.photo1) }}
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary" id="btn_submit"> {{ button_label|default('Enregistrer') }}</button>
+    <button type="submit" class="btn btn-primary mt-3 mb-3" id="btn_submit"> {{ button_label|default('Enregistrer') }}</button>
     {# <button type="submit" class="btn btn-primary" {{ has_unsaved_changes ? '' : 'disabled' }}>{{
         button_label|default('Enregistrer') }}</button> #}
 

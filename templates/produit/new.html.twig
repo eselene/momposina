@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% block title %} Nouveau produitt{% endblock %}
 {% block body %}
     <div class="container form-container">
         <h1>Créer un nouveau Produit</h1>
@@ -58,21 +58,20 @@
             </div>
 
             <div class="col-md-4"> 
-                <div class="image-container_prod" id="image-preview">
-                    <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}" alt="Photo" class="img-fluid" style="height: 30vh; display: '{{ produit.photo1 ? 'block' : 'none' }}'; margin: 0 auto;">
+                <div class="image-container_prod  text-center" id="image-preview">
+                    <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}"  class="img-fluid" style="height: 50vh; display: '{{ produit.photo1 ? 'block' : 'none' }}'; margin: 0 auto;" >
                     {{ form_row(form.photo1) }}
                 </div>
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        <button type="submit" class="btn btn-primary my-1">Enregistrer</button>
         {{ form_end(form) }}
         <a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Retour à la liste</a>
     </div>
   
 
     <script>
-
         document.addEventListener('DOMContentLoaded', function () {
             const imageInput = document.querySelector('#{{ form.photo1.vars.id }}');
             const imagePreview = document.querySelector('#image-preview img');
