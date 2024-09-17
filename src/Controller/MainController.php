@@ -8,22 +8,22 @@ use App\Repository\SousCategorieRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-// use Symfony\Component\Http\HttpResponse;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Doctrine\ORM\EntityManagerInterface;
+// use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Evenement;
 use App\Entity\Produit;
 use App\Entity\SousCategorie;
 use App\Form\ProduitSearchType;
-use Doctrine\ORM\Query\AST\OrderByItem;
-use phpDocumentor\Reflection\DocBlock\Description;
+// use Doctrine\ORM\Query\AST\OrderByItem;
+// use phpDocumentor\Reflection\DocBlock\Description;
 
 class MainController extends AbstractController
 {
     private const ALIM = 'Alimentation';
-    private const BOISSON = 'Boisson'; 
+    private const BOISSON = 'Boisson';  
+    private const ELEMENTS_PAR_PAGE = 2; 
 
     #[Route('/', name: 'app_evenements')]
     public function home(EvenementRepository $evenementRepository, PaginatorInterface $paginator, Request $request): Response
@@ -33,14 +33,14 @@ class MainController extends AbstractController
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            2 // Nombre d'éléments par page
+            self::ELEMENTS_PAR_PAGE // Nombre d'éléments par page
         );
 
         return $this->render('main/mainEvenement.html.twig', [
             'pagination' => $pagination,
         ]);
     }
-    
+
     #[Route('/presentation', name: 'app_presentation')]
     public function presentation(): Response
     {
@@ -48,12 +48,9 @@ class MainController extends AbstractController
     }
 
     private function produitDetail(
-        ProduitRepository $produitRepository,
-        SousCategorieRepository $sousCategorieRepository,
-        PaginatorInterface $paginator,
-        Request $request,
-        int $id,
-        string $typePage
+        ProduitRepository $produitRepository, SousCategorieRepository $sousCategorieRepository,
+        PaginatorInterface $paginator, Request $request,
+        int $id, string $typePage
     ): Response {
         $formResearch = $this->createForm(ProduitSearchType::class);
         $formResearch->handleRequest($request);
@@ -62,7 +59,7 @@ class MainController extends AbstractController
             $query = $formResearch->get('query')->getData();
             $produits = $produitRepository->findByNomNomEs($query, $id);
         } else {
-        $produits = $produitRepository->findBy(['sousCategorie' => $id, 'visibleWeb' => true]);
+            $produits = $produitRepository->findBy(['sousCategorie' => $id, 'visibleWeb' => true]);
         }
 
         $sousCategorie = $sousCategorieRepository->find($id);
@@ -71,19 +68,19 @@ class MainController extends AbstractController
         $pagination = $paginator->paginate(
             $produits,
             $request->query->getInt('page', 1),
-            4
+            self::ELEMENTS_PAR_PAGE
         );
 
-         // Détermine si la page est pour "Boisson"
-        $isBoisson = $typePage === 'Boisson';
-        $template = $isBoisson ? 'main/boisson_detail.html.twig' : 'main/alimentation_detail.html.twig';
+        // Vérifie si la page est pour une boisson, en ignorant la casse 
+        $isPageForBoisson = strtolower($typePage) === 'boisson';
+        $template = $isPageForBoisson ? 'main/boisson_detail.html.twig' : 'main/alimentation_detail.html.twig';
 
         return $this->render($template, [
             'pagination' => $pagination,
             'formResearch' => $formResearch->createView(),
             'sousCategorieNom' => $sousCategorieNom,
             'pageTitle' => $typePage,
-            'isBoisson' => $isBoisson,
+            'isBoisson' => $isPageForBoisson,
         ]);
     }
 

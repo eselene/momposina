@@ -6,14 +6,18 @@
 {% endblock %}
 
 {% block body %}
-  <h1 class="text-hidden d-none">Login ou Register</h1>
-  <div class="container mt-3">
+  <h1 class="text-hidden d-none">Login ou Création de compte</h1>
+  <div class="container mt-3>
     <div class="row">
-      <h2>DÉJÀ CLIENT? IDENTIFIEZ-VOUS -- ou --</h2>
-      <h2 class="text-center">CRÉEZ VOTRE COMPTE</h2>
+       <div class="col-lg-12 d-flex justify-content-between flex-column flex-lg-row align-items-center mt-1">
+        <h2>DÉJÀ CLIENT? IDENTIFIEZ-VOUS </h2>
+        {# ce titre apparait que sur les grands écrans #}
+        <h2 class="d-none d-lg-block text-center mr-6">-- ou --</h2>
+        <h2 class="d-none d-lg-block text-left">CRÉEZ VOTRE COMPTE</h2>
+      </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-lg-5 col-md-12">
+      <div class="col-lg-5 col-md-12  mt-4">
         <form method="post" class="mt-1">
           {# Affiche un message d'erreur si une erreur de connexion est présente #}
           {% if error %}
@@ -27,13 +31,11 @@
               <a href="{{ path('app_logout') }}" style="margin-left: 10px;">Se déconnecter</a>
             </div>
           {% endif %}
-          {# Zone de connection #}
+          {# Zone de connexion #}
           <div class="form-group">
-            {# <label for="email">Email :</label> #}
             <input type="email" name="email" id="email" value="{{ last_username }}" required class="form-control" autocomplete="email" autofocus placeholder="Votre email" />
           </div>
           <div class="form-group position-relative">
-            {# <label for="password">Password :</label> #}
             <div>
               <input type="password" name="password" id="password" required class="form-control" autocomplete="current-password" placeholder="Votre mot de passe" />
               <span class="password-toggle" onclick="togglePasswordVisibility()"><i class="fa fa-eye text-danger"></i></span>
@@ -44,22 +46,24 @@
 
           <div class="form-group form-check">
             <input type="checkbox" name="_remember_me" id="_remember_me" class="form-check-input" />
-            <label for="_remember_me" class="form-check-label">Remember me</label>
+            <label for="_remember_me" class="form-check-label">Se souvenir de moi</label>
           </div>
 
-          <button class="btn btn-lg btn-danger w-75" type="submit">Me connecter</button>
+          <button class="btn btn-lg btn-danger w-100" type="submit">Me connecter</button>
         </form>
       </div>
 
-      {# Ligne vertical qui separe les deux forms #}
-      <div class="col-md-1 d-flex justify-content-center align-items-center">
-        <div class="border-left border-secondary" style="height: 100%;"></div>
+      {# Ligne vertical qui sépare les deux forms #}
+      <div class="col-md-auto d-flex justify-content-center align-items-center px-0">
+        <div class="border-left border-secondary" style="height: 100%; width: 1px;"></div>
       </div>
 
       {# PARTIE REGISTRATION FORM #}
       <div class="col-lg-6 col-md-12">
         <div>
-          <p>Veuillez remplir les champs:</p>
+          <!-- Ce texte "CRÉEZ VOTRE COMPTE" sera visible uniquement sur les petits écrans -->
+          <h2 class="d-lg-none text-center">CRÉEZ VOTRE COMPTE</h2>
+          <p>Veuillez remplir les champs :</p>
         </div>
         {# Affiche les messages d'erreur de flash #}
         {% for flash_error in app.flashes('error') %}
@@ -73,16 +77,13 @@
           <div class="alert alert-success" role="alert">{{ flash_success }}</div>
         {% endfor %}
 
-      <div class="form-group">
+        <div class="form-group">
           {% for child in registrationForm.genre %}
-              <div class="form-check form-check-inline">
-                  {{ form_widget(child, { 'attr': {'class': 'form-check-input'} }) }}
-                  {{ form_label(child, null, { 'label_attr': {'class': 'form-check-label text-white'} }) }}
-              </div>
+            <div class="form-check form-check-inline">{{ form_widget(child, { attr: { class: 'form-check-input' } }) }}
+              {{ form_label(child, null, { label_attr: { class: 'form-check-label text-white' } }) }}</div>
           {% endfor %}
           <div class="invalid-feedback d-block">{{ form_errors(registrationForm.genre) }}</div>
-      </div>
-
+        </div>
 
         <div class="form-group">
           {{ form_widget(registrationForm.nom) }}
@@ -126,7 +127,7 @@
           {{ form_widget(registrationForm.pays) }}
           <div class="invalid-feedback">{{ form_errors(registrationForm.pays) }}</div>
         </div>
-        <button class="btn btn-lg btn-danger w-75">Créer mon compte</button>
+        <button class="btn btn-lg btn-danger w-100">Créer mon compte</button>
         {{ form_end(registrationForm) }}
       </div>
     </div>
