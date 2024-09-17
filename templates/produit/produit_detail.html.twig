@@ -61,8 +61,8 @@
       <div class="pagination justify-content-center mt-4">
         {{ knp_pagination_render(pagination) }} {# Pagination des résultats #}
       </div>
-    {% else %}
-      <p class="text-center mt-3">Aucun produit trouvé pour "{{ formResearch.query.vars.value }}".</p> {# Message si aucun produit n'est trouvé #}
+    {% else %}{# Message si aucun produit n'est trouvé #}
+      <p class="text-center mt-3">Aucun produit trouvé pour "{{ formResearch.query.vars.value }}".</p> 
     {% endif %}
   </div>
 {% endblock %}
