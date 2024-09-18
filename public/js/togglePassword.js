@@ -1,5 +1,4 @@
 // public/js/togglePassword.js
-
 var mespasswords = document.querySelectorAll("input[type='password']");
 
 function togglePasswordVisibility() {

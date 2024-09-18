@@ -125,8 +125,8 @@ hr {
 }
 
 /* Styles pour les groupes de formulaires */
-.form-group {
-    margin-bottom: var(--form-group-margin-bottom);
+.form-group.position-relative {
+    position: relative;
 }
 
 /* Styles pour les étiquettes de formulaire */
@@ -138,7 +138,6 @@ hr {
 
 /* Styles pour les champs de saisie */
 .form-control {
-    padding: var(--form-control-padding);
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 100%;
@@ -151,20 +150,15 @@ hr {
     margin-bottom: 0;
 }
 
-.form-group.position-relative {
-    position: relative;
-}
-
 .password-toggle {
     position: absolute;
     right: 10px;
-    top: 70%;
+    top: 60%;
     transform: translateY(-50%);
     cursor: pointer;
     z-index: 2;
     /* S'assurer que l'icon est dans le champ input */
 }
-
 
 
 .user-icon {
@@ -421,10 +415,10 @@ footer {
 }
 
 .message {
-    overflow: hidden;
     /* Cache le texte qui dépasse de la div */
-    position: relative;
+    overflow: hidden;
     /* Assure que le texte reste dans sa div */
+    position: relative;
 }
 
 .sticky-top {
@@ -540,18 +534,18 @@ footer {
 
 @media (min-width: 992px) {
     .navbar .col-2 {
+        /* Réduit la taille de l'icône */
         flex: 0 0 15%;
-        /* Réduisez la taille de l'icône */
     }
 
     .navbar .col-7 {
+        /* Laisse plus d'espace au centre pour les liens */
         flex: 0 0 70%;
-        /* Laissez plus d'espace au centre pour les liens */
     }
 
     .navbar .col-1 {
-        flex: 0 0 15%;
         /* Ajustez la largeur du bouton mobile */
+        flex: 0 0 15%;
     }
 
     .middle-section {
