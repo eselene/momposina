@@ -26,7 +26,9 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-        dd($request->request->all());
+        // dd($request->request->all());
+        
+        // Vérifiez si le formulaire est soumis et valide        
         if ($form->isSubmitted() && $form->isValid()) {
             try {
                 $user->setPassword(

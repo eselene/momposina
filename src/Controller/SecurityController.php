@@ -49,18 +49,22 @@ class SecurityController extends AbstractController
         // Create the registration form
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-        dump($request->request->all());
-        // Check if form is submitted and valid
+        // Affichez les données de la requête pour le débogage
+        // dump($request->request->all());
+
+        // Vérifiez si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
-            // Hash the password
+            // hache le mot de passe en utilisant un algorithme sécurisé et
+            // l'affecte à la propriété password de l'entité utilisateur.
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
+                    // récupère le mot de passe saisi par l'utilisateur dans le formulaire
                     $form->get('plainPassword')->getData()
                 )
             );
        
-            // Save the user
+            // sauvegarde en base de données
             $entityManager->persist($user);
             $entityManager->flush();
 

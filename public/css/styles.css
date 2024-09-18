@@ -150,16 +150,20 @@ hr {
     margin-bottom: 0;
 }
 
+/* Style pour l'elément de bascule de mot de passe */
 .password-toggle {
-    position: absolute;
+    /* Positionne l'élément de manière absolue par rapport à son parent */
+    position: absolute; 
+    /* Place l'élément à 10px du bord droit du parent */
     right: 10px;
-    top: 60%;
-    transform: translateY(-50%);
+    /* Place l'élément à 60% de la hauteur du parent */ 
+    top: 60%; 
+    /* Centre verticalement l'élément */
+    transform: translateY(-50%); 
     cursor: pointer;
-    z-index: 2;
-    /* S'assurer que l'icon est dans le champ input */
+    /* Assure que l'icône est au-dessus des autres éléments */ 
+    z-index: 2; 
 }
-
 
 .user-icon {
     display: flex;
