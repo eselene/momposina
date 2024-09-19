@@ -441,20 +441,21 @@ footer {
 @media (max-width: 480px) {
     
     body {
-        text-size-adjust: text-sm;
+        font-size: 0.875em; 
     }
     .btn-danger {
         font-size: 0.8em;
-    }
-    
-    #btn-en-savoir-plus {
-        display: inline-block;
     }
     
     footer {
         padding: 10px;
         font-size: 12px;
     }
+
+    #btn-en-savoir-plus {
+        display: inline-block;
+    }
+
     .image-container {
         width: 100%;
         max-height: 200px;
@@ -490,6 +491,9 @@ footer {
 }
 
 @media (max-width: 575px) {
+    .h1, h1 {
+        font-size: 2rem;
+    }
 
     .col-lg-4,
     .col-md-6 {
