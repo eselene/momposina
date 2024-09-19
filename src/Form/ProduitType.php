@@ -26,9 +26,9 @@ class ProduitType extends AbstractType
             ->add('nom', TextType::class, [
                 'label' => 'Nom         *',
             ])
-            ->add('nomEs', TextType::class, [ // Use TextType for Spanish name
+            ->add('nomEs', TextType::class, [ 
                 'required' => false,
-                'label' => 'Nom (espagnol)' // Clearer label for user
+                'label' => 'Nom (espagnol)'  
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
@@ -36,18 +36,18 @@ class ProduitType extends AbstractType
             ])
             ->add('pays', TextType::class, [
                 'required' => false,
-                'label' => 'Pays d\'origine' // Clearer label for user
+                'label' => 'Pays d\'origine'  
             ])
-            ->add('marque', TextType::class, [ // Use TextType for brand
+            ->add('marque', TextType::class, [ 
                 'required' => false,
-                'label' => 'Marque' // Clearer label for user
+                'label' => 'Marque'  
             ])
-            ->add('visibleWeb', CheckboxType::class, [ // Use CheckboxType for boolean visibility
+            ->add('visibleWeb', CheckboxType::class, [ 
                 'label' => 'Visible sur le site web' ,
                 // 'data' => true,
                 'required' => false,
             ])
-            ->add('user', EntityType::class, [ // Use EntityType for user association
+            ->add('user', EntityType::class, [ 
                 'class' => User::class,
                 'choice_label' => 'email',
                 'label' => 'Utilisateur associé' 
@@ -60,7 +60,7 @@ class ProduitType extends AbstractType
                 },
                 'label' => 'Sous-catégorie' 
             ])            
-            ->add('photo1', FileType::class, [ // il faut traiter ce fichier là dans le controller
+            ->add('photo1', FileType::class, [ 
                 'required' => false,
                 'label' => 'Ajouter une image (jpeg ou png)',
                 'data_class' => null,
@@ -81,8 +81,6 @@ class ProduitType extends AbstractType
                     ])
                 ],
             ]);
-            // Add fields for 'poids', 'unitePoids', 'ingredients', 'allergenes', and 'certification'
-            // if needed, using appropriate form field types and labels
         ;
     }
 

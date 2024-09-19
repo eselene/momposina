@@ -18,8 +18,9 @@
       {{ form_start(formResearch, {'attr': {'class': 'form-inline'}}) }} 
         <div class="form-group mb-2">
           {# Champ de recherche #}
-          {{ form_widget(formResearch.query) }}
-        </div>
+            {{ form_label(formResearch.query) }}          
+           {{ form_widget(formResearch.query, {'attr': {'class': 'form-control'}}) }}
+        </div>      
         <button type="submit" class="btn btn-primary d-none ml-2">Chercher</button>
       {{ form_end(formResearch) }}
     </div>

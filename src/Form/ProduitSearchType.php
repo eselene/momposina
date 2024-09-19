@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 class ProduitSearchType extends AbstractType
 {
     private const LABEL = 'Rechercher un produit';
-    private const PLACEHOLDER = 'Rechercher';
+    private const PLACEHOLDER = 'Rechercher par Nom';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
