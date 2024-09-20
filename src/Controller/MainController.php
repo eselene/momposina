@@ -11,13 +11,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-// use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Evenement;
 use App\Entity\Produit;
 use App\Entity\SousCategorie;
 use App\Form\ProduitSearchType;
-// use Doctrine\ORM\Query\AST\OrderByItem;
-// use phpDocumentor\Reflection\DocBlock\Description;
 
 class MainController extends AbstractController
 {
@@ -54,7 +51,7 @@ class MainController extends AbstractController
     ): Response {
         $formResearch = $this->createForm(ProduitSearchType::class);
         $formResearch->handleRequest($request);
-
+ 
         if ($formResearch->isSubmitted() && $formResearch->isValid()) {
             $query = $formResearch->get('query')->getData();
             $produits = $produitRepository->findByNomNomEs($query, $id);

@@ -51,13 +51,11 @@
               </li>
               {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item dropdown">
-                  {% if is_granted('ROLE_ADMIN') %}
                     <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
                     <div class="dropdown-menu" aria-labelledby="adminDropdown">
                       <a class="dropdown-item" href="{{ path('app_evenement_index') }}">Evenement</a>
                       <a class="dropdown-item" href="{{ path('app_produit_index') }}">Produits</a>
                     </div>
-                  {% endif %}
                 </li>
               {% endif %}
             </ul>

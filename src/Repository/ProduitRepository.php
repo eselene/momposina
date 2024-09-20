@@ -30,12 +30,11 @@ class ProduitRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    // Récupére les produits associés à une sous-catégorie spécifique.
     /*** @return Produit[] Returns an array of Produit objects   */
     public function findBySousCategorieId($sousCategorieId): array
     {
         return $this->createQueryBuilder('p')
-            // ->join('p.sousCategorie', 's')
-            // ->join('s.categorie', 'c')
             ->andWhere('p.sousCategorie = :val')
             ->andWhere('p.visibleWeb = true')
             ->setParameter('val', $sousCategorieId)
