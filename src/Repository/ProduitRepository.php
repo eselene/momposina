@@ -74,14 +74,19 @@ class ProduitRepository extends ServiceEntityRepository
 
     public function findByNomNomEs($value, $valSousCategorieId): array
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.nom LIKE :val OR p.nomEs LIKE :val')
-            ->andWhere('p.sousCategorie = :valSousCategorieId')
-            ->andWhere('p.visibleWeb = true')
-            ->setParameter('val', '%' . $value . '%')
-            ->setParameter('valSousCategorieId', $valSousCategorieId)
-            ->getQuery()
-            ->getResult();
+        try {
+            return $this->createQueryBuilder('p')
+                ->andWhere('p.nom LIKE :val OR p.nomEs LIKE :val')
+                ->andWhere('p.sousCategorie = :valSousCategorieId')
+                ->andWhere('p.visibleWeb = true')
+                ->setParameter('val', '%' . $value . '%')
+                ->setParameter('valSousCategorieId', $valSousCategorieId)
+                ->getQuery()
+                ->getResult();
+        } catch (\Exception $e) {
+            $this->getEntityManager()->getConnection()->getConfiguration();
+            throw $e; // Relancer l'exception pour qu'elle soit gérée par le contrôleur
+        }
     }
 
     public function findAllOrderByName(): array
@@ -91,7 +96,7 @@ class ProduitRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-    
+
     //    /**
     //     * @return Produit[] Returns an array of Produit objects
     //     */

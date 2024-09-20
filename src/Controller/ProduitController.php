@@ -32,6 +32,7 @@ class ProduitController extends AbstractController
     #[Route('admin/produit', name: 'app_produit_index', methods: ['GET'])]
     public function index(ProduitRepository $produitRepository, PaginatorInterface $paginator, Request $request): Response
     {
+    try {        
         // Crée une requête pour récupérer les produits
         $query = $produitRepository->findAllOrderByName();    
         // Paginer la requête
@@ -44,6 +45,12 @@ class ProduitController extends AbstractController
         return $this->render('produit/index.html.twig', [
             'pagination' => $pagination,
         ]);
+    } catch (\Exception $e) {
+        $this->container->get('logger')->error('Erreur lors de la récupération des produits : ' . $e->getMessage());
+        $this->addFlash('error', 'Une erreur est survenue lors de la récupération des produits. Veuillez réessayer.');
+
+        return $this->redirectToRoute('app_evenements');
+    }        
     }
 
     #[Route('admin/produit/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
@@ -56,6 +63,7 @@ class ProduitController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+        try {
             $imageFile = $form->get('photo1')->getData();
 
             if ($imageFile) {
@@ -63,14 +71,11 @@ class ProduitController extends AbstractController
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
 
-                try {
                     $imageFile->move(
                         $this->getParameter('images_directory'),
                         $newFilename
                     );
-                } catch (FileException $e) {
-                    $this->addFlash('error', 'Une erreur est apparue pendant le téléchargement du fichier.');
-                }
+
                 // Enregistre seulement le nom du fichier dans la base de données
                 $produit->setPhoto1($newFilename);
             }
@@ -80,6 +85,19 @@ class ProduitController extends AbstractController
             // Ajout des messages flash
             $this->addFlash('success', 'Produit créé avec succès!');
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
+        } catch (FileException $e) {
+            // Log l'erreur pour les développeurs
+            $this->container->get('logger')->error('Erreur lors du téléchargement du fichier : ' . $e->getMessage());
+
+            // Affiche un message d'erreur à l'utilisateur
+            $this->addFlash('error', 'Une erreur est survenue lors du téléchargement de l\'image. Veuillez réessayer.');
+        } catch (\Exception $e) {
+            // Log l'erreur générale
+            $this->container->get('logger')->error('Erreur lors de la création du produit : ' . $e->getMessage());
+
+            // Affiche un message d'erreur générique à l'utilisateur
+            $this->addFlash('error', 'Une erreur est survenue lors de la création du produit. Veuillez réessayer.');
+        }
         }
 
         return $this->render('produit/new.html.twig', [
@@ -105,6 +123,7 @@ class ProduitController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            try {
             $imageFile = $form->get('photo1')->getData();
 
             if ($imageFile) {
@@ -112,21 +131,25 @@ class ProduitController extends AbstractController
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
 
-                try {
                     $imageFile->move(
                         $this->getParameter('images_directory'),
                         $newFilename
                     );
-                } catch (FileException $e) {
-                    $this->addFlash('error', 'Une erreur est apparue pendant le téléchargement du fichier.');
+                    
+                    $produit->setPhoto1($newFilename);
                 }
+                
+                $entityManager->flush();
 
-                $produit->setPhoto1($newFilename);
+                $this->addFlash('success', 'Produit modifié avec succès!');
+                return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
+            } catch (FileException $e) {
+            $this->container->get('logger')->error('Erreur lors du téléchargement du fichier : ' . $e->getMessage());
+            $this->addFlash('error', 'Une erreur est survenue lors du téléchargement de l\'image. Veuillez réessayer.');
+        } catch (\Exception $e) {
+            $this->container->get('logger')->error('Erreur lors de la modification du produit : ' . $e->getMessage());
+            $this->addFlash('error', 'Une erreur est survenue lors de la modification du produit. Veuillez réessayer.');
             }
-
-            $entityManager->flush();
-            $this->addFlash('success', 'Produit modifié avec succès!');
-            return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('produit/edit.html.twig', [
@@ -139,13 +162,20 @@ class ProduitController extends AbstractController
     public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $produit->getId(), $request->request->get('_token'))) {
+        try {
             $entityManager->remove($produit);
             $entityManager->flush();
+
             $this->addFlash('success', 'Produit supprimé avec succès!');
+        } catch (\Exception $e) {
+            $this->container->get('logger')->error('Erreur lors de la suppression du produit : ' . $e->getMessage());
+            $this->addFlash('error', 'Une erreur est survenue lors de la suppression du produit. Veuillez réessayer.');
+        }
         } else {
-            $this->addFlash('error', 'Invalid CSRF token.');
+        $this->addFlash('error', 'Token CSRF invalide.');
         }
 
         return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }
