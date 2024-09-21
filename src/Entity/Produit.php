@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ProduitRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 class Produit
@@ -44,6 +45,14 @@ class Produit
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $certification = null;
 
+    /**
+     * @Assert\Image(
+     *     mimeTypes={"image/jpeg", "image/png"},
+     *     mimeTypesMessage="Seules les images au format JPEG ou PNG sont acceptées",
+     *     maxSize="5M",
+     *     maxSizeMessage="L'image ne doit pas dépasser 5Mo"
+     * )
+     */
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photo1 = null;
 

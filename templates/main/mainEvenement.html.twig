@@ -40,8 +40,13 @@
               </p>
               <p>
                 {% if evenement.plageHeure %}
-                  <i class="fas fa-clock"></i>
-                  {{ evenement.plageHeure }}
+                  <i class="fas fa-clock"></i>                  
+                  <span class="mr-4"> {{ evenement.plageHeure }}</span>
+                {% endif %}
+                {% if evenement.prix == 0 %}
+                  Gratuit
+                {% else %}
+                  <span><i class="fas fa-euro-sign"></i> {{ evenement.prix }}</span>
                 {% endif %}
               </p>
               <p>

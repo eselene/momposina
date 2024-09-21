@@ -1,39 +1,76 @@
 {# templates/produit/_form.html.twig #}
-{% extends 'base.html.twig' %}
-{% block body %}
-  <div class="container form-container">
-    <h1>Edit Produit</h1>
 
-    {{ form_start(form) }}
+{{ form_start(form) }}
 
-    <div class="row">
-      <div class="col-md-6">
-        {{ form_row(form.nom) }}
-        {{ form_row(form.nomEs) }}
-        {{ form_row(form.description {'attr': {'rows': '3'}}) }}
-        {{ form_row(form.pays) }}
-        {{ form_row(form.marque) }}
-        {{ form_row(form.visibleWeb) }}
-        {{ form_row(form.user) }}
-        {{ form_row(form.sousCategorie) }}
-      </div>
-
-      <div class="col-md-6">
-        <div class="image-container_prod" id="image-preview">
-          <img src="{{ produit and produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}" alt="Photo" style="height: 30vh; display: '{{ produit and produit.photo1 ? 'block' : 'none' }}'; margin: 0 auto;"/>
-          {{ form_row(form.photo1) }}
+<div class="row">
+    <div class="col-md-8">
+        {# Champs du formulaire #}
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-left text-white" for="{{ form.nom.vars.id }}">{{ form_label(form.nom) }}</label>
+            <div class="col-sm-8">
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+            </div>
         </div>
-      </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-left text-white" for="{{ form.nomEs.vars.id }}">{{ form_label(form.nomEs) }}</label>
+            <div class="col-sm-8">
+                {{ form_widget(form.nomEs, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-left text-white" for="{{ form.description.vars.id }}">{{ form_label(form.description) }}</label>
+            <div class="col-sm-8">
+                {{ form_widget(form.description, {'attr': {'rows': '3', 'class': 'form-control', 'style': 'width: 100%;'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-left text-white">{{ form_label(form.pays) }}</label>
+            <div class="col-sm-8">
+                {{ form_widget(form.pays, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-left text-white">{{ form_label(form.marque) }}</label>
+            <div class="col-sm-8">
+                {{ form_widget(form.marque, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-left text-white">{{ form_label(form.visibleWeb) }}</label>
+            <div class="col-sm-8">
+                {{ form_widget(form.visibleWeb, {'attr': {'class': 'form-check-input'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-left text-white">{{ form_label(form.user) }}</label>
+            <div class="col-sm-8">
+                {{ form_widget(form.user, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-left text-white">{{ form_label(form.sousCategorie) }}</label>
+            <div class="col-sm-8">
+                {{ form_widget(form.sousCategorie, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+    <div class="col-md-4">
+    
+        <div class="image-container_prod text-center" id="image-preview">
+                <img src="{{ produit and produit.photo1 ? asset('images/' ~ produit.photo1) : '' }}"
+                alt="{{ produit and produit.nom ? produit.nom : '' }}" class="img-fluid" style="height: 50vh; display: '{{ produit and produit.photo1 ? 'block' : 'none' }}'; margin: 0 auto;">
+            {{ form_row(form.photo1) }}
+        </div>
+    </div>
+</div>
 
-    {{ form_end(form) }}
+<button type="submit" class="btn btn-primary mt-3 mb-3" id="btn_submit">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}
 
-    <a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Retour à la liste</a>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
+{% block javascripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
         const imageInput = document.querySelector('#{{ form.photo1.vars.id }}');
         const imagePreview = document.querySelector('#image-preview img');
         const saveButton = document.querySelector('.btn-primary');
@@ -41,43 +78,42 @@
         const formElements = document.querySelectorAll('input[type="text"], textarea');
 
         if (imageInput) {
-          imageInput.addEventListener('change', function (event) {
-            if (event.target.files && event.target.files[0]) {
-              const reader = new FileReader();
-              reader.onload = function (e) {
-                imagePreview.src = e.target.result;
-                imagePreview.style.display = 'block';
-              };
-              reader.readAsDataURL(event.target.files[0]);
-            } else {
-              imagePreview.src = "{{ produit and produit.photo1 ? asset('images/' ~ {{produit.photo1}}) : '' }}";
-              imagePreview.style.display = "{{ produit and produit.photo1 ? 'block' : 'none' }}";
-            }
-          });
+            imageInput.addEventListener('change', function (event) {
+                if (event.target.files && event.target.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(event.target.files[0]);
+                } else {
+                    imagePreview.style.display = 'none';
+                }
+            });
         }
 
         let formChanged = false;
 
         formElements.forEach(element => {
-          element.addEventListener('input', () => {
-            formChanged = true;
-            saveButton.disabled = false;
-            backToListButton.disabled = false;
-          });
+            element.addEventListener('input', () => {
+                formChanged = true;
+                saveButton.disabled = false;
+                backToListButton.disabled = false;
+            });
         });
 
         saveButton.addEventListener('click', (event) => {
-          formChanged = false;
+            formChanged = false;
         });
 
         backToListButton.addEventListener('click', (event) => {
-          if (formChanged) {
-            event.preventDefault();
-            if (confirm('Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir quitter ?')) {
-              window.location.href = backToListButton.href;
+            if (formChanged) {
+                event.preventDefault();
+                if (confirm('Vous n\'avez pas sauvegardé votre travail. Êtes-vous sûr de vouloir quitter ?')) {
+                    window.location.href = backToListButton.href;
+                }
             }
-          }
         });
-      });
-    </script>
+    });
+</script>
 {% endblock %}
