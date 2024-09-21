@@ -1,97 +1,12 @@
-{% extends 'base.html.twig' %}
 {# templates/evenement/edit.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier l'Événement{% endblock %}
+
 {% block body %}
-  <div class="container form-container">
-    <h1>Modifier l'Événement</h1>
-    {{ form_start(form) }}
-
-    <div class="row">
-      <div class="col-md-6">
-        {{ form_row(form.titre) }}
-        {{ form_row(form.description, {'attr': {'rows': '3'}}) }}
-        {{ form_row(form.date) }}
-        {{ form_row(form.plageHeure) }}
-        {{ form_row(form.lieu) }}
-        {{ form_row(form.prix) }}
-        {{ form_row(form.visibleWeb) }}
-        {{ form_row(form.user) }}
-      </div>
-      <div class="col-md-6">
-        <div class="image-container_prod text-center" id="image-preview">
-          <img src="{{ evenement and evenement.photo1 ? asset('images/' ~ evenement.photo1) : '' }}"
-              alt="{{ evenement.titre }}" class="img-fluid"style="height: 50vh; display: '{{ evenement and evenement.photo1 ? 'block' : 'none' }}'; margin: 0 auto;">
-          {{ form_row(form.photo1) }}
-        </div>
-      </div>
+    <div class="container form-container">
+        <h1>Modifier l'Événement</h1>
+        {% include 'evenement/_form.html.twig' with {'button_label': 'Enregistrer'} %}
+        <a href="{{ path('app_evenement_index') }}" class="btn btn-secondary">Retour à la liste</a>
     </div>
-    <button type="submit"  class="btn btn-primary mt-3 mb-3" id="save-button">Enregistrer</button>
-
-    {{ form_end(form) }}
-
-    <a href="{{ path('app_evenement_index') }}" id="returnToList" class="btn btn-secondary">Retour à la liste</a>
-  </div>
-{% endblock %}
-
-
-{% block javascripts %}
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var returnButton = document.getElementById('returnToList');
-
-        if (returnButton) {
-            returnButton.addEventListener('click', function(event) {
-                var confirmation = confirm("Êtes-vous sûr de vouloir retourner à la liste ?");
-                if (!confirmation) {
-                    event.preventDefault(); // Annule la navigation si l'utilisateur clique sur "Annuler"
-                }
-            });
-        }
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-      const imageInput = document.querySelector('#{{ form.photo1.vars.id }}');
-      const imagePreview = document.querySelector('#image-preview img');
-    
-      if (imageInput) {
-        imageInput.addEventListener('change', function (event) {
-          if (event.target.files && event.target.files[0]) {
-        // console.log('Fichier sélectionné : ', event.target.files[0]);
-        const reader = new FileReader();
-            reader.onload = function (e) {
-              imagePreview.src = e.target.result;
-              imagePreview.style.display = 'block';
-            };
-            reader.readAsDataURL(event.target.files[0]);
-          } else {
-            // console.log('Aucun fichier sélectionné');
-            imagePreview.src = '{{ evenement and evenement.photo1 ? asset("images/" ~ evenement.photo1) : asset("images/default_event.png") }}';
-            imagePreview.style.display = '{{ evenement and evenement.photo1 ? "block" : "none" }}';
-          }
-        })
-      }
-    
-      let formChanged = false;
-    
-      formElements.forEach((element) => {
-        element.addEventListener('input', () => {
-          formChanged = true;
-          saveButton.disabled = false;
-          backToListButton.disabled = false;
-});
-});
-    
-      saveButton.addEventListener('click', () => {
-        formChanged = false;
-      })
-    
-      backToListButton.addEventListener('click', (event) => {
-// if (formChanged) {
-// event.preventDefault();
-//           if (confirm('Vous avez des modifications non sauvegardées. Êtes-vous sûr de vouloir quitter ?')) {
-//             window.location.href = backToListButton.href;
-//           }
-//         }
-// });
-});
-  </script>
 {% endblock %}

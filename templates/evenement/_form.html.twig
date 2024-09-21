@@ -1,56 +1,87 @@
-{% extends 'base.html.twig' %}
-{# templates/evenement/edit.html.twig #}
-{% block body %}
-	<div class="container form-container">
-		<h1>Modifier l'Événement fgsdfg</h1>
+{# templates/evenement/_form.html.twig #}
 		{{ form_start(form) }}
-
 		<div class="row">
-			<div class="col-md-6 text-white">
-				{{ form_row(form.titre) }}
-				{{ form_row(form.description, {'attr': {'rows': '3'}}) }}
-				{{ form_row(form.date) }}
-				{{ form_row(form.plageHeure) }}
-				{{ form_row(form.lieu) }}
-				{{ form_row(form.prix) }}
-				{{ form_row(form.visibleWeb) }}
-				{{ form_row(form.user) }}
+    <div class="col-md-8">
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-left">{{ form_label(form.titre) }}</label>
+            <div class="col-sm-8">
+                {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
 			</div>
-			<div class="col-md-6">
-				<div class="image-container mb-3" id="image-preview">
-					<img src="{{ evenement and evenement.photo1 ? asset('images/' ~ evenement.photo1) : '' }}" alt="Photo" style="height: 70vh; display: '{{ evenement and evenement.photo1 ? 'block' : 'none' }}'; margin: 0 auto;">
-					{{ form_row(form.photo1) }}
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-left">{{ form_label(form.description) }}</label>
+            <div class="col-sm-8">
+                {{ form_widget(form.description, {'attr': {'rows': '3', 'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-left">{{ form_label(form.date) }}</label>
+            <div class="col-sm-8">
+                {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-left">{{ form_label(form.plageHeure) }}</label>
+            <div class="col-sm-8">
+                {{ form_widget(form.plageHeure, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-left">{{ form_label(form.lieu) }}</label>
+            <div class="col-sm-8">
+                {{ form_widget(form.lieu, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-left">{{ form_label(form.prix) }}</label>
+            <div class="col-sm-8">
+                {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-left">{{ form_label(form.visibleWeb) }}</label>
+            <div class="col-sm-8">
+                {{ form_widget(form.visibleWeb, {'attr': {'class': 'form-check-input'}}) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-left">{{ form_label(form.user) }}</label>
+            <div class="col-sm-8">
+                {{ form_widget(form.user, {'attr': {'class': 'form-control'}}) }}
+            </div>
 				</div>
 			</div>
 
+		<div class="col-md-4">
+			<div class="image-container_prod text-center" id="image-preview">
+				<img src="{{ evenement and evenement.photo1 ? asset('images/' ~ evenement.photo1) : '' }}" 
+					class="img-fluid" style="height: 50vh; display: '{{ evenement and evenement.photo1 ? 'block' : 'none' }}'; margin: 0 auto;">
+				{{ form_row(form.photo1) }}
+			</div>
 		</div>
-		<div class="d-flex justify-content-between">
-			<button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
-			<a href="{{ path('app_evenement_index') }}" class="btn btn-secondary">Retour à la liste</a>
 		</div>
+		<button type="submit" class="btn btn-primary my-1">{{ button_label|default('Enregistrer') }}</button>
 		{{ form_end(form) }}
+{% block javascripts %}
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+		const imageInput = document.querySelector('#{{ form.photo1.vars.id }}');
+		const imagePreview = document.querySelector('#image-preview img');
 
-		<script>
-			document.addEventListener('DOMContentLoaded', function () {
-const imageInput = document.querySelector('#  {{ form.photo1.vars.id }}');
-const imagePreview = document.querySelector('#image-preview img');
-
-if (imageInput) {
-imageInput.addEventListener('change', function (event) {
-if (event.target.files && event.target.files[0]) {
-const reader = new FileReader();
-reader.onload = function (e) {
-imagePreview.src = e.target.result;
-imagePreview.style.display = 'block';
-};
-reader.readAsDataURL(event.target.files[0]);
-} else {
-imagePreview.src = "{{ evenement and evenement.photo1 ? asset('images/' ~ evenement.photo1) : '' }}";
-imagePreview.style.display = "{{ evenement and evenement.photo1 ? 'block' : 'none' }}";
-}
-});
-}
-});
-		</script>
-	</div>
+		if (imageInput) {
+			imageInput.addEventListener('change', function (event) {
+			if (event.target.files && event.target.files[0]) {
+				const reader = new FileReader();
+				reader.onload = function (e) {
+				imagePreview.src = e.target.result;
+				imagePreview.style.display = 'block';
+				};
+				reader.readAsDataURL(event.target.files[0]);
+			} else {
+				imagePreview.style.display = 'none';
+			}
+		});
+		}
+		});
+	</script>
 {% endblock %}

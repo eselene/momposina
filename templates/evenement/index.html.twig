@@ -44,9 +44,10 @@
 							<td>
 								<a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-info btn-sm custom-btn">Voir</a>
 								<a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}" class="btn btn-primary btn-sm custom-btn">Modifier</a>
-								{# {{ form_start(delete_forms[evenement.id], {'attr': {'style': 'display:inline-block;'}}) }}
-																                <button class="btn btn-danger btn-sm">Supprimer</button>
-																                {{ form_end(delete_forms[evenement.id]) }} #}
+								<form method="post" action="{{ path('app_evenement_delete', { id: evenement.id }) }}" style="display:inline;" onsubmit="return confirm('Vous êtes sure de supprimer cet évènement?');">
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.id) }}" />
+									<button class="btn btn-danger btn-sm custom-btn">Supprimer</button>
+								</form>								
 							</td>
 						</tr>
 					{% else %}
