@@ -34,7 +34,14 @@ class Evenement
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
     private ?string $prix = null;
-
+    /**
+     * @Assert\Image(
+     *     mimeTypes={"image/jpeg", "image/png"},
+     *     mimeTypesMessage="Seules les images au format JPEG ou PNG sont acceptées",
+     *     maxSize="5M",
+     *     maxSizeMessage="L'image ne doit pas dépasser 5Mo"
+     * )
+     */
     #[ORM\Column(length: 255)]
     private ?string $photo1 = null;
 

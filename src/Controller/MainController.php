@@ -44,24 +44,35 @@ class MainController extends AbstractController
         return $this->render('main/presentation.html.twig');
     }
 
+    // * Affiche les détails des produits d'une sous-catégorie spécifique.
+    // * Gère la recherche de produits,
+    // * et la sélection du template approprié en fonction du type de page.
     private function produitDetail(
         ProduitRepository $produitRepository, SousCategorieRepository $sousCategorieRepository,
         PaginatorInterface $paginator, Request $request,
         int $id, string $typePage
     ): Response {
+    // Crée le formulaire de recherche de produits
         $formResearch = $this->createForm(ProduitSearchType::class);
         $formResearch->handleRequest($request);
  
+    // Vérifie si le formulaire de recherche a été soumis et est valide
         if ($formResearch->isSubmitted() && $formResearch->isValid()) {
+        // Récupère la requête de recherche
             $query = $formResearch->get('query')->getData();
+        // Recherche les produits correspondant à la requête
             $produits = $produitRepository->findByNomNomEs($query, $id);
         } else {
+        // Recherche les produits de la sous-catégorie spécifiée et visibles sur le web
             $produits = $produitRepository->findBy(['sousCategorie' => $id, 'visibleWeb' => true]);
         }
 
+    // Récupère la sous-catégorie par son ID
         $sousCategorie = $sousCategorieRepository->find($id);
+    // Récupère la description de la sous-catégorie, ou une chaîne vide si non trouvée
         $sousCategorieNom = $sousCategorie ? $sousCategorie->getDescription() : '';
 
+    // Paginate les résultats des produits
         $pagination = $paginator->paginate(
             $produits,
             $request->query->getInt('page', 1),
@@ -70,8 +81,10 @@ class MainController extends AbstractController
 
         // Vérifie si la page est pour une boisson, en ignorant la casse 
         $isPageForBoisson = strtolower($typePage) === 'boisson';
+    // Sélectionne le template approprié en fonction du type de page
         $template = $isPageForBoisson ? 'main/boisson_detail.html.twig' : 'main/alimentation_detail.html.twig';
 
+    // Rend la vue avec les données nécessaires
         return $this->render($template, [
             'pagination' => $pagination,
             'formResearch' => $formResearch->createView(),

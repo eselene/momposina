@@ -29,7 +29,7 @@
     {% if pagination.items is not empty %}
       <div class="row mt-4">
         {% for produit in pagination.items %}
-          <div class="col-lg-6 col-md-12 col-sm-12 mb-3">
+          <div class="col-lg-6 col-md-12 col-sm-12 mb-md-3 mb-sm-0">
             <div class="card h-100 bg-light text-black">
               {# Image du produit #}
               <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : asset('images/default.jpeg') }}" class="card-img-top img-fluid fixed-size-image" alt="{{ produit.nom }}"> 

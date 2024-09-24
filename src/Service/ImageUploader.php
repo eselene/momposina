@@ -22,12 +22,15 @@ class ImageUploader
     public function upload(UploadedFile $file): string
     {
         // Extensions de fichier autorisées
-        $allowedExtensions = ['jpg', 'jpeg', 'png'];
+        $allowedExtensions = ['jpeg', 'png'];
         $fileExtension = $file->guessExtension();
+        if ($fileExtension==='jpg') {
+            $fileExtension = 'jpeg';
+        }
 
         // Vérifie si l'extension du fichier est autorisée
         if (!in_array($fileExtension, $allowedExtensions)) {
-            throw new \Exception('Le fichier doit être une image (JPG, JPEG, PNG).');
+            throw new \Exception('Le fichier doit être une image (JPEG, PNG).');
         }
 
         // Génère un nom de fichier sécurisé
