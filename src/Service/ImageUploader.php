@@ -33,7 +33,7 @@ class ImageUploader
             throw new \Exception('Le fichier doit être une image (JPEG, PNG).');
         }
 
-        // Génère un nom de fichier sécurisé
+        // Génère un nom de fichier sécurisé qui ne contient pas de caractères problématiques (comme les accents, les espaces, etc.)
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = $this->slugger->slug($originalFilename);
         $newFilename = $safeFilename . '-' . uniqid() . '.' . $fileExtension;

@@ -57,14 +57,17 @@ class MainController extends AbstractController
         $formResearch->handleRequest($request);
  
     // Vérifie si le formulaire de recherche a été soumis et est valide
-        if ($formResearch->isSubmitted() && $formResearch->isValid()) {
-        // Récupère la requête de recherche
-            $query = $formResearch->get('query')->getData();
-        // Recherche les produits correspondant à la requête
+    if ($formResearch->isSubmitted() && $formResearch->isValid()) {
+        $query = $formResearch->get('query')->getData();
+        // Vérification de la requête
+        if ($query) {
             $produits = $produitRepository->findByNomNomEs($query, $id);
         } else {
-        // Recherche les produits de la sous-catégorie spécifiée et visibles sur le web
             $produits = $produitRepository->findBy(['sousCategorie' => $id, 'visibleWeb' => true]);
+        }
+        } else {
+        // Vérifie si le formulaire n'est pas soumis ou s'il n'est pas valide
+        $produits = $produitRepository->findBy(['sousCategorie' => $id, 'visibleWeb' => true]);
         }
 
     // Récupère la sous-catégorie par son ID
