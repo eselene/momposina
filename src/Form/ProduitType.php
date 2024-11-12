@@ -66,7 +66,7 @@ class ProduitType extends AbstractType
                 'data_class' => null,
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false, // mémo en bdd ou pas
-                // make it optional so you don't have to re-upload the PDF file
+                // make it optional so you don't have to re-upload the  file
                 // every time you edit the Product details
                 'required' => false,
                 'mapped' => false,

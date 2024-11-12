@@ -1,4 +1,3 @@
-{# templates/main/mainEvenement.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}
@@ -9,8 +8,8 @@
   <div class="container mt-2">
     <h1 class="text-center">Liste des Événements</h1>
 
-    <div class="container section mb-2 pl-md-5">
-      <ul class="list-unstyled text-yellow">
+    <div class="mb-2 pl-md-5">
+      <ul class="list-unstyled text-primary">
         <li class="ml-3">Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année :</li>
         <ul>
           <li>Repas, concerts, rencontres.</li>
@@ -21,42 +20,30 @@
 
     <div class="row">
       {% for evenement in pagination %}
-        <div class="col-md-4 col-sm-6 mb-3">
-          {# Vérifie si le titre de l'événement commence par 'Programme' #}
-          {% if evenement.titre starts with 'Programme' %}
-            {% set dateEnLettres = evenement.titre %}
-          {% else %}
-            {# Convertit la date en lettres si le titre ne commence pas par 'Programme' #}
-            {% set dateEnLettres = evenement.date|date('Y-m-d')|date_en_lettres %}
-          {% endif %}
-          <div class="card bg-dark text-white h-100 d-flex flex-column">
-            <div class="card-header text-center">{{ dateEnLettres ? dateEnLettres : 'Pas de date' }}</div>
+        <div class="col-md-4 col-sm-6 mb-3 fond">
+          <div class="card border-0 bg-dark text-white h-100 d-flex flex-column">
+            <div class="card-header text-center">{{ evenement.titre starts with 'Programme' ? evenement.titre : evenement.date|date('Y-m-d')|date_en_lettres }}</div>
             <div class="card-img-top" style="height: 56%;">
-              {# Affiche l'image de l'événement ou une image par défaut #}
-              <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="{{ evenement.titre }}" class="img-fluid h-100 w-100 object-fit-cover pointer" data-toggle="modal" data-target="#imageModal{{ loop.index }}" />
+              <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="{{ evenement.titre }}" class="img-fluid h-100 w-100 object-fit-cover pointer" data-bs-toggle="modal" data-bs-target="#imageModal{{ loop.index }}" />
             </div>
             <div class="card-body bg-white text-dark d-flex flex-column flex-grow-1">
               <h2 class="card-title text-primary h2petit">{{ evenement.titre }}</h2>
               <p>
-                <i class="fas fa-align-left"></i>
-                {{ evenement.description }}
+                <i class="fas fa-align-left"></i> {{ evenement.description }}
               </p>
               <p>
-                {# Affiche l'heure de l'événement si disponible #}
                 {% if evenement.plageHeure %}
-                  <i class="fas fa-clock"></i>                  
-                  <span class="mr-4"> {{ evenement.plageHeure }}</span>
+                  <i class="fas fa-clock"></i> <span class="mr-4">{{ evenement.plageHeure }}</span>
                 {% endif %}
-                {# Affiche le prix de l'événement ou 'Gratuit' si le prix est 0 #}
-                {% if evenement.prix == 0 %}
-                  Gratuit
+                {% if evenement.prix > 0 %}
+                  <span><i class="fas fa-euro-sign"></i> {{ evenement.prix|number_format(2, ',', ' ') }}</span>
                 {% else %}
-                  <span><i class="fas fa-euro-sign"></i> {{ evenement.prix }}</span>
+                  <span>Gratuit</span>
                 {% endif %}
               </p>
+
               <p>
-                <i class="fas fa-map-marker-alt"></i>
-                {{ evenement.lieu }}
+                <i class="fas fa-map-marker-alt"></i> {{ evenement.lieu }}
               </p>
             </div>
           </div>
@@ -66,7 +53,7 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h2 class="modal-title text-center text-dark w-100" id="imageModalLabel{{ loop.index }}">{{ evenement.titre }}</h2>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
                   <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="{{ evenement.titre }}" class="img-fluid" />

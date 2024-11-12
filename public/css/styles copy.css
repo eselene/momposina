@@ -1,46 +1,28 @@
 /* public/css/styles.css */
 /* Variables */
 :root {
-    --background-color: #ffffff3a;
-    /* Blanc */
-    --background-color2: #8e9dac;
-    /* Bleu claire */
-    --font-family: 'Open Sans', sans-serif;
+    --background-color: black;
+    --font-family: Arial, sans-serif;
     --line-height: 1.5;
     --margin-bottom-p: 8px;
-    --border-color-hr: #FFFFFF;
+    --border-color-hr: #fff;
     --margin-hr: 1.5rem;
-    --text-color: #333333;
-    /* Gris foncé */
-    --text-orange: #FF5733;
-    /* Orange vif */
-    --text-white: #FFFFFF;
-    /* Blanc */
-    --text-yellow: #FFC300;
-    /* Jaune vif */
+    --text-color: white;
+    --text-yellow: yellow;
     --text-primary: #007bff;
-    --text-navbar: #FFFFFF;
     --container-max-width: 1200px;
+    --navbar-max-width: 1200px;
     --container-padding: 15px;
     --row-margin-bottom: 2rem;
-    --img-border-radius: .25rem;
-    --navbar-max-width: 1200px;
-    --navbar-background-color: #2C3E50;
-    /* Bleu foncé */
-    --btn-primary-bg: #FF5733;
-    /* Orange vif */
-    --btn-primary-border: #FF5733;
-    /* Orange vif */
-    --btn-primary-hover: #FFC300;
-    /* Jaune vif */
+    --img-border-radius: 5px;
+    --btn-danger-bg: #ff0000;
+    --btn-danger-border: #dc3545;
     --bg-light: #f8f9fa;
     --bg-bleu: #3696db;
     --bg-grey: #aaa7a7;
-    --footer-bg: #2C3E50;
-    /* Bleu foncé */
-    --footer-color: #FFFFFF;
-    /* Blanc */
-    --footer-padding: 20px 0;
+    --footer-bg: #333;
+    --footer-color: #fff;
+    --footer-padding: 20px;
     --footer-line-height: 1.2;
     --base-font-size: 16px;
     --font-scale: 1.2;
@@ -49,8 +31,7 @@
 /* Global Styles */
 body {
     background-color: var(--background-color);
-    color: var(--text-color);
-    /* Gris foncé */
+    color: var(--text-color) !important;
     font-family: var(--font-family);
     line-height: var(--line-height);
     font-size: var(--base-font-size);
@@ -61,38 +42,15 @@ p {
     margin-bottom: var(--margin-bottom-p);
 }
 
-h1,
-h2,
-.h2petit,
-h3,
-h4,
-h5,
-h6 {
-    font-family: 'Montserrat', sans-serif;
-    color: var(--text-color);
-    /* Gris foncé */
-}
-
-h1 {
-    /* font-size: 36px; */
-    font-weight: bold;
-}
-
-.h2,
-.h2petit,
-h2 {
+.h2, h2 {
     font-size: 1.5rem;
-    font-weight: semi-bold;
-    color: var(--text-orange);
-    /* Orange vif */
 }
 
 .h2petit {
     font-size: 1.2rem;
 }
 
-h3,
-.h3 {
+.h3, h3 {
     font-size: 1.25rem;
 }
 
@@ -106,8 +64,10 @@ hr {
     padding: 10px;
 }
 
+
+
 .text-white {
-    color: var(--text-white) !important;
+    color: var(--text-color) !important;
 }
 
 .text-black {
@@ -134,21 +94,6 @@ hr {
     font-size: calc(var(--base-font-size) * var(--font-scale));
 }
 
-.btn-primary {
-    background-color: var(--btn-primary-bg);
-    /* Orange vif */
-    border-color: var(--btn-primary-border);
-    /* Orange vif */
-    width: 100%;
-}
-
-.btn-primary:hover {
-    background-color: var(--btn-primary-hover);
-    /* Jaune vif */
-    border-color: var(--btn-primary-hover);
-    /* Jaune vif */
-}
-
 /* Layout Styles */
 .container {
     max-width: var(--container-max-width);
@@ -168,13 +113,7 @@ hr {
     width: 45%;
 }
 
-.fond {
-    background-color: var(--background-color2);
-}
-
-
-.col-lg-6,
-.col-md-12 {
+.col-lg-6, .col-md-12 {
     padding: 5vh 4vw;
 }
 
@@ -192,29 +131,20 @@ hr {
 /* Styles pour les étiquettes de formulaire */
 .form-label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 5px;    
     padding: var(--form-label-padding);
 }
 
 /* Styles pour les champs de saisie */
 .form-control {
-    border: 1px solid;
-    border-color: #DAF7A6;
-    /* Vert clair */
+    border: 1px solid #ccc;
     border-radius: 4px;
     width: 100%;
-    box-sizing: border-box;
+    box-sizing: border-box;    
     line-height: var(--line-height);
 }
 
-.form-control:focus {
-    border-color: var(--text-orange);
-    /* Orange vif */
-    box-shadow: 0 0 0 .2rem rgba(255, 87, 51, .25);
-    /* Orange vif */
-}
-
-/* Style pour les champs de saisie en ligne */
+/* Style pour les champs de saisie en ligne*/
 .form-check-label {
     margin-bottom: 0;
 }
@@ -222,16 +152,16 @@ hr {
 /* Style pour l'elément de bascule de mot de passe */
 .password-toggle {
     /* Positionne l'élément de manière absolue par rapport à son parent */
-    position: absolute;
+    position: absolute; 
     /* Place l'élément à 10px du bord droit du parent */
     right: 10px;
-    /* Place l'élément à 60% de la hauteur du parent */
-    top: 60%;
+    /* Place l'élément à 60% de la hauteur du parent */ 
+    top: 60%; 
     /* Centre verticalement l'élément */
-    transform: translateY(-50%);
+    transform: translateY(-50%); 
     cursor: pointer;
-    /* Assure que l'icône est au-dessus des autres éléments */
-    z-index: 2;
+    /* Assure que l'icône est au-dessus des autres éléments */ 
+    z-index: 2; 
 }
 
 .user-icon {
@@ -254,25 +184,6 @@ header .message {
     color: #333;
 }
 
-header .navbar-nav,
-.nav-link:hover {
-    color: var(--btn-primary-hover)
-        /* Jaune vif au survol */
-}
-
-a,
-a:link,
-a:visited {
-    color: var(--text-white);
-}
-
-a:hover {
-    color: var(--text-yellow);
-}
-
-a:active {
-    color: var(--text-orange);
-}
 
 /* Image Styles */
 .image-container {
@@ -320,6 +231,10 @@ img {
     border-radius: var(--img-border-radius);
 }
 
+button.btn-primary {
+    width: 100%;
+}
+
 .custom-btn {
     width: 95px;
     height: 40px;
@@ -331,6 +246,11 @@ img {
     font-size: calc(var(--base-font-size) * var(--font-scale));
     line-height: 1.5;
     border-radius: 0.25rem;
+}
+
+.btn-danger {
+    background-color: var(--btn-danger-bg);
+    border-color: var(--btn-danger-border);
 }
 
 .bg-light {
@@ -379,38 +299,13 @@ img {
     margin: 20px 0;
 }
 
-/* Footer styling */
-.footer {
+/* Footer Styles */
+footer {
     background-color: var(--footer-bg);
-    /* Gris foncé */
-    color: var(--footer-color);
-    /* Blanc */
+    /* color: var(--footer-color); */
     padding: var(--footer-padding);
     line-height: var(--footer-line-height);
 }
-
-.footer h3 {
-    color: var(--text-orange);
-    /* Orange vif */
-}
-
-.footer .fas,
-.fab {
-    color: #DAF7A6;
-    /* Vert clair pour les icônes */
-}
-
-/* List styling */
-.footer .list-inline-item a {
-    color: var(--text-white);
-    /* Blanc */
-}
-
-.footer .list-inline-item a:hover {
-    color: var(--text-orange);
-    /* Orange vif au survol */
-}
-
 
 .pagination .page-item.active .page-link {
     background-color: #ff0000;
@@ -434,7 +329,7 @@ img {
 .card {
     height: 100%;
     border: none;
-    max-width: 300px;
+    max-width: 300px; 
 }
 
 .card-title {
@@ -447,14 +342,12 @@ img {
 }
 
 .card-body {
-    border: none;
+    border: none; 
 
     /* border: 1px solid transparent;  */
-    overflow: hidden;
-    /* Ou 'auto' pour une barre de défilement */
+    overflow: hidden; /* Ou 'auto' pour une barre de défilement */
     text-overflow: ellipsis;
-    white-space: nowrap;
-    /* Évite le retour à la ligne */
+    white-space: nowrap; /* Évite le retour à la ligne */
     /* padding: 0.6rem !important; */
 }
 
@@ -463,60 +356,50 @@ img {
     margin-right: 15px;
 } */
 
-/* Style commun pour la barre de navigation et les éléments du menu déroulant */
-.navbar, .dropdown-item {
-    background-color: var(--navbar-background-color);
-}
-
-/* Style de la dropdown */
 .dropdown-menu {
     padding-top: 6px;
     padding-bottom: 6px;
 }
 
-/* Couleur de fond et du texte par défaut pour les dropdown-item */
-.dropdown-item {
-    color: #343a40; /* Couleur de texte foncée */
-}
-
 /* Style de survol pour les éléments du menu déroulant */
 .dropdown-item:hover {
-    background-color: #e81111;
-    color: #ffffff; /* Texte blanc pour un meilleur contraste */
+    background-color: #786161;
+    color: #721c24;
 }
 
-/* Style pour l'élément actif */
 .dropdown-item:active {
-    background-color: #87dd25; /* Couleur de fond au clic */
-    color: var(--text-primary); /* Couleur du texte au clic */
+    background-color: #f5c6cb;
+    /* Couleur de fond au clic */
+    color: var(--text-primary);
+    /* Couleur du texte au clic */
 }
 
-/* Autres styles pour la navbar */
+.dropdown-menu {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
 .navbar {
     max-width: var(--navbar-max-width);
     margin: 0 auto;
 }
 
-.navbar-brand {
-    margin: 0 auto; /* Centrer le logo */
-}
-
-.navbar-brand,
-.navbar-nav .nav-link {
-    color: var(--text-navbar); /* Blanc */
-}
-
 /* Style pour l'élément de navigation actif */
 .nav-item.active .nav-link {
+    color: var(--text-primary);
     font-weight: bold;
     border-bottom: 2px solid var(--text-primary);
 }
 
-/* Styles spécifiques pour les éléments de la navigation */
-.nav-link .dropdown-item, .nav-item.dropdown-item {
+
+.nav-link .dropdown-item {
     padding-top: 4px;
     padding-bottom: 4px;
-    border: none !important;
+}
+
+/* centrer le logo */
+.navbar-brand {
+    margin: 0 auto;
 }
 
 .scrolling-text {
@@ -554,17 +437,20 @@ img {
     z-index: 1020;
 }
 
+.card-img-top img {
+    cursor: pointer
+}
+
 /* Responsive Styles */
 @media (max-width: 480px) {
-
+    
     body {
-        font-size: 0.875em;
+        font-size: 0.875em; 
     }
-
-    .btn-primary {
+    .btn-danger {
         font-size: 0.8em;
     }
-
+    
     footer {
         padding: 10px;
         font-size: 12px;
@@ -580,7 +466,7 @@ img {
         object-fit: cover;
         border-radius: 0;
     }
-
+    
     .presentation-photo {
         height: 200px;
         max-height: 350px;
@@ -592,26 +478,6 @@ img {
         width: 100%;
         height: auto;
         object-fit: cover;
-        justify-content: center;
-        /* Centre horizontalement */
-        align-items: center;
-        /* Centre verticalement */
-        margin: 20px auto;
-        /* Marge en haut et en bas */
-        padding: 20px;
-        /* Ajoute un espace autour de l'image */
-        background-color: var(--background-color2);
-        /* Fond de l'image */
-        border-radius: 10px;
-    }
-
-    .card-img-top img {
-        max-width: 100%;
-        /* Ajuste la largeur de l'image */
-        height: auto;
-        /* Ajuste la hauteur automatiquement */
-        border-radius: 5px;
-        /* Arrondi les coins de l'image */
     }
 
     .card-body {
@@ -631,29 +497,10 @@ img {
     .card-title {
         font-size: 1em;
     }
-
-    .footer {
-        padding: 15px;
-        font-size: 8px;
-        line-height: 1;
-    }
-
-    /* Links */
-    a {
-        color: #FF5733;
-        /* Orange vif */
-    }
-
-    a:hover {
-        color: #FFC300;
-        /* Jaune vif */
-    }
 }
 
 @media (max-width: 575px) {
-
-    .h1,
-    h1 {
+    .h1, h1 {
         font-size: 2rem;
     }
 
@@ -675,9 +522,13 @@ img {
         margin: 0 auto;
         max-height: 250px;
     }
+
+    .footer {
+        padding: 15px;
+        font-size: 8px;
+        line-height: 1;
+    }
 }
-
-
 
 @media (max-width: 768px) {
     .logo img {
