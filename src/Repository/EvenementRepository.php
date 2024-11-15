@@ -34,6 +34,7 @@ class EvenementRepository extends ServiceEntityRepository
     public function findAllOrderByDateVisible(): array
     {
         return $this->createQueryBuilder('e')
+            ->select('e.id, e.titre, e.description, e.date, e.plageHeure, e.lieu, e.prix, e.photo1, e.visibleWeb')
             ->andWhere('e.visibleWeb = :visible')
             ->setParameter('visible', true)
             ->orderBy('e.date', 'DESC')

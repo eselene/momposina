@@ -1,33 +1,40 @@
 {% extends 'base.html.twig' %}
+{# templates/main/mainEvenement.html.twig #}
 
 {% block title %}
-  Événements
+  Événements - La Momposina Tienda Latina
+{% endblock %}
+
+{% block meta_description %}
+  Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année : repas, concerts, rencontres, et Fiesta Latina autour de l'environnement « Latino Grenoble ».
 {% endblock %}
 
 {% block body %}
-  <div class="container mt-2">
-    <h1 class="text-center">Liste des Événements</h1>
+  <div class="container-fluid mt-2 p-2">
+    <h1 class="text-center">Événements</h1>
 
     <div class="mb-2 pl-md-5">
-      <ul class="list-unstyled text-primary">
-        <li class="ml-3">Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année :</li>
+      <ul class="list-unstyled text-primary2">
+        <li class="ml-3">
+          Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année :
         <ul>
           <li>Repas, concerts, rencontres.</li>
           <li>Fiesta Latina autour de l’environnement « Latino Grenoble » !</li>
         </ul>
+        </li>
       </ul>
     </div>
 
     <div class="row">
       {% for evenement in pagination %}
-        <div class="col-md-4 col-sm-6 mb-3 fond">
-          <div class="card border-0 bg-dark text-white h-100 d-flex flex-column">
+        <div class="col-md-4 col-sm-6 mb-3 p-3 fond">
+          <div class="card border-2 bg-dark text-white h-100 d-flex flex-column">
             <div class="card-header text-center">{{ evenement.titre starts with 'Programme' ? evenement.titre : evenement.date|date('Y-m-d')|date_en_lettres }}</div>
-            <div class="card-img-top" style="height: 56%;">
-              <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="{{ evenement.titre }}" class="img-fluid h-100 w-100 object-fit-cover pointer" data-bs-toggle="modal" data-bs-target="#imageModal{{ loop.index }}" />
+            <div class="card-img-top">
+              <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="{{ evenement.titre }}" class="img-fluid h-100 w-100 object-fit-cover pointer" loading="lazy" data-bs-toggle="modal" data-bs-target="#imageModal{{ loop.index }}" width="600" height="400" />
             </div>
             <div class="card-body bg-white text-dark d-flex flex-column flex-grow-1">
-              <h2 class="card-title text-primary h2petit">{{ evenement.titre }}</h2>
+              <h2 class="card-title text-primary2">{{ evenement.titre }}</h2>
               <p>
                 <i class="fas fa-align-left"></i> {{ evenement.description }}
               </p>
@@ -41,24 +48,9 @@
                   <span>Gratuit</span>
                 {% endif %}
               </p>
-
               <p>
                 <i class="fas fa-map-marker-alt"></i> {{ evenement.lieu }}
               </p>
-            </div>
-          </div>
-
-          <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel{{ loop.index }}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h2 class="modal-title text-center text-dark w-100" id="imageModalLabel{{ loop.index }}">{{ evenement.titre }}</h2>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center">
-                  <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="{{ evenement.titre }}" class="img-fluid" />
-                </div>
-              </div>
             </div>
           </div>
         </div>

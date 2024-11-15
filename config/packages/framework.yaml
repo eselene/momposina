@@ -1,4 +1,5 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
+# config/packages/framework.yaml
 framework:
     secret: '%env(APP_SECRET)%'
     #csrf_protection: true
@@ -14,6 +15,10 @@ framework:
     #     default_path: '%kernel.project_dir%/translations'
     #     fallbacks:
     #         - fr   
+    cache: 
+        app: cache.adapter.filesystem 
+        system: cache.adapter.system 
+        directory: '%kernel.cache_dir%/pools'
 
     translator:
         enabled: false
@@ -26,3 +31,7 @@ when@test:
         test: true
         session:
             storage_factory_id: session.storage.factory.mock_file
+        cache: 
+            app: cache.adapter.filesystem 
+            system: cache.adapter.system 
+            directory: '%kernel.cache_dir%/pools'

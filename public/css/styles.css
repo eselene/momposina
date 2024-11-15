@@ -3,28 +3,28 @@
 :root {
     --background-color: #ffffff3a;
     /* Blanc */
-    --background-color2: #8e9dac;
+    --background-color2: #2C3E50;
     /* Bleu claire */
     --font-family: 'Open Sans', sans-serif;
     --line-height: 1.5;
     --margin-bottom-p: 8px;
     --border-color-hr: #FFFFFF;
     --margin-hr: 1.5rem;
-    --text-color: #333333;
+    --text-color: #39364f;
     /* Gris foncé */
     --text-orange: #FF5733;
     /* Orange vif */
     --text-white: #FFFFFF;
     /* Blanc */
-    --text-yellow: #FFC300;
+    --text-yellow: #FFD700;
     /* Jaune vif */
-    --text-primary: #007bff;
+    --text-primary2: #061627;
     --text-navbar: #FFFFFF;
     --container-max-width: 1200px;
-    --container-padding: 15px;
+    /* --container-padding: 15px; */
     --row-margin-bottom: 2rem;
     --img-border-radius: .25rem;
-    --navbar-max-width: 1200px;
+    /* --navbar-max-width: 1200px; */
     --navbar-background-color: #2C3E50;
     /* Bleu foncé */
     --btn-primary-bg: #FF5733;
@@ -37,9 +37,9 @@
     --bg-bleu: #3696db;
     --bg-grey: #aaa7a7;
     --footer-bg: #2C3E50;
-    /* Bleu foncé */
     --footer-color: #FFFFFF;
-    /* Blanc */
+    --footer-title-color: #FFD700; /* Jaune vif pour les titres */ 
+    --footer-link-hover: #FFD700;
     --footer-padding: 20px 0;
     --footer-line-height: 1.2;
     --base-font-size: 16px;
@@ -48,7 +48,7 @@
 
 /* Global Styles */
 body {
-    background-color: var(--background-color);
+    /* background-color: var(--background-color) !important; */
     color: var(--text-color);
     /* Gris foncé */
     font-family: var(--font-family);
@@ -60,42 +60,39 @@ body {
 p {
     margin-bottom: var(--margin-bottom-p);
 }
-
-h1,
-h2,
-.h2petit,
-h3,
-h4,
-h5,
-h6 {
-    font-family: 'Montserrat', sans-serif;
-    color: var(--text-color);
-    /* Gris foncé */
-}
-
-h1 {
-    /* font-size: 36px; */
+/* Base styles for all headings */
+h1, h2, .h2petit, h3, h4, h5, h6 {
+    font-family: 'Bebas Neue Bold', sans-serif;
+    color: var(--text-color); /* Dark gray */
+  }
+  
+  /* Specific styles for each heading level */
+  h1 {
+    font-size: 3rem; /* Adjust font size as needed */
     font-weight: bold;
-}
-
-.h2,
-.h2petit,
-h2 {
-    font-size: 1.5rem;
-    font-weight: semi-bold;
-    color: var(--text-orange);
-    /* Orange vif */
-}
-
-.h2petit {
-    font-size: 1.2rem;
-}
-
-h3,
-.h3 {
+  }
+  
+  .h2petit, h3 {
     font-size: 1.25rem;
-}
-
+    font-weight: semi-bold;
+    color: var(--text-jaune); /* Bright orange */
+  }
+  
+  /* Optional: Add more specific styles for h4, h5, and h6 if needed */
+  h4 {
+    font-size: 1.125rem;
+    font-weight: bold;
+  }
+  
+  h5 {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  h6 {
+    font-size: 0.875rem;
+    font-weight: bold;
+  }
 hr {
     border: 1px solid var(--border-color-hr);
     margin: var(--margin-hr) 0;
@@ -115,7 +112,7 @@ hr {
 }
 
 .text-primary {
-    color: var(--text-primary);
+    color: var(--text-primary2);
 }
 
 .text-justify {
@@ -170,6 +167,7 @@ hr {
 
 .fond {
     background-color: var(--background-color2);
+    /* background-color: rgb(122, 126, 128); */
 }
 
 
@@ -299,19 +297,21 @@ a:active {
     padding: 10px;
 }
 
-img {
+/* Global Image Styles */
+.img {
     width: 80%;
     height: auto;
     object-fit: cover;
     border-radius: var(--img-border-radius);
 }
 
-.logo img {
-    /* min-height: 70px; */
+/* Logo Specific Styles */
+.logo img{
     width: 100%;
-    max-width: 150px;
+    max-width: 150px; /* Ajustement de la taille du logo */
+    /* height: auto;
+    display: block; */
 }
-
 .fixed-size-image {
     max-width: 100%;
     max-height: 350px;
@@ -389,9 +389,9 @@ img {
     line-height: var(--footer-line-height);
 }
 
-.footer h3 {
-    color: var(--text-orange);
-    /* Orange vif */
+.footer-title { 
+    color: var(--footer-title-color); 
+    /* Couleur des titres */ 
 }
 
 .footer .fas,
@@ -400,18 +400,37 @@ img {
     /* Vert clair pour les icônes */
 }
 
+/* Ajouter des marges entre les éléments */ 
+.footer .col-md-3 { 
+    margin-bottom: 20px; /* Espace entre les colonnes */ 
+}
+
+.footer .row { 
+    margin-top: 20px; /* Espace entre les rangées */ 
+}
+
 /* List styling */
 .footer .list-inline-item a {
-    color: var(--text-white);
-    /* Blanc */
+    color: var(--footer-color);
 }
 
 .footer .list-inline-item a:hover {
-    color: var(--text-orange);
+    color: var(--footer-link-hover);
     /* Orange vif au survol */
 }
 
+.footer-link, .social-link { 
+    padding: 10px; /* Ajout de padding pour agrandir la zone cliquable */ 
+    margin: 5px; /* Ajout de marge pour espacer les éléments */ 
+    display: inline-block; 
+} 
 
+.footer-links a {
+     font-size: 1rem; 
+     padding: 12px 12px; 
+     display: inline-block; 
+}
+E
 .pagination .page-item.active .page-link {
     background-color: #ff0000;
     /* Rouge */
@@ -434,7 +453,7 @@ img {
 .card {
     height: 100%;
     border: none;
-    max-width: 300px;
+    /* max-width: 350px; */
 }
 
 .card-title {
@@ -488,12 +507,12 @@ img {
 /* Style pour l'élément actif */
 .dropdown-item:active {
     background-color: #87dd25; /* Couleur de fond au clic */
-    color: var(--text-primary); /* Couleur du texte au clic */
+    color: var(--text-primary2); /* Couleur du texte au clic */
 }
 
 /* Autres styles pour la navbar */
 .navbar {
-    max-width: var(--navbar-max-width);
+    /* max-width: var(--navbar-max-width); */
     margin: 0 auto;
 }
 
@@ -509,7 +528,7 @@ img {
 /* Style pour l'élément de navigation actif */
 .nav-item.active .nav-link {
     font-weight: bold;
-    border-bottom: 2px solid var(--text-primary);
+    border-bottom: 2px solid var(--text-primary2);
 }
 
 /* Styles spécifiques pour les éléments de la navigation */
@@ -554,9 +573,8 @@ img {
     z-index: 1020;
 }
 
-/* Responsive Styles */
+/* Styles Responsives */
 @media (max-width: 480px) {
-
     body {
         font-size: 0.875em;
     }
@@ -565,100 +583,54 @@ img {
         font-size: 0.8em;
     }
 
-    footer {
+    footer, .footer {
         padding: 10px;
-        font-size: 12px;
+    }
+
+    .footer-link, .social-link { 
+        padding: 15px; /* Augmentation du padding pour les petits écrans */ 
+        margin: 8px; /* Augmentation de la marge pour les petits écrans */ 
+        text-decoration: none; /* Pour améliorer la lisibilité des liens */
+    }
+
+    .footer-links a { 
+        font-size: 1.1rem; /* Augmentation de la taille de police pour les petits écrans */ 
+        padding: 16px 20px; /* Augmentation du padding pour une meilleure accessibilité sur les petits écrans */
     }
 
     #btn-en-savoir-plus {
         display: inline-block;
     }
 
-    .image-container {
+    .image-container, .presentation-photo {
         width: 100%;
         max-height: 200px;
         object-fit: cover;
         border-radius: 0;
     }
 
-    .presentation-photo {
-        height: 200px;
-        max-height: 350px;
-        object-fit: cover;
-    }
-
-
-    .card-img-top {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        justify-content: center;
-        /* Centre horizontalement */
-        align-items: center;
-        /* Centre verticalement */
-        margin: 20px auto;
-        /* Marge en haut et en bas */
-        padding: 20px;
-        /* Ajoute un espace autour de l'image */
-        background-color: var(--background-color2);
-        /* Fond de l'image */
-        border-radius: 10px;
-    }
-
-    .card-img-top img {
-        max-width: 100%;
-        /* Ajuste la largeur de l'image */
-        height: auto;
-        /* Ajuste la hauteur automatiquement */
-        border-radius: 5px;
-        /* Arrondi les coins de l'image */
-    }
-
-    .card-body {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 0.1rem;
-        max-height: 130px;
-        overflow-y: auto;
-        border: none !important;
-    }
-
-    .card-body * {
-        border: none !important;
-    }
-
-    .card-title {
-        font-size: 1em;
-    }
-
     .footer {
         padding: 15px;
-        font-size: 8px;
         line-height: 1;
     }
 
-    /* Links */
+    /* Liens */
     a {
-        color: #FF5733;
-        /* Orange vif */
+        color: #FF5733; /* Orange vif */
     }
 
     a:hover {
-        color: #FFC300;
-        /* Jaune vif */
+        color: #FFC300; /* Jaune vif */
+        text-decoration: underline; /* Améliorer l'indication de l'interaction */
     }
 }
 
 @media (max-width: 575px) {
-
-    .h1,
-    h1 {
+    .h1, h1 {
         font-size: 2rem;
     }
 
-    .col-lg-4,
-    .col-md-6 {
+    .col-lg-4, .col-md-6 {
         flex: 0 0 100%;
     }
 
@@ -677,43 +649,34 @@ img {
     }
 }
 
-
-
 @media (max-width: 768px) {
-    .logo img {
+    /* .logo img {
         max-width: 100px;
-    }
+    } */
 
-    .col-3 {
-        /* Pour s'assurer que le logo ne soit pas trop petit */
-        flex-basis: auto;
-    }
+    /* .col-3 {
+        flex-basis: auto; /* Pour s'assurer que le logo ne soit pas trop petit */
+    } */
 
     .image-container {
-        /* Pour s'adapter aux petits écrans */
-        width: auto;
+        width: auto; /* Pour s'adapter aux petits écrans */
         height: auto;
     }
-}
 
 @media (min-width: 992px) {
     .navbar .col-2 {
-        /* Réduit la taille de l'icône */
-        flex: 0 0 15%;
+        flex: 0 0 15%; /* Réduit la taille de l'icône */
     }
 
     .navbar .col-7 {
-        /* Laisse plus d'espace au centre pour les liens */
-        flex: 0 0 70%;
+        flex: 0 0 70%; /* Laisse plus d'espace au centre pour les liens */
     }
 
     .navbar .col-1 {
-        /* Ajustez la largeur du bouton mobile */
-        flex: 0 0 15%;
+        flex: 0 0 15%; /* Ajustez la largeur du bouton mobile */
     }
 
     .middle-section {
         max-width: 80vw;
     }
-
 }
