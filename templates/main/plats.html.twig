@@ -21,7 +21,7 @@
               <img src="{{ asset('images/' ~ plat.photo1) }}" class="card-img-top embed-responsive-item" data-toggle="modal" data-target="#imageModal{{ loop.index }}" />
             </div>
 
-            <div class="card-body bg-bleu">
+            <div class="card-body bg-blue">
               <h2 class="card-title">{{ plat.nom }}</h2>
               {% set description = plat.description|split('.') %}
               <p class="card-text">{{ description[0] }}.</p>

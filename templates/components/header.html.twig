@@ -5,7 +5,7 @@
         <!-- Logo Section -->
         <div class="col-2 d-flex align-items-center">
           <a class="navbar-brand" href="{{ path('app_evenements') }}">
-            <img src="{{ asset('images/logo/momposina.png') }}" alt="Logo La Momposina Tienda Latina" class="logo img-fluid" width="150" height="75" />
+            <img src="{{ asset('images/logo/momposina.png') }}" alt="Logo La Momposina Tienda Latina" class="logo img-fluid" width="80" height="75" />
           </a>
         </div>
 
@@ -87,6 +87,7 @@
                 <div class="dropdown-menu" aria-labelledby="adminDropdown">
                   <a class="dropdown-item" href="{{ path('app_evenement_index') }}">Événement</a>
                   <a class="dropdown-item" href="{{ path('app_produit_index') }}">Produits</a>
+                  <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
                 </div>
               </li>
               {% endif %}

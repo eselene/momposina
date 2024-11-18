@@ -10,31 +10,26 @@
 {% endblock %}
 
 {% block body %}
-  <div class="container-fluid mt-2 p-2">
-    <h1 class="text-center">Événements</h1>
-
-    <div class="mb-2 pl-md-5">
-      <ul class="list-unstyled text-primary2">
-        <li class="ml-3">
-          Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année :
-        <ul>
-          <li>Repas, concerts, rencontres.</li>
-          <li>Fiesta Latina autour de l’environnement « Latino Grenoble » !</li>
-        </ul>
-        </li>
+  <div class="container-fluid m-0 p-0">
+    <div class="bg-light text-center">
+      <h1 class="text-center p-1">Événements</h1>
+      <p class="ml-2">Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année :</p>
+      <ul class="list-unstyled m-0 pt-0 pb-1">
+        <li>Repas, concerts, rencontres,...</li>
+        <li>Fiesta Latina autour de l’environnement « Latino Grenoble » !</li>
       </ul>
     </div>
 
-    <div class="row">
+    <div class="row bg-light m-0 p-1">
       {% for evenement in pagination %}
-        <div class="col-md-4 col-sm-6 mb-3 p-3 fond">
+        <div class="col-md-4 col-sm-6 mb-1 p-1 bg-yellow">
           <div class="card border-2 bg-dark text-white h-100 d-flex flex-column">
             <div class="card-header text-center">{{ evenement.titre starts with 'Programme' ? evenement.titre : evenement.date|date('Y-m-d')|date_en_lettres }}</div>
             <div class="card-img-top">
               <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="{{ evenement.titre }}" class="img-fluid h-100 w-100 object-fit-cover pointer" loading="lazy" data-bs-toggle="modal" data-bs-target="#imageModal{{ loop.index }}" width="600" height="400" />
             </div>
             <div class="card-body bg-white text-dark d-flex flex-column flex-grow-1">
-              <h2 class="card-title text-primary2">{{ evenement.titre }}</h2>
+              <h2 class="card-title text-primary">{{ evenement.titre }}</h2>
               <p>
                 <i class="fas fa-align-left"></i> {{ evenement.description }}
               </p>
@@ -56,7 +51,7 @@
         </div>
       {% endfor %}
     </div>
-    <div class="pagination">{{ knp_pagination_render(pagination) }}</div>
+    <div class="pagination mt-0 mb-3 p-2 bg-light">{{ knp_pagination_render(pagination) }}</div>
     {% include 'components/findUs.html.twig' %}
   </div>
 {% endblock %}

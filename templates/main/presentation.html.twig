@@ -1,132 +1,95 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Présentation{% endblock %}
+{% block title %}
+  Présentation
+{% endblock %}
+
+{% block meta_description %}
+  Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année : repas, concerts, rencontres, et Fiesta Latina autour de l'environnement « Latino Grenoble ».
+{% endblock %}
 
 {% block body %}
-<div class="container">
+  <div class="container-fluid m-0 p-0">
     <!-- Section presentation -->
-    <section class="row">
-        <div class="col-md-8 mb-3 mb-md-0">
-            <h1 class="text-warning">L'Amérique Latine à Grenoble</h1>
-            <div class="text-justify">
-                <p>
-                    Venez découvrir la Momposina Tienda Latina et vivez une expérience latino unique. Voyagez à travers
-                    l'Amérique Latine et dégustez multiples plats traditionnels. Vous trouverez tous les ingrédients
-                    nécessaires à sa réalisation sur place pour manger des délicieuses empanadas maison mais d'abord vous irez
-                    faire un tour aux plages du Brésil pour boire un cocktail de Cachaça.
-                </p>
-                <div class="col-md-4 d-flex flex-column align-items-end mt-0">
-                    <button id="btn-en-savoir-plus" class="btn btn-danger">En savoir plus</button>
-                </div>
+    <div class="bg-light pl-3 pr-3">
+      <section class="row mt-0 pt-3">
+        <div class="col-md-8 mb-3">
+          <h1>L'Amérique Latine à Grenoble</h1>
+          <div class="text-justify">
+            <p>Venez découvrir la Momposina Tienda Latina et vivez une expérience latino unique. Voyagez à travers l'Amérique Latine et dégustez multiples plats traditionnels. Vous trouverez tous les ingrédients nécessaires à sa réalisation sur place pour manger des délicieuses empanadas maison mais d'abord vous irez faire un tour aux plages du Brésil pour boire un cocktail de Cachaça.</p>
+            <div class="col-md-4 d-flex flex-column align-items-end mt-0">
+              <button id="btn-en-savoir-plus" class="btn btn-danger">En savoir plus</button>
             </div>
-            <div id="moreText" class="d-none mt-1">
-                <p class="text-justify">
-                    Au menu, nous vous proposons un arrêt en Colombie. En option non alcoolisé, nous vous proposons de faire
-                    un saut en Argentine pour boire un bon Maté! En remontant la côte, vous vous arrêterez au Pérou pour
-                    visiter le Machu Picchu et la verdure vous fera penser à toutes les épices que vous avez envie de goûter.
-                    Un marchand vous parlera alors du vin chilien et votre curiosité vous poussera à boire un verre de rouge
-                    tout en regardant le plus grand festival de musique!
+          </div>
+          <div id="moreText" class="d-none mt-1">
+            <p class="text-justify">Au menu, nous vous proposons un arrêt en Colombie. En option non alcoolisé, nous vous proposons de faire un saut en Argentine pour boire un bon Maté! En remontant la côte, vous vous arrêterez au Pérou pour visiter le Machu Picchu et la verdure vous fera penser à toutes les épices que vous avez envie de goûter. Un marchand vous parlera alors du vin chilien et votre curiosité vous poussera à boire un verre de rouge tout en regardant le plus grand festival de musique!
 
-                    Au lever du soleil, vous déjeunerez avec toute sorte de jus exotiques et du fromage frais. La Salsa et
-                    les musiques tropicales vous feront rêver de Cuba et ses incontournables rhums. Mais pour le moment,
-                    c'est l'heure du goûter et vous vous arrêterez au Venezuela pour manger une arepa sans gluten. Pour être
-                    sûr de tenir la Fiesta du soir, vous commanderez une tasse de café guatémaltèque. Et à ce moment-là,
-                    détendu et calme, vous vous poserez une seule question: Si je mange une tortilla mexicaine et la sauce
-                    est trop piquante... Est-ce qu'une bonne Tequila fera l'affaire?
-                </p>
-            </div>
+              Au lever du soleil, vous déjeunerez avec toute sorte de jus exotiques et du fromage frais. La Salsa et les musiques tropicales vous feront rêver de Cuba et ses incontournables rhums. Mais pour le moment, c'est l'heure du goûter et vous vous arrêterez au Venezuela pour manger une arepa sans gluten. Pour être sûr de tenir la Fiesta du soir, vous commanderez une tasse de café guatémaltèque. Et à ce moment-là, détendu et calme, vous vous poserez une seule question: Si je mange une tortilla mexicaine et la sauce est trop piquante... Est-ce qu'une bonne Tequila fera l'affaire?</p>
+          </div>
         </div>
         <div class="col-md-4 text-center">
-            <img src="{{ asset('images/presentation/ameriqueGre.jpeg') }}" alt="Proposition momposina"
-                class="img-fluid rounded presentation-photo text-center"/>
+          <img src="{{ asset('images/presentation/ameriqueGre.jpeg') }}" alt="Proposition momposina" class="img-fluid text-center" />
         </div>
-    </section>
-    <hr class="my-2"/>
+      </section>
+      <hr class="my-1" />
 
-    <!-- Section Histoire -->
-    <section class="row">
+      <!-- Section Histoire -->
+      <section class="row">
         <div class="d-md-flex justify-content-between align-items-center">
-        <div class="col-md-8 mb-3 mb-md-0">
-            <h2 class="text-primary2">Histoire</h2>
-            <p class="text-justify">
-                    Avant l'épicerie, une association. La Momposina, association franco-colombienne a été créée en 2006
-                    par
-                    Andrea
-                    Puentes. Elle a pour propos de faciliter les échanges entre les deux pays à travers des événements
-                    socio-culturels. Le projet Momposina Tienda Latina est né de la nécessité de la communauté d'un
-                    endroit
-                    physique
-                    pour concrétiser des échanges gastronomiques.
-            </p>
+          <div class="col-md-8 mb-3 mb-md-0">
+            <h2 class="text-primary">Histoire</h2>
+            <p class="text-justify">Avant l'épicerie, une association. La Momposina, association franco-colombienne a été créée en 2006 par Andrea Puentes. Elle a pour propos de faciliter les échanges entre les deux pays à travers des événements socio-culturels. Le projet Momposina Tienda Latina est né de la nécessité de la communauté d'un endroit physique pour concrétiser des échanges gastronomiques.</p>
+          </div>
+          <div class="col-md-4 text-center">
+            <img src="{{ asset('images/presentation/histoire.jpeg') }}" alt="Histoire" class="img-fluid text-center" />
+          </div>
         </div>
-            <div class="col-md-4 text-center">
-                <img src="{{ asset('images/presentation/histoire.jpeg') }}" alt="Histoire"
-                    class="img-fluid rounded presentation-photo text-center"/>
-            </div>
-        </div>
-        <hr class="my-1"/>
-    </section>
-    <hr class="my-2"/>
+        <hr class="my-1" />
+      </section>
+      <hr class="my-1" />
 
-    <!-- Section Qui sommes-nous -->
-    <section class="row">
+      <!-- Section Qui sommes-nous -->
+      <section class="row">
         <div class="d-md-flex justify-content-between align-items-center">
-            <div class="col-md-8 mb-3 mb-md-0">
-                <h2 class="text-primary2">Qui sommes-nous ?</h2>
-                <p class="text-justify">
-                    L'épicerie est gérée par Xiomara et Andrea Puentes, deux sœurs colombiennes passionnées de leur
-                    culture
-                    qui se
-                    sont investies pour créer des liens entre la communauté latino-américaine et qui ont pour objectif
-                    de
-                    faire
-                    découvrir à la France les délices d'Amérique Latine.
-                </p>
-            </div>
-            <div class="col-md-4 text-center">
-                <img src="{{ asset('images/presentation/sommes.jpeg') }}" alt="Qui est momposina"
-                    class="img-fluid rounded presentation-photo text-center"/>
-            </div>
+          <div class="col-md-8 mb-3 mb-md-0">
+            <h2 class="text-primary">Qui sommes-nous ?</h2>
+            <p class="text-justify">L'épicerie est gérée par Xiomara et Andrea Puentes, deux sœurs colombiennes passionnées de leur culture qui se sont investies pour créer des liens entre la communauté latino-américaine et qui ont pour objectif de faire découvrir à la France les délices d'Amérique Latine.</p>
+          </div>
+          <div class="col-md-4 text-center">
+            <img src="{{ asset('images/presentation/sommes.jpeg') }}" alt="Qui est momposina" class="img-fluid text-center" />
+          </div>
         </div>
-        <hr class="my-1"/>
-    </section>
-    <hr class="my-2"/>
+        <hr class="my-1" />
+      </section>
+      <hr class="my-1" />
 
-    <!-- Section Qu'avons-nous à proposer -->
-    <section class="row">
+      <!-- Section Qu'avons-nous à proposer -->
+      <section class="row p-1">
         <div class="d-md-flex justify-content-between align-items-center">
-            <div class="col-md-8 mb-3 mb-md-0">
-                <h2 class="text-primary2">Qu'avons-nous à proposer ?</h2>
-                <p class="text-justify">
-                    L'épicerie est gérée par Xiomara et Andrea Puentes, deux sœurs colombiennes passionnées de leur
-                    culture
-                    qui se
-                    sont investies pour créer des liens entre la communauté latino-américaine et qui ont pour objectif
-                    de
-                    faire
-                    découvrir à la France les délices d'Amérique Latine.
-                </p>
-            </div>
-            <div class="col-md-4 text-center">
-                <img src="{{ asset('images/presentation/proposition.jpeg') }}" alt="Proposition momposina"
-                    class="img-fluid rounded presentation-photo text-center"/>
-            </div>
+          <div class="col-md-8 mb-3 mb-md-0">
+            <h2 class="text-primary">Qu'avons-nous à proposer ?</h2>
+            <p class="text-justify">L'épicerie est gérée par Xiomara et Andrea Puentes, deux sœurs colombiennes passionnées de leur culture qui se sont investies pour créer des liens entre la communauté latino-américaine et qui ont pour objectif de faire découvrir à la France les délices d'Amérique Latine.</p>
+          </div>
+          <div class="col-md-4 text-center pb-1">
+            <img src="{{ asset('images/presentation/proposition.jpeg') }}" alt="Proposition momposina" class="img-fluid text-center" />
+          </div>
         </div>
-        <hr class="my-1"/>
-    </section>
-    <hr class="my-2"/>
+      </section>
+    </div>
 
-    <!-- Section Retrouvez-nous -->
-    <section class="row find-us mt-4">
+    <div>
+      <!-- Section Retrouvez-nous -->
+      <section class="find-us">
         {% include 'components/findUs.html.twig' %}
-    </section>
-</div>
+      </section>
+    </div>
 
-<script>
-    // "En savoir plus" button click event
-    document.getElementById('btn-en-savoir-plus').addEventListener('click', function () {
-        document.getElementById('moreText').classList.remove('d-none');
-        this.style.display = 'none';
-    });
-</script>
+    <script>
+      // "En savoir plus" button click event
+      document.getElementById('btn-en-savoir-plus').addEventListener('click', function () {
+        document.getElementById('moreText').classList.remove('d-none')
+        this.style.display = 'none'
+      })
+    </script>
+  </div>
 {% endblock %}

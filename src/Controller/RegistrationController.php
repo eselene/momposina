@@ -20,42 +20,42 @@ use App\Security\AppAuthenticator;
 
 class RegistrationController extends AbstractController
 {
-    #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $passwordHasher, UserAuthenticatorInterface $userAuthenticator, AppAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
-    {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
-        // dd($request->request->all());
+//     #[Route('/register', name: 'app_register')]
+//     public function register(Request $request, UserPasswordHasherInterface $passwordHasher, UserAuthenticatorInterface $userAuthenticator, AppAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+//     {
+//         $user = new User();
+//         $form = $this->createForm(RegistrationFormType::class, $user);
+//         $form->handleRequest($request);
+//         // dd($request->request->all());
         
-        // Vérifiez si le formulaire est soumis et valide        
-        if ($form->isSubmitted() && $form->isValid()) {
-            try {
-                $user->setPassword(
-                    $passwordHasher->hashPassword(
-                        $user,
-                        $form->get('plainPassword')->getData()
-                    )
-                );
+//         // Vérifiez si le formulaire est soumis et valide        
+//         if ($form->isSubmitted() && $form->isValid()) {
+//             try {
+//                 $user->setPassword(
+//                     $passwordHasher->hashPassword(
+//                         $user,
+//                         $form->get('plainPassword')->getData()
+//                     )
+//                 );
 
-                $entityManager->persist($user);
-                $entityManager->flush();
+//                 $entityManager->persist($user);
+//                 $entityManager->flush();
 
-                $this->addFlash('success', 'Your account has been created. Please check your email to verify your account.');
+//                 $this->addFlash('success', 'Your account has been created. Please check your email to verify your account.');
                 
-                return $userAuthenticator->authenticateUser(
-                    $user,
-                    $authenticator,
-                    $request
-                );
-            } catch (\Exception $e) {
-                $this->addFlash('error', 'There was a problem creating your account.');
-            }
-        }
+//                 return $userAuthenticator->authenticateUser(
+//                     $user,
+//                     $authenticator,
+//                     $request
+//                 );
+//             } catch (\Exception $e) {
+//                 $this->addFlash('error', 'There was a problem creating your account.');
+//             }
+//         }
 
-        return $this->render('security/login_register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
-    }
-}
+//         return $this->render('security/login_register.html.twig', [
+//             'registrationForm' => $form->createView(),
+//         ]);
+//     }
+ }
 
