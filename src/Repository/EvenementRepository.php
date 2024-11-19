@@ -22,7 +22,7 @@ class EvenementRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('e')
             ->orderBy('e.date', 'DESC')
-            ->setMaxResults(10)
+            // ->setMaxResults(10)
             ->getQuery()
             ->getResult();             
     }
@@ -31,7 +31,7 @@ class EvenementRepository extends ServiceEntityRepository
    /**
     * @return Evenement[] Returns an array of Evenement objects
     */
-    public function findAllOrderByDateVisible(): array
+    public function findAllOrderByDateVisibleByTen(): array
     {
         return $this->createQueryBuilder('e')
             ->select('e.id, e.titre, e.description, e.date, e.plageHeure, e.lieu, e.prix, e.photo1, e.visibleWeb')

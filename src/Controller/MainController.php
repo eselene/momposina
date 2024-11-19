@@ -26,7 +26,7 @@ class MainController extends AbstractController
     public function home(EvenementRepository $evenementRepository, PaginatorInterface $paginator, Request $request): Response
     {
         setlocale(LC_TIME, 'fr_FR.UTF-8');
-        $query = $evenementRepository->findAllOrderByDateVisible();
+        $query = $evenementRepository->findAllOrderByDateVisibleByTen();
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
