@@ -8,6 +8,7 @@
     --blue-accesibilite: #3696db;
     --dark-blue: #0b3c6c;
     --orange: #FF5733;
+    --rouge: #ff0000;
     --yellow: #FFD700;
     --ligth-green: #DAF7A6;
     --light-gray: #d6d9da;
@@ -399,10 +400,9 @@ a:active {
 }
 
 .pagination .page-item.active .page-link {
-    background-color: #ff0000;
-    /* Rouge */
+    background-color: var(--rouge);
     /* border-color: #ff0000; */
-    color: #ffffff;
+    color: var(--white);
     /* Blanc */
 }
 
@@ -439,6 +439,7 @@ a:active {
     border: none;
     overflow-y: auto;
     height: 200px;
+    color: var(--light-gray);
     /* Ou 'auto' pour une barre de défilement */
     /* text-overflow: ellipsis; */
     white-space: nowrap;
@@ -639,6 +640,10 @@ a:active {
 
     h4 {
         font-size: 1rem;
+    }
+    
+    p {
+        font-size: 14px;
     }
 
     /* p {

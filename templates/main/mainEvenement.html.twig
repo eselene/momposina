@@ -24,8 +24,8 @@
     <div class="row bg-light p-2 mt-0">
       {% for evenement in pagination %}
         <div class="col-md-6 col-sm-12 mb-3 p-2">
-          <div class="card rounded-top text-white h-100 d-flex flex-column">
-            <div class="card-header text-center">{{ evenement.titre starts with 'Programme' ? evenement.titre : evenement.date|date('Y-m-d')|date_en_lettres }}</div>
+          <div class="card rounded-top h-100 d-flex flex-column">
+            <div class="card-header text-primary text-center">{{ evenement.titre starts with 'Programme' ? evenement.titre : evenement.date|date('Y-m-d')|date_en_lettres }}</div>
             <div class="card-img-top">
               <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="{{ evenement.titre }}" class="img-fluid h-auto w-100 object-fit-cover" width="400" height="200" loading="lazy" />
             </div>
