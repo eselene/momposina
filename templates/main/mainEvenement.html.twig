@@ -24,10 +24,10 @@
     <div class="row bg-light p-2 mt-0">
       {% for evenement in pagination %}
         <div class="col-md-6 col-sm-12 mb-3 p-2">
-          <div class="card text-white h-100 d-flex flex-column">
-            <div class="card-header rounded rounded-top text-center">{{ evenement.titre starts with 'Programme' ? evenement.titre : evenement.date|date('Y-m-d')|date_en_lettres }}</div>
+          <div class="card rounded-top text-white h-100 d-flex flex-column">
+            <div class="card-header text-center">{{ evenement.titre starts with 'Programme' ? evenement.titre : evenement.date|date('Y-m-d')|date_en_lettres }}</div>
             <div class="card-img-top">
-              <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="{{ evenement.titre }}" class="img-fluid h-auto w-100 object-fit-cover" width="400" height="200" loading="lazy" data-bs-toggle="modal" data-bs-target="#imageModal{{ loop.index }}" />
+              <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="{{ evenement.titre }}" class="img-fluid h-auto w-100 object-fit-cover" width="400" height="200" loading="lazy" />
             </div>
             <div class="card-body d-flex flex-column flex-grow-1">
               <h2 class="card-title text-primary">{{ evenement.titre }}</h2>
@@ -57,7 +57,7 @@
       {% endfor %}
     </div>
 
-    <div class="pagination mt-0 mb-3 p-2 bg-light">{{ knp_pagination_render(pagination) }}</div>
+    <div class="pagination bg-light mt-0 mb-3 p-2 pr-0">{{ knp_pagination_render(pagination) }}</div>
 
     {% include 'components/findUs.html.twig' %}
   </div>

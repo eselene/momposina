@@ -62,7 +62,7 @@ h1 {
 
 .h2petit,
 h2,
-h3 {
+h3,h4 {
     font-size: 1.25rem;
     font-weight: semi-bold;
     /* color: var(--orange); */
@@ -254,7 +254,7 @@ a:active {
     width: 80%;
     height: auto;
     object-fit: cover;
-    border-radius: var(--img-border-radius);
+    /* border-radius: var(--img-border-radius); */
 }
 
 /* Logo Specific Styles */
@@ -271,7 +271,7 @@ a:active {
     max-height: 350px;
     height: auto;
     object-fit: contain;
-    border-radius: var(--img-border-radius);
+    /* border-radius: var(--img-border-radius); */
 }
 
 .custom-btn {
@@ -401,7 +401,7 @@ a:active {
 .pagination .page-item.active .page-link {
     background-color: #ff0000;
     /* Rouge */
-    border-color: #ff0000;
+    /* border-color: #ff0000; */
     color: #ffffff;
     /* Blanc */
 }
@@ -409,7 +409,7 @@ a:active {
 .pagination .page-item .page-link {
     color: #000000;
     /* Noir */
-    border: 1px solid #007bff;
+    /* border: 1px solid #007bff; */
     /* blue clair */
 }
 
@@ -421,7 +421,7 @@ a:active {
     margin: 0 auto;
     /* Centre horizontalement */
     height: 100%;
-    border: none;
+    /* border: none; */
     max-width: 350px;
 }
 
