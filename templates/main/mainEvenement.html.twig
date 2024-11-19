@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+
 {# templates/main/mainEvenement.html.twig #}
 
 {% block title %}
@@ -10,39 +11,43 @@
 {% endblock %}
 
 {% block body %}
-  <div class="container-fluid m-0 p-0">
-    <div class="bg-light text-center">
-      <h1 class="text-center p-1">Événements</h1>
-      <p class="ml-2">Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année :</p>
-      <ul class="list-unstyled m-0 pt-0 pb-1">
-        <li>Repas, concerts, rencontres,...</li>
-        <li>Fiesta Latina autour de l’environnement « Latino Grenoble » !</li>
-      </ul>
+  <div class="container-fluid p-0">
+    <div class="bg-light text-center py-4">
+      <h1 class="text-center pb-2">Événements</h1>
+      <p class="lead">
+      Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année :<br>
+      Repas, concerts, rencontres,...<br>
+      Fiesta Latina autour de l’environnement « Latino Grenoble » !
+      </p>
     </div>
 
-    <div class="row bg-light m-0 p-1">
+    <div class="row bg-light p-2 mt-0">
       {% for evenement in pagination %}
-        <div class="col-md-4 col-sm-6 mb-1 p-1 bg-yellow">
-          <div class="card border-2 bg-dark text-white h-100 d-flex flex-column">
-            <div class="card-header text-center">{{ evenement.titre starts with 'Programme' ? evenement.titre : evenement.date|date('Y-m-d')|date_en_lettres }}</div>
+        <div class="col-md-6 col-sm-12 mb-3 p-2">
+          <div class="card text-white h-100 d-flex flex-column">
+            <div class="card-header rounded rounded-top text-center">{{ evenement.titre starts with 'Programme' ? evenement.titre : evenement.date|date('Y-m-d')|date_en_lettres }}</div>
             <div class="card-img-top">
-              <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="{{ evenement.titre }}" class="img-fluid h-100 w-100 object-fit-cover pointer" loading="lazy" data-bs-toggle="modal" data-bs-target="#imageModal{{ loop.index }}" width="600" height="400" />
+              <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="{{ evenement.titre }}" class="img-fluid h-auto w-100 object-fit-cover" width="400" height="200" loading="lazy" data-bs-toggle="modal" data-bs-target="#imageModal{{ loop.index }}" />
             </div>
-            <div class="card-body bg-white text-dark d-flex flex-column flex-grow-1">
+            <div class="card-body d-flex flex-column flex-grow-1">
               <h2 class="card-title text-primary">{{ evenement.titre }}</h2>
               <p>
                 <i class="fas fa-align-left"></i> {{ evenement.description }}
               </p>
-              <p>
-                {% if evenement.plageHeure %}
-                  <i class="fas fa-clock"></i> <span class="mr-4">{{ evenement.plageHeure }}</span>
-                {% endif %}
-                {% if evenement.prix > 0 %}
-                  <span><i class="fas fa-euro-sign"></i> {{ evenement.prix|number_format(2, ',', ' ') }}</span>
-                {% else %}
-                  <span>Gratuit</span>
-                {% endif %}
-              </p>
+              <div class="d-flex justify-content-between">
+                <p>
+                  {% if evenement.plageHeure %}
+                    <i class="fas fa-clock"></i> <span class="mr-4">{{ evenement.plageHeure }}</span>
+                  {% endif %}
+                </p>
+                <p>
+                  {% if evenement.prix > 0 %}
+                    <span><i class="fas fa-euro-sign"></i> {{ evenement.prix|number_format(2, ',', ' ') }}</span>
+                  {% else %}
+                    <span>Gratuit</span>
+                  {% endif %}
+                </p>
+              </div>
               <p>
                 <i class="fas fa-map-marker-alt"></i> {{ evenement.lieu }}
               </p>
@@ -51,7 +56,9 @@
         </div>
       {% endfor %}
     </div>
+
     <div class="pagination mt-0 mb-3 p-2 bg-light">{{ knp_pagination_render(pagination) }}</div>
+
     {% include 'components/findUs.html.twig' %}
   </div>
 {% endblock %}

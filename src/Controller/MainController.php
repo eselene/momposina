@@ -20,7 +20,7 @@ class MainController extends AbstractController
 {
     private const ALIM = 'Alimentation';
     private const BOISSON = 'Boisson';  
-    private const ELEMENTS_PAR_PAGE = 2; 
+    private const ELEMENTS_PAR_PAGE = 4; 
 
     #[Route('/', name: 'app_evenements')]
     public function home(EvenementRepository $evenementRepository, PaginatorInterface $paginator, Request $request): Response

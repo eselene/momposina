@@ -60,7 +60,8 @@ h1 {
     font-weight: bold;
 }
 
-.h2petit, h2,
+.h2petit,
+h2,
 h3 {
     font-size: 1.25rem;
     font-weight: semi-bold;
@@ -240,8 +241,7 @@ a:active {
     width: 600px;
 }
 
-.image-container_prod img,
-.image {
+.image-container_prod img, .image {
     max-width: 100%;
     object-fit: cover;
     border: 1px solid #ddd;
@@ -308,6 +308,12 @@ a:active {
     width: 80%;
 }
 
+.col-lg-4, .col-md-6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Section Styles */
 .section {
     margin-top: var(--row-margin-bottom);
@@ -322,8 +328,7 @@ a:active {
     margin-bottom: 20px;
 }
 
-.section .col-md-8,
-.section .col-md-4 {
+.section .col-md-8, .section .col-md-4 {
     flex: 0 0 auto;
     margin-bottom: var(--row-margin-bottom);
 }
@@ -347,8 +352,7 @@ a:active {
     /* Couleur des titres */
 }
 
-.footer .fas,
-.fab {
+.footer .fas, .fab {
     color: var(--ligth-green);
 
     /* Vert clair pour les icônes */
@@ -374,8 +378,7 @@ a:active {
     color: var(--yellow);
 }
 
-.footer-link,
-.social-link {
+.footer-link, .social-link {
     padding: 10px;
     /* Ajout de padding pour agrandir la zone cliquable */
     margin: 5px;
@@ -415,9 +418,11 @@ a:active {
 }
 
 .card {
+    margin: 0 auto;
+    /* Centre horizontalement */
     height: 100%;
     border: none;
-    /* max-width: 350px; */
+    max-width: 350px;
 }
 
 .card-title {
@@ -425,26 +430,22 @@ a:active {
     text-overflow: ellipsis;
 }
 
-.card-body.bg-black {
-    background-color: black;
+.card-header,
+.card-body {
+    background: linear-gradient(to bottom, #c0bfbf, #787575);
 }
 
 .card-body {
     border: none;
-
-    /* border: 1px solid transparent;  */
-    overflow: hidden;
+    overflow-y: auto;
+    height: 200px;
     /* Ou 'auto' pour une barre de défilement */
-    text-overflow: ellipsis;
+    /* text-overflow: ellipsis; */
     white-space: nowrap;
     /* Évite le retour à la ligne */
-    /* padding: 0.6rem !important; */
+    padding: 0.6rem !important;
 }
 
-/* .card-img-left {
-    float: left !important;
-    margin-right: 15px;
-} */
 
 /* styles pour la navbar */
 /* Style commun pour la barre de navigation et les éléments du menu déroulant */
@@ -574,10 +575,6 @@ a:active {
         /* Augmentation du padding pour une meilleure accessibilité sur les petits écrans */
     }
 
-    #btn-en-savoir-plus {
-        display: inline-block;
-    }
-
     .footer {
         padding: 15px;
         line-height: 1;
@@ -604,17 +601,8 @@ a:active {
         font-size: 2rem;
     }
 
-    .col-lg-4,
-    .col-md-6 {
-        flex: 0 0 100%;
-    }
-
     .row .col-md-6 {
         width: 100%;
-    }
-
-    .card {
-        height: auto;
     }
 
     .fixed-size-image {
@@ -622,6 +610,24 @@ a:active {
         margin: 0 auto;
         max-height: 250px;
     }
+}
+
+@media (max-width: 768px) {
+    .card-body {
+        height: auto;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+    }
+    .image-container img, img {
+        max-width: 100%;
+        height: auto;
+    }    
 }
 
 @media (max-width: 991px) {
