@@ -15,9 +15,9 @@
     <div class="bg-light text-center py-4">
       <h1 class="text-center pb-2">Événements</h1>
       <p class="lead">
-      Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année:<br>
-      Repas, concerts, rencontres,...<br>
-      Fiesta Latina autour de l’environnement « Latino Grenoble » !
+        Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année:<br />
+        Repas, concerts, rencontres,...<br />
+        Fiesta Latina autour de l’environnement « Latino Grenoble » !
       </p>
     </div>
 
@@ -57,8 +57,8 @@
       {% endfor %}
     </div>
 
-    <div class="pagination bg-light mt-0 mb-3 p-2 pr-0">{{ knp_pagination_render(pagination) }}</div>
-
+    <div class="pagination bg-light mt-0 mb-3 p-2 pr-0">
+      {{ knp_pagination_render(pagination, { pagination_options: { display: false } }) }}</div>
     {% include 'components/findUs.html.twig' %}
   </div>
 {% endblock %}

@@ -9,8 +9,13 @@ knp_paginator:
         filter_value_name: filterValue   # filter value query parameter name
         distinct: true                   # ensure distinct results, useful when ORM queries are using GROUP BY statements
     template:
-        pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig'
-        sortable: '@KnpPaginator/Pagination/sortable_link.html.twig'    
+        pagination: '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig' 
+        sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' 
+    # template_options: 
+    #     prev_message: 'Page précédente' # Texte personnalisé pour le bouton "Previous" 
+    #     next_message: 'Page suivante'
+        # pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig'
+        # sortable: '@KnpPaginator/Pagination/sortable_link.html.twig'    
         # pagination: '@KnpPaginator/Pagination/sliding.html.twig'     # sliding pagination template
         # sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' # sortable link template
         # filtration: '@KnpPaginator/Pagination/filtration.html.twig'  # filtration template
