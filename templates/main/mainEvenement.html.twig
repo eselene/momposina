@@ -29,7 +29,7 @@
             <div class="card-img-top">
               <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="{{ evenement.titre }}" class="img-fluid h-auto w-100 object-fit-cover" width="400" height="200" loading="lazy" />
             </div>
-            <div class="card-body d-flex flex-column flex-grow-1">
+            <div class="card-body text-gray d-flex flex-column flex-grow-1">
               <h2 class="card-title text-primary">{{ evenement.titre }}</h2>
               <p>
                 <i class="fas fa-align-left"></i> {{ evenement.description }}

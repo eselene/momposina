@@ -12,7 +12,7 @@
     --yellow: #FFD700;
     --ligth-green: #DAF7A6;
     --light-gray: #d6d9da;
-    --text-color: #39364f;
+    --dark-gray: #333333;
     --base-font-size: 16px;
     --font-family: 'Montserrat', sans-serif;
     --font-scale: 1.2;
@@ -30,7 +30,7 @@
 
 /* Global Styles */
 body {
-    color: var(--text-color);
+    color: var(--dark-gray);
     /* Gris foncé */
     font-family: var(--font-family);
     font-size: var(--base-font-size);
@@ -51,7 +51,7 @@ h4,
 h5,
 h6 {
     font-family: 'Montserrat', sans-serif;
-    color: var(--text-color);
+    color: var(--dark-gray);
     /* Gris foncé */
 }
 
@@ -88,6 +88,10 @@ hr {
 
 .text-white {
     color: var(--white) !important;
+}
+
+.text-gray {
+    color: var(--d) !important;
 }
 
 .text-black {
@@ -153,7 +157,7 @@ hr {
 /* Form Styles */
 .form-container {
     padding: 5px;
-    color: var(--text-color);
+    color: var(--dark-gray);
 }
 
 /* Styles pour les groupes de formulaires */
