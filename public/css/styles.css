@@ -63,7 +63,8 @@ h1 {
 
 .h2petit,
 h2,
-h3,h4 {
+h3,
+h4 {
     font-size: 1.25rem;
     font-weight: semi-bold;
     /* color: var(--orange); */
@@ -207,16 +208,6 @@ hr {
     z-index: 2;
 }
 
-.user-icon,
-.user-icon-white {
-    color: var(--white) !important;
-}
-
-header .message {
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: var(--light-gray);
-}
 
 header .navbar-nav,
 .nav-link:hover {
@@ -246,7 +237,8 @@ a:active {
     width: 600px;
 }
 
-.image-container_prod img, .image {
+.image-container_prod img,
+.image {
     max-width: 100%;
     object-fit: cover;
     border: 1px solid #ddd;
@@ -270,6 +262,14 @@ a:active {
     /* height: auto;
     display: block; */
 }
+
+.icon-size {
+    width: 32px;
+    /* Ajustez la taille selon vos besoins */
+    height: 32px;
+    /* Ajustez la taille selon vos besoins */
+}
+
 
 .fixed-size-image {
     max-width: 100%;
@@ -313,7 +313,8 @@ a:active {
     width: 80%;
 }
 
-.col-lg-4, .col-md-6 {
+.col-lg-4,
+.col-md-6 {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -333,7 +334,8 @@ a:active {
     margin-bottom: 20px;
 }
 
-.section .col-md-8, .section .col-md-4 {
+.section .col-md-8,
+.section .col-md-4 {
     flex: 0 0 auto;
     margin-bottom: var(--row-margin-bottom);
 }
@@ -347,20 +349,16 @@ a:active {
     background-color: var(--secondary-color);
     /* Gris foncé */
     color: var(--white);
-    /* Blanc */
     padding: var(--footer-padding);
     line-height: var(--footer-line-height);
 }
 
 .footer-title {
     color: var(--yellow);
-    /* Couleur des titres */
 }
 
-.footer .fas, .fab {
+.footer .img {
     color: var(--ligth-green);
-
-    /* Vert clair pour les icônes */
 }
 
 /* Ajouter des marges entre les éléments */
@@ -383,7 +381,8 @@ a:active {
     color: var(--yellow);
 }
 
-.footer-link, .social-link {
+.footer-link,
+.social-link {
     padding: 10px;
     /* Ajout de padding pour agrandir la zone cliquable */
     margin: 5px;
@@ -441,15 +440,23 @@ a:active {
 
 .card-body {
     border: none;
+    height: 200px;
+    overflow-y: auto;
+    color: var(--light-gray);
+    padding: 0.6rem !important;
+}
+
+/* .card-body {
+    border: none;
     overflow-y: auto;
     height: 200px;
     color: var(--light-gray);
-    /* Ou 'auto' pour une barre de défilement */
-    /* text-overflow: ellipsis; */
+     Ou 'auto' pour une barre de défilement
+    text-overflow: ellipsis;
     white-space: nowrap;
-    /* Évite le retour à la ligne */
+    Évite le retour à la ligne
     padding: 0.6rem !important;
-}
+} */
 
 /* styles pour la navbar */
 /* Style commun pour la barre de navigation et les éléments du menu déroulant */
@@ -512,17 +519,6 @@ a:active {
     /* Couleur du texte au clic */
 }
 
-.scrolling-text {
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    box-sizing: border-box;
-    animation: scroll-left 10s linear infinite;
-    max-width: 100%;
-    position: relative;
-
-}
-
 @keyframes scroll-left {
     0% {
         transform: translateX(100%);
@@ -533,11 +529,15 @@ a:active {
     }
 }
 
-.message {
-    /* Cache le texte qui dépasse de la div */
+.scrolling-text {
+    display: inline-block;
+    white-space: nowrap;
     overflow: hidden;
-    /* Assure que le texte reste dans sa div */
+    box-sizing: border-box;
     position: relative;
+    max-width: 70%;
+    margin-left: 20px;
+    animation: scroll-left 20s linear infinite;
 }
 
 .sticky-top {
@@ -550,53 +550,42 @@ a:active {
 /* Styles Responsives */
 @media (max-width: 480px) {
     body {
-        font-size: 0.875em;
+        font-size: 0.875em; /* Taille de police adaptée */
     }
 
     .btn-primary {
-        font-size: 0.8em;
+        font-size: 0.8em; /* Taille optimisée pour les boutons */
     }
 
     footer,
     .footer {
-        padding: 10px;
+        padding: 15px; /* Consolidation des styles de padding */
+        line-height: 1.4; /* Meilleure lisibilité */
     }
 
     .footer-link,
     .social-link {
-        padding: 15px;
-        /* Augmentation du padding pour les petits écrans */
-        margin: 8px;
-        /* Augmentation de la marge pour les petits écrans */
+        padding: 15px; 
+        margin: 8px; 
         text-decoration: none;
-        /* Pour améliorer la lisibilité des liens */
     }
 
     .footer-links a {
-        font-size: 1.1rem;
-        /* Augmentation de la taille de police pour les petits écrans */
-        padding: 16px 20px;
-        /* Augmentation du padding pour une meilleure accessibilité sur les petits écrans */
+        font-size: 1.1rem; /* Taille de police lisible sur petits écrans */
+        padding: 16px 20px; /* Accessibilité renforcée */
+        display: inline-block; /* Mieux structurer les liens */
     }
 
-    .footer {
-        padding: 15px;
-        line-height: 1;
-    }
-
-    /* Liens */
-    a {
-        color: #FF5733;
-        /* Orange vif */
+    /* a {
+        color: var(--orange); 
     }
 
     a:hover {
-        color: #FFC300;
-        /* Jaune vif */
-        text-decoration: underline;
-        /* Améliorer l'indication de l'interaction */
-    }
+        color: var(--yellow); 
+        text-decoration: underline; 
+    }  */
 }
+
 
 @media (max-width: 575px) {
 
@@ -628,10 +617,12 @@ a:active {
     .card-text {
         font-size: 0.9rem;
     }
-    .image-container img, img {
+
+    .image-container img,
+    img {
         max-width: 100%;
         height: auto;
-    }    
+    }
 }
 
 @media (max-width: 991px) {
@@ -644,9 +635,13 @@ a:active {
     h4 {
         font-size: 1rem;
     }
-    
+
     p {
         font-size: 14px;
+    }
+
+    .scrolling-text {
+        display: none;
     }
 
     /* p {

@@ -27,7 +27,12 @@
 					<div class="card rounded-top h-100 d-flex flex-column">
 						<div class="card-header text-primary text-center">{{ evenement.titre starts with 'Programme' ? evenement.titre : evenement.date|date('Y-m-d')|date_en_lettres }}</div>
 						<div class="card-img-top">
-							<img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="{{ evenement.titre }}" class="img-fluid h-auto w-100 object-fit-cover" width="400" height="200" loading="lazy" title="{{ evenement.titre }} - {{ evenement.date|date('Y-m-d') }}" aria-label="{{ evenement.titre }} - {{ evenement.date|date('Y-m-d') }}">
+                            <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}"
+                                 alt="Affiche de:{{ evenement.titre }}"
+                                 class="img-fluid"
+                                 loading="lazy"
+                                 title="{{ evenement.titre }} - {{ evenement.date|date('Y-m-d') }}"
+                                 aria-label="{{ evenement.titre }} - {{ evenement.date|date('Y-m-d') }}">
 						</div>
 						<div class="card-body text-gray d-flex flex-column flex-grow-1">
 							<h2 class="card-title text-primary">{{ evenement.titre }}</h2>
