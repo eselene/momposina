@@ -21,12 +21,12 @@
 			</p>
 		</div>
 
-		<div class="row bg-light p-2 mt-0">
+		<div class="row justify-content-center bg-light p-2 mt-0">
 			{% for evenement in pagination %}
-				<div class="col-md-6 col-sm-12 mb-3 p-2">
+				<div class="col-md-6 col-sm-12 mb-3 p-2 d-flex justify-content-center">
 					<div class="card rounded-top h-100 d-flex flex-column">
-						<div class="card-header text-primary text-center">{{ evenement.titre starts with 'Programme' ? evenement.titre : evenement.date|date('Y-m-d')|date_en_lettres }}</div>
-						<div class="card-img-top">
+						<div class="card-header card-header-gradient txt-primary text-center">{{ evenement.titre starts with 'Programme' ? evenement.titre : evenement.date|date('Y-m-d')|date_en_lettres }}</div>
+						<div class="card-img-top text-center">
                             <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}"
                                  alt="Affiche de:{{ evenement.titre }}"
                                  class="img-fluid"
@@ -36,20 +36,19 @@
 						</div>
 						<div class="card-body text-gray d-flex flex-column flex-grow-1">
 							<h2 class="card-title text-primary">{{ evenement.titre }}</h2>
-							<p>
-								<img src="{{ asset('icons/align-left.svg') }}" alt="Description de l'evenement">
+							<p class="text-center">
 								{{ evenement.description }}
 							</p>
 							<div class="d-flex justify-content-between">
 								{% if evenement.plageHeure %}
-									<p class="d-flex pr-4">
-										<img src="{{ asset('icons/clock.svg') }}" alt="Heure" class="pl-2 pr-2">
+									<p class="d-flex">
+										<img src="{{ asset('icons/clock.svg') }}" alt="Heure">
 										<span>{{ evenement.plageHeure}}     </span>
 									</p>
 								{% endif %}
 								{% if evenement.prix is defined and evenement.prix > 0 %}
-									<p class="d-flex pr-2">
-										<img src="{{ asset('icons/currency-euro.svg') }}" alt="Prix en euros" class="pr-2">
+									<p class="d-flex">
+										<img src="{{ asset('icons/currency-euro.svg') }}" alt="Prix en euros">
 										<span>{{ evenement.prix|number_format(2, ',', ' ') }}</span>
 									</p>
 								{% else %}
@@ -77,9 +76,6 @@
 			<p>Aucune donnée de pagination trouvée.</p>
 		{% endif %}
 
-
-		{# <div class="pagination bg-light mt-0 mb-3 p-2 pr-0">
-														      {{ knp_pagination_render(pagination) }}</div> #}
 		{% include 'components/findUs.html.twig' %}
 	</div>
 {% endblock %}
