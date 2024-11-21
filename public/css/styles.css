@@ -83,15 +83,7 @@ a:visited {
     color: var(--dark-blue);
     text-decoration: none;
 }
-
-a:hover {
-    color: var(--yellow);
-    text-decoration: underline;
-}
-
-a:active {
-    color: var(--orange);
-} */
+*/
 
 /* Boutons */
 .btn-primary {
@@ -189,7 +181,7 @@ a:active {
     color: var(--black)!important;
 }
 
-.nav-item.active .nav-link {
+.nav-item.active {
     font-weight: bold;
     color: var(--black) !important;
     /* border-bottom: 2px solid var(--dark-blue); */
