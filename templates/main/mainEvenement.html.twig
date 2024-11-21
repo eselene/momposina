@@ -1,56 +1,69 @@
 {% extends 'base.html.twig' %}
-
 {# templates/main/mainEvenement.html.twig #}
-
 {% block title %}
   Événements - La Momposina Tienda Latina
 {% endblock %}
-
 {% block meta_description %}
-  Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année : repas, concerts, rencontres, et Fiesta Latina autour de l'environnement « Latino Grenoble ».
+  Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année: repas, concerts, rencontres, et Fiesta Latina autour de l'environnement « Latino Grenoble ».
 {% endblock %}
 
 {% block body %}
-  <div class="container-fluid p-0">
-    <div class="bg-light text-center py-4">
-      <h1 class="text-center pb-2">Événements</h1>
-      <p class="lead">
-        Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année:<br />
-        Repas, concerts, rencontres,...<br />
-        Fiesta Latina autour de l’environnement « Latino Grenoble » !
+  <div class="container-fluid bg-dark-subtle p-0"> 
+  {# <div class="container-fluid bg-light p-0"> bg-primary-subtle #}
+    <div class="text-center py-4">
+      <h1 class="text-center pb-2">
+        Événements
+      </h1>
+      <p class="text-xl">
+        Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année:
+        <br/>
+        Repas, concerts, rencontres,...
+        <br/>
+        Fiesta Latina autour de l’environnement « Latino Grenoble »
       </p>
     </div>
-
-    <div class="row justify-content-center bg-light p-1 mt-0">
+    {# CARD #}
+    <div class="row justify-content-center p-1 mt-0">
       {% for evenement in pagination %}
         <div class="col-md-6 col-sm-12 mb-3 p-2 d-flex justify-content-center">
           <div class="card rounded-top h-100 d-flex flex-column">
-            <div class="card-header card-gradient text-primary text-center">{{ evenement.titre starts with 'Programme' ? evenement.titre : evenement.date|date('Y-m-d')|date_en_lettres }}</div>
+            <div class="card-header card-gradient text-primary text-center fw-semibold">
+              {{ evenement.titre starts with 'Programme' ? evenement.titre : evenement.date|date('Y-m-d')|date_en_lettres }}
+            </div>
             <div class="card-img-top text-center">
               <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="Affiche de:{{ evenement.titre }}" class="img-fluid" loading="lazy" title="{{ evenement.titre }} - {{ evenement.date|date('Y-m-d') }}" aria-label="{{ evenement.titre }} - {{ evenement.date|date('Y-m-d') }}" />
             </div>
             <div class="card-body card-gradient text-gray d-flex flex-column flex-grow-1">
-              <h2 class="card-title text-primary text-center">{{ evenement.titre }}</h2>
-              <p class="text-center">{{ evenement.description }}</p>
+              <h2 class="card-title text-primary text-center">
+                {{ evenement.titre }}
+              </h2>
+              <p class="text-center">
+                {{ evenement.description }}
+              </p>
               <div class="d-flex justify-content-between">
                 {% if evenement.plageHeure %}
                   <p class="d-flex">
                     <img src="{{ asset('icons/clock.svg') }}" alt="Heure" />
-                    <span>{{ evenement.plageHeure }}</span>
+                    <span>
+                      {{ evenement.plageHeure }}
+                    </span>
                   </p>
                 {% endif %}
                 {% if evenement.prix is defined and evenement.prix > 0 %}
                   <p class="d-flex">
                     <img src="{{ asset('icons/currency-euro.svg') }}" alt="Prix en euros" />
-                    <span>{{ evenement.prix|number_format(2, ',', ' ') }}</span>
+                    <span>
+                      {{ evenement.prix|number_format(2, ',', ' ') }}
+                    </span>
                   </p>
                 {% else %}
                   <p class="d-flex">
-                    <span>Gratuit</span>
+                    <span>
+                      Gratuit
+                    </span>
                   </p>
                 {% endif %}
               </div>
-
               <p>
                 <img src="{{ asset('icons/geo-alt.svg') }}" alt="Lieu" />
                 {{ evenement.lieu }}
@@ -60,18 +73,19 @@
         </div>
       {% endfor %}
     </div>
-
     {% if pagination is defined %}
       <div class="text-center">
         <nav aria-label="Page navigation">
-          <ul class="pagination bg-light justify-content-center pb-2">
-          {{ knp_pagination_render(pagination) }}</ul>
+          <ul class="pagination justify-content-center pb-2">
+            {{ knp_pagination_render(pagination) }}
+          </ul>
         </nav>
       </div>
     {% else %}
-      <p>Aucune donnée de pagination trouvée.</p>
+      <p>
+        Aucune donnée de pagination trouvée.
+      </p>
     {% endif %}
-
-    {% include 'components/findUs.html.twig' %}
   </div>
+  {% include 'components/findUs.html.twig' %}
 {% endblock %}

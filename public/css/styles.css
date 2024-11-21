@@ -38,7 +38,7 @@
 
 /* ------------------------- Styles Globaux ------------------------- */
 body {
-    color: var(--dark-gray);
+    /* color: var(--dark-gray); */
     font-family: var(--font-family);
     font-size: var(--base-font-size);
     line-height: var(--line-height);
@@ -77,7 +77,7 @@ h4 {
 }
 
 /* Liens */
-a,
+/* a,
 a:link,
 a:visited {
     color: var(--dark-blue);
@@ -91,7 +91,7 @@ a:hover {
 
 a:active {
     color: var(--orange);
-}
+} */
 
 /* Boutons */
 .btn-primary {
@@ -176,31 +176,26 @@ a:active {
 }
 
 /* ------------------------- Menu ------------------------- */
-
-.navbar-brand,
-.navbar-nav .nav-link {
-    color: var(--white);
-}
-
-.nav-item.active .nav-link {
-    font-weight: bold;
-    border-bottom: 2px solid var(--dark-blue);
-}
-.navbar,
+.navbar, .nav-link ,
 .dropdown-item {
     background-color: var(--secondary-color);
     margin: auto;
     color: var(--white) !important;
 }
 
+
 .dropdown-item:hover {
-    background-color: var(--red);
-    color: var(--white);
+    background-color: var(--light-gray);
+    color: var(--black)!important;
 }
-/* .dropdown-item {
-    color: #343a40;
+
+.nav-item.active .nav-link {
+    font-weight: bold;
+    color: var(--black) !important;
+    /* border-bottom: 2px solid var(--dark-blue); */
 }
-} */
+
+
  /* Message en scrolling: Mompo tienda latina */
 @keyframes scroll-left {
     0% {
@@ -213,25 +208,10 @@ a:active {
 }
 
 .scrolling-text {
-    /* max-width: calc(70%); */
-    /* max-width: calc(100% - 160px); */
-    /* Ajuster pour éviter l'empiètement sur le logo */
-    /* display: inline-block; */
     overflow: hidden;
     white-space: nowrap;
-    /* box-sizing: border-box;
-    max-width: 70%;
-    margin-left: 20px; */
-    /* position: relative; */
     animation: scroll-left 20s linear 2;
 }
-
-
-/* pas besoin */
-/* .logo {
-    display: block;
-    margin: 0 auto;
-} */
 
 
 .bg-blue {
@@ -242,9 +222,9 @@ a:active {
     background-color: var(--light-gray) !important;
 }
 
-.bg-light {
+/* .bg-light {
     background-color: var(--light-gray) !important;
-}
+} */
 
 /* ------------------------- Footer ------------------------- */
 .footer {
@@ -257,8 +237,26 @@ a:active {
 .footer-title {
     color: var(--yellow);
 }
-
-.footer-link,
+.footer a {
+color: var(--white);
+}
+.footer-links a {
+    font-size: 1rem;
+    padding: 12px 12px;
+    display: inline-block;
+    color: var(--white);
+}
+.footer .list-inline-item a:hover {
+    color: var(--yellow);
+} 
+.social-link-icon {
+    width: 2rem;
+    height: 2rem;
+}
+.social-link {
+    margin: 0 1rem; /* Marge de 1rem à gauche et à droite de chaque élément */
+}
+/* .footer-link,
 .social-link {
     padding: 10px;
     margin: 5px;
@@ -271,9 +269,7 @@ a:active {
     display: inline-block;
 }
 
-.footer .list-inline-item a:hover {
-    color: var(--yellow);
-}
+*/
 
 
 /* ------------------------- SEO et Accessibilité ------------------------- */
