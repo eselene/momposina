@@ -2,7 +2,6 @@
 /* Variables */
 :root { 
     /* Couleurs principales */
-    --primary-color: #FF5733; 
     --secondary-color: #2C3E50; /* Bleu foncé */
     --white: #FFFFFF;
     --black: #000000;
@@ -13,7 +12,7 @@
     --yellow: #FFD700;
     --light-green: #DAF7A6;
     --light-gray: #e7e3e3;
-    --dark-gray: #333333;
+    --dark-gray: #656565;
     --bg-light: #f8f9fa;
 
     /* Typographie */
@@ -45,15 +44,9 @@ body {
 }
 
 /* Dégradés pour le body  et le titre de la carte */
-/* .card-header-gradient {
-    background: linear-gradient(135deg, var(--dark-gray) 0%, var(--light-gray) 100%);
-    color:var(--dark-gray); 
+.card-gradient {
+    background: linear-gradient(235deg, var(--light-gray) 0%, var(--dark-gray) 200%);
 }
-
-.card-body-gradient {
-    background: linear-gradient(135deg, var(--dark-gray) 0%, var(--light-gray) 100%);
-    color:var(--dark-gray); 
-} */
 
 p {
     margin-bottom: var(--margin-bottom-p);
@@ -88,13 +81,7 @@ a:active {
 
 /* Boutons */
 .btn-primary {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
     width: 100%;
-}
-.btn-primary:hover {
-    background-color: var(--yellow);
-    border-color: var(--yellow);
 }
 
 /* Images */
@@ -316,70 +303,70 @@ a:focus, button:focus, .form-control:focus {
 
 /* Petits écrans : jusqu'à 575px */
 @media (max-width: 575px) {
-    h1 {
-        font-size: 2rem; /* Taille des titres adaptée */
+    /* h1 {
+        font-size: 2rem; 
     }
 
     .row .col-md-6, .col-md-12 {
-        width: 100%; /* Les colonnes occupent toute la largeur */
+        width: 100%; 
     }
 
     .fixed-size-image {
         width: 80%;
         margin: 0 auto;
-        max-height: 250px; /* Limitation de la hauteur des images */
-    }
+        max-height: 250px; 
+    } */
 }
 
 /* Moyens écrans : jusqu'à 768px */
 @media (max-width: 768px) {
-    .card-body {
-        height: auto; /* Suppression de la hauteur fixe */
+    /* .card-body {
+        height: auto; 
     }
 
     .card-title {
-        font-size: 1.2rem; /* Taille des titres dans les cartes */
+        font-size: 1.2rem; 
     }
 
     .card-text {
-        font-size: 0.9rem; /* Taille du texte des cartes */
+        font-size: 0.9rem; 
     }
 
     .image-container img, img {
         max-width: 100%;
-        height: auto; /* Adaptation des images à la largeur */
+        height: auto; 
     }
 
     .col-md-6 {
-        width: 100%; /* Les colonnes occupent toute la largeur sur petits écrans */
+        width: 100%; 
     }
 
     .card-img-top img {
         max-width: 100%;
         height: auto;
-    }
+    } */
 }
 
 /* Grands écrans : à partir de 992px */
 @media (min-width: 992px) {
-    .navbar .col-2 {
-        flex: 0 0 15%; /* Taille réduite pour les icônes */
+    /* .navbar .col-2 {
+        flex: 0 0 15%; 
     }
 
     .navbar .col-7 {
-        flex: 0 0 70%; /* Plus d'espace pour les liens centraux */
+        flex: 0 0 70%; 
     }
 
     .navbar .col-1 {
-        flex: 0 0 15%; /* Ajustement des boutons mobiles */
+        flex: 0 0 15%; 
     }
 
     .middle-section {
-        max-width: 80vw; /* Limitation de la largeur centrale */
+        max-width: 80vw; 
     }
 
     .image-container {
-        width: auto; /* Adaptation aux petits écrans */
+        width: auto; 
         height: auto;
     }
 
@@ -392,14 +379,14 @@ a:focus, button:focus, .form-control:focus {
     }
 
     .scrolling-text {
-        display: none; /* Masquer les textes défilants */
+        display: none; 
     }
 
     .row {
-        gap: 1rem; /* Réduction de l'espacement sur très petits écrans */
+        gap: 1rem; 
     }
 
     .container-fluid {
-        padding: 1rem; /* Réduction du padding global */
-    }
+        padding: 1rem; 
+    } */
 }
