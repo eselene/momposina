@@ -1,8 +1,9 @@
 /* public/css/styles.css */
 /* Variables */
-:root { 
+:root {
     /* Couleurs principales */
-    --secondary-color: #2C3E50; /* Bleu foncé */
+    --secondary-color: #2C3E50;
+    /* Bleu foncé */
     --white: #FFFFFF;
     --black: #000000;
     --blue-accesibilite: #3696db;
@@ -57,24 +58,37 @@ h1 {
     font-size: 1.75rem;
     font-weight: bold;
 }
-h1, h2, h3, h4, h5, h6 {
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: var(--dark-gray);
     font-family: var(--font-family);
 }
-h2, h3, h4 {
+
+h2,
+h3,
+h4 {
     font-size: 1.25rem;
     font-weight: 600;
 }
 
 /* Liens */
-a, a:link, a:visited {
+a,
+a:link,
+a:visited {
     color: var(--dark-blue);
     text-decoration: none;
 }
+
 a:hover {
     color: var(--yellow);
     text-decoration: underline;
 }
+
 a:active {
     color: var(--orange);
 }
@@ -90,6 +104,7 @@ a:active {
     height: auto;
     object-fit: cover;
 }
+
 .image-container img {
     max-width: 100%;
     border-radius: var(--img-border-radius);
@@ -100,22 +115,29 @@ a:active {
     max-width: var(--container-max-width);
     margin: 0 auto;
 }
+
 .row {
-    margin: 0 auto; /* Centrer la rangée */
-    padding: 1rem; /* Ajouter de l'espace autour des colonnes */
-    gap: 1.5rem; /* Espacement uniforme entre les colonnes */
+    margin: 0 auto;
+    /* Centrer la rangée */
+    padding: 1rem;
+    /* Ajouter de l'espace autour des colonnes */
+    gap: 1.5rem;
+    /* Espacement uniforme entre les colonnes */
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
 .col-md-6 {
-    flex: 0 0 48%; /* Set width to 48% for two equal columns */
-    margin-bottom: 1rem;     
-    padding: 1rem; 
+    flex: 0 0 48%;
+    /* Set width to 48% for two equal columns */
+    margin-bottom: 1rem;
+    padding: 1rem;
     box-sizing: border-box;
 }
-.col-lg-6, .col-md-12 {
+
+.col-lg-6,
+.col-md-12 {
     padding: 5vh 4vw;
 }
 
@@ -124,6 +146,7 @@ a:active {
     padding: 5px;
     color: var(--dark-gray);
 }
+
 .form-control {
     border: 1px solid var(--light-green);
     border-radius: 4px;
@@ -131,10 +154,12 @@ a:active {
     box-sizing: border-box;
     line-height: var(--line-height);
 }
+
 .form-control:focus {
     border-color: var(--orange);
     box-shadow: 0 0 0 0.2rem var(--orange);
 }
+
 /* Style pour l'elément de bascule de mot de passe */
 .password-toggle {
     /* Positionne l'élément de manière absolue par rapport à son parent */
@@ -149,29 +174,66 @@ a:active {
     /* Assure que l'icône est au-dessus des autres éléments */
     z-index: 2;
 }
+
 /* ------------------------- Menu ------------------------- */
-.navbar, .dropdown-item {
-    background-color: var(--secondary-color);
-    margin: 0 auto;
-    color: var(--white) !important;
-}
-.dropdown-item:hover {
-    background-color: var(--red);
+
+.navbar-brand,
+.navbar-nav .nav-link {
     color: var(--white);
 }
-.navbar-brand, .navbar-nav .nav-link {
-    color: var(--white);
-}
+
 .nav-item.active .nav-link {
     font-weight: bold;
     border-bottom: 2px solid var(--dark-blue);
 }
+.navbar,
+.dropdown-item {
+    background-color: var(--secondary-color);
+    margin: auto;
+    color: var(--white) !important;
+}
 
-/* Dropdown */
+.dropdown-item:hover {
+    background-color: var(--red);
+    color: var(--white);
+}
 /* .dropdown-item {
     color: #343a40;
 }
 } */
+ /* Message en scrolling: Mompo tienda latina */
+@keyframes scroll-left {
+    0% {
+        transform: translateX(100%);
+    }
+
+    70% {
+        transform: translateX(-50%);
+    }
+}
+
+.scrolling-text {
+    /* max-width: calc(70%); */
+    /* max-width: calc(100% - 160px); */
+    /* Ajuster pour éviter l'empiètement sur le logo */
+    /* display: inline-block; */
+    overflow: hidden;
+    white-space: nowrap;
+    /* box-sizing: border-box;
+    max-width: 70%;
+    margin-left: 20px; */
+    /* position: relative; */
+    animation: scroll-left 20s linear 2;
+}
+
+
+/* pas besoin */
+/* .logo {
+    display: block;
+    margin: 0 auto;
+} */
+
+
 .bg-blue {
     background-color: var(--blue-accesibilite) !important;
 }
@@ -179,6 +241,7 @@ a:active {
 .bg-grey {
     background-color: var(--light-gray) !important;
 }
+
 .bg-light {
     background-color: var(--light-gray) !important;
 }
@@ -190,79 +253,36 @@ a:active {
     padding: var(--footer-padding);
     line-height: var(--footer-line-height);
 }
+
 .footer-title {
     color: var(--yellow);
 }
-.footer-link, .social-link {
+
+.footer-link,
+.social-link {
     padding: 10px;
     margin: 5px;
     display: inline-block;
 }
+
 .footer-links a {
     font-size: 1rem;
     padding: 12px 12px;
     display: inline-block;
 }
+
 .footer .list-inline-item a:hover {
     color: var(--yellow);
 }
 
-/* ------------------------- Pagination ------------------------- */
- /* .pagination {
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    color: var(--dark-gray);
-}
-.pagination .page-item.active .page-link {
-    background-color: var(--red);
-}
-.pagination .page-item .page-link:hover {
-    background-color: var(--dark-blue);
-}  */
-/*
-.pagination .page-item.active .page-link {
-    background-color: #ff0000;
-    border-color: #ff0000;
-    color: #ffffff;
-}
-
-.pagination .page-item .page-link {
-    color: #000000;
-    border: 1px solid #007bff;
-}
-
-.pagination .page-item:hover .page-link {
-    background-color: #e6e6e6;
-} */
 
 /* ------------------------- SEO et Accessibilité ------------------------- */
 /* Focus visible pour une meilleure accessibilité */
-a:focus, button:focus, .form-control:focus {
+a:focus,
+button:focus,
+.form-control:focus {
     outline: 2px solid var(--blue-accesibilite);
     outline-offset: 2px;
-}
-
-/* Message en scrolling: Mompo tienda latina */
-@keyframes scroll-left {
-    0% {
-        transform: translateX(100%);
-    }
-
-    100% {
-        transform: translateX(-100%);
-    }
-}
-
-.scrolling-text {
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    box-sizing: border-box;
-    position: relative;
-    max-width: 70%;
-    margin-left: 20px;
-    animation: scroll-left 20s linear infinite;
 }
 
 /* .sticky-top {
