@@ -1,127 +1,124 @@
-<header class="bg-dark">
+<header>
   <div class="container-fluid p-0">
-    <nav class="navbar navbar-expand-lg navbar-dark w-100 p-1">
+    <nav class="navbar navbar-expand-lg w-100 p-1">
       <div class="d-flex w-100 justify-content-between align-items-center">
         <!-- Logo Section -->
-        <div class="col-2 d-flex align-items-center justify-content-center">
-          <a class="navbar-brand" href="{{ path('app_evenements') }}">
-            <img src="{{ asset('images/logo/momposina.png') }}" alt="Logo La Momposina Tienda Latina" class="logo" width="100%" height="auto" />
-          </a>
-        </div>
+        <a class="navbar-brand" href="{{ path('app_evenements') }}">
+          <img src="{{ asset('images/logo/momposina.png') }}" alt="Logo La Momposina Tienda Latina" class="logo" width="100%" height="auto" />
+        </a>
         <!-- Toggler for Mobile Menu -->
-        <div class="col-1 d-flex align-items-center">
-          <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#menuprincipal" aria-controls="menuprincipal" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+        <button class="navbar-toggler mx-auto d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#menuprincipal" aria-controls="menuprincipal" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <!-- Center Section: Message & Main Menu -->
+      <div class="col-9 text-center p-lg-0 position-relative">
+        <div class="mt-1 mb-1 row justify-content-end">
+          <div class="scrolling-text text-white d-none d-lg-block">
+            LA MOMPOSINA - Tienda Latina - Epicerie Latino Grenoble
+          </div>
         </div>
-        <!-- Center Section: Message & Main Menu -->
-        <div class="col-9 text-center p-lg-0 position-relative">
-          <div class="mt-1 mb-1 row justify-content-end">
-            <div class="scrolling-text text-white d-none d-lg-block">
-              LA MOMPOSINA - Tienda Latina - Epicerie Latino Grenoble
-            </div>
-          </div>
-          <div class="collapse navbar-collapse" id="menuprincipal">
-            <ul class="navbar-nav mx-auto">
-              <!-- Événements -->
-              <li class="nav-item {% if app.request.get('_route') == 'app_evenements' %}{% endif %}">
-                <a class="nav-link" href="{{ path('app_evenements') }}">
-                  Événements
+        <div class="collapse navbar-collapse px-1 py-1" id="menuprincipal">
+          <ul class="navbar-nav mx-auto">
+            <!-- Événements -->
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('app_evenements') }}">
+                Événements
+              </a>
+            </li>
+            <!-- Présentation -->
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('app_presentation') }}">
+                Présentation
+              </a>
+            </li>
+            <!-- Alimentation Dropdown -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="alimentationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Alimentation
+              </a>
+              <div class="dropdown-menu pt-0" aria-labelledby="alimentationDropdown">
+                <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 4 }) }}">
+                  Confiserie
                 </a>
-              </li>
-              <!-- Présentation -->
-              <li class="nav-item {% if app.request.get('_route') == 'app_presentation' %}{% endif %}">
-                <a class="nav-link" href="{{ path('app_presentation') }}">
-                  Présentation
+                <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 5 }) }}">
+                  Farines
                 </a>
-              </li>
-              <!-- Alimentation Dropdown -->
+                <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 6 }) }}">
+                  Fromages
+                </a>
+                <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 7 }) }}">
+                  Sauces & Épices
+                </a>
+                <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 8 }) }}">
+                  Saucisses
+                </a>
+              </div>
+            </li>
+            <!-- Boisson Dropdown -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="boissonDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Boisson
+              </a>
+              <div class="dropdown-menu pt-0" aria-labelledby="boissonDropdown">
+                <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 9 }) }}">
+                  Bières
+                </a>
+                <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 10 }) }}">
+                  Cafés
+                </a>
+                <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 11 }) }}">
+                  Mate
+                </a>
+                <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 12 }) }}">
+                  Spiritueux
+                </a>
+                <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 13 }) }}">
+                  Vins
+                </a>
+              </div>
+            </li>
+            <!-- Plats -->
+            <li class="nav-item {% if app.request.get('_route') == 'app_plats' %}{% endif %}">
+              <a class="nav-link" href="{{ path('app_plats') }}">
+                Plats
+              </a>
+            </li>
+            <!-- Galerie -->
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('app_galerie') }}">
+                Galerie
+              </a>
+            </li>
+            <!-- Contact -->
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('app_contact') }}">
+                Contact
+              </a>
+            </li>
+            <!-- Admin (Only for ROLE_ADMIN) -->
+            {% if is_granted('ROLE_ADMIN') %}
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="alimentationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Alimentation
+                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Admin
                 </a>
-                <div class="dropdown-menu pt-0" aria-labelledby="alimentationDropdown">
-                  <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 4 }) }}">
-                    Confiserie
+                <div class="dropdown-menu" aria-labelledby="adminDropdown">
+                  <a class="dropdown-item" href="{{ path('app_evenement_index') }}">
+                    Événement
                   </a>
-                  <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 5 }) }}">
-                    Farines
+                  <a class="dropdown-item" href="{{ path('app_produit_index') }}">
+                    Produits
                   </a>
-                  <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 6 }) }}">
-                    Fromages
-                  </a>
-                  <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 7 }) }}">
-                    Sauces & Épices
-                  </a>
-                  <a class="dropdown-item" href="{{ path('app_alimentation_detail', { id: 8 }) }}">
-                    Saucisses
+                  <a class="dropdown-item" href="{{ path('app_logout') }}">
+                    Déconnexion
                   </a>
                 </div>
               </li>
-              <!-- Boisson Dropdown -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="boissonDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Boisson
-                </a>
-                <div class="dropdown-menu pt-0" aria-labelledby="boissonDropdown">
-                  <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 9 }) }}">
-                    Bières
-                  </a>
-                  <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 10 }) }}">
-                    Cafés
-                  </a>
-                  <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 11 }) }}">
-                    Mate
-                  </a>
-                  <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 12 }) }}">
-                    Spiritueux
-                  </a>
-                  <a class="dropdown-item" href="{{ path('app_boisson_detail', { id: 13 }) }}">
-                    Vins
-                  </a>
-                </div>
-              </li>
-              <!-- Plats -->
-              <li class="nav-item {% if app.request.get('_route') == 'app_plats' %}{% endif %}">
-                <a class="nav-link" href="{{ path('app_plats') }}">
-                  Plats
-                </a>
-              </li>
-              <!-- Galerie -->
-              <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_galerie') }}">
-                  Galerie
-                </a>
-              </li>
-              <!-- Contact -->
-              <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_contact') }}">
-                  Contact
-                </a>
-              </li>
-              <!-- Admin (Only for ROLE_ADMIN) -->
-              {% if is_granted('ROLE_ADMIN') %}
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Admin
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                    <a class="dropdown-item" href="{{ path('app_evenement_index') }}">
-                      Événement
-                    </a>
-                    <a class="dropdown-item" href="{{ path('app_produit_index') }}">
-                      Produits
-                    </a>
-                    <a class="dropdown-item" href="{{ path('app_logout') }}">
-                      Déconnexion
-                    </a>
-                  </div>
-                </li>
-              {% endif %}
-            </ul>
-          </div>
+            {% endif %}
+          </ul>
         </div>
       </div>
-    </nav>
-  </div>
+    </div>
+  </nav>
+</div>
 </header>

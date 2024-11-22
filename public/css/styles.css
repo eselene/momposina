@@ -14,7 +14,6 @@
     --light-green: #DAF7A6;
     --light-gray: #e7e3e3;
     --dark-gray: #656565;
-    --bg-light: #f8f9fa;
 
     /* Typographie */
     --base-font-size: 16px;
@@ -188,7 +187,7 @@ a:visited {
 }
 
 
- /* Message en scrolling: Mompo tienda latina */
+/* Message en scrolling: Mompo tienda latina */
 @keyframes scroll-left {
     0% {
         transform: translateX(100%);
@@ -214,13 +213,12 @@ a:visited {
     background-color: var(--light-gray) !important;
 }
 
-/* .bg-light {
-    background-color: var(--light-gray) !important;
-} */
+.bg-secondary {
+    background-color: var(--secondary-color) !important;
+}
 
 /* ------------------------- Footer ------------------------- */
 .footer {
-    background-color: var(--secondary-color);
     color: var(--white);
     padding: var(--footer-padding);
     line-height: var(--footer-line-height);
@@ -229,40 +227,31 @@ a:visited {
 .footer-title {
     color: var(--yellow);
 }
+
 .footer a {
-color: var(--white);
+    color: var(--white);
 }
+
 .footer-links a {
     font-size: 1rem;
     padding: 12px 12px;
     display: inline-block;
     color: var(--white);
 }
+
 .footer .list-inline-item a:hover {
     color: var(--yellow);
-} 
+}
+
 .social-link-icon {
     width: 2rem;
     height: 2rem;
 }
+
 .social-link {
-    margin: 0 1rem; /* Marge de 1rem à gauche et à droite de chaque élément */
+    margin: 0 1rem;
+    /* Marge de 1rem à gauche et à droite de chaque élément */
 }
-/* .footer-link,
-.social-link {
-    padding: 10px;
-    margin: 5px;
-    display: inline-block;
-}
-
-.footer-links a {
-    font-size: 1rem;
-    padding: 12px 12px;
-    display: inline-block;
-}
-
-*/
-
 
 /* ------------------------- SEO et Accessibilité ------------------------- */
 /* Focus visible pour une meilleure accessibilité */
@@ -327,7 +316,7 @@ button:focus,
 }
 
 /* Moyens écrans : jusqu'à 768px */
-@media (max-width: 768px) {
+@media (max-width: 991px) {
     /* .card-body {
         height: auto; 
     }
