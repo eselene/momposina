@@ -232,7 +232,7 @@ a:visited {
     line-height: var(--footer-line-height);
 }
 
-.footer-title {
+.footer-title, .text-yellow {
     color: var(--yellow);
 }
 
