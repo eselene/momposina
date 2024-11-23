@@ -50,6 +50,7 @@ body {
 
 p {
     margin-bottom: var(--margin-bottom-p);
+    text-align: justify;
 }
 
 /* Typographie pour les titres */
