@@ -50,6 +50,7 @@ body {
 
 p {
     margin-bottom: var(--margin-bottom-p);
+    text-align: justify;
 }
 
 /* Typographie pour les titres */
@@ -74,15 +75,6 @@ h4 {
     font-size: 1.25rem;
     font-weight: 600;
 }
-
-/* Liens */
-/* a,
-a:link,
-a:visited {
-    color: var(--dark-blue);
-    text-decoration: none;
-}
-*/
 
 /* Boutons */
 .btn-primary {
@@ -169,14 +161,12 @@ a:visited {
 /* ------------------------- Menu ------------------------- */
 .navbar, .nav-link ,
 .dropdown-item {
-    background-color: var(--secondary-color);
     margin: auto;
     color: var(--white) !important;
 }
 
 .navbar-toggler {
     background-color:var(--white); /* Ajoute une couleur de fond au bouton */
-    /* border-color: var(--yellow); */
 }
 
 .navbar-toggler:hover, .navbar-toggler-icon:hover, .social-link-icon:hover {
