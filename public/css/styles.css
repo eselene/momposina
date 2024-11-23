@@ -218,7 +218,7 @@ h4 {
 /* ------------------------- Footer ------------------------- */
 .footer {
     color: var(--white);
-    padding: var(--footer-padding);
+    /* padding: var(--footer-padding); */
     line-height: var(--footer-line-height);
 }
 
