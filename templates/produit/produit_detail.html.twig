@@ -2,15 +2,16 @@
 {# templates/produit/produit_detail.html.twig #}
 
 {% block title %}
-  {{ pageTitle }} {# Titre de la page, défini dynamiquement #}
+  {{ sousCategorieNom }} {# Titre de la page, défini dynamiquement #}
 {% endblock %}
 
 {% block body %}
   <div class="container mt-3">
   {# Nom de la sous-catégorie affiché en tant que titre principal #}
     <h1 class="text-center">{{ sousCategorieNom }}</h1> 
-    <div class="section">
+    <div class="section" >
       <p>Venez visiter la boutique pour connaître la gamme complète du mois. Vous trouverez des nouveautés tous les jours</p>
+      <p class="fw-semibold">N’HÉSITEZ  PAS À NOUS DEMANDER QUEL EST LE PLAT DE LA SEMAINE!</p>
     </div>
 
     {# Zone de recherche #}

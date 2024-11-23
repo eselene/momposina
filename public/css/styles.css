@@ -162,7 +162,8 @@ h4 {
 .navbar, .nav-link ,
 .dropdown-item {
     margin: auto;
-    color: var(--white) !important;
+    color: var(--black) !important;
+    /* color: var(--white) !important; */
 }
 
 .navbar-toggler {
@@ -213,6 +214,7 @@ h4 {
 
 .bg-secondary {
     background-color: var(--secondary-color) !important;
+    color: var(--white);
 }
 
 /* ------------------------- Footer ------------------------- */
