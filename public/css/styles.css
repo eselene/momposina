@@ -43,11 +43,6 @@ body {
     line-height: var(--line-height);
 }
 
-/* Dégradés pour le body  et le titre de la carte */
-.card-gradient {
-    background: linear-gradient(235deg, var(--light-gray) 0%, var(--dark-gray) 200%);
-}
-
 p {
     margin-bottom: var(--margin-bottom-p);
     text-align: justify;
@@ -93,6 +88,33 @@ h4 {
     border-radius: var(--img-border-radius);
 }
 
+/* Images dans les cartes */
+.fixed-size-image {
+    width: 100%;
+    max-height: 250px; /* Limiter la hauteur */
+    object-fit: cover; /* Assurer une coupe propre */
+    border-radius: 0.5rem;
+}
+.g-4 > .col {
+    padding: 1rem;
+}
+
+/* --------CARD ----*/
+/* Dégradés pour le body  et le titre de la carte */
+.card-gradient {
+    background: linear-gradient(235deg, var(--light-gray) 0%, var(--dark-gray) 200%);
+}
+
+.card {
+    height: 100%; /* S'assurer que toutes les cartes prennent la même hauteur */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
 /* ------------------------- Mise en page ------------------------- */
 .container {
     max-width: var(--container-max-width);
@@ -127,6 +149,8 @@ h4 {
 /* ------------------------- Formulaires ------------------------- */
 .form-container {
     padding: 5px;
+    background-color: var(--dark-gray);
+
     color: var(--dark-gray);
 }
 
@@ -260,7 +284,7 @@ h4 {
 }
 
 /* ------------------------- SEO et Accessibilité ------------------------- */
-/* Focus visible pour une meilleure accessibilité */
+/* Focus visible */
 a:focus,
 button:focus,
 .form-control:focus {
@@ -314,6 +338,9 @@ button:focus,
 
 /* Petits écrans : jusqu'à 575px */
 @media (max-width: 575px) {
+    .card {
+        margin: 1rem 0;
+    }
     /* h1 {
         font-size: 2rem; 
     }
@@ -331,6 +358,9 @@ button:focus,
 
 /* Moyens écrans : jusqu'à 768px */
 @media (max-width: 991px) {
+    .fixed-size-image {
+        height: auto;
+    }
     /* .card-body {
         height: auto; 
     }
