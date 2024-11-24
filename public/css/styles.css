@@ -159,24 +159,28 @@ h4 {
 }
 
 /* ------------------------- Menu ------------------------- */
-.navbar, .nav-link ,
+.navbar,
+.nav-link,
 .dropdown-item {
     margin: auto;
-    color: var(--black) !important;
-    /* color: var(--white) !important; */
+    /* color: var(--black) !important; */
+    color: var(--white) !important;
 }
 
 .navbar-toggler {
-    background-color:var(--white); /* Ajoute une couleur de fond au bouton */
+    background-color: var(--white);
+    /* Ajoute une couleur de fond au bouton */
 }
 
-.navbar-toggler:hover, .navbar-toggler-icon:hover, .social-link-icon:hover {
-    background-color: var(--yellow); /* Change la couleur de l'icône au survol */
+.navbar-toggler:hover,
+.navbar-toggler-icon:hover,
+.social-link-icon:hover {
+    background-color: var(--yellow);
 }
 
 .dropdown-item:hover {
-    background-color: var(--light-gray);
-    color: var(--black)!important;
+    background-color: var(--dark-gray);
+    /* color: var(--black)!important; */
 }
 
 .nav-item.active {
@@ -224,7 +228,8 @@ h4 {
     line-height: var(--footer-line-height);
 }
 
-.footer-title, .text-yellow {
+.footer-title,
+.text-yellow {
     color: var(--yellow);
 }
 
@@ -261,6 +266,14 @@ button:focus,
 .form-control:focus {
     outline: 2px solid var(--blue-accesibilite);
     outline-offset: 2px;
+    color: var(--black);
+    background: var(--light-gray);
+}
+
+.nav-link:focus,
+.dropdown-item:focus {
+    color: var(--black) !important;
+    background-color: var(--light-gray);
 }
 
 /* .sticky-top {
