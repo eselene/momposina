@@ -1,9 +1,6 @@
 /* public/css/styles.css */
-/* Variables */
 :root {
-    /* Couleurs principales */
     --secondary-color: #2C3E50;
-    /* Bleu foncé */
     --white: #FFFFFF;
     --black: #000000;
     --blue-accesibilite: #3696db;
@@ -23,19 +20,15 @@
 
     /* Marges et paddings */
     --margin-bottom-p: 8px;
+    --margin-hr: 1.5rem;
     --row-margin-bottom: 2rem;
     --footer-padding: 20px 0;
     --footer-line-height: 1.2;
-
-    /* Conteneur global */
-    --container-max-width: 1200px;
-
-    /* Autres */
-    --margin-hr: 1.5rem;
     --img-border-radius: 0.5rem;
-}
 
-/* ------------------------- Styles Globaux ------------------------- */
+    --container-max-width: 1200px;
+}
+/* -- Styles Globaux ------------------------- */
 body {
     /* color: var(--dark-gray); */
     font-family: var(--font-family);
@@ -48,7 +41,7 @@ p {
     text-align: justify;
 }
 
-/* Typographie pour les titres */
+/* Typographie */
 h1 {
     font-size: 1.75rem;
     font-weight: bold;
@@ -88,54 +81,55 @@ h4 {
     border-radius: var(--img-border-radius);
 }
 
-/* Images dans les cartes */
-.fixed-size-image {
-    width: 100%;
-    max-height: 250px; /* Limiter la hauteur */
-    object-fit: cover; /* Assurer une coupe propre */
-    border-radius: 0.5rem;
-}
-.g-4 > .col {
-    padding: 1rem;
-}
-
 /* --------CARD ----*/
 /* Dégradés pour le body  et le titre de la carte */
 .card-gradient {
     background: linear-gradient(235deg, var(--light-gray) 0%, var(--dark-gray) 200%);
 }
 
-.card {
-    height: 100%; /* S'assurer que toutes les cartes prennent la même hauteur */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+body:not(.evenements-page) .card {
+    height: 100%;
+    /* Toutes les cartes auront la même hauteur */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s; */
 }
 
-.card:hover {
-    transform: scale(1.05);
+/* body:not(.evenements-page) .card:hover { */
+/* transform: scale(1.05); Effet de zoom */
+/* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); */
+/* } */
+
+body:not(.evenements-page) card-body {
+    flex-grow: 1;
+    /* S'assure que le contenu s'étire pour remplir l'espace */
 }
 
-/* ------------------------- Mise en page ------------------------- */
-.container {
+/* -- Mise en page ------------------------- */
+body:not(.evenements-page) .container {
     max-width: var(--container-max-width);
     margin: 0 auto;
 }
 
-.row {
-    margin: 0 auto;
-    /* Centrer la rangée */
-    padding: 1rem;
-    /* Ajouter de l'espace autour des colonnes */
-    gap: 1.5rem;
-    /* Espacement uniforme entre les colonnes */
+body:not(.evenements-page) .row {
+    margin: 0;
+    /* padding: 1rem; */
+    /* gap: 1.5rem; */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
+
+.col {
+    padding: 0.5rem;
+    /* Réduisez les paddings pour éviter l'encombrement */
+}
+
 .col-md-6 {
-    flex: 0 0 48%;
-    /* Set width to 48% for two equal columns */
+    flex: 0 0 48%;/* Set width to 48%  */
     margin-bottom: 1rem;
     padding: 1rem;
     box-sizing: border-box;
@@ -145,6 +139,28 @@ h4 {
 .col-md-12 {
     padding: 5vh 4vw;
 }
+
+/* Images dans les cartes */
+/* Pour les produits (max 3 colonnes) */
+.produits-container .fixed-size-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: var(--img-border-radius);
+}
+
+.produits-container .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.produits-container .col {
+    flex: 0 0 30%;
+}
+
+
 
 /* ------------------------- Formulaires ------------------------- */
 .form-container {
@@ -167,20 +183,20 @@ h4 {
     box-shadow: 0 0 0 0.2rem var(--orange);
 }
 
-/* Style pour l'elément de bascule de mot de passe */
-.password-toggle {
-    /* Positionne l'élément de manière absolue par rapport à son parent */
-    position: absolute;
-    /* Place l'élément à 10px du bord droit du parent */
-    right: 10px;
-    /* Place l'élément à 60% de la hauteur du parent */
-    top: 60%;
-    /* Centre verticalement l'élément */
-    transform: translateY(-50%);
-    cursor: pointer;
-    /* Assure que l'icône est au-dessus des autres éléments */
-    z-index: 2;
+/* Barre de Rx Limite la largeur pour éviter qu'elle déborde */
+/*.search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem; 
 }
+ .form-control {
+    max-width: 300px; 
+} 
+.btn-primary {
+    width: auto;
+}    
+*/
 
 /* ------------------------- Menu ------------------------- */
 .navbar,
@@ -212,25 +228,6 @@ h4 {
     color: var(--black) !important;
     /* border-bottom: 2px solid var(--dark-blue); */
 }
-
-
-/* Message en scrolling: Mompo tienda latina */
-@keyframes scroll-left {
-    0% {
-        transform: translateX(100%);
-    }
-
-    70% {
-        transform: translateX(-50%);
-    }
-}
-
-.scrolling-text {
-    overflow: hidden;
-    white-space: nowrap;
-    animation: scroll-left 20s linear 2;
-}
-
 
 .bg-blue {
     background-color: var(--blue-accesibilite) !important;
@@ -299,6 +296,33 @@ button:focus,
     color: var(--black) !important;
     background-color: var(--light-gray);
 }
+/* Style pour l'elément de bascule de mot de passe */
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 60%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    /* Assure que l'icône est au-dessus des autres éléments */
+    z-index: 2;
+}
+
+/* Message en scrolling: Mompo tienda latina */
+@keyframes scroll-left {
+    0% {
+        transform: translateX(100%);
+    }
+
+    70% {
+        transform: translateX(-50%);
+    }
+}
+
+.scrolling-text {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: scroll-left 20s linear 2;
+}
 
 /* .sticky-top {
     position: -webkit-sticky;
@@ -310,8 +334,12 @@ button:focus,
 /* ------------------------- Styles Responsives ------------------------- */
 /* Petits écrans : jusqu'à 480px */
 @media (max-width: 480px) {
-    /* body {
-        font-size: 0.875em; 
+    body {
+        font-size: 0.875em;
+    }
+    /*
+    .evenements-container .fixed-size-image {
+        height: 200px; 
     }
 
     .btn-primary {
@@ -338,9 +366,10 @@ button:focus,
 
 /* Petits écrans : jusqu'à 575px */
 @media (max-width: 575px) {
-    .card {
+    /* .card {
         margin: 1rem 0;
-    }
+    } */
+
     /* h1 {
         font-size: 2rem; 
     }
@@ -357,11 +386,15 @@ button:focus,
 }
 
 /* Moyens écrans : jusqu'à 768px */
-@media (max-width: 991px) {
-    .fixed-size-image {
-        height: auto;
+@media (max-width: 768px) {
+   /* .evenements-container .col {
+        flex: 0 0 100%; 
     }
-    /* .card-body {
+
+    .evenements-container .fixed-size-image {
+        height: 300px; 
+    }
+     .card-body {
         height: auto; 
     }
 
@@ -390,7 +423,11 @@ button:focus,
 
 /* Grands écrans : à partir de 992px */
 @media (min-width: 992px) {
-    /* .navbar .col-2 {
+  /*  .fixed-size-image {
+        height: auto;
+    }
+
+     .navbar .col-2 {
         flex: 0 0 15%; 
     }
 
