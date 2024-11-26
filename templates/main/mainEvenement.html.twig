@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block body %}
-  <div class="container-fluid bg-dark-subtle evenements-container m-0 p-0"> 
+  <div class="container-fluid bg-dark-subtle  m-0 p-0"> 
     <div class="py-4">
       <h1 class="text-center pb-2">
         Événements
@@ -31,7 +31,8 @@
               {{ evenement.titre starts with 'Programme' ? evenement.titre : evenement.date|date('Y-m-d')|date_en_lettres }}
             </div>
             <div class="card-img-top text-center">
-              <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="Affiche de:{{ evenement.titre }}" class="img-fluid fixed-size-image" loading="lazy" title="{{ evenement.titre }} - {{ evenement.date|date('Y-m-d') }}" aria-label="{{ evenement.titre }} - {{ evenement.date|date('Y-m-d') }}" />
+              <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="Affiche de:{{ evenement.titre }}" class="img-fluid" loading="lazy" title="{{ evenement.titre }} - {{ evenement.date|date('Y-m-d') }}" aria-label="{{ evenement.titre }} - {{ evenement.date|date('Y-m-d') }}" />
+              {# <img src="{{ evenement.photo1 ? asset('images/' ~ evenement.photo1) : asset('images/default.jpeg') }}" alt="Affiche de:{{ evenement.titre }}" class="img-fluid fixed-size-image" loading="lazy" title="{{ evenement.titre }} - {{ evenement.date|date('Y-m-d') }}" aria-label="{{ evenement.titre }} - {{ evenement.date|date('Y-m-d') }}" /> #}
             </div>
             <div class="card-body card-gradient text-gray d-flex flex-column flex-grow-1">
               <h2 class="card-title text-primary text-center">

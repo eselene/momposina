@@ -5,18 +5,24 @@ namespace App\Repository;
 use App\Entity\Produit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Psr\Log\LoggerInterface;
 
 /**
  * @extends ServiceEntityRepository<Produit>
  */
 class ProduitRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $logger;
+
+    public function __construct(ManagerRegistry $registry, LoggerInterface $logger)
     {
         parent::__construct($registry, Produit::class);
+        $this->logger = $logger;
     }
 
-    /*** @return Produit[] Returns an array of Produit objects   */
+    /** 
+     * @return Produit[] Returns an array of Produit objects
+     */
     public function findByCategorie($idCategorie): array
     {
         return $this->createQueryBuilder('p')
@@ -30,8 +36,9 @@ class ProduitRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    // Récupére les produits associés à une sous-catégorie spécifique.
-    /*** @return Produit[] Returns an array of Produit objects   */
+    /** 
+     * @return Produit[] Returns an array of Produit objects
+     */
     public function findBySousCategorieId($sousCategorieId): array
     {
         return $this->createQueryBuilder('p')
@@ -40,25 +47,26 @@ class ProduitRepository extends ServiceEntityRepository
             ->setParameter('val', $sousCategorieId)
             ->orderBy('p.nom', 'ASC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
-    /*** @return Produit[] Returns an array of Produit objects   */
+    /** 
+     * @return Produit[] Returns an array of Produit objects
+     */
     public function findById($id): array
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.id = :val')
-            // ->andWhere('p.visibleWeb = true')
             ->setParameter('val', $id)
             ->orderBy('p.nom', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
-    /*** @return Produit[] Returns an array of Produit objects   */
+    /** 
+     * @return Produit[] Returns an array of Produit objects
+     */
     public function findByNom($value): array
     {
         return $this->createQueryBuilder('p')
@@ -68,57 +76,40 @@ class ProduitRepository extends ServiceEntityRepository
             ->orderBy('p.nom', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
+    /**
+     * @return Produit[] Returns an array of Produit objects
+     */
     public function findByNomNomEs($value, $valSousCategorieId): array
     {
         try {
             return $this->createQueryBuilder('p')
-                ->andWhere('p.nom LIKE :val OR p.nomEs LIKE :val')
+                ->andWhere('LOWER(p.nom) LIKE :val OR LOWER(p.nomEs) LIKE :val')
                 ->andWhere('p.sousCategorie = :valSousCategorieId')
                 ->andWhere('p.visibleWeb = true')
-                ->setParameter('val', '%' . $value . '%')
+                ->setParameter('val', '%' . strtolower($value) . '%')
                 ->setParameter('valSousCategorieId', $valSousCategorieId)
                 ->getQuery()
                 ->getResult();
         } catch (\Exception $e) {
-            $this->getEntityManager()->getConnection()->getConfiguration();
-            throw $e; // Relancer l'exception pour qu'elle soit gérée par le contrôleur
+            $this->logger->error('Error searching for products: ' . $e->getMessage(), [
+                'query' => $value,
+                'sousCategorieId' => $valSousCategorieId
+            ]);
+            throw new \RuntimeException('An error occurred while searching for products.');
         }
     }
 
+    /**
+     * @return Produit[] Returns an array of Produit objects
+     */
     public function findAllOrderByName(): array
     {
         return $this->createQueryBuilder('p')
-            ->orderBy('p.nom', 'ASC') // 'ASC' pour un tri croissant, 'DESC' pour un tri décroissant
+            ->orderBy('p.nom', 'ASC')
             ->getQuery()
             ->getResult();
     }
-
-    //    /**
-    //     * @return Produit[] Returns an array of Produit objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Produit
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
 }

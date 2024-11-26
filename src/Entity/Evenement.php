@@ -3,10 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\EvenementRepository;
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
 use DateTime\DateInterface;
 
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
@@ -51,8 +51,8 @@ class Evenement
     #[ORM\Column]
     private ?bool $visibleWeb = null;
 
-    // #[ORM\OneToOne(inversedBy: 'evenement', cascade: ['persist', 'remove'])]
-    #[ORM\OneToOne(cascade: ['persist'])]
+    #[ORM\OneToOne(inversedBy: 'evenement', cascade: ['persist', 'remove'])]
+    // #[ORM\OneToOne(cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: true)]
     private ?User $user = null;
 
@@ -185,7 +185,7 @@ class Evenement
         return $this->user;
     }
 
-    public function setUser(User $user): static
+    public function setUser(?User $user): static
     {
         $this->user = $user;
 

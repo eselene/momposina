@@ -6,9 +6,9 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -263,10 +263,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->evenement;
     }
 
-    public function setEvenement(Evenement $evenement): static
+    public function setEvenement(?Evenement $evenement): static
     {
         // set the owning side of the relation if necessary
-        if ($evenement->getUser() !== $this) {
+        if ($evenement && $evenement->getUser() !== $this) {
             $evenement->setUser($this);
         }
 

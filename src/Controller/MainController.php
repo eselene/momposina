@@ -11,16 +11,16 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\Evenement;
-use App\Entity\Produit;
-use App\Entity\SousCategorie;
+// use App\Entity\Evenement;
+// use App\Entity\Produit;
+// use App\Entity\SousCategorie;
 use App\Form\ProduitSearchType;
 
 class MainController extends AbstractController
 {
     private const ALIM = 'Alimentation';
     private const BOISSON = 'Boisson';  
-    private const ELEMENTS_PAR_PAGE = 4; 
+    private const ELEMENTS_PAR_PAGE = 2; 
 
     #[Route('/', name: 'app_evenements')]
     public function home(EvenementRepository $evenementRepository, PaginatorInterface $paginator, Request $request): Response

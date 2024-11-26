@@ -115,356 +115,345 @@ body:not(.evenements-page) .container {
 
 body:not(.evenements-page) .row {
     margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
     /* padding: 1rem; */
     /* gap: 1.5rem; */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
 
-
-.col {
-    padding: 0.5rem;
-    /* Réduisez les paddings pour éviter l'encombrement */
-}
-
-.col-md-6 {
-    flex: 0 0 48%;/* Set width to 48%  */
-    margin-bottom: 1rem;
-    padding: 1rem;
-    box-sizing: border-box;
-}
-
-.col-lg-6,
-.col-md-12 {
-    padding: 5vh 4vw;
-}
-
-/* Images dans les cartes */
-/* Pour les produits (max 3 colonnes) */
-.produits-container .fixed-size-image {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: var(--img-border-radius);
-}
-
-.produits-container .row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 1rem;
-}
-
-.produits-container .col {
-    flex: 0 0 30%;
-}
-
-
-
-/* ------------------------- Formulaires ------------------------- */
-.form-container {
-    padding: 5px;
-    background-color: var(--dark-gray);
-
-    color: var(--dark-gray);
-}
-
-.form-control {
-    border: 1px solid var(--light-green);
-    border-radius: 4px;
-    width: 100%;
-    box-sizing: border-box;
-    line-height: var(--line-height);
-}
-
-.form-control:focus {
-    border-color: var(--orange);
-    box-shadow: 0 0 0 0.2rem var(--orange);
-}
-
-/* Barre de Rx Limite la largeur pour éviter qu'elle déborde */
-/*.search-bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem; 
-}
- .form-control {
-    max-width: 300px; 
-} 
-.btn-primary {
-    width: auto;
-}    
-*/
-
-/* ------------------------- Menu ------------------------- */
-.navbar,
-.nav-link,
-.dropdown-item {
-    margin: auto;
-    /* color: var(--black) !important; */
-    color: var(--white) !important;
-}
-
-.navbar-toggler {
-    background-color: var(--white);
-    /* Ajoute une couleur de fond au bouton */
-}
-
-.navbar-toggler:hover,
-.navbar-toggler-icon:hover,
-.social-link-icon:hover {
-    background-color: var(--yellow);
-}
-
-.dropdown-item:hover {
-    background-color: var(--dark-gray);
-    /* color: var(--black)!important; */
-}
-
-.nav-item.active {
-    font-weight: bold;
-    color: var(--black) !important;
-    /* border-bottom: 2px solid var(--dark-blue); */
-}
-
-.bg-blue {
-    background-color: var(--blue-accesibilite) !important;
-}
-
-.bg-grey {
-    background-color: var(--light-gray) !important;
-}
-
-.bg-secondary {
-    background-color: var(--secondary-color) !important;
-    color: var(--white);
-}
-
-/* ------------------------- Footer ------------------------- */
-.footer {
-    color: var(--white);
-    padding: var(--footer-padding);
-    line-height: var(--footer-line-height);
-}
-
-.footer-title,
-.text-yellow {
-    color: var(--yellow);
-}
-
-.footer a {
-    color: var(--white);
-}
-
-.footer-links a {
-    font-size: 1rem;
-    padding: 12px 12px;
-    display: inline-block;
-    color: var(--white);
-}
-
-.footer .list-inline-item a:hover {
-    color: var(--yellow);
-}
-
-.social-link-icon {
-    width: 2rem;
-    height: 2rem;
-}
-
-.social-link {
-    margin: 0 1rem;
-    /* margin: 0 1rem 0 1.5rem; */
-    /* Marge de 1rem à gauche et à droite de chaque élément */
-}
-
-/* ------------------------- SEO et Accessibilité ------------------------- */
-/* Focus visible */
-a:focus,
-button:focus,
-.form-control:focus {
-    outline: 2px solid var(--blue-accesibilite);
-    outline-offset: 2px;
-    color: var(--black);
-    background: var(--light-gray);
-}
-
-.nav-link:focus,
-.dropdown-item:focus {
-    color: var(--black) !important;
-    background-color: var(--light-gray);
-}
-/* Style pour l'elément de bascule de mot de passe */
-.password-toggle {
-    position: absolute;
-    right: 10px;
-    top: 60%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    /* Assure que l'icône est au-dessus des autres éléments */
-    z-index: 2;
-}
-
-/* Message en scrolling: Mompo tienda latina */
-@keyframes scroll-left {
-    0% {
-        transform: translateX(100%);
+    .col {
+        padding: 0.5rem;
     }
-
-    70% {
-        transform: translateX(-50%);
+    
+     .col-md-6 {
+        flex: 0 0 48%;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        box-sizing: border-box;
     }
-}
-
-.scrolling-text {
-    overflow: hidden;
-    white-space: nowrap;
-    animation: scroll-left 20s linear 2;
-}
-
-/* .sticky-top {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 1020;
-} */
-
-/* ------------------------- Styles Responsives ------------------------- */
-/* Petits écrans : jusqu'à 480px */
-@media (max-width: 480px) {
-    body {
-        font-size: 0.875em;
+    
+    .col-lg-6,
+    .col-md-12 {
+        padding: 5vh 4vw;
+    } */
+    
+    /* Images dans les cartes */
+    /* Pour les produits (max 3 colonnes) */
+    .produits-container .fixed-size-image {
+        /* width: 100%;
+        min-width: 200px;
+        height: 350px;
+        padding-top: 2%; */
+        object-fit: cover;
+        border-radius: var(--img-border-radius);
     }
-    /*
-    .evenements-container .fixed-size-image {
-        height: 200px; 
+    
+    /* .produits-container .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1rem;
     }
-
+    
+    .produits-container .col {
+        flex: 0 0 30%;
+    } */
+    
+    
+    
+    /* ------------------------- Formulaires ------------------------- */
+    .form-container {
+        padding: 5px;
+        background-color: var(--dark-gray);
+    
+        color: var(--dark-gray);
+    }
+    
+    .form-control {
+        border: 1px solid var(--light-green);
+        border-radius: 4px;
+        width: 100%;
+        box-sizing: border-box;
+        line-height: var(--line-height);
+    }
+    
+    .form-control:focus {
+        border-color: var(--orange);
+        box-shadow: 0 0 0 0.2rem var(--orange);
+    }
+    
+    /* Barre de Rx Limite la largeur pour éviter qu'elle déborde */
+    /*.search-bar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem; 
+    }
+     .form-control {
+        max-width: 300px; 
+    } 
     .btn-primary {
-        font-size: 0.8em; 
+        width: auto;
+    }    
+    */
+    
+    /* ------------------------- Menu ------------------------- */
+    .navbar,
+    .nav-link,
+    .dropdown-item {
+        margin: auto;
+        /* color: var(--black) !important; */
+        color: var(--white) !important;
     }
-
-    footer, .footer {
-        padding: 15px; 
-        line-height: 1.4; 
+    
+    .navbar-toggler {
+        background-color: var(--white);
+        /* Ajoute une couleur de fond au bouton */
     }
-
-    .footer-link, .social-link {
-        padding: 15px;
-        margin: 8px;
-        text-decoration: none;
+    
+    .navbar-toggler:hover,
+    .navbar-toggler-icon:hover,
+    .social-link-icon:hover {
+        background-color: var(--yellow);
     }
-
+    
+    .dropdown-item:hover {
+        background-color: var(--dark-gray);
+        /* color: var(--black)!important; */
+    }
+    
+    .nav-item.active {
+        font-weight: bold;
+        color: var(--black) !important;
+        /* border-bottom: 2px solid var(--dark-blue); */
+    }
+    
+    .bg-blue {
+        background-color: var(--blue-accesibilite) !important;
+    }
+    
+    .bg-grey {
+        background-color: var(--light-gray) !important;
+    }
+    
+    .bg-secondary {
+        background-color: var(--secondary-color) !important;
+        color: var(--white);
+    }
+    
+    /* ------------------------- Footer ------------------------- */
+    .footer {
+        color: var(--white);
+        padding: var(--footer-padding);
+        line-height: var(--footer-line-height);
+    }
+    
+    .footer-title,
+    .text-yellow {
+        color: var(--yellow);
+    }
+    
+    .footer a {
+        color: var(--white);
+    }
+    
     .footer-links a {
-        font-size: 1.1rem; 
-        padding: 16px 20px; 
-        display: inline-block; 
-    } */
-}
-
-/* Petits écrans : jusqu'à 575px */
-@media (max-width: 575px) {
-    /* .card {
-        margin: 1rem 0;
-    } */
-
-    /* h1 {
-        font-size: 2rem; 
-    }
-
-    .row .col-md-6, .col-md-12 {
-        width: 100%; 
-    }
-
-    .fixed-size-image {
-        width: 80%;
-        margin: 0 auto;
-        max-height: 250px; 
-    } */
-}
-
-/* Moyens écrans : jusqu'à 768px */
-@media (max-width: 768px) {
-   /* .evenements-container .col {
-        flex: 0 0 100%; 
-    }
-
-    .evenements-container .fixed-size-image {
-        height: 300px; 
-    }
-     .card-body {
-        height: auto; 
-    }
-
-    .card-title {
-        font-size: 1.2rem; 
-    }
-
-    .card-text {
-        font-size: 0.9rem; 
-    }
-
-    .image-container img, img {
-        max-width: 100%;
-        height: auto; 
-    }
-
-    .col-md-6 {
-        width: 100%; 
-    }
-
-    .card-img-top img {
-        max-width: 100%;
-        height: auto;
-    } */
-}
-
-/* Grands écrans : à partir de 992px */
-@media (min-width: 992px) {
-  /*  .fixed-size-image {
-        height: auto;
-    }
-
-     .navbar .col-2 {
-        flex: 0 0 15%; 
-    }
-
-    .navbar .col-7 {
-        flex: 0 0 70%; 
-    }
-
-    .navbar .col-1 {
-        flex: 0 0 15%; 
-    }
-
-    .middle-section {
-        max-width: 80vw; 
-    }
-
-    .image-container {
-        width: auto; 
-        height: auto;
-    }
-
-    h4 {
         font-size: 1rem;
+        padding: 12px 12px;
+        display: inline-block;
+        color: var(--white);
     }
-
-    p {
-        font-size: 14px;
+    
+    .footer .list-inline-item a:hover {
+        color: var(--yellow);
     }
-
+    
+    .social-link-icon {
+        width: 2rem;
+        height: 2rem;
+    }
+    
+    .social-link {
+        margin: 0 1rem;
+        /* margin: 0 1rem 0 1.5rem; */
+        /* Marge de 1rem à gauche et à droite de chaque élément */
+    }
+    
+    /* ------------------------- SEO et Accessibilité ------------------------- */
+    /* Focus visible */
+    a:focus,
+    button:focus,
+    .form-control:focus {
+        outline: 2px solid var(--blue-accesibilite);
+        outline-offset: 2px;
+        color: var(--black);
+        background: var(--light-gray);
+    }
+    
+    .nav-link:focus,
+    .dropdown-item:focus {
+        color: var(--black) !important;
+        background-color: var(--light-gray);
+    }
+    /* Style pour l'elément de bascule de mot de passe */
+    .password-toggle {
+        position: absolute;
+        right: 10px;
+        top: 60%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        /* Assure que l'icône est au-dessus des autres éléments */
+        z-index: 2;
+    }
+    
+    /* Message en scrolling: Mompo tienda latina */
+    @keyframes scroll-left {
+        0% {
+            transform: translateX(100%);
+        }
+    
+        70% {
+            transform: translateX(-50%);
+        }
+    }
+    
     .scrolling-text {
-        display: none; 
+        overflow: hidden;
+        white-space: nowrap;
+        animation: scroll-left 20s linear 2;
     }
-
-    .row {
-        gap: 1rem; 
-    }
-
-    .container-fluid {
-        padding: 1rem; 
+    
+    /* .sticky-top {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 1020;
     } */
-}
+    
+    /* ------------------------- Styles Responsives ------------------------- */
+    /* Petits écrans : jusqu'à 480px */
+    @media (max-width: 480px) {
+        body {
+            font-size: 0.875em;
+        }
+        /*
+        .btn-primary {
+            font-size: 0.8em; 
+        }
+    
+        footer, .footer {
+            padding: 15px; 
+            line-height: 1.4; 
+        }
+    
+        .footer-link, .social-link {
+            padding: 15px;
+            margin: 8px;
+            text-decoration: none;
+        }
+    
+        .footer-links a {
+            font-size: 1.1rem; 
+            padding: 16px 20px; 
+            display: inline-block; 
+        } */
+    }
+    
+    /* Petits écrans : jusqu'à 575px */
+    @media (max-width: 575px) {
+        /* .card {
+            margin: 1rem 0;
+        } */
+    
+        /* h1 {
+            font-size: 2rem; 
+        }
+    
+        .row .col-md-6, .col-md-12 {
+            width: 100%; 
+        }
+    
+        .fixed-size-image {
+            width: 80%;
+            margin: 0 auto;
+            max-height: 250px; 
+        } */
+    }
+    
+    /* Moyens écrans : jusqu'à 768px */
+    @media (max-width: 768px) {
+       /* .card-body {
+            height: auto; 
+        }
+    
+        .card-title {
+            font-size: 1.2rem; 
+        }
+    
+        .card-text {
+            font-size: 0.9rem; 
+        }
+    
+        .image-container img, img {
+            max-width: 100%;
+            height: auto; 
+        }
+    
+        .col-md-6 {
+            width: 100%; 
+        }
+    
+        .card-img-top img {
+            max-width: 100%;
+            height: auto;
+        } */
+    }
+    
+    /* Grands écrans : à partir de 992px */
+    @media (min-width: 992px) {
+      /*  .fixed-size-image {
+            height: auto;
+        }
+    
+         .navbar .col-2 {
+            flex: 0 0 15%; 
+        }
+    
+        .navbar .col-7 {
+            flex: 0 0 70%; 
+        }
+    
+        .navbar .col-1 {
+            flex: 0 0 15%; 
+        }
+    
+        .middle-section {
+            max-width: 80vw; 
+        }
+    
+        .image-container {
+            width: auto; 
+            height: auto;
+        }
+    
+        h4 {
+            font-size: 1rem;
+        }
+    
+        p {
+            font-size: 14px;
+        }
+    
+        .scrolling-text {
+            display: none; 
+        }
+    
+        .row {
+            gap: 1rem; 
+        }
+    
+        .container-fluid {
+            padding: 1rem; 
+        } */
+    }
