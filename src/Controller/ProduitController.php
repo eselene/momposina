@@ -1,5 +1,6 @@
 <?php
-// src/Form/ProduitController.php
+// src/Controller/ProduitController.php
+
 namespace App\Controller;
 
 use App\Form\ProduitSearchType;
@@ -12,12 +13,15 @@ use Knp\Component\Pager\PaginatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
+// use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+// use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+
+use function PHPUnit\Framework\isNull;
+
 // use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/admin/produit')]
@@ -52,7 +56,7 @@ class ProduitController extends AbstractController
     } catch (\Exception $e) {
             $this->logger->error('Erreur lors de la récupération des produits : ' . $e->getMessage());
         $this->addFlash('error', 'Une erreur est survenue lors de la récupération des produits. Veuillez réessayer.');
-        return $this->redirectToRoute('app_evenements');
+            return $this->redirectToRoute('app_produit_index');
     }        
     }
 
@@ -86,7 +90,7 @@ class ProduitController extends AbstractController
 
         return $this->render('produit/new.html.twig', [
             'produit' => $produit,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -116,7 +120,7 @@ class ProduitController extends AbstractController
 
         return $this->render('produit/edit.html.twig', [
             'produit' => $produit,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
     
@@ -148,4 +152,38 @@ class ProduitController extends AbstractController
         return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    #[Route('/search', name: 'app_produit_search', methods: ['GET', 'POST'])]
+    public function search(ProduitRepository $produitRepository, PaginatorInterface $paginator, Request $request): Response
+    {
+        $form = $this->createForm(ProduitSearchType::class);
+        $form->handleRequest($request);
+
+        $query = null;
+        $sousCategorieId = $request->query->getInt('sousCategorieId', 0); // Assurez-vous qu'un int est toujours fourni
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $query = $form->get('query')->getData();
+        }
+
+        if ($query) {
+            $produits = $produitRepository->findByNomNomEs($query, $sousCategorieId);
+
+            if (empty($produits)) {
+                $produits = $produitRepository->findBySousCategorieId($sousCategorieId);
+            }
+        } else {
+            $produits = $produitRepository->findBySousCategorieId($sousCategorieId);
+        }
+
+        $pagination = $paginator->paginate(
+            $produits,
+            $request->query->getInt('page', 1),
+            5
+        );
+
+        return $this->render('produit/search.html.twig', [
+            'pagination' => $pagination,
+            'form' => $form->createView(),
+        ]);
+    }
 }

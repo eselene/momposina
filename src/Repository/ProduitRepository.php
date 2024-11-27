@@ -1,23 +1,21 @@
 <?php
-
+// src/Repository/ProduitRepository.php
 namespace App\Repository;
 
 use App\Entity\Produit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Psr\Log\LoggerInterface;
+// use Psr\Log\LoggerInterface;
 
 /**
  * @extends ServiceEntityRepository<Produit>
  */
 class ProduitRepository extends ServiceEntityRepository
 {
-    private $logger;
-
-    public function __construct(ManagerRegistry $registry, LoggerInterface $logger)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Produit::class);
-        $this->logger = $logger;
+        // $this->logger = $logger;
     }
 
     /** 
@@ -82,24 +80,17 @@ class ProduitRepository extends ServiceEntityRepository
     /**
      * @return Produit[] Returns an array of Produit objects
      */
-    public function findByNomNomEs($value, $valSousCategorieId): array
+    public function findByNomNomEs($value, int $sousCategorieId): array
     {
-        try {
-            return $this->createQueryBuilder('p')
-                ->andWhere('LOWER(p.nom) LIKE :val OR LOWER(p.nomEs) LIKE :val')
-                ->andWhere('p.sousCategorie = :valSousCategorieId')
-                ->andWhere('p.visibleWeb = true')
-                ->setParameter('val', '%' . strtolower($value) . '%')
-                ->setParameter('valSousCategorieId', $valSousCategorieId)
-                ->getQuery()
-                ->getResult();
-        } catch (\Exception $e) {
-            $this->logger->error('Error searching for products: ' . $e->getMessage(), [
-                'query' => $value,
-                'sousCategorieId' => $valSousCategorieId
-            ]);
-            throw new \RuntimeException('An error occurred while searching for products.');
-        }
+        return $this->createQueryBuilder('p')
+            ->andWhere('LOWER(p.nom) LIKE :val OR LOWER(p.nomEs) LIKE :val')
+            ->andWhere('p.sousCategorie = :sousCategorieId')
+            ->andWhere('p.visibleWeb = true')
+            ->setParameter('val', '%' . strtolower($value) . '%')
+            ->setParameter('sousCategorieId', $sousCategorieId)
+            ->orderBy('p.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 
     /**

@@ -20,7 +20,8 @@ class MainController extends AbstractController
 {
     private const ALIM = 'Alimentation';
     private const BOISSON = 'Boisson';  
-    private const ELEMENTS_PAR_PAGE = 2; 
+    private const ELEMENTS_PAR_PAGE_E = 4; //evenement
+    private const ELEMENTS_PAR_PAGE_B = 8; //alim et boisson
 
     #[Route('/', name: 'app_evenements')]
     public function home(EvenementRepository $evenementRepository, PaginatorInterface $paginator, Request $request): Response
@@ -30,7 +31,7 @@ class MainController extends AbstractController
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            self::ELEMENTS_PAR_PAGE // Nombre d'éléments par page
+            self::ELEMENTS_PAR_PAGE_E // Nombre d'éléments par page
         );
 
         return $this->render('main/mainEvenement.html.twig', [
@@ -52,42 +53,42 @@ class MainController extends AbstractController
         PaginatorInterface $paginator, Request $request,
         int $id, string $typePage
     ): Response {
-    // Crée le formulaire de recherche de produits
+        // Crée le formulaire de recherche de produits
         $formResearch = $this->createForm(ProduitSearchType::class);
         $formResearch->handleRequest($request);
- 
-    // Vérifie si le formulaire de recherche a été soumis et est valide
-    if ($formResearch->isSubmitted() && $formResearch->isValid()) {
-        $query = $formResearch->get('query')->getData();
-        // Vérification de la requête
-        if ($query) {
-            $produits = $produitRepository->findByNomNomEs($query, $id);
+    
+        // Vérifie si le formulaire de recherche a été soumis et est valide
+        if ($formResearch->isSubmitted() && $formResearch->isValid()) {
+            $query = $formResearch->get('query')->getData();
+            // Vérification de la requête
+            if ($query) {
+                $produits = $produitRepository->findByNomNomEs($query, $id);
+            } else {
+                $produits = $produitRepository->findBy(['sousCategorie' => $id, 'visibleWeb' => true]);
+            }
         } else {
+            // Vérifie si le formulaire n'est pas soumis ou s'il n'est pas valide
             $produits = $produitRepository->findBy(['sousCategorie' => $id, 'visibleWeb' => true]);
         }
-        } else {
-        // Vérifie si le formulaire n'est pas soumis ou s'il n'est pas valide
-        $produits = $produitRepository->findBy(['sousCategorie' => $id, 'visibleWeb' => true]);
-        }
-
-    // Récupère la sous-catégorie par son ID
+    
+        // Récupère la sous-catégorie par son ID
         $sousCategorie = $sousCategorieRepository->find($id);
-    // Récupère la description de la sous-catégorie, ou une chaîne vide si non trouvée
+        // Récupère la description de la sous-catégorie, ou une chaîne vide si non trouvée
         $sousCategorieNom = $sousCategorie ? $sousCategorie->getDescription() : '';
-
-    // Paginate les résultats des produits
+    
+        // Paginate les résultats des produits
         $pagination = $paginator->paginate(
             $produits,
             $request->query->getInt('page', 1),
-            self::ELEMENTS_PAR_PAGE
+            self::ELEMENTS_PAR_PAGE_B
         );
-
+    
         // Vérifie si la page est pour une boisson, en ignorant la casse 
         $isPageForBoisson = strtolower($typePage) === 'boisson';
-    // Sélectionne le template approprié en fonction du type de page
+        // Sélectionne le template approprié en fonction du type de page
         $template = $isPageForBoisson ? 'main/boisson_detail.html.twig' : 'main/alimentation_detail.html.twig';
-
-    // Rend la vue avec les données nécessaires
+    
+        // Rend la vue avec les données nécessaires
         return $this->render($template, [
             'pagination' => $pagination,
             'formResearch' => $formResearch->createView(),
@@ -95,7 +96,7 @@ class MainController extends AbstractController
             'pageTitle' => $typePage,
             'isBoisson' => $isPageForBoisson,
         ]);
-    }
+    }    
 
     #[Route('/alimentation/{id}', name: 'app_alimentation_detail', requirements: ['id' => '\d+'])]
     public function alimentationDetail(
