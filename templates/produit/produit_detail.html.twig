@@ -21,13 +21,12 @@
     </div>
     <!-- Barre de recherche -->
     <div class="search-bar d-flex justify-content-center align-items-center mt-1 mb-2">
-      {{ form_start(formResearch, {'attr': {'class': 'form-inline d-flex', 'action': app.request.attributes.get('_route')|default(''), 'method': 'GET' }}
-      ) }}
-      {{ form_widget(formResearch.query, {'attr': {'class': 'form-control', 'placeholder': 'Chercher un produit' }}
-      ) }}
-      <input type="hidden" name="page" value="1">
-        <button type="submit" class="btn btn-primary">
-          Rechercher
+      {{ form_start(formResearch, {'attr': {'class': 'form-inline d-flex'}, 'method': 'GET'}) }}
+        <div class="form-group mb-1">
+  {{ form_widget(formResearch.query, {'attr': {'class': 'form-control', 'placeholder': 'Chercher un produit'}}) }}
+        </div>
+        <button type="submit" class="btn btn-primary btn-sm rounded-circle ml-2" style="width: 2.5rem; height: 2.5rem; display: flex; align-items: center; justify-content: center;">
+          <img src="{{ asset('icons/search-heart-fill.svg') }}" alt="Chercher un produit" style="width: 1rem; height: 1rem;">
         </button>
         {{ form_end(formResearch) }}
       </div>
@@ -59,9 +58,7 @@
           </div>
         {% else %}
           <p class="text-center mt-3">
-            Aucun produit trouvé pour "
-            {{ formResearch.query.vars.value }}
-            ".
+          Aucun produit trouvé pour "{{ formResearch.query.vars.value }}".
           </p>
         {% endif %}
       </div>

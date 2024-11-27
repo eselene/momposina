@@ -49,26 +49,24 @@ class MainController extends AbstractController
     // * Gère la recherche de produits,
     // * et la sélection du template approprié en fonction du type de page.
     private function produitDetail(
-        ProduitRepository $produitRepository, SousCategorieRepository $sousCategorieRepository,
-        PaginatorInterface $paginator, Request $request,
-        int $id, string $typePage
+        ProduitRepository $produitRepository,
+        SousCategorieRepository $sousCategorieRepository,
+        PaginatorInterface $paginator,
+        Request $request,
+        int $id,
+        string $typePage
     ): Response {
         // Crée le formulaire de recherche de produits
-        $formResearch = $this->createForm(ProduitSearchType::class);
+        $formResearch = $this->createForm(ProduitSearchType::class, null, ['method' => 'GET']);
         $formResearch->handleRequest($request);
     
-        // Vérifie si le formulaire de recherche a été soumis et est valide
+        $produits = $produitRepository->findBy(['sousCategorie' => $id, 'visibleWeb' => true]);
         if ($formResearch->isSubmitted() && $formResearch->isValid()) {
             $query = $formResearch->get('query')->getData();
             // Vérification de la requête
             if ($query) {
                 $produits = $produitRepository->findByNomNomEs($query, $id);
-            } else {
-                $produits = $produitRepository->findBy(['sousCategorie' => $id, 'visibleWeb' => true]);
             }
-        } else {
-            // Vérifie si le formulaire n'est pas soumis ou s'il n'est pas valide
-            $produits = $produitRepository->findBy(['sousCategorie' => $id, 'visibleWeb' => true]);
         }
     
         // Récupère la sous-catégorie par son ID
