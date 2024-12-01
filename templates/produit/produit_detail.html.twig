@@ -1,11 +1,10 @@
 {% extends 'base.html.twig' %}
 {# templates/main/produit_det.html.twig #}
 {% block title %}
-  {{ sousCategorieNom }}
-  - La Momposina
+  {{ sousCategorieNom }} - La Momposina
 {% endblock %}
 {% block body %}
-  <div class="container-fluid produits-container p-0 mt-3 ">
+  <div class="container-fluid produits-container p-0 mt-3">
     <!-- Titre principal -->
     <h1 class="text-center pb-2">
       {{ sousCategorieNom }}
@@ -21,46 +20,43 @@
     </div>
     <!-- Barre de recherche -->
     <div class="search-bar d-flex justify-content-center align-items-center mt-1 mb-2">
-      {{ form_start(formResearch, {'attr': {'class': 'form-inline d-flex'}, 'method': 'GET'}) }}
-        <div class="form-group mb-1">
-  {{ form_widget(formResearch.query, {'attr': {'class': 'form-control', 'placeholder': 'Chercher un produit'}}) }}
-        </div>
-        <button type="submit" class="btn btn-primary btn-sm rounded-circle ml-2" style="width: 2.5rem; height: 2.5rem; display: flex; align-items: center; justify-content: center;">
-          <img src="{{ asset('icons/search-heart-fill.svg') }}" alt="Chercher un produit" style="width: 1rem; height: 1rem;">
-        </button>
-        {{ form_end(formResearch) }}
+      {{ form_start(formResearch, {'attr': {'class': 'form-inline d-flex position-relative'}, 'method': 'GET'}) }}
+      <div class="input-group">
+        {{ form_widget(formResearch.query, {'attr': {'class': 'form-control', 'placeholder': 'Chercher un produit', 'id': 'searchQuery'}}) }}
+        <button type="submit" class="btn btn-primary ms-2" title="Rechercher">Rechercher</button>
       </div>
-      <!-- Résultats de recherche -->
-      {% if pagination.items is not empty %}
-        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3 justify-content-start">
-          {% for produit in pagination.items %}
-            <!-- Colonne de produit -->
-            <div class="col">
-              <div class="card h-100 bg-light text-black">
-                <!-- Image du produit -->
-                <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : asset('images/default.jpeg') }}" class="card-img-top img-fluid fixed-size-image" alt="{{ produit.nom }}">
-                  <!-- Contenu de la carte -->
-                  <div class="card-body d-flex flex-column justify-content-between">
-                    <h2 class="card-title h4 text-center">
-                      {{ produit.nom }}
-                    </h2>
-                    <p>
-                      {{ produit.description }}
-                    </p>
-                  </div>
-                </div>
+      {{ form_end(formResearch) }}
+    </div>
+    <!-- Résultats de recherche -->
+    {% if pagination.items is not empty %}
+      <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3 justify-content-start">
+        {% for produit in pagination.items %}
+          <!-- Colonne de produit -->
+          <div class="col">
+            <div class="card h-100 bg-light text-black">
+              <!-- Image du produit -->
+              <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : asset('images/default.jpeg') }}" class="card-img-top img-fluid fixed-size-image" alt="{{ produit.nom }}">
+              <!-- Contenu de la carte -->
+              <div class="card-body d-flex flex-column">
+                <h2 class="card-title h4 text-center">
+                  {{ produit.nom }}
+                </h2>
+                <p class="pe-1 ps-1">
+                  {{ produit.description }}
+                </p>
               </div>
-            {% endfor %}
+            </div>
           </div>
-          <!-- Pagination -->
-          <div class="pagination justify-content-center mt-4">
-            {{ knp_pagination_render(pagination) }}
-          </div>
-        {% else %}
-          <p class="text-center mt-3">
-          Aucun produit trouvé pour "{{ formResearch.query.vars.value }}".
-          </p>
-        {% endif %}
+        {% endfor %}
       </div>
-    {% endblock %}
-    
+      <!-- Pagination -->
+      <div class="pagination justify-content-center mt-4">
+        {{ knp_pagination_render(pagination) }}
+      </div>
+    {% else %}
+      <p class="text-center mt-3">
+        Aucun produit trouvé pour "{{ formResearch.query.vars.value }}".
+      </p>
+    {% endif %}
+  </div>
+{% endblock %}

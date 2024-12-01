@@ -28,9 +28,9 @@
 
     --container-max-width: 1200px;
 }
+
 /* -- Styles Globaux ------------------------- */
 body {
-    /* color: var(--dark-gray); */
     font-family: var(--font-family);
     font-size: var(--base-font-size);
     line-height: var(--line-height);
@@ -82,29 +82,20 @@ h4 {
 }
 
 /* --------CARD ----*/
-/* Dégradés pour le body  et le titre de la carte */
+/* Dégradés pour le body et le titre de la carte */
 .card-gradient {
     background: linear-gradient(235deg, var(--light-gray) 0%, var(--dark-gray) 200%);
 }
 
 body:not(.evenements-page) .card {
     height: 100%;
-    /* Toutes les cartes auront la même hauteur */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s; */
 }
 
-/* body:not(.evenements-page) .card:hover { */
-/* transform: scale(1.05); Effet de zoom */
-/* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); */
-/* } */
-
-body:not(.evenements-page) card-body {
+body:not(.evenements-page) .card-body {
     flex-grow: 1;
-    /* S'assure que le contenu s'étire pour remplir l'espace */
 }
 
 /* -- Mise en page ------------------------- */
@@ -119,8 +110,6 @@ body:not(.evenements-page) .row {
     flex-wrap: wrap;
     justify-content: space-between;
 }
-    /* padding: 1rem; */
-    /* gap: 1.5rem; */
 
     .col {
         padding: 0.5rem;
@@ -136,37 +125,18 @@ body:not(.evenements-page) .row {
     .col-lg-6,
     .col-md-12 {
         padding: 5vh 4vw;
-    } */
+}
     
     /* Images dans les cartes */
-    /* Pour les produits (max 3 colonnes) */
     .produits-container .fixed-size-image {
-        /* width: 100%;
-        min-width: 200px;
-        height: 350px;
-        padding-top: 2%; */
         object-fit: cover;
         border-radius: var(--img-border-radius);
     }
-    
-    /* .produits-container .row {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 1rem;
-    }
-    
-    .produits-container .col {
-        flex: 0 0 30%;
-    } */
-    
-    
     
     /* ------------------------- Formulaires ------------------------- */
     .form-container {
         padding: 5px;
         background-color: var(--dark-gray);
-    
         color: var(--dark-gray);
     }
     
@@ -183,20 +153,21 @@ body:not(.evenements-page) .row {
         box-shadow: 0 0 0 0.2rem var(--orange);
     }
     
-    /* Barre de Rx Limite la largeur pour éviter qu'elle déborde */
-    /*.search-bar {
+/* Barre de recherche */
+.search-bar {
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 0.5rem; 
     }
+
      .form-control {
         max-width: 300px; 
     } 
+
     .btn-primary {
         width: auto;
     }    
-    */
     
     /* ------------------------- Menu ------------------------- */
     .navbar,
@@ -209,7 +180,6 @@ body:not(.evenements-page) .row {
     
     .navbar-toggler {
         background-color: var(--white);
-        /* Ajoute une couleur de fond au bouton */
     }
     
     .navbar-toggler:hover,
@@ -220,13 +190,11 @@ body:not(.evenements-page) .row {
     
     .dropdown-item:hover {
         background-color: var(--dark-gray);
-        /* color: var(--black)!important; */
     }
     
     .nav-item.active {
         font-weight: bold;
         color: var(--black) !important;
-        /* border-bottom: 2px solid var(--dark-blue); */
     }
     
     .bg-blue {
@@ -262,7 +230,6 @@ body:not(.evenements-page) .row {
         font-size: 1rem;
         padding: 12px 12px;
         display: inline-block;
-        color: var(--white);
     }
     
     .footer .list-inline-item a:hover {
@@ -276,12 +243,9 @@ body:not(.evenements-page) .row {
     
     .social-link {
         margin: 0 1rem;
-        /* margin: 0 1rem 0 1.5rem; */
-        /* Marge de 1rem à gauche et à droite de chaque élément */
     }
     
     /* ------------------------- SEO et Accessibilité ------------------------- */
-    /* Focus visible */
     a:focus,
     button:focus,
     .form-control:focus {
@@ -296,23 +260,20 @@ body:not(.evenements-page) .row {
         color: var(--black) !important;
         background-color: var(--light-gray);
     }
-    /* Style pour l'elément de bascule de mot de passe */
+
     .password-toggle {
         position: absolute;
         right: 10px;
         top: 60%;
         transform: translateY(-50%);
         cursor: pointer;
-        /* Assure que l'icône est au-dessus des autres éléments */
         z-index: 2;
     }
     
-    /* Message en scrolling: Mompo tienda latina */
     @keyframes scroll-left {
         0% {
             transform: translateX(100%);
         }
-    
         70% {
             transform: translateX(-50%);
         }
@@ -332,7 +293,6 @@ body:not(.evenements-page) .row {
     } */
     
     /* ------------------------- Styles Responsives ------------------------- */
-    /* Petits écrans : jusqu'à 480px */
     @media (max-width: 480px) {
         body {
             font-size: 0.875em;
