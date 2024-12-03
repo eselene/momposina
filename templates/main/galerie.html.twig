@@ -1,31 +1,36 @@
 {% extends 'base.html.twig' %}
 {# templates/main/galerie.html.twig #}
-{% block title %}Galerie{% endblock %}
-
+{% block title %}
+  Galerie - Momposina
+{% endblock %}
 {% block body %}
-  <div class="container mt-5">
-    <h1 class="text-center">Galerie</h1>
-
-    <div class="text-yellow">
-        <p>Bienvenue dans notre galerie virtuelle ! Plongez au cœur de l’Amérique Latine en explorant notre magasin Momposina Tienda Latina. </p>
+  <div class="galerie-page container mt-5">
+    <h1 class="text-center pb-2">Galerie</h1>
+    <div class="section text-center ps-2 pe-2">
+      <p>Bienvenue dans notre galerie virtuelle ! Plongez au cœur de l’Amérique Latine en explorant notre magasin Momposina Tienda Latina.</p>
       <p>Chaque rayon est une fenêtre ouverte sur les richesses culturelles et gastronomiques de cette région. Découvrez une sélection variée de produits authentiques : épices exotiques, boissons traditionnelles, confiseries typiques, et bien plus encore. Nos étagères colorées et nos arômes envoûtants vous transporteront directement dans les marchés animés de l’Amérique Latine.</p>
-        <p> N’HÉSITEZ PAS À NOUS DEMANDER QUEL EST LE PLAT DE LA SEMAINE!</p>
     </div>
-
-    <div class="row">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center mb-4">
       {% for image in images %}
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
-                <img src="{{ asset(image.src) }}" class="img-fluid rounded fixed-size-image" alt="{{ image.alt }}" data-toggle="modal"
-                data-target="#imageModal{{ loop.index }}"/>
-
-            <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" role="dialog"
-                aria-labelledby="imageModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <div class="modal-body d-flex justify-content-center">
-                  <img src="{{ asset(image.src) }}" class="img-fluid" />
-                </div>
+        <div class="col d-flex align-items-stretch">
+          <div class="card h-100 bg-light text-black">
+            <div class="ratio ratio-1x1">
+              <img src="{{ asset(image.src) }}" class="card-img-top" alt="{{ image.alt }}" data-bs-toggle="modal" data-bs-target="#imageModal{{ loop.index }}" style="cursor: pointer;"  width="200" height="200"/>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <p class="ps-2 pe-2">{{ image.desc }}</p>
+            </div>
+          </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" aria-labelledby="imageModalLabel{{ loop.index }}" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body d-flex justify-content-center">
+                <img src="{{ asset(image.src) }}" class="img-fluid" />
               </div>
             </div>
           </div>

@@ -87,217 +87,241 @@ h4 {
     background: linear-gradient(235deg, var(--light-gray) 0%, var(--dark-gray) 200%);
 }
 
-body:not(.evenements-page) .card {
+body:not(.galerie-page) .card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+}
+
+body:not(.galerie-page) .card-body {
+    flex-grow: 1;
+}
+
+/* General container styles */
+body:not(.galerie-page) .container {
+    /* max-width: var(--container-max-width); */
+    margin: 0 auto;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+}
+
+/* Layout for galerie page */
+.galerie-page .container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+}
+
+.galerie-page .row {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* justify-content: space-between; */
+}
+.galerie-page .card {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-body:not(.evenements-page) .card-body {
+.galerie-page .card-body {
     flex-grow: 1;
-}
-
-/* -- Mise en page ------------------------- */
-body:not(.evenements-page) .container {
-    max-width: var(--container-max-width);
-    margin: 0 auto;
-}
-
-body:not(.evenements-page) .row {
-    margin: 0;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
+}
+.col {
+    padding: 0.5rem;
 }
 
-    .col {
-        padding: 0.5rem;
-    }
-    
-     .col-md-6 {
-        flex: 0 0 48%;
-        margin-bottom: 1rem;
-        padding: 1rem;
-        box-sizing: border-box;
-    }
-    
-    .col-lg-6,
-    .col-md-12 {
-        padding: 5vh 4vw;
+.col-md-6 {
+    flex: 0 0 48%;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    box-sizing: border-box;
 }
-    
-    /* Images dans les cartes */
-    .produits-container .fixed-size-image {
-        object-fit: cover;
-        border-radius: var(--img-border-radius);
-    }
-    
-    /* ------------------------- Formulaires ------------------------- */
-    .form-container {
-        padding: 5px;
-        background-color: var(--dark-gray);
-        color: var(--dark-gray);
-    }
-    
-    .form-control {
-        border: 1px solid var(--light-green);
-        border-radius: 4px;
-        width: 100%;
-        box-sizing: border-box;
-        line-height: var(--line-height);
-    }
-    
-    .form-control:focus {
-        border-color: var(--orange);
-        box-shadow: 0 0 0 0.2rem var(--orange);
-    }
-    
+
+.col-lg-6,
+.col-md-12 {
+    padding: 5vh 4vw;
+}
+
+/* Images dans les cartes */
+.produits-container .fixed-size-image {
+    object-fit: cover;
+    border-radius: var(--img-border-radius);
+}
+
+/* ------------------------- Formulaires ------------------------- */
+.form-container {
+    padding: 5px;
+    background-color: var(--dark-gray);
+    color: var(--dark-gray);
+}
+
+.form-control {
+    border: 1px solid var(--light-green);
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    line-height: var(--line-height);
+}
+
+.form-control:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 0.2rem var(--orange);
+}
+
 /* Barre de recherche */
 .search-bar {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 0.5rem; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-control {
+    max-width: 300px;
+}
+
+.btn-primary {
+    width: auto;
+}
+
+/* ------------------------- Menu ------------------------- */
+.navbar,
+.nav-link,
+.dropdown-item {
+    margin: auto;
+    /* color: var(--black) !important; */
+    color: var(--white) !important;
+}
+
+.navbar-toggler {
+    background-color: var(--white);
+}
+
+.navbar-toggler:hover,
+.navbar-toggler-icon:hover,
+.social-link-icon:hover {
+    background-color: var(--yellow);
+}
+
+.dropdown-item:hover {
+    background-color: var(--dark-gray);
+}
+
+.nav-item.active {
+    font-weight: bold;
+    color: var(--black) !important;
+}
+
+.bg-blue {
+    background-color: var(--blue-accesibilite) !important;
+}
+
+.bg-grey {
+    background-color: var(--light-gray) !important;
+}
+
+.bg-secondary {
+    background-color: var(--secondary-color) !important;
+    color: var(--white);
+}
+
+/* ------------------------- Footer ------------------------- */
+.footer {
+    color: var(--white);
+    padding: var(--footer-padding);
+    line-height: var(--footer-line-height);
+}
+
+.footer-title,
+.text-yellow {
+    color: var(--yellow);
+}
+
+.footer a {
+    color: var(--white);
+}
+
+.footer-links a {
+    font-size: 1rem;
+    padding: 12px 12px;
+    display: inline-block;
+}
+
+.footer .list-inline-item a:hover {
+    color: var(--yellow);
+}
+
+.social-link-icon {
+    width: 2rem;
+    height: 2rem;
+}
+
+.social-link {
+    margin: 0 1rem;
+}
+
+/* ------------------------- SEO et Accessibilité ------------------------- */
+a:focus,
+button:focus,
+.form-control:focus {
+    outline: 2px solid var(--blue-accesibilite);
+    outline-offset: 2px;
+    color: var(--black);
+    background: var(--light-gray);
+}
+
+.nav-link:focus,
+.dropdown-item:focus {
+    color: var(--black) !important;
+    background-color: var(--light-gray);
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 60%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 2;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(100%);
     }
 
-     .form-control {
-        max-width: 300px; 
-    } 
+    70% {
+        transform: translateX(-50%);
+    }
+}
 
-    .btn-primary {
-        width: auto;
-    }    
-    
-    /* ------------------------- Menu ------------------------- */
-    .navbar,
-    .nav-link,
-    .dropdown-item {
-        margin: auto;
-        /* color: var(--black) !important; */
-        color: var(--white) !important;
-    }
-    
-    .navbar-toggler {
-        background-color: var(--white);
-    }
-    
-    .navbar-toggler:hover,
-    .navbar-toggler-icon:hover,
-    .social-link-icon:hover {
-        background-color: var(--yellow);
-    }
-    
-    .dropdown-item:hover {
-        background-color: var(--dark-gray);
-    }
-    
-    .nav-item.active {
-        font-weight: bold;
-        color: var(--black) !important;
-    }
-    
-    .bg-blue {
-        background-color: var(--blue-accesibilite) !important;
-    }
-    
-    .bg-grey {
-        background-color: var(--light-gray) !important;
-    }
-    
-    .bg-secondary {
-        background-color: var(--secondary-color) !important;
-        color: var(--white);
-    }
-    
-    /* ------------------------- Footer ------------------------- */
-    .footer {
-        color: var(--white);
-        padding: var(--footer-padding);
-        line-height: var(--footer-line-height);
-    }
-    
-    .footer-title,
-    .text-yellow {
-        color: var(--yellow);
-    }
-    
-    .footer a {
-        color: var(--white);
-    }
-    
-    .footer-links a {
-        font-size: 1rem;
-        padding: 12px 12px;
-        display: inline-block;
-    }
-    
-    .footer .list-inline-item a:hover {
-        color: var(--yellow);
-    }
-    
-    .social-link-icon {
-        width: 2rem;
-        height: 2rem;
-    }
-    
-    .social-link {
-        margin: 0 1rem;
-    }
-    
-    /* ------------------------- SEO et Accessibilité ------------------------- */
-    a:focus,
-    button:focus,
-    .form-control:focus {
-        outline: 2px solid var(--blue-accesibilite);
-        outline-offset: 2px;
-        color: var(--black);
-        background: var(--light-gray);
-    }
-    
-    .nav-link:focus,
-    .dropdown-item:focus {
-        color: var(--black) !important;
-        background-color: var(--light-gray);
-    }
+.scrolling-text {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: scroll-left 20s linear 2;
+}
 
-    .password-toggle {
-        position: absolute;
-        right: 10px;
-        top: 60%;
-        transform: translateY(-50%);
-        cursor: pointer;
-        z-index: 2;
-    }
-    
-    @keyframes scroll-left {
-        0% {
-            transform: translateX(100%);
-        }
-        70% {
-            transform: translateX(-50%);
-        }
-    }
-    
-    .scrolling-text {
-        overflow: hidden;
-        white-space: nowrap;
-        animation: scroll-left 20s linear 2;
-    }
-    
-    /* .sticky-top {
+/* .sticky-top {
         position: -webkit-sticky;
         position: sticky;
         top: 0;
         z-index: 1020;
     } */
-    
-    /* ------------------------- Styles Responsives ------------------------- */
-    @media (max-width: 480px) {
-        body {
-            font-size: 0.875em;
-        }
-        /*
+
+/* ------------------------- Styles Responsives ------------------------- */
+@media (max-width: 480px) {
+    /*
+    body {
+        font-size: 0.875em;
+    }
+
         .btn-primary {
             font-size: 0.8em; 
         }
@@ -318,15 +342,24 @@ body:not(.evenements-page) .row {
             padding: 16px 20px; 
             display: inline-block; 
         } */
+}
+
+/* Petits écrans : jusqu'à 575px */
+@media (max-width: 575px) {
+    /*     .row {
+        justify-content: center;
     }
-    
-    /* Petits écrans : jusqu'à 575px */
-    @media (max-width: 575px) {
-        /* .card {
+
+    .col {
+        display: flex;
+        justify-content: center;
+    }
+
+.card {
             margin: 1rem 0;
         } */
-    
-        /* h1 {
+
+    /* h1 {
             font-size: 2rem; 
         }
     
@@ -339,40 +372,41 @@ body:not(.evenements-page) .row {
             margin: 0 auto;
             max-height: 250px; 
         } */
+}
+
+/* Moyens écrans : jusqu'à 768px */
+@media (max-width: 768px) {
+    /* .card-body {
+        height: auto;
     }
-    
-    /* Moyens écrans : jusqu'à 768px */
-    @media (max-width: 768px) {
-       /* .card-body {
-            height: auto; 
-        }
-    
-        .card-title {
-            font-size: 1.2rem; 
-        }
-    
-        .card-text {
-            font-size: 0.9rem; 
-        }
-    
-        .image-container img, img {
-            max-width: 100%;
-            height: auto; 
-        }
-    
-        .col-md-6 {
-            width: 100%; 
-        }
-    
-        .card-img-top img {
-            max-width: 100%;
-            height: auto;
-        } */
+
+    .card-title {
+        font-size: 1.2rem;
     }
-    
-    /* Grands écrans : à partir de 992px */
-    @media (min-width: 992px) {
-      /*  .fixed-size-image {
+
+    .card-text {
+        font-size: 0.9rem;
+    }
+
+    .image-container img,
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .col-md-6 {
+        width: 100%;
+    }
+
+    .card-img-top img {
+        max-width: 100%;
+        height: auto;
+    } */
+}
+
+/* Grands écrans : à partir de 992px */
+@media (min-width: 992px) {
+    /*  .fixed-size-image {
             height: auto;
         }
     
@@ -416,4 +450,4 @@ body:not(.evenements-page) .row {
         .container-fluid {
             padding: 1rem; 
         } */
-    }
+}

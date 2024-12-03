@@ -6,7 +6,7 @@
   Découvrez tous les événements que La Momposina Tienda Latina vous propose tout au long de l'année : repas, concerts, rencontres, et Fiesta Latina autour de l'environnement « Latino Grenoble ».
 {% endblock %}
 {% block body %}
-  <div class="container-fluid bg-dark-subtle p-0">
+  <div class="container-fluid bg-dark-subtle p-4">
     <div class="py-4">
       <!-- Section présentation -->
       <section class="row mb-1">
@@ -42,7 +42,7 @@
             </div>
           </div>
           <div class="col-md-4 d-flex justify-content-center align-items-center mt-1 mb-3">
-            <img src="{{ asset('images/presentation/ameriqueGre.jpeg') }}" alt="Proposition momposina" class="img-fluid rounded" width="745" height="250"/>
+            <img src="{{ asset('images/presentation/ameriqueGre.jpeg') }}" alt="Proposition momposina" class="img-fluid rounded" width="745" height="250" />
           </div>
         </div>
       </section>
@@ -59,7 +59,7 @@
             </p>
           </div>
           <div class="col-md-4 d-flex justify-content-center align-items-center mt-1 mb-3">
-            <img src="{{ asset('images/presentation/histoire.jpeg') }}" alt="Histoire" class="img-fluid rounded" width="745" height="250"/>
+            <img src="{{ asset('images/presentation/histoire.jpeg') }}" alt="Histoire" class="img-fluid rounded" width="745" height="250" />
           </div>
         </div>
       </section>
@@ -76,7 +76,7 @@
             </p>
           </div>
           <div class="col-md-4 d-flex justify-content-center align-items-center mt-1 mb-3">
-            <img src="{{ asset('images/presentation/sommes.jpeg') }}" alt="Qui est momposina" class="img-fluid rounded" width="745" height="250"/>
+            <img src="{{ asset('images/presentation/sommes.jpeg') }}" alt="Qui est momposina" class="img-fluid rounded" width="745" height="250" />
           </div>
         </div>
       </section>
@@ -93,15 +93,15 @@
             </p>
           </div>
           <div class="col-md-4 d-flex justify-content-center align-items-center mt-1 mb-3">
-            <img src="{{ asset('images/presentation/proposition.jpeg') }}" alt="Proposition momposina" class="img-fluid rounded" width="745" height="250"/>
+            <img src="{{ asset('images/presentation/proposition.jpeg') }}" alt="Proposition momposina" class="img-fluid rounded" width="745" height="250" />
           </div>
         </div>
       </section>
       <hr class="my-1" />
-      <!-- Section Retrouvez-nous -->
-      <section class="find-us mb-4">
-        {% include 'components/findUs.html.twig' %}
-      </section>
     </div>
   </div>
+  <!-- Section Retrouvez-nous -->
+  <section class="find-us mb-4">
+    {% include 'components/findUs.html.twig' %}
+  </section>
 {% endblock %}
