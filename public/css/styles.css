@@ -64,21 +64,29 @@ h4 {
     font-weight: 600;
 }
 
+.text-xs {
+    font-size: 0.8rem;
+}
+
+.col {
+    padding: 0.5rem;
+}
+
+.col-md-6 {
+    flex: 0 0 48%;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.col-lg-6,
+.col-md-12 {
+    padding: 5vh 4vw;
+}
+
 /* Boutons */
 .btn-primary {
     width: 100%;
-}
-
-/* Images */
-.img {
-    width: 80%;
-    height: auto;
-    object-fit: cover;
-}
-
-.image-container img {
-    max-width: 100%;
-    border-radius: var(--img-border-radius);
 }
 
 /* --------CARD ----*/
@@ -107,6 +115,18 @@ body:not(.galerie-page) .container {
     align-items: center; */
 }
 
+/* Images */
+.img {
+    width: 80%;
+    height: auto;
+    object-fit: cover;
+}
+
+.image-container img {
+    max-width: 100%;
+    border-radius: var(--img-border-radius);
+}
+
 /* Layout for galerie page */
 .galerie-page .container {
     max-width: var(--container-max-width);
@@ -120,6 +140,7 @@ body:not(.galerie-page) .container {
     justify-content: center;
     /* justify-content: space-between; */
 }
+
 .galerie-page .card {
     height: 100%;
     display: flex;
@@ -132,21 +153,6 @@ body:not(.galerie-page) .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-.col {
-    padding: 0.5rem;
-}
-
-.col-md-6 {
-    flex: 0 0 48%;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    box-sizing: border-box;
-}
-
-.col-lg-6,
-.col-md-12 {
-    padding: 5vh 4vw;
 }
 
 /* Images dans les cartes */
@@ -173,6 +179,21 @@ body:not(.galerie-page) .container {
 .form-control:focus {
     border-color: var(--orange);
     box-shadow: 0 0 0 0.2rem var(--orange);
+}
+
+/* validation */
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 0.25em;
+}
+
+.invalid-feedback.d-none {
+    display: none;
 }
 
 /* Barre de recherche */
@@ -376,6 +397,11 @@ button:focus,
 
 /* Moyens écrans : jusqu'à 768px */
 @media (max-width: 768px) {
+    .fixed-size-container {
+        height: 500px;
+        /* Définir une hauteur fixe */
+    }
+
     /* .card-body {
         height: auto;
     }
@@ -406,6 +432,11 @@ button:focus,
 
 /* Grands écrans : à partir de 992px */
 @media (min-width: 992px) {
+    .fixed-size-container {
+        height: 600px;
+        /* Définir une hauteur fixe */
+    }
+
     /*  .fixed-size-image {
             height: auto;
         }
