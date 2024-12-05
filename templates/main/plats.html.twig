@@ -3,6 +3,9 @@
 {% block title %}
   Plats
 {% endblock %}
+{% block meta_description %}
+  Découvrez tous les repas latino que La Momposina Tienda Latina vous propose tout au long de l'année à Grenoble.
+{% endblock %}
 {% block body %}
   <div class="container-fluid mt-3">
     <h1 class="text-center pb-2">
@@ -20,14 +23,14 @@
       <div class="col-md-4 col-sm-6 mb-3">
         <div class="card h-100">
           <div class="ratio ratio-4x3">
-            <img src="{{ asset('images/' ~ plat.photo1) }}" class="card-img-top" data-bs-toggle="modal" data-bs-target="#imageModal{{ loop.index }}" style="cursor: pointer;" />
+            <img src="{{ asset('images/' ~ plat.photo1) }}" alt="Photo d'un plat vendu par Momposina:{{ plat.nom }}" class="card-img-top" data-bs-toggle="modal" data-bs-target="#imageModal{{ loop.index }}" style="cursor: pointer;" />
           </div>
-          <div class="card-body bg-blue">
+          <div class="card-body card-gradient-bleu bg-blue">
             <h2 class="card-title">
               {{ plat.nom }}
             </h2>
             {% set description = plat.description|split('.') %}
-            <p class="card-text">
+            <p class="card-text ">
               {{ description[0] }}
               .
             </p>

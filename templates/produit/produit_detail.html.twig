@@ -33,7 +33,7 @@
         {% for produit in pagination.items %}
           <!-- Colonne de produit -->
           <div class="col">
-            <div class="card h-100 bg-light text-black">
+            <div class="card h-70 bg-light text-black">
               <!-- Image du produit -->
               <img src="{{ produit.photo1 ? asset('images/' ~ produit.photo1) : asset('images/default.jpeg') }}" class="card-img-top img-fluid fixed-size-image" alt="{{ produit.nom }}" onmouseover="this.style.transform='scale(1.05)'; this.style.transition='transform 0.2s ease-in-out';" onmouseout="this.style.transform='scale(1)';">
               <!-- Contenu de la carte -->
