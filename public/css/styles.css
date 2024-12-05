@@ -205,7 +205,7 @@ body:not(.galerie-page) .container {
 }
 
 .form-control {
-    max-width: 300px;
+    max-width: 500px;
 }
 
 .btn-primary {
