@@ -45,10 +45,10 @@
                             <div class="d-grid gap-2">
                                 <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-info">Voir</a>
                                 <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}" class="btn btn-primary">Modifier</a>
-                                <form method="post" action="{{ path('app_evenement_delete', { id: evenement.id }) }}" onsubmit="return confirm('Vous êtes sûr de supprimer cet évènement?');">
+                                {# <form method="post" action="{{ path('app_evenement_delete', { id: evenement.id }) }}" onsubmit="return confirm('Vous êtes sûr de supprimer cet évènement?');">
 									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.id) }}" />
                                     <button class="btn btn-danger w-100">Supprimer</button>
-								</form>								
+								</form>								 #}
                             </div>
 							</td>
 						</tr>
