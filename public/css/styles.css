@@ -168,8 +168,8 @@ body:not(.galerie-page) .container {
 /* ------------------------- Formulaires ------------------------- */
 .form-container {
     padding: 5px;
-    background-color: var(--dark-gray);
-    color: var(--dark-gray);
+    /* background-color: var(--dark-gray); */
+    /* color: var(--light-gray); */
 }
 
 .form-control {
@@ -212,9 +212,9 @@ body:not(.galerie-page) .container {
     max-width: 600px;
 }
 
-.btn-primary {
+/* .btn-primary {
     width: auto;
-}
+} */
 
 /* ------------------------- Menu ------------------------- */
 .navbar,

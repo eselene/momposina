@@ -4,102 +4,117 @@
     Contactez-nous
 {% endblock %}
 {% block meta_description %}
-    Page Contact de La Momposina Tienda Latina - épicerie Latino à Grenoble.
-{% endblock %}
-{% block body %}
-    <div class="container-fluid bg-dark-subtle">
-        <h1 class="text-center pt-3 mb-4">
-            Contactez-nous
-        </h1>
-        <div class="container-fluid pt-3 d-flex justify-content-center align-items-center" style="min-height: 60vh;">
-            <div class="row no-gutters">
-                <div class="col-md-7 d-flex flex-column justify-content-center">
-                    {{ form_start(form) }}
-                    <div class="form-group mb-3">
-                        {{ form_label(form.name, null, {'label_attr': {'class': 'form-label' }}) }}
-                        {{ form_widget(form.name, {'attr': {'class': 'form-control w-100', 'placeholder': 'Nom et Prénom', 'aria-label': 'Nom et Prénom' }}) }}
-                        <span class="invalid-feedback d-none" role="alert"></span>
-                        {{ form_errors(form.name) }}
-                    </div>
-                    <div class="form-group mb-3">
-                        {{ form_label(form.email, null, {'label_attr': {'class': 'form-label' }}) }}
-                        {{ form_widget(form.email, {'attr': {'class': 'form-control w-100', 'placeholder': 'Email', 'aria-label': 'Email' }}) }}
-                        <span class="invalid-feedback d-none" role="alert"></span>
-                        {{ form_errors(form.email) }}
-                    </div>
-                    <div class="form-group mb-3">
-                        {{ form_label(form.telephone, null, {'label_attr': {'class': 'form-label' }}) }}
-                        {{ form_widget(form.telephone, {'attr': {'class': 'form-control w-100', 'placeholder': 'Téléphone', 'aria-label': 'Téléphone' }}) }}
-                        <span class="invalid-feedback d-none" role="alert"></span>
-                        {{ form_errors(form.telephone) }}
-                    </div>
-                    <div class="form-group mb-3">
-                        {{ form_label(form.subject, null, {'label_attr': {'class': 'form-label' }}) }}
-                        {{ form_widget(form.subject, {'attr': {'class': 'form-control w-100', 'placeholder': 'Objet', 'aria-label': 'Objet' }}) }}
-                        <span class="invalid-feedback d-none" role="alert"></span>
-                        {{ form_errors(form.subject) }}
-                    </div>
-                    <div class="form-group mb-3">
-                        {{ form_widget(form.message, {'attr': {'class': 'form-control w-100', 'rows': 3, 'placeholder': 'Message', 'aria-label': 'Message' }}) }}
-                        <span class="invalid-feedback d-none" role="alert"></span>
-                        {{ form_errors(form.message) }}
-                    </div>
-                        <div class="form-check mb-3">
-                        {{ form_widget(form.privacyPolicyAccepted, {'attr': {'class': 'form-check-input', 'aria-label': 'Accepter la politique de confidentialité' }}) }}
-                        {{ form_label(form.privacyPolicyAccepted, null, {'label_attr': {'class': 'form-check-label' }}) }}
-                            <span class="invalid-feedback d-none" role="alert"></span>
-                            {{ form_errors(form.privacyPolicyAccepted) }}
+    {# <meta name="description" content="Mary's simple recipe for maple bacon donuts
+            makes a sticky, sweet treat with just a hint
+        of salt that you'll keep coming back for."> #}
+        <meta name="description" content="Page Contact de La Momposina Tienda Latina - épicerie Latino à Grenoble.">
+        {% endblock %}
+        {% block body %}
+            <div class="container-fluid bg-dark-subtle">
+                <h1 class="text-center pt-3 mb-4">
+                    Contactez-nous
+                </h1>
+                <div class="container-fluid pt-3 d-flex justify-content-center align-items-center" style="min-height: 60vh;">
+                    <div class="row no-gutters">
+                        <div class="col-md-7 d-flex flex-column justify-content-center">
+                            {{ form_start(form) }}
+                            <div class="form-group mb-3">
+                                {{ form_label(form.name, null, {'label_attr': {'class': 'form-label' }}
+                                ) }}
+                                {{ form_widget(form.name, {'attr': {'class': 'form-control w-100', 'placeholder': 'Nom et Prénom', 'aria-label': 'Nom et Prénom' }}
+                                ) }}
+                                <span class="invalid-feedback d-none" role="alert"></span>
+                                {{ form_errors(form.name) }}
+                            </div>
+                            <div class="form-group mb-3">
+                                {{ form_label(form.email, null, {'label_attr': {'class': 'form-label' }}
+                                ) }}
+                                {{ form_widget(form.email, {'attr': {'class': 'form-control w-100', 'placeholder': 'Email', 'aria-label': 'Email' }}
+                                ) }}
+                                <span class="invalid-feedback d-none" role="alert"></span>
+                                {{ form_errors(form.email) }}
+                            </div>
+                            <div class="form-group mb-3">
+                                {{ form_label(form.telephone, null, {'label_attr': {'class': 'form-label' }}
+                                ) }}
+                                {{ form_widget(form.telephone, {'attr': {'class': 'form-control w-100', 'placeholder': 'Téléphone', 'aria-label': 'Téléphone' }}
+                                ) }}
+                                <span class="invalid-feedback d-none" role="alert"></span>
+                                {{ form_errors(form.telephone) }}
+                            </div>
+                            <div class="form-group mb-3">
+                                {{ form_label(form.subject, null, {'label_attr': {'class': 'form-label' }}
+                                ) }}
+                                {{ form_widget(form.subject, {'attr': {'class': 'form-control w-100', 'placeholder': 'Objet', 'aria-label': 'Objet' }}
+                                ) }}
+                                <span class="invalid-feedback d-none" role="alert"></span>
+                                {{ form_errors(form.subject) }}
+                            </div>
+                            <div class="form-group mb-3">
+                                {{ form_widget(form.message, {'attr': {'class': 'form-control w-100', 'rows': 3, 'placeholder': 'Message', 'aria-label': 'Message' }}
+                                ) }}
+                                <span class="invalid-feedback d-none" role="alert"></span>
+                                {{ form_errors(form.message) }}
+                            </div>
+                            <div class="form-check mb-3">
+                                {{ form_widget(form.privacyPolicyAccepted, {'attr': {'class': 'form-check-input', 'aria-label': 'Accepter la politique de confidentialité' }}
+                                ) }}
+                                {{ form_label(form.privacyPolicyAccepted, null, {'label_attr': {'class': 'form-check-label' }}
+                                ) }}
+                                <span class="invalid-feedback d-none" role="alert"></span>
+                                {{ form_errors(form.privacyPolicyAccepted) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_widget(form.send, {'attr': {'class': 'btn btn-lg btn-primary w-60', 'aria-label': 'Envoyer' }}
+                                ) }}
+                            </div>
+                            {{ form_end(form) }}
                         </div>
-                        <div class="mb-3">
-                        {{ form_widget(form.send, {'attr': {'class': 'btn btn-lg btn-primary w-60', 'aria-label': 'Envoyer' }}) }}
-                        </div>
-                        {{ form_end(form) }}
-                    </div>
-                    <div class="col-md-5 d-flex justify-content-center align-items-center">
-                        <div class="image-container text-center">
-                            <img src="{{ asset('images/contact/MomposinaFondatrices.jpeg') }}" alt="Contact Image" class="img-fluid mb-3" style="max-width: 80%;" />
-                            <div class="ps-5 w-75 text-center">
-                                <p class="fw-bold">
-                                    LA TIENDA MOMPOSINA SARL
-                                </p>
-                                <p>
-                                    107 Cours Jean Jaurès - GRENOBLE
-                                </p>
-                                <div class="mb-2">
+                        <div class="col-md-5 d-flex justify-content-center align-items-center">
+                            <div class="image-container text-center">
+                                <img src="{{ asset('images/contact/MomposinaFondatrices.jpeg') }}" alt="Contact Image" class="img-fluid mb-3" style="max-width: 80%;" />
+                                <div class="ps-5 w-75 text-center">
                                     <p class="fw-bold">
-                                        <img src="{{ asset('icons/telephone-inbound-fill.svg') }}" alt="Téléphone" class="me-2" />
-                                        Téléphone :
+                                        LA TIENDA MOMPOSINA SARL
                                     </p>
                                     <p>
-                                        + 33 4 57 93 31 47
+                                        107 Cours Jean Jaurès - GRENOBLE
                                     </p>
-                                    <p>
-                                        + 33 6 12 02 34 35
-                                    </p>
+                                    <div class="mb-2">
+                                        <p class="fw-bold">
+                                            <img src="{{ asset('icons/telephone-inbound-fill.svg') }}" alt="Téléphone" class="me-2" />
+                                            Téléphone :
+                                        </p>
+                                        <p>
+                                            + 33 4 57 93 31 47
+                                        </p>
+                                        <p>
+                                            + 33 6 12 02 34 35
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success mt-3">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
                 </div>
-                {% for message in app.flashes('success') %}
-                    <div class="alert alert-success mt-3">
-                        {{ message }}
-                    </div>
-                {% endfor %}
+                <p class="text-muted text-sm mt-2 p-2">
+                    Les informations saisies sur ce formulaire seront communiquées au propriétaire de ce site via email.
+                        Vous pouvez exercer vos droits relatifs à vos données personnelles (accès, effacement, rectification,
+                        portabilité...) directement depuis ce formulaire de contact. Le propriétaire du site est informé qu’il
+                    dispose d’un mois pour vous répondre. Pour en savoir plus sur la protection de vos données personnelles.
+                </p>
             </div>
-            <p class="text-muted text-sm mt-2 p-2">
-                Les informations saisies sur ce formulaire seront communiquées au propriétaire de ce site via email.
-                    Vous pouvez exercer vos droits relatifs à vos données personnelles (accès, effacement, rectification,
-                    portabilité...) directement depuis ce formulaire de contact. Le propriétaire du site est informé qu’il
-                dispose d’un mois pour vous répondre. Pour en savoir plus sur la protection de vos données personnelles.
-            </p>
-        </div>
-        <section class="find-us mt-4">
-            {% include 'components/findUs.html.twig' %}
-        </section>
-    {% endblock %}
-    {% block javascripts %}
-        <script>
+            <section class="find-us mt-4">
+                {% include 'components/findUs.html.twig' %}
+            </section>
+        {% endblock %}
+        {% block javascripts %}
+            <script>
     document.addEventListener('DOMContentLoaded', () => {
         // Fonction pour valider un champ spécifique
         const validateField = (input, regex, errorMessage) => {
@@ -165,5 +180,5 @@
         });
     });
 </script>
-    {% endblock %}
-    
+        {% endblock %}
+        

@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Événements
-{% endblock %}
+{% block title %}Liste des Événements{% endblock %}
 
 {% block body %}
 
@@ -19,7 +18,7 @@
 						<th>Plage Horaire</th>
 						<th>Lieu</th>
 						<th>Prix</th>
-						<th>Photo1</th>
+						<th>Affiche</th>
 						<th>Visible</th>
 						<th>Actions</th>
 					</tr>
@@ -34,20 +33,23 @@
 							<td>{{ evenement.plageHeure }}</td>
 							<td>{{ evenement.lieu }}</td>
 							<td>{{ evenement.prix }}</td>
-							<td>{% if evenement.photo1 %}
-									<img src="{{ asset('images/' ~ evenement.photo1) }}" alt="{{ evenement.titre }}" class="img-fluid object-fit-cover object-position-center" style="width: 100px; height: 100px;"/>
+                        <td>
+                            {% if evenement.photo1 %}
+                                <img src="{{ asset('images/' ~ evenement.photo1) }}" alt="{{ evenement.titre }}" class="img-fluid object-fit-cover object-position-center" style="width: 100px; height: 100px;" />
 								{% else %}
 									Pas de photo
 								{% endif %}
 							</td>
 							<td>{{ evenement.visibleWeb ? 'Oui' : 'Non' }}</td>
 							<td>
-								<a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-info btn-sm custom-btn">Voir</a>
-								<a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}" class="btn btn-primary btn-sm custom-btn">Modifier</a>
-								<form method="post" action="{{ path('app_evenement_delete', { id: evenement.id }) }}" style="display:inline;" onsubmit="return confirm('Vous êtes sure de supprimer cet évènement?');">
+                            <div class="d-grid gap-2">
+                                <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-info">Voir</a>
+                                <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}" class="btn btn-primary">Modifier</a>
+                                <form method="post" action="{{ path('app_evenement_delete', { id: evenement.id }) }}" onsubmit="return confirm('Vous êtes sûr de supprimer cet évènement?');">
 									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.id) }}" />
-									<button class="btn btn-danger btn-sm custom-btn">Supprimer</button>
+                                    <button class="btn btn-danger w-100">Supprimer</button>
 								</form>								
+                            </div>
 							</td>
 						</tr>
 					{% else %}
