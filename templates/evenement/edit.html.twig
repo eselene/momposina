@@ -1,12 +1,12 @@
 {# templates/evenement/edit.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier l'Événement{% endblock %}
+{% block title %}Modifier Événement{% endblock %}
 
 {% block body %}
     <div class="container form-container">
         <h1>Modifier l'Événement</h1>
         {% include 'evenement/_form.html.twig' with {'button_label': 'Enregistrer'} %}
-        <a href="{{ path('app_evenement_index') }}" class="btn btn-secondary  w-40">Retour à la liste</a>
+        <a href="{{ path('app_evenement_index') }}" class="btn btn-secondary w-50">Retour à la liste</a>
     </div>
 {% endblock %}

@@ -1,10 +1,11 @@
 {% extends 'base.html.twig' %}
 {# templates/produit/edit.html.twig #}
+{% block title %}Modifier Produit{% endblock %}
 
 {% block body %}
 <div class="container form-container">
-    <h1 class="text-white">Modification du Produit</h1>
+    <h1>Modification du Produit</h1>
     {% include 'produit/_form.html.twig' with {'form': form, 'produit': produit, 'button_label': 'Enregistrer'} %}
-    <a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Retour à la liste</a>
+    <a href="{{ path('app_produit_index') }}" class="btn btn-secondary w-50">Retour à la liste</a>
 </div>
 {% endblock %}
