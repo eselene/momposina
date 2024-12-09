@@ -89,6 +89,10 @@ h4 {
     width: 100%;
 }
 
+.btn-search {
+    width: auto;
+}
+
 /* --------CARD ----*/
 /* Dégradés pour le body et le titre de la carte */
 .card-gradient {
@@ -173,14 +177,26 @@ body:not(.galerie-page) .container {
 }
 
 .form-control {
-    border: 1px solid var(--light-green);
+    /* .form-control, .form-control-search { */
+    border: 1px solid var(--dark-blue);
+    /* border: 1px solid var(--light-green); */
     border-radius: 4px;
     width: 100%;
     box-sizing: border-box;
     line-height: var(--line-height);
 }
 
-.form-control:focus {
+.form-control{
+    max-width: 600px;
+}
+
+.form-control-search{
+    flex: 1;
+    min-width: 0;
+    /* max-width: 800px; */
+}
+
+.form-control:focus, .form-control-search:focus {
     border-color: var(--orange);
     box-shadow: 0 0 0 0.2rem var(--orange);
 }
@@ -200,17 +216,13 @@ body:not(.galerie-page) .container {
     display: none;
 }
 
-/* Barre de recherche */
-.search-bar {
+.input-group {
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 0.5rem;
-}
+    flex-wrap:nowrap;
+    width: 100%;
+  }
 
-.form-control {
-    max-width: 600px;
-}
 
 /* .btn-primary {
     width: auto;
@@ -301,7 +313,16 @@ button:focus,
     color: var(--black);
     background: var(--light-gray);
 }
-
+  /* Barre de recherche */
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%; 
+    max-width: 600px; 
+    margin: 0 auto; 
+}
 .nav-link:focus,
 .dropdown-item:focus {
     color: var(--black) !important;
