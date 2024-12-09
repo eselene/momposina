@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="container form-container">
-    <h1>Modification du Produit</h1>
+    <h1>Modification du Produit. id= {{produit.id}}</h1>
     {% include 'produit/_form.html.twig' with {'form': form, 'produit': produit, 'button_label': 'Enregistrer'} %}
     <a href="{{ path('app_produit_index') }}" class="btn btn-secondary w-50">Retour à la liste</a>
 </div>

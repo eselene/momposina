@@ -24,7 +24,7 @@ class ImageUploader
     /**
      * Upload an image to a specific subdirectory.
      * @param UploadedFile $file The file to upload.
-     * @param string|null $subDirectory The subdirectory where the file will be saved.
+     * @param string|null $subDirectory The subdirectory where the file will be saved. Parameter en Option
      * @return string The new filename.
      * @throws \Exception If the file is invalid or cannot be uploaded.
      */
@@ -93,7 +93,7 @@ class ImageUploader
      * @param string|null $subDirectory The optional subdirectory.
      * @return string The full path to the target directory.
      */
-    private function getTargetDirectory(?string $subDirectory = null): string
+    public function getTargetDirectory(?string $subDirectory = null): string
     {
         return $subDirectory
             ? $this->targetDirectory . '/' . trim($subDirectory, '/')
