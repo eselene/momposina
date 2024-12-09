@@ -47,10 +47,10 @@ class Produit
 
     /**
      * @Assert\Image(
-     *     mimeTypes={"image/jpeg", "image/png"},
-     *     mimeTypesMessage="Seules les images au format JPEG ou PNG sont acceptées",
-     *     maxSize="5M",
-     *     maxSizeMessage="L'image ne doit pas dépasser 5Mo"
+     *     mimeTypes={"image/jpeg","image/jpg", "image/png"},
+     *     mimeTypesMessage="Seules les images au format JPEG, JPG ou PNG sont acceptées",
+     *     maxSize="122880",
+     *     maxSizeMessage="L'image ne doit pas dépasser 122880b"
      * )
      */
     #[ORM\Column(length: 255, nullable: true)]

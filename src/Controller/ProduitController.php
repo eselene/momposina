@@ -12,16 +12,10 @@ use Knp\Component\Pager\PaginatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-// use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-// use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-
-// use function PHPUnit\Framework\isNull;
-
-// use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/admin/produit')]
 class ProduitController extends AbstractController
@@ -104,28 +98,29 @@ class ProduitController extends AbstractController
         $this->logger->info('Accès à la page d\'édition du produit ID: ' . $produit->getId());
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
+        $this->logger->info('Apres $form->handleRequest($request)');
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            try {
-                $imageFile = $form->get('photo1')->getData();
-                dump($imageFile);
-                if ($imageFile) {
-                    $this->logger->info('Upload de l\'image du produit.');
-                    $newFilename = $imageUploader->upload($imageFile);
-                    dump($newFilename);
+        if ($form->isSubmitted()) {
+            $this->logger->info('$form->isSubmitted');
 
-                    $produit->setPhoto1($newFilename);
-                    dump($produit);
+            if ($form->isValid()) {
+                $this->logger->info('$form->isValid');
+                try {
+                    $imageFile = $form->get('photo1')->getData();
+                    $this->logger->info('$imageFile getData');
+
+                    if ($imageFile) {
+                        $newFilename = $imageUploader->upload($imageFile);
+                        $produit->setPhoto1($newFilename);
+                    }
+
+                    $entityManager->flush();
+                    $this->addFlash('success', 'Produit modifié avec succès!');
+                    return $this->redirectToRoute('app_produit_index');
+                } catch (\Exception $e) {
+                    $this->logger->error('Erreur lors de la modification du produit : ' . $e->getMessage());
+                    $this->addFlash('error', 'Une erreur est survenue : ' . $e->getMessage());
                 }
-
-                $entityManager->flush();
-
-                $this->logger->info('Produit ID: ' . $produit->getId() . ' modifié avec succès.');
-                $this->addFlash('success', 'Produit modifié avec succès!');
-                return $this->redirectToRoute('app_produit_index');
-            } catch (\Exception $e) {
-                $this->logger->error('Erreur lors de la modification du produit ID: ' . $produit->getId() . ' : ' . $e->getMessage());
-                $this->addFlash('error', 'Une erreur est survenue : ' . $e->getMessage());
             }
         }
 
@@ -156,41 +151,29 @@ class ProduitController extends AbstractController
                 $this->logger->info('Produit ID: ' . $produit->getId() . ' supprimé avec succès.');
                 $this->addFlash('success', 'Produit supprimé avec succès!');
             } catch (\Exception $e) {
-                $this->logger->error('Erreur lors de la suppression du produit ID: ' . $produit->getId() . ' : ' . $e->getMessage());
-                $this->addFlash('error', 'Une erreur est survenue lors de la suppression du produit. Veuillez réessayer.');
+                $this->addFlash('error', 'Une erreur est survenue lors de la suppression du produit.');
             }
         } else {
             $this->logger->error('Token CSRF invalide pour la suppression du produit ID: ' . $produit->getId());
             $this->addFlash('error', 'Token CSRF invalide.');
         }
 
-        return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_produit_index');
     }
 
     #[Route('/search', name: 'app_produit_search', methods: ['GET', 'POST'])]
     public function search(ProduitRepository $produitRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $this->logger->info('Recherche de produits.');
         $form = $this->createForm(ProduitSearchType::class);
         $form->handleRequest($request);
 
-        $query = null;
-        $sousCategorieId = $request->query->getInt('sousCategorieId', 0);
+        $query = $form->isSubmitted() && $form->isValid()
+            ? $form->get('query')->getData()
+            : null;
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $query = $form->get('query')->getData();
-        }
-
-        if ($query) {
-            $this->logger->info('Recherche avec la requête : ' . $query);
-            $produits = $produitRepository->findByNomNomEs($query, $sousCategorieId);
-
-            if (empty($produits)) {
-                $produits = $produitRepository->findBySousCategorieId($sousCategorieId);
-            }
-        } else {
-            $produits = $produitRepository->findBySousCategorieId($sousCategorieId);
-        }
+        $produits = $query
+            ? $produitRepository->findByNomNomEs($query, $request->query->getInt('sousCategorieId', 0))
+            : $produitRepository->findBySousCategorieId($request->query->getInt('sousCategorieId', 0));
 
         $pagination = $paginator->paginate(
             $produits,

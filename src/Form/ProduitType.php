@@ -6,7 +6,6 @@ use App\Entity\Produit;
 // use App\Form\EntityRepository;
 use App\Entity\SousCategorie;
 use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Repository\SousCategorieRepository;
 // use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\AbstractType;
@@ -14,8 +13,10 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class ProduitType extends AbstractType
 {
@@ -24,7 +25,7 @@ class ProduitType extends AbstractType
         $isEdit = $options['is_edit'] ?? false;
         $builder
             ->add('nom', TextType::class, [
-                'label' => 'Nom         *',
+                'label' => 'Nom ',
             ])
             ->add('nomEs', TextType::class, [
                 'required' => false,
@@ -62,21 +63,23 @@ class ProduitType extends AbstractType
             ])
             ->add('photo1', FileType::class, [
                 'required' => false,
-                'label' => 'Ajouter une image (jpeg ou png)',
+                'label' => 'Ajouter une image (JPEG, JPG ou PNG)',
                 'data_class' => null,
                 'mapped' => false, // pas d'association en bdd
                 'required' => false,
                 'constraints' => [
-                    new \Symfony\Component\Validator\Constraints\File([
-                        'maxSize' => '2M',
+                    new File([
+                        'maxSize' => '122880',
+                        'maxSizeMessage' => 'La taille de l\'image ne doit pas dépasser 122 kb.',
                         'mimeTypes' => [
                             'image/jpeg',
+                            'image/jpg',
                             'image/png',
                         ],
-                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG ou PNG)',
+                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, JPG ou PNG)',
                     ])
                 ],
-            ]);;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -23,7 +23,6 @@ class ImageUploader
 
     /**
      * Upload an image to a specific subdirectory.
-     *
      * @param UploadedFile $file The file to upload.
      * @param string|null $subDirectory The subdirectory where the file will be saved.
      * @return string The new filename.
@@ -35,9 +34,14 @@ class ImageUploader
         $maxFileSize = 5 * 1024 * 1024; // 5 MB
 
         $this->logger->info('Début du processus de téléchargement de l\'image.');
+        $this->logger->debug('Début de la méthode upload dans ImageUploader.*****************');
 
         // Vérification du type MIME
         $mimeType = $file->getMimeType();
+        $this->logger->info('Type MIME du fichier: ' . $mimeType);
+        $fileSize = $file->getSize();
+        $this->logger->info('Taille du fichier: ' . $fileSize);
+        // dd($mimeType);
         if (!in_array($mimeType, $allowedMimeTypes)) {
             $this->logger->error('Type MIME invalide : ' . $mimeType);
             throw new \Exception('Le fichier doit être une image au format JPEG ou PNG.');
@@ -91,7 +95,7 @@ class ImageUploader
      */
     private function getTargetDirectory(?string $subDirectory = null): string
     {
-        return $subDirectory 
+        return $subDirectory
             ? $this->targetDirectory . '/' . trim($subDirectory, '/')
             : $this->targetDirectory;
     }
