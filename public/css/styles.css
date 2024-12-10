@@ -329,6 +329,16 @@ button:focus,
     z-index: 2;
 }
 
+.cookie-consent-banner {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1050;
+    background-color: #343a40; /* Couleur de fond */
+    color: #ffffff; /* Couleur du texte */
+    padding: 1rem; /* Espacement intérieur */
+}
+
 @keyframes scroll-left {
     0% {
         transform: translateX(100%);

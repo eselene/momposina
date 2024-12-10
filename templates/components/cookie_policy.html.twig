@@ -1,0 +1,21 @@
+{# templates/components/cookie_policy.html.twig #}
+<div class="cookie-consent-banner bg-dark text-white p-3 fixed-bottom w-100">
+    <div class="container d-flex justify-content-between align-items-center">
+        <p>
+            Nous utilisons des cookies pour améliorer votre expérience. En continuant à naviguer sur notre site, vous acceptez notre politique d'utilisation des cookies.
+            <a href="{{ path('cookies_policy') }}" class="text-white text-decoration-underline">En savoir plus</a>
+        </p>
+        <button id="accept-cookies" class="btn btn-primary">Accepter</button>
+    </div>
+</div>
+
+<script>
+    document.getElementById('accept-cookies').addEventListener('click', function () {
+        document.querySelector('.cookie-consent-banner').style.display = 'none';
+        localStorage.setItem('cookieConsent', 'accepted');
+    });
+
+    if (localStorage.getItem('cookieConsent') === 'accepted') {
+        document.querySelector('.cookie-consent-banner').style.display = 'none';
+    }
+</script>
