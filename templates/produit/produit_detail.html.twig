@@ -20,19 +20,18 @@
       </p>
     </div>
     <!-- Barre de recherche -->
-    <div class="search-bar d-flex justify-content-center align-items-center mt-1 mb-2">
+    <div class="mt-1 mb-2">
       {{ form_start(formResearch, {'attr': {'class': 'form-inline d-flex'}, 'method': 'GET'}) }}
-      {# {{ form_start(formResearch, {'attr': {'class': 'form-inline d-flex position-relative'}, 'method': 'GET'}) }} #}
-      <div class="input-group w-100">
-        {{ form_widget(formResearch.query, {'attr': {'class': 'form-control form-control-search col-8', 'placeholder': 'Chercher un produit', 'id': 'searchQuery' }}
+      <div class="input-group w-100 ps-1 ps-sm-5 pe-1">
+        {{ form_widget(formResearch.query, {'attr': {'class': 'form-control form-control-search', 'placeholder': 'Chercher un produit' }}
         ) }}
-        <button type="submit" class="btn btn-primary col-4 ms-2 btn-search" title="Rechercher">
+        <button type="submit" class="btn btn-primary d-none d-sm-inline ml-2 btn-search" title="Rechercher">
           Rechercher
         </button>
       </div>
-      {# <img src="{{ asset('icons/envelope-at-fill.svg') }}" alt="Email"> #}
       {{ form_end(formResearch) }}
     </div>
+    {# src="{{ asset('icons/envelope-at-fill.svg') }}" alt="Email"> #}
     <!-- Résultats de recherche -->
     {% if pagination.items is not empty %}
       <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3 justify-content-start mx-3">
