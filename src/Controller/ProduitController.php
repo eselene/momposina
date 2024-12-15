@@ -207,7 +207,7 @@ class ProduitController extends AbstractController
 
         // Recherche les produits selon les critères ou une catégorie
         $produits = $query
-            ? $produitRepository->findByNomNomEs($query, $request->query->getInt('sousCategorieId', 0))
+            ? $produitRepository->findByNomNomEsFR($query, $request->query->getInt('sousCategorieId', 0))
             : $produitRepository->findBySousCategorieId($request->query->getInt('sousCategorieId', 0));
 
         // Paginer les résultats

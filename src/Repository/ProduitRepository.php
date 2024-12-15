@@ -80,7 +80,7 @@ class ProduitRepository extends ServiceEntityRepository
     /**
      * @return Produit[] Returns an array of Produit objects
      */
-    public function findByNomNomEs($value, int $sousCategorieId): array
+    public function findByNomNomEsFR($value, int $sousCategorieId): array
     {
         return $this->createQueryBuilder('p')
             ->andWhere('LOWER(p.nom) LIKE :val OR LOWER(p.nomEs) LIKE :val')
@@ -88,7 +88,7 @@ class ProduitRepository extends ServiceEntityRepository
             ->andWhere('p.visibleWeb = true')
             ->setParameter('val', '%' . strtolower($value) . '%')
             ->setParameter('sousCategorieId', $sousCategorieId)
-            ->orderBy('p.nomEs', 'ASC')
+            ->orderBy('p.nom', 'ASC')
             ->getQuery()
             ->getResult();
     }

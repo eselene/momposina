@@ -59,13 +59,14 @@ class MainController extends AbstractController
         // Crée le formulaire de recherche de produits
         $formResearch = $this->createForm(ProduitSearchType::class, null, ['method' => 'GET']);
         $formResearch->handleRequest($request);
-
-        $produits = $produitRepository->findBy(['sousCategorie' => $id, 'visibleWeb' => true]);
+                // public function findBySousCategorieId($sousCategorieId): array
+        $produits = $produitRepository->findBySousCategorieId(['sousCategorie' => $id]);
+        // $produits = $produitRepository->findBy(['sousCategorie' => $id, 'visibleWeb' => true]);
         if ($formResearch->isSubmitted() && $formResearch->isValid()) {
             $query = $formResearch->get('query')->getData();
             // Vérification de la requête
             if ($query) {
-                $produits = $produitRepository->findByNomNomEs($query, $id);
+                $produits = $produitRepository->findByNomNomEsFR($query, $id);
             }
         }
 
