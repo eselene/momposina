@@ -11,16 +11,19 @@ use Knp\Component\Pager\PaginatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+// use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+// use Symfony\Component\HttpFoundation\File\Exception\FileException;
+// use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-use Symfony\Component\String\Slugger\SluggerInterface;
-use Symfony\Component\Validator\Constraints\File;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
+// use Symfony\Component\String\Slugger\SluggerInterface;
+// use Symfony\Component\Validator\Constraints\File;
+// use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+#[Route('/evenements/ajax', name: 'ajax_evenements', methods: ['GET'])]
 
 #[Route('/admin/evenement')]
 class EvenementController extends AbstractController
@@ -149,5 +152,36 @@ class EvenementController extends AbstractController
 
         return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
     }
-    
+
+public function ajaxEvenements(
+    EvenementRepository $evenementRepository,
+    Request $request
+): JsonResponse {
+    $query = $request->query->get('query');
+    $evenements = $evenementRepository->findAllOrderByDate();
+
+    if ($query) {
+        // Appliquer la logique de recherche 
+        $evenements = array_filter($evenements, function($evenement) use ($query) {
+            return stripos($evenement->getTitre(), $query) !== false;
+        });
+    }
+
+    // Créez un tableau de résultats au format JSON
+    $data = [];
+    foreach ($evenements as $evenement) {
+        $data[] = [
+            'titre' => $evenement->getTitre(),
+            'description' => $evenement->getDescription(),
+            'photo' => $evenement->getPhoto1() ? $this->generateUrl('event_image', ['filename' => $evenement->getPhoto1()]) : $this->generateUrl('event_image', ['filename' => 'default.jpeg']),
+            'date' => $evenement->getDate()->format('Y-m-d'),
+            'lieu' => $evenement->getLieu(),
+            'plageHeure' => $evenement->getPlageHeure(),
+            'prix' => $evenement->getPrix(),
+        ];
+    }
+
+    return new JsonResponse($data);
+}
+
 }

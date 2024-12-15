@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 // Route de base pour toutes les actions du contrôleur
 #[Route('/admin/produit')]
@@ -225,4 +226,32 @@ class ProduitController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    
+    #[Route('/produits/ajax', name: 'ajax_produits', methods: ['GET'])]
+    public function ajaxProduits(
+        ProduitRepository $produitRepository,
+        Request $request
+    ): JsonResponse {
+        $query = $request->query->get('query');
+        $id = $request->query->getInt('id');
+    
+        if ($query) {
+            $produits = $produitRepository->findByNomNomEsFR($query, $id);
+        } else {
+            $produits = $produitRepository->findBySousCategorieId(['sousCategorie' => $id]);
+        }
+    
+        // Créez un tableau de résultats au format JSON
+        $data = [];
+        foreach ($produits as $produit) {
+            $data[] = [
+                'nom' => $produit->getNom(),
+                'description' => $produit->getDescription(),
+                'photo' => $produit->getPhoto1() ? $this->generateUrl('product_image', ['filename' => $produit->getPhoto1()]) : $this->generateUrl('product_image', ['filename' => 'default.jpeg']),
+            ];
+        }
+    
+        return new JsonResponse($data);
+    }
+    
 }

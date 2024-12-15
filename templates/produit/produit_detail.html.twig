@@ -67,4 +67,10 @@
       {% endif %}
     </div>
   {% endblock %}
+
+  {% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/ajaxScript.js') }}"></script>
+{% endblock %}
+
   
