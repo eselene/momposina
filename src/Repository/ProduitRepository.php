@@ -88,7 +88,7 @@ class ProduitRepository extends ServiceEntityRepository
             ->andWhere('p.visibleWeb = true')
             ->setParameter('val', '%' . strtolower($value) . '%')
             ->setParameter('sousCategorieId', $sousCategorieId)
-            ->orderBy('p.nom', 'ASC')
+            ->orderBy('p.nomEs', 'ASC')
             ->getQuery()
             ->getResult();
     }
